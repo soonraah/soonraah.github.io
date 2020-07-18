@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://soonraah/about/</loc>
+    <lastmod>2020-07-12T03:16:47Z</lastmod>
+  </url>
+  <url>
+    <loc>https://soonraah/tags/apache-spark/</loc>
+    <lastmod>2020-07-12T00:00:00Z</lastmod>
+  </url>
+  <url>
+    <loc>https://soonraah/study-spark-3-0-0/</loc>
+    <lastmod>2020-07-12T00:00:00Z</lastmod>
+  </url>
+  <url>
+    <loc>https://soonraah/</loc>
+    <lastmod>2020-07-12T00:00:00Z</lastmod>
+  </url>
+  <url>
+    <loc>https://soonraah/posts/</loc>
+    <lastmod>2020-07-12T00:00:00Z</lastmod>
+  </url>
+  <url>
+    <loc>https://soonraah/tags/</loc>
+    <lastmod>2020-07-12T00:00:00Z</lastmod>
+  </url>
+  <url>
+    <loc>https://soonraah/categories/</loc>
+  </url>
+</urlset>
