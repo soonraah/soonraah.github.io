@@ -2,24 +2,24 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="jp">
   <title>Froglog</title>
   <subtitle></subtitle>
-  <id>https://soonraah/</id>
+  <id>https://soonraah.github.io/</id>
   <author>
     <name>Froglog</name>
-    <uri>https://soonraah/</uri>
+    <uri>https://soonraah.github.io/</uri>
   </author>
-  <updated>2020-07-18T07:35:27Z</updated>
-  <link rel="self" type="application/atom+xml" href="https://soonraah/feed.atom" hreflang="jp"/>
-  <link rel="alternate" type="text/html" href="https://soonraah/" hreflang="jp"/>
+  <updated>2020-07-18T07:43:02Z</updated>
+  <link rel="self" type="application/atom+xml" href="https://soonraah.github.io/feed.atom" hreflang="jp"/>
+  <link rel="alternate" type="text/html" href="https://soonraah.github.io/" hreflang="jp"/>
   <entry>
     <title>Apache Spark 3.0.0 について調べた</title>
     <author>
       <name>soonraah</name>
       <uri>https://example.com/</uri>
     </author>
-    <id>https://soonraah/study-spark-3-0-0/</id>
+    <id>https://soonraah.github.io/study-spark-3-0-0/</id>
     <updated>2020-07-12T00:00:00Z</updated>
     <published>2020-07-12T00:00:00Z</published>
-    <content type="html"><![CDATA[<div class="flex flex-wrap justify-center"><a class="rounded font-content-sans font-semibold text-raven-700 bg-raven-100 hover:bg-raven-200 py-2 px-4 m-2" href="https://soonraah/tags/apache-spark/">Apache spark (1)</a>
+    <content type="html"><![CDATA[<div class="flex flex-wrap justify-center"><a class="rounded font-content-sans font-semibold text-raven-700 bg-raven-100 hover:bg-raven-200 py-2 px-4 m-2" href="https://soonraah.github.io/tags/apache-spark/">Apache spark (1)</a>
 </div>
 
 <h2 id="はじめに">はじめに</h2>

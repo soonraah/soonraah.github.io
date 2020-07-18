@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://soonraah/sitemap.xml
+Sitemap: https://soonraah.github.io/sitemap.xml
