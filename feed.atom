@@ -7,22 +7,317 @@
     <name>Froglog</name>
     <uri>https://soonraah.github.io/</uri>
   </author>
-  <updated>2020-07-18T07:51:12Z</updated>
+  <updated>2020-07-20T15:22:45Z</updated>
   <link rel="self" type="application/atom+xml" href="https://soonraah.github.io/feed.atom" hreflang="jp"/>
   <link rel="alternate" type="text/html" href="https://soonraah.github.io/" hreflang="jp"/>
+  <entry>
+    <title>Spark DataFrame クエリの弱い分離レベル</title>
+    <author>
+      <name>soonraah</name>
+      <uri>https://soonraah.github.io/</uri>
+    </author>
+    <id>https://soonraah.github.io/weak_isolation_level_of_dataframe/</id>
+    <updated>2020-07-19T13:00:00Z</updated>
+    <published>2020-07-19T13:00:00Z</published>
+    <content type="html"><![CDATA[<p>Spark バッチ処理の問題を調べていたら分離レベルという概念にたどりついた。
+分離レベルについて調べたので、Spark の問題の内容と絡めて記しておく。
+考えてみれば当たり前でたいした話ではない。</p>
+<h1 id="分離レベルとは">分離レベルとは</h1>
+<h2 id="トランザクションの挙動についての暗黙の理解">トランザクションの挙動についての暗黙の理解</h2>
+<p>アドホックな分析クエリやプロダクションコード中のクエリを書くとき、その単一のクエリのトランザクションにおいて「同時に実行されている別のクエリの commit 前の状態や commit 結果に影響され、このクエリの結果がおかしくなるかもしれない」ということは通常考えない。
+トランザクションはデータベースのある時点の状態に対して正しく処理される、というほぼ無意識の理解をおそらくほとんどの開発者が持っている。</p>
+<p>多くの場合この理解は間違っていない。
+それはなぜかというと DB 等のデータ処理フレームワークがある強さの分離レベルを提供しているからである。</p>
+<h2 id="いろいろな分離レベル">いろいろな分離レベル</h2>
+<p>ACID 特性のうちの1つ、分離性 (Isolation) の程度を表すのが分離レベル。</p>
+
+<blockquote>
+  <p>トランザクション中に行われる操作の過程が他の操作から隠蔽されることを指し、日本語では分離性、独立性または隔離性ともいう。より形式的には、独立性とはトランザクション履歴が直列化されていることと言える。この性質と性能はトレードオフの関係にあるため、一般的にはこの性質の一部を緩和して実装される場合が多い。</p>
+  <footer>&#8212; Wikipedia <cite title="ACID (コンピュータ科学)"><a rel="noopener nofollow" href="https://ja.wikipedia.org/wiki/ACID_%28%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E7%A7%91%E5%AD%A6%29">ACID (コンピュータ科学)</a></cite></footer>
+</blockquote>
+
+<p>分離レベルには名前のついたものがいくつかあり、分離性の保証の強さが異なる。
+具体的にはトランザクションの並行性の問題への対応力が異なる。
+名著「<a href="https://www.oreilly.co.jp/books/9784873118703/">データ指向アプリケーションデザイン</a>」の第7章で分離レベルについて詳しく述べられているので、以下ではそちらからの引用。
+分離レベルを弱い順に並べる。</p>
+<ul>
+<li>
+<p>read uncommitted</p>
+<blockquote>
+<p>このレベルではダーティライトは生じませんが、ダーティリードは妨げられません。</p>
+</blockquote>
+</li>
+<li>
+<p>read committed</p>
+<blockquote>
+<ol>
+<li>データベースからの読み取りを行った際に見えるデータは、コミットされたもののみであること（ダーティリードは生じない）。</li>
+<li>データベースへの書き込みを行う場合、上書きするのはコミットされたデータのみであること（ダーティライトは生じない）。</li>
+</ol>
+</blockquote>
+</li>
+<li>
+<p>snapshot isolation</p>
+<blockquote>
+<p>スナップショット分離の考え方は、それぞれのトランザクションがデータベースの一貫性のあるスナップショットから読み取りを行うというものです。すなわち、トランザクションが読み取るデータは、すべてそのトランザクションの開始時点のデータベースにコミット済みのものだけということです。</p>
+</blockquote>
+</li>
+<li>
+<p>serializability</p>
+<blockquote>
+<p>この分離レベルはトランザクションが並行して実行されていても、最終的な答えはそれぞれが1つずつ順番に、並行ではなく実行された場合と同じになることを保証します。</p>
+</blockquote>
+</li>
+</ul>
+<p>日本語で「分離レベル」を検索すると snapshot isolation の代わりに repeatable read が出てくる事が多い。
+しかし repeatable read の名前は実装によって意味が違っていたりして扱いが難しいらしい。</p>
+<h2 id="分離レベルと-race-condition-の関係">分離レベルと race condition の関係</h2>
+<p>以下に各分離レベルとトランザクションの並行性の問題 (race condition) の関係を示す。
+各 race condition の説明については割愛するが、複数のトランザクションが並行して実行されることにより起こりうる期待されていない挙動だと思えばよい。
+○はその分離レベルにおいてその race condition が発生しないことを示す。
+△は条件によっては発生する。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>dirty read</th>
+<th>dirty write</th>
+<th>read skew (nonrepeatable read)</th>
+<th>lost update</th>
+<th>write skew</th>
+<th>phantom read</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>read uncommitted</td>
+<td>○</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>read committed</td>
+<td>○</td>
+<td>○</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>snapshot isolation</td>
+<td>○</td>
+<td>○</td>
+<td>○</td>
+<td>△</td>
+<td>-</td>
+<td>△</td>
+</tr>
+<tr>
+<td>serializability</td>
+<td>○</td>
+<td>○</td>
+<td>○</td>
+<td>○</td>
+<td>○</td>
+<td>○</td>
+</tr>
+</tbody>
+</table>
+<p>下に行くほど強い分離レベルとなっている。
+分離レベルが強くなるほど race condition が発生しにくくなるが、一方で lock 等によりパフォーマンスが下がっていくというトレードオフがある。</p>
+<h1 id="各種データベースの分離レベル">各種データベースの分離レベル</h1>
+<p>ここでは MySQL と Hive においてどの分離レベルが提供されているかを見てみる。</p>
+<h2 id="mysql-の場合">MySQL の場合</h2>
+<p>MySQL の分離レベルについては以下のドキュメントで述べられている。</p>
+<ul>
+<li><a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html">15.7.2.1 Transaction Isolation Levels</a></li>
+</ul>
+<p>MySQL (というか InnoDB?) では次の4つの分離レベルを設定することができる。</p>
+<ul>
+<li><code>READ UNCOMMITTED</code></li>
+<li><code>READ COMMITTED</code></li>
+<li><code>REPEATABLE READ</code> (default)</li>
+<li><code>SERIALIZABLE</code></li>
+</ul>
+<p>デフォルトの分離レベルは <code>REPEATABLE READ</code> だが、これは前述の snapshot isolation に相当するらしい。
+分離レベルは、例えば <code>set transaction</code> 構文により次のようにして指定できる。</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="kt">set</span> <span class="n">transaction</span> <span class="n">isolation</span> <span class="n">level</span> <span class="n">SERIALIZABLE</span><span class="p">;</span>
+</code></pre></div><p>この場合は現在のセッション内で実行される次のトランザクションについて適用される。
+すべてのセッションやすべてのトランザクション等の指定もできる。
+詳しくは以下。</p>
+<ul>
+<li><a href="https://dev.mysql.com/doc/refman/8.0/en/set-transaction.html">13.3.7 SET TRANSACTION Statement</a></li>
+</ul>
+<h2 id="hive-の場合">Hive の場合</h2>
+<p>Hive についてはドキュメントに次のような記載がある。</p>
+
+<blockquote>
+  <p>At this time only snapshot level isolation is supported.  When a given query starts it will be provided with a consistent snapshot of the data.</p>
+  <footer>&#8212; Apache Hive <cite title="Hive Transactions"><a rel="noopener nofollow" href="https://cwiki.apache.org/confluence/display/Hive/Hive&#43;Transactions#HiveTransactions-Limitations">Hive Transactions</a></cite></footer>
+</blockquote>
+
+<p>Hive は snapshot isolation のみ提供しているとのこと。</p>
+
+<blockquote>
+  <p>The default DummyTxnManager emulates behavior of old Hive versions: has no transactions and uses hive.lock.manager property to create lock manager for tables, partitions and databases.</p>
+  <footer>&#8212; Apache Hive <cite title="Hive Transactions"><a rel="noopener nofollow" href="https://cwiki.apache.org/confluence/display/Hive/Hive&#43;Transactions#HiveTransactions-Transaction/LockManager">Hive Transactions</a></cite></footer>
+</blockquote>
+
+<p>lock は小さくとも partition の単位になるのだろうか。
+であるとすると予想通りだが MySQL よりもいかつい挙動になっている。</p>
+<p>このように多くの DB では snapshot isolation の分離レベルが基本となっている。</p>
+<h1 id="spark-クエリの分離レベル">Spark クエリの分離レベル</h1>
+<p>では Spark のクエリはどうだろうか。
+ここからようやく本題となる。</p>
+<h2 id="read-committed-相当">read committed 相当</h2>
+<p>Spark において <code>DataFrame</code> を用いたデータ処理を記述するとき、それは1つの SQL クエリを書くのと近い感覚になる。
+そもそも <code>DataFrame</code> は SQL-like な使い心地を目的として作られた API だから当然だ。</p>
+<p><code>DataFrame</code> で記述された処理は実行時に <code>RDD</code> として翻訳されるが、分離レベルを考えるにあたって <code>RDD</code> の特性がキーとなってくる。</p>
+
+<blockquote>
+  <p>By default, each transformed RDD may be recomputed each time you run an action on it.</p>
+  <footer>&#8212; Apache Spark <cite title="RDD Operations"><a rel="noopener nofollow" href="https://spark.apache.org/docs/3.0.0/rdd-programming-guide.html#rdd-operations">RDD Operations</a></cite></footer>
+</blockquote>
+
+<p>あまり良い説明を見つけられなかったが、1回の action を伴う処理においても同じ <code>RDD</code> が複数回参照されるとき、その <code>RDD</code> までの計算は通常やり直されることになる。</p>
+<p>したがって例えば self join のようなことをするとき、同じデータソースを2回読みに行くということが起こってしまう。
+HDFS や S3 上のファイル、JDBC 経由の外部 DB など Spark は様々なデータソースを扱うことができるが、通常 Spark がその2回の読み込みに対して lock をかけたりすることはできない。</p>
+<p>つまり non-repeatable read や phantom read を防ぐことができない。
+read committed という弱い分離レベルに相当するということになってしまう。</p>
+<p>分離レベルという言葉はトランザクションという概念に対して使われるものであり、<code>DataFrame</code> のクエリをトランザクションと呼んでいいのかはわからない。
+なので分離レベルという言葉をここで使うのが適切でないかもしれないということは述べておく。</p>
+<h2 id="検証">検証</h2>
+<p>MySQL からデータを読み取り Spark で処理することを考える。
+まず local の MySQL で次のような table を用意する。</p>
+<pre><code>mysql&gt; describe employees;
++---------------+---------+------+-----+---------+-------+
+| Field         | Type    | Null | Key | Default | Extra |
++---------------+---------+------+-----+---------+-------+
+| id            | int(11) | NO   | PRI | NULL    |       |
+| salary        | int(11) | YES  |     | NULL    |       |
+| department_id | int(11) | YES  |     | NULL    |       |
++---------------+---------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+</code></pre><p>部署 (department) ごとの給料 (salary) の平均から各従業員の給料がどれくらい離れているかの差分を見たいものとする。
+Spark のコードは次のようになる。
+Spark のバージョンはこれを書いている時点での最新 3.0.0 とした。</p>
+<div class="highlight"><pre class="chroma"><code class="language-scala" data-lang="scala"><span class="k">package</span> <span class="nn">com.example</span>
+
+<span class="k">import</span> <span class="nn">org.apache.spark.sql.functions.avg</span>
+<span class="k">import</span> <span class="nn">org.apache.spark.sql.SparkSession</span>
+
+<span class="k">object</span> <span class="nc">IsolationLevelExperiment</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="c1">// Prepare SparkSession
+</span><span class="c1"></span>    <span class="k">val</span> <span class="n">spark</span> <span class="k">=</span> <span class="nc">SparkSession</span>
+      <span class="o">.</span><span class="n">builder</span><span class="o">()</span>
+      <span class="o">.</span><span class="n">appName</span><span class="o">(</span><span class="s">&#34;Isolation Level Experiment&#34;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">master</span><span class="o">(</span><span class="s">&#34;local[*]&#34;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">getOrCreate</span><span class="o">()</span>
+
+    <span class="k">import</span> <span class="nn">spark.implicits._</span>
+
+    <span class="c1">// Read from MySQL
+</span><span class="c1"></span>    <span class="k">val</span> <span class="n">dfEmployee</span> <span class="k">=</span> <span class="n">spark</span>
+      <span class="o">.</span><span class="n">read</span>
+      <span class="o">.</span><span class="n">format</span><span class="o">(</span><span class="s">&#34;jdbc&#34;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&#34;url&#34;</span><span class="o">,</span> <span class="s">&#34;jdbc:mysql://localhost&#34;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&#34;dbtable&#34;</span><span class="o">,</span> <span class="s">&#34;db_name.employees&#34;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&#34;user&#34;</span><span class="o">,</span> <span class="s">&#34;user_name&#34;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&#34;password&#34;</span><span class="o">,</span> <span class="s">&#34;********&#34;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&#34;driver&#34;</span><span class="o">,</span> <span class="s">&#34;com.mysql.cj.jdbc.Driver&#34;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">load</span>
+      <span class="o">.</span><span class="n">cache</span>
+
+    <span class="c1">// Get average salary
+</span><span class="c1"></span>    <span class="k">val</span> <span class="n">dfAvg</span> <span class="k">=</span> <span class="n">dfEmployee</span>
+      <span class="o">.</span><span class="n">groupBy</span><span class="o">(</span><span class="n">$</span><span class="s">&#34;department_id&#34;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">agg</span><span class="o">(</span><span class="n">avg</span><span class="o">(</span><span class="n">$</span><span class="s">&#34;salary&#34;</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="s">&#34;avg_salary&#34;</span><span class="o">))</span>
+
+    <span class="c1">// Calculate diff
+</span><span class="c1"></span>    <span class="k">val</span> <span class="n">dfResult</span> <span class="k">=</span> <span class="n">dfEmployee</span>
+      <span class="o">.</span><span class="n">as</span><span class="o">(</span><span class="s">&#34;e&#34;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">join</span><span class="o">(</span>
+        <span class="n">dfAvg</span><span class="o">.</span><span class="n">as</span><span class="o">(</span><span class="s">&#34;a&#34;</span><span class="o">),</span>
+        <span class="n">$</span><span class="s">&#34;e.department_id&#34;</span> <span class="o">===</span> <span class="n">$</span><span class="s">&#34;a.department_id&#34;</span><span class="o">,</span>
+        <span class="s">&#34;left_outer&#34;</span>
+      <span class="o">)</span>
+      <span class="o">.</span><span class="n">select</span><span class="o">(</span>
+        <span class="n">$</span><span class="s">&#34;e.id&#34;</span><span class="o">,</span>
+        <span class="n">$</span><span class="s">&#34;e.department_id&#34;</span><span class="o">,</span>
+        <span class="o">(</span><span class="n">$</span><span class="s">&#34;e.salary&#34;</span> <span class="o">-</span> <span class="n">$</span><span class="s">&#34;a.avg_salary&#34;</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="s">&#34;salary_diff&#34;</span><span class="o">)</span>
+      <span class="o">)</span>
+
+    <span class="c1">// Output results
+</span><span class="c1"></span>    <span class="n">dfResult</span><span class="o">.</span><span class="n">show</span>
+
+    <span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="o">()</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><p>このコードを実行する前に MySQL の <a href="https://dev.mysql.com/doc/refman/8.0/en/query-log.html">general query log</a> を ON にする。</p>
+<pre><code>mysql&gt; set global general_log = 'ON';
+Query OK, 0 rows affected (0.02 sec)
+
+mysql&gt; show global variables like 'general_log%';
++------------------+--------------------------------------+
+| Variable_name    | Value                                |
++------------------+--------------------------------------+
+| general_log      | ON                                   |
+| general_log_file | /usr/local/var/mysql/MacBook-Pro.log |
++------------------+--------------------------------------+
+2 rows in set (0.01 sec)
+</code></pre><p>これによって MySQL に対して発行されたクエリがログとして記録されるようになる。</p>
+<p>直感的に snapshot isolation になっているのであれば MySQL に対する select 文は1回だけ発行されるはずである。
+しかし前述のとおり <code>RDD</code> や <code>DataFrame</code> の処理は途中の状態を通常保存せず、同じ <code>RDD</code> や <code>DataFrame</code> を参照していたとしても再計算される。
+上記コードの例だと <code>dfEmployee</code> が2回参照されている。</p>
+<p>コードを実行すると general query log には次のように、データ取得のための select 文が2つ記録されていた。
+それぞれ <code>join()</code> の左右の table のデータソースを示している。</p>
+<pre><code>8 Query     SELECT `id`,`salary`,`department_id` FROM test_fout_dsp.employees
+7 Query     SELECT `salary`,`department_id` FROM test_fout_dsp.employees WHERE (`department_id` IS NOT NULL)
+</code></pre><p>2つの select 文はそれぞれ別のクエリ、トランザクションとして発行されている。
+したがって前者の select 文が実行された後、後者の select 文が実行される前に別のトランザクションにより <code>employees</code> が更新されたり挿入・削除されたりすると non-repeatable read や phantom read が発生してしまうのである。</p>
+<p>今回はデータソースへのアクセスを確認するためにデータソースとして MySQL を使ったが、同じことはファイルや他の DB など別のデータソースで起こりうる。</p>
+<h2 id="回避策">回避策</h2>
+<p>プロダクト運用上、non-repeatable read や phantom read が発生しうる状況というのは多くの場合で厄介である。
+一時的なデータソースの状態に依存して問題が発生するため、バグの原因追求がとても困難だからだ。
+見た目上の分離レベルを強くし、これらを避けるには2つの方法が考えられる。</p>
+<h3 id="immutable-なデータにのみアクセスする">immutable なデータにのみアクセスする</h3>
+<p>単純な話で non-repeatable read や phantom read が発生するようなデータソースを参照しなければよい。
+例えばユーザの行動ログのような蓄積されていくデータが hour 単位で partitioning されているような場合、基本的に過去の partition に対しては変更や挿入・削除は行われない。
+このような partition にアクセスする分には前述のような厄介な問題は起こらない。</p>
+<h3 id="cache-する">cache する</h3>
+<p>データソースから読み取った結果の <code>DataFrame</code> に対して <code>cache()</code> または <code>persist()</code> をするとよい。</p>
+
+<blockquote>
+  <p>Spark SQL can cache tables using an in-memory columnar format by calling spark.catalog.cacheTable(&#34;tableName&#34;) or dataFrame.cache().</p>
+  <footer>&#8212; Apache Spark <cite title="Caching Data In Memory"><a rel="noopener nofollow" href="https://spark.apache.org/docs/latest/sql-performance-tuning.html#caching-data-in-memory">Caching Data In Memory</a></cite></footer>
+</blockquote>
+
+<p>前述のコードで <code>dfEmployee</code> に対して <code>.cache()</code> をした場合、MySQL へのデータ取得のための select 文の発行は1回になった。
+大きなデータソースを <code>cache()</code> するときだけメモリや HDD 容量に気をつけておきたい。</p>
+<h1 id="まとめ">まとめ</h1>
+<p><code>DataFrame</code> はいわゆる RDBMS を操作しているように見えてしまうところが難しいところだろうか。
+「データ指向アプリケーションデザイン」に至極真っ当なことが書いてあったので、その言葉を借りて締めておく。</p>
+
+<blockquote>
+  <p>何も考えずにツールを信じて依存するのではなく、並行性の問題にはどういったものがあるのか、そしてそれらを回避するにはどうしたら良いのかを、しっかり理解しなければなりません。そうすれば、信頼性があり、正しく動作するアプリケーションを手の届くツールを使って構築できるようになります。</p>
+  <footer>&#8212; Martin Kleppmann <cite title="データ指向アプリケーションデザイン"><a rel="noopener nofollow" href="https://www.oreilly.co.jp/books/9784873118703/">データ指向アプリケーションデザイン</a></cite></footer>
+</blockquote>]]></content>
+  </entry>
   <entry>
     <title>Apache Spark 3.0.0 について調べた</title>
     <author>
       <name>soonraah</name>
-      <uri>https://example.com/</uri>
+      <uri>https://soonraah.github.io/</uri>
     </author>
     <id>https://soonraah.github.io/study-spark-3-0-0/</id>
     <updated>2020-07-12T00:00:00Z</updated>
     <published>2020-07-12T00:00:00Z</published>
-    <content type="html"><![CDATA[<div class="flex flex-wrap justify-center"><a class="rounded font-content-sans font-semibold text-raven-700 bg-raven-100 hover:bg-raven-200 py-2 px-4 m-2" href="https://soonraah.github.io/tags/apache-spark/">Apache spark (1)</a>
-</div>
-
-<h2 id="はじめに">はじめに</h2>
+    <content type="html"><![CDATA[<h2 id="はじめに">はじめに</h2>
 <p>Apache Spark 3.0.0 がリリースされました。</p>
 <ul>
 <li><a href="https://spark.apache.org/releases/spark-release-3-0-0.html">Spark Release 3.0.0</a></li>
@@ -181,20 +476,6 @@ logical plan を出力してみると <code>observe()</code> を入れること�
 これがフレームワーク側でサポートされるのはうれしいです。</p>
 <h2 id="まとめ">まとめ</h2>
 <p>2つのダイナミックな最適化に期待大。
-気が向いたら追加でまた調べるかもしれません。</p>
-<table>
-<thead>
-<tr>
-<th>aaa</th>
-<th>bbb</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>2</td>
-</tr>
-</tbody>
-</table>]]></content>
+気が向いたら追加でまた調べるかもしれません。</p>]]></content>
   </entry>
 </feed>
