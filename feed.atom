@@ -7,9 +7,169 @@
     <name>Froglog</name>
     <uri>https://soonraah.github.io/</uri>
   </author>
-  <updated>2020-07-20T15:22:45Z</updated>
+  <updated>2020-08-02T03:45:23Z</updated>
   <link rel="self" type="application/atom+xml" href="https://soonraah.github.io/feed.atom" hreflang="jp"/>
   <link rel="alternate" type="text/html" href="https://soonraah.github.io/" hreflang="jp"/>
+  <entry>
+    <title>勉強会メモ: Spark Meetup Tokyo #3 Online</title>
+    <author>
+      <name>soonraah</name>
+      <uri>https://soonraah.github.io/</uri>
+    </author>
+    <id>https://soonraah.github.io/spark-meetup-tokyo-3/</id>
+    <updated>2020-08-01T06:00:00Z</updated>
+    <published>2020-08-01T06:00:00Z</published>
+    <content type="html"><![CDATA[<p>2020-07-31 にオンライン開催された <a href="https://spark-meetup-tokyo.connpass.com/event/181422/">Spark Meetup Tokyo #3 Online</a> に参加した。
+感想などメモしておく。</p>
+<h1 id="全体感">全体感</h1>
+<p>トピックとしては主に</p>
+<ul>
+<li>Spark 3.0</li>
+<li>Spark + AI Summit 2020</li>
+<li>Spark 周辺要素</li>
+</ul>
+<p>といったところだろうか。
+最近のコミュニティの動向や関心を日本語で聞くことができてよかった。</p>
+<p>運営 &amp; スピーカーの皆様、ありがとうございます。</p>
+<h1 id="発表">発表</h1>
+<p>発表資料は公開されたら追加していく。</p>
+<h2 id="sparkai-summit-2020-イベント概要">SPARK+AI Summit 2020 イベント概要</h2>
+<p>スピーカー: <a href="https://twitter.com/tokyodataguy">@tokyodataguy</a> さん</p>
+<ul>
+<li>Summit は金融業界の参加者が増えているらしい</li>
+<li>Spark で最も使われている言語は Python とのことだったが、Databricks の notebook サービスの話だった
+<ul>
+<li>プロダクションコードではまた違うのだろう</li>
+</ul>
+</li>
+<li>Spark 3.0 の update をざっくりと</li>
+<li>Spark 周辺要素の話をざっくりと
+<ul>
+<li>Koalas</li>
+<li>Delta Lake</li>
+<li>Redash</li>
+<li>MLflow</li>
+</ul>
+</li>
+</ul>
+<h2 id="introducing-koalas-10">Introducing Koalas 1.0</h2>
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/42rsX5ywWZbk5b" width="510" height="420" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/ueshin/introducing-koalas-10-and-11" title="Introducing Koalas 1.0 (and 1.1)" target="_blank">Introducing Koalas 1.0 (and 1.1)</a> </strong> from <strong><a href="//www.slideshare.net/ueshin" target="_blank">Takuya UESHIN</a></strong> </div>
+<p>スピーカー: <a href="https://twitter.com/ueshin">@ueshin</a> さん</p>
+<ul>
+<li>What's Koalas
+<ul>
+<li>open source の pure Python library</li>
+<li>pandas の API で Spark を動かせるようにする</li>
+<li>小さいデータも大きなデータも同じように扱えるように</li>
+</ul>
+</li>
+<li>最近 v1.1 をリリース</li>
+<li>(個人的には pandas の API があまり好きではなく…)</li>
+</ul>
+<h2 id="sparkai-summit-2020-のセッションハイライト">SPARK+AI Summit 2020 のセッションハイライト</h2>
+<p>スピーカー: <a href="https://twitter.com/masaru_dobashi">@masaru_dobashi</a> さん</p>
+<ul>
+<li>Summit のセッションから case study 的なセッションを2つピックアップ</li>
+<li>USCIS の例
+<ul>
+<li><a href="https://databricks.com/jp/session_na20/lessons-learned-from-modernizing-uscis-data-analytics-platform">Lessons Learned from Modernizing USCIS Data Analytics Platform</a></li>
+<li>古き良き Data Warehouse から Data Lake への移行</li>
+<li>injection には Kafka も利用</li>
+<li>諸々気にせずに気軽にデータをストレージに置きたい</li>
+</ul>
+</li>
+<li>Alibaba の例
+<ul>
+<li>Spark Structured Streming の上に SQL-like なものを載せた？</li>
+<li>ストリームの mini-batch 処理の合間で compaction を行う (つらそう)</li>
+</ul>
+</li>
+<li>スライド中の「パイプラインの途中でモダンな技術に流し込めるかどうか？」という言葉が印象的だった
+<ul>
+<li>モダンなものに移行するとき現実的に重要</li>
+</ul>
+</li>
+</ul>
+<h2 id="spark-v30の紹介">Spark v3.0の紹介</h2>
+<h3 id="前半">前半</h3>
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/j4RUIhcche96WO" width="510" height="420" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/ishizaki/introduction-new-features-in-spark-30" title="Introduction new features in Spark 3.0" target="_blank">Introduction new features in Spark 3.0</a> </strong> from <strong><a href="//www.slideshare.net/ishizaki" target="_blank">Kazuaki Ishizaki</a></strong> </div>
+<p>スピーカー: <a href="https://twitter.com/kiszk">@kiszk</a> さん</p>
+<ul>
+<li>SQL の性能に関わる7大機能の話
+<ol>
+<li>Query planの新しい表示方法</li>
+<li>Join hintsの強化</li>
+<li>Adaptive query execution</li>
+<li>Dynamic partitioning pruning</li>
+<li>nested column pruning &amp; pushdown の強化</li>
+<li>Aggregation のコード生成の改良</li>
+<li>ScalaとJavaの新バージョンのサポート</li>
+</ol>
+</li>
+<li>実行計画が見やすくなるのは本当にうれしい</li>
+<li>人がチューニングしていた部分が Adaptive Query Plan や Dynamic Partition Pruning で自動化されるのもうれしい</li>
+</ul>
+<h3 id="後半">後半</h3>
+<p>スピーカー: <a href="https://twitter.com/raspberry1123">@raspberry1123</a> さん</p>
+<ul>
+<li>Accelarator Aware Scheduling
+<ul>
+<li>Project Hydrogen</li>
+</ul>
+</li>
+<li>プラグイン機能
+<ul>
+<li>executor や driver の機能を user が拡張できる</li>
+<li>executor については Spark 2.4 からあったそうだが知らなかった…</li>
+</ul>
+</li>
+<li>Structured Straming web UI
+<ul>
+<li>ストリーム処理にはこういった chart が必要だと思う</li>
+</ul>
+</li>
+</ul>
+<h2 id="sparkにprを投げてみた">SparkにPRを投げてみた</h2>
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/r8MSqiNNAd73Wk" width="510" height="420" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/ssuserca76a5/spark-237429607" title="Sparkにプルリク投げてみた" target="_blank">Sparkにプルリク投げてみた</a> </strong> from <strong><a href="//www.slideshare.net/ssuserca76a5" target="_blank">Noritaka Sekiyama</a></strong> </div>
+<p>スピーカー: <a href="https://twitter.com/moomindani">@moomindani</a> さん</p>
+<ul>
+<li>スピーカーは AWS で Glue の開発をしている方</li>
+<li>Glue は Spark に強く依存しているため、機能追加にモチベーションがあったとのこと</li>
+<li>私も投げてみたい！</li>
+</ul>
+<h2 id="lt-td-spark-internals-airframeでsparkの機能を拡張するテクニック">LT: td-spark internals: AirframeでSparkの機能を拡張するテクニック</h2>
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/jWHWpIeuyCY9mq" width="510" height="420" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/taroleo/tdspark-internals-extending-spark-with-airframe-spark-meetup-tokyo-3-2020" title="td-spark internals: Extending Spark with Airframe - Spark Meetup Tokyo #3 2020" target="_blank">td-spark internals: Extending Spark with Airframe - Spark Meetup Tokyo #3 2020</a> </strong> from <strong><a href="//www.slideshare.net/taroleo" target="_blank">Taro L. Saito</a></strong> </div>
+<p>スピーカー: <a href="https://twitter.com/taroleo">@taroleo</a> さん</p>
+<ul>
+<li><a href="https://github.com/wvlet/airframe">Airframe</a> とは Scala の application 開発用ツール群のようなもの？</li>
+<li>Spark の機能を拡張</li>
+</ul>
+<h2 id="lt-spark-31-feature-expectation">LT: Spark 3.1 Feature Expectation</h2>
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/lwQplIU1K7gMBl" width="510" height="420" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/maropu0804/lt-spark-31-feature-expectation" title="LT: Spark 3.1 Feature Expectation" target="_blank">LT: Spark 3.1 Feature Expectation</a> </strong> from <strong><a href="//www.slideshare.net/maropu0804" target="_blank">Takeshi Yamamuro</a></strong> </div>
+<p>スピーカー: <a href="https://twitter.com/maropu">@maropu</a> さん</p>
+<ul>
+<li>新機能
+<ul>
+<li>Support Filter Pushdown JSON
+<ul>
+<li>JSON の読み取りが早くなる</li>
+</ul>
+</li>
+<li>Better Handling for Node Shutdown
+<ul>
+<li>node 離脱時にその node が保持する shuffle や cache の情報が失われていた</li>
+<li>計画された node の離脱に対して shuffle や cache ブロックを別 node に委譲</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="まとめ">まとめ</h1>
+<p>どんどん便利になっていくなという印象。
+手でパフォーマンスチューニングする要素はどんどん減っていくのだろう。</p>
+<p>Delta Lake が盛り上がっているように感じた。
+データレイクについて勉強しないと…</p>]]></content>
+  </entry>
   <entry>
     <title>Spark DataFrame クエリの弱い分離レベル</title>
     <author>
