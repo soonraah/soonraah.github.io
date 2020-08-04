@@ -7,9 +7,99 @@
     <name>Froglog</name>
     <uri>https://soonraah.github.io/</uri>
   </author>
-  <updated>2020-08-02T03:45:23Z</updated>
+  <updated>2020-08-04T00:39:07Z</updated>
   <link rel="self" type="application/atom+xml" href="https://soonraah.github.io/feed.atom" hreflang="jp"/>
   <link rel="alternate" type="text/html" href="https://soonraah.github.io/" hreflang="jp"/>
+  <entry>
+    <title>あまり大きな Pull Request を作ってほしくない</title>
+    <author>
+      <name>soonraah</name>
+      <uri>https://soonraah.github.io/</uri>
+    </author>
+    <id>https://soonraah.github.io/no-more-huge-pull-request/</id>
+    <updated>2020-08-03T13:00:00Z</updated>
+    <published>2020-08-03T13:00:00Z</published>
+    <content type="html"><![CDATA[<p>GitHub Flow ベースの開発においてはあまり大きな pull request を作ってほしくないという話。
+なんというか今更わざわざ言わなくてもいいんだけど…</p>
+<p>仕事で何度か大きな pull request が投げられているのを見てしまったので、それはあまりよくないよというのを自分でも指摘しやすくするためにまとめておく。</p>
+<h2 id="reference">Reference</h2>
+<p>最初に参考資料を挙げておく。</p>
+<ul>
+<li><a href="http://kurtfunai.com/2017/12/100-duck-sized-pull-requests.html">100 Duck-Sized Pull Requests</a></li>
+<li><a href="https://techracho.bpsinc.jp/hachi8833/2018_02_07/51095">「巨大プルリク1件vs細かいプルリク100件」問題を考える（翻訳）</a></li>
+<li><a href="https://smallbusinessprogramming.com/optimal-pull-request-size/">Optimal pull request size</a></li>
+</ul>
+<p>これらを読めば特に私から言うこともないのだが…
+これらに書いてあるとおりだが補足しておく。</p>
+<h2 id="pull-request-を小分けにしたときのメリット">Pull Request を小分けにしたときのメリット</h2>
+<h3 id="module-を適切に切り出すモチベーションが得られる">module を適切に切り出すモチベーションが得られる</h3>
+<p>次のような話がある。</p>
+<ul>
+<li><a href="https://hachibeechan.hateblo.jp/entry/dont-think-just-make-it-abstract">共通化という考え方はアンチパターンを生み出すだけ説</a></li>
+</ul>
+<p>これを理由に module を分けるべきところが分けられず、いろんなことができてしまうベタッと大きな module が生まれるのを見た。</p>
+<p>もちろんよく考えられていない共通化は駄目だが、上記ポストでは一方で</p>
+
+<blockquote>
+  <p>ただし共通化という名の下におこなわれるのは「同じロジックを持つコードをまとめる」行為であって、抽象化のようにそのコード単位の意味を捉える作業はその範疇にない。抽象化というのはロジックを意味単位ごとにひとくくりにしていく行為で、これがどういうことなのかは次以降で述べていく。</p>
+  <footer>&#8212; はっちん <cite title="共通化という考え方はアンチパターンを生み出すだけ説 - タオルケット体操"><a rel="noopener nofollow" href="https://hachibeechan.hateblo.jp/entry/dont-think-just-make-it-abstract">共通化という考え方はアンチパターンを生み出すだけ説 - タオルケット体操</a></cite></footer>
+</blockquote>
+
+<p>と述べており抽象化、つまりコードの意味を考慮した上で適切な単位でまとめておくことは否定していない。</p>
+<p>pull request を小さく分けるという行為のためには module や機能を適度なまとまりで切り分けること、つまり抽象化を考えていくことが必要となる。
+したがって何でもできてしまう大きな module が生まれるのを防ぐ方向に働く。
+(もちろんここで駄目な共通化がなされてしまうこともあるだろう)</p>
+<h3 id="リリースまでの期間が短く済む">リリースまでの期間が短く済む</h3>
+<p>前述の参考資料においても pull request が大きいと</p>
+
+<blockquote>
+  <p>Developers would put off reviews until they had time/energy and the development process would come to a halt.</p>
+  <footer>&#8212; Kurtis Funai <cite title="100 Duck-Sized Pull Requests"><a rel="noopener nofollow" href="http://kurtfunai.com/2017/12/100-duck-sized-pull-requests.html">100 Duck-Sized Pull Requests</a></cite></footer>
+</blockquote>
+
+
+<blockquote>
+  <p>development continues on the master branch, it often results in merge conflicts, rebases, and other fun.</p>
+  <footer>&#8212; Kurtis Funai <cite title="100 Duck-Sized Pull Requests"><a rel="noopener nofollow" href="http://kurtfunai.com/2017/12/100-duck-sized-pull-requests.html">100 Duck-Sized Pull Requests</a></cite></footer>
+</blockquote>
+
+<p>となると述べられている。
+仮にすぐにレビューされ、かつ conflict なども発生しなかっとしても大きな1つの pull request をレビューする場合とそれを3つに分けた場合の開発プロセスの進行を比較すると</p>
+<ul>
+<li>大きな1つの pull request
+<ol>
+<li>全体の開発</li>
+<li>全体のレビュー</li>
+</ol>
+</li>
+<li>3つに分割された pull request
+<ol>
+<li>part-1 の開発</li>
+<li>part-1 のレビュー &amp; part-2 の開発</li>
+<li>part-2 のレビュー &amp; part-3 の開発</li>
+<li>part-3 のレビュー</li>
+</ol>
+</li>
+</ul>
+<p>のようになり、開発とレビューを並列で進められる部分があるので全体としての開発期間を短くすることができる。
+もちろんこれはうまく噛み合ったときの例だが。
+早めにフィードバックが得られるのも大きい。</p>
+<h2 id="pull-request-を小分けにしたときのデメリット">Pull Request を小分けにしたときのデメリット</h2>
+<p>小分けにすることでレビュワーが全体感をつかみにくくなるというのはあるかもしれない。
+part-1 と part-2 で同じレビュワーになるとも限らない。</p>
+<p>これに対しては開発に着手する前にまず全体のざっくりとした設計についてレビューを受けることで対応できる。
+このステップを入れることで「とりあえず手を動かそう」となりにくくなる。
+手を動かすと仕事してる感が出るのでとりあえず手を動かしたくなりがちだが、ちょっと待てよと。
+まず何を作るか、全体の工程を考えましょうと。</p>
+
+<blockquote>
+  <p>Working under these constraints causes developers to break problems down into incremental deliverables. It helps avoid the temptation of jumping into development without a clear plan.</p>
+  <footer>&#8212; Kurtis Funai <cite title="100 Duck-Sized Pull Requests"><a rel="noopener nofollow" href="http://kurtfunai.com/2017/12/100-duck-sized-pull-requests.html">100 Duck-Sized Pull Requests</a></cite></footer>
+</blockquote>
+
+<h2 id="まとめ">まとめ</h2>
+<p>pull request を分けてくれ、頼む。</p>]]></content>
+  </entry>
   <entry>
     <title>勉強会メモ: Spark Meetup Tokyo #3 Online</title>
     <author>
