@@ -7,9 +7,230 @@
     <name>Froglog</name>
     <uri>https://soonraah.github.io/</uri>
   </author>
-  <updated>2020-08-04T00:39:07Z</updated>
+  <updated>2020-08-06T13:55:38Z</updated>
   <link rel="self" type="application/atom+xml" href="https://soonraah.github.io/feed.atom" hreflang="jp"/>
   <link rel="alternate" type="text/html" href="https://soonraah.github.io/" hreflang="jp"/>
+  <entry>
+    <title>Apache Flink の broadcast state pattern を用いた stream data と static data の join</title>
+    <author>
+      <name>soonraah</name>
+      <uri>https://soonraah.github.io/</uri>
+    </author>
+    <id>https://soonraah.github.io/flink-join-by-broadcast-state-pattern/</id>
+    <updated>2020-08-06T13:00:00Z</updated>
+    <published>2020-08-06T13:00:00Z</published>
+    <content type="html"><![CDATA[<p>star schema における fact table と dimension table の join のようなことを Apache Flink におけるストリーム処理で行いたい。
+stream data と static data の join ということになる。
+ただし dimension table 側も更新されるため、完全な static というわけではない。</p>
+<p>このポストでは Flink v1.11 を前提とした。</p>
+<h2 id="join-の方法">join の方法</h2>
+<p>今回は DataStream API でこれを実現することを考える。
+Flink のドキュメントを読むと broadcast state pattern でできそうだ。</p>
+<ul>
+<li><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/stream/state/broadcast_state.html">The Broadcast State Pattern</a></li>
+</ul>
+<p>やり方としては次のようになる。</p>
+<ol>
+<li>static data のファイルを <code>FileProcessingMode.PROCESS_CONTINUOUSLY</code> で読み込み <code>DataStream</code> 化</li>
+<li>1 を <code>broadcast()</code></li>
+<li>stream data の <code>DataStream</code> と 2 を <code>connect()</code></li>
+</ol>
+<p>static data を <code>PROCESS_CONTINUOUSLY</code> で読むのは変更を得るため。
+<code>PROCESS_ONCE</code> で読んでしまうとストリーム処理の開始時に1回読むだけになり、dimension table の変更を得られない。
+このあたりの仕様については <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/datastream_api.html#data-sources">Data Sources</a> を参照。</p>
+<p>その後は broadcast state pattern にそのまま従う。
+したがって <code>BroadcastProcessFunction</code> or <code>KeyedBroadcastProcessFunction</code> を実装する必要がある。
+その中で static data を取り込んで state として持ち、stream data 側で参照すればよい。</p>
+<p>2つのデータの各 term に対する関係性を以下に示す。</p>
+<table>
+<thead>
+<tr>
+<th>in star schema</th>
+<th>stream or static</th>
+<th>broadcast or not</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dimension table</td>
+<td>static data</td>
+<td>broadcasted</td>
+</tr>
+<tr>
+<td>fact table</td>
+<td>stream data</td>
+<td>non-broadcasted</td>
+</tr>
+</tbody>
+</table>
+<h2 id="実験">実験</h2>
+<h3 id="実験概要">実験概要</h3>
+<p>stream data として株価のデータを考える。
+適当に乱数で作った株価が &quot;GOOGL&quot; 等の ticker とともに流れてくる。
+一方、会社情報が記載された dimension table 的なファイルも用意する。
+流れ続ける株価データに対して ticker を key にして会社情報を紐付ける、ということを行う。</p>
+<h3 id="コード">コード</h3>
+<p>上記を実行するためのコードを以下に示す。
+実行可能なプロジェクトを <a href="https://github.com/soonraah/flink_join_test">GitHub</a> に置いたので興味があればどうぞ。</p>
+<h4 id="entry-point">Entry Point</h4>
+<p><code>main()</code> の実装。
+<code>MiniClusterWithClientResource</code> は本来は単体テスト用だが、簡単に local で cluster を動かすためにここで使用している。</p>
+<div class="highlight"><pre class="chroma"><code class="language-scala" data-lang="scala"><span class="k">package</span> <span class="nn">example</span>
+
+<span class="k">import</span> <span class="nn">org.apache.flink.api.common.state.MapStateDescriptor</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.api.java.io.TextInputFormat</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.core.fs.Path</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.runtime.testutils.MiniClusterResourceConfiguration</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.streaming.api.functions.source.FileProcessingMode</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.streaming.api.scala.</span><span class="o">{</span><span class="nc">DataStream</span><span class="o">,</span> <span class="nc">StreamExecutionEnvironment</span><span class="o">,</span> <span class="n">createTypeInformation</span><span class="o">}</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.test.util.MiniClusterWithClientResource</span>
+
+<span class="k">object</span> <span class="nc">FlinkJoinTest</span> <span class="o">{</span>
+  <span class="c1">// See https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/stream/testing.html#testing-flink-jobs
+</span><span class="c1"></span>  <span class="k">private</span> <span class="k">val</span> <span class="nc">FlinkCluster</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">MiniClusterWithClientResource</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nc">MiniClusterResourceConfiguration</span>
+    <span class="o">.</span><span class="nc">Builder</span><span class="o">()</span>
+      <span class="o">.</span><span class="n">setNumberSlotsPerTaskManager</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">setNumberTaskManagers</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">build</span>
+  <span class="o">)</span>
+
+  <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="nc">FlinkCluster</span><span class="o">.</span><span class="n">before</span><span class="o">()</span>
+
+    <span class="k">val</span> <span class="n">env</span> <span class="k">=</span> <span class="nc">StreamExecutionEnvironment</span><span class="o">.</span><span class="n">getExecutionEnvironment</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">setParallelism</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
+
+    <span class="k">val</span> <span class="n">companiesMasterFilePath</span> <span class="k">=</span> <span class="s">&#34;data/companies.csv&#34;</span>
+
+    <span class="k">val</span> <span class="n">companies</span> <span class="k">=</span> <span class="n">readCompaniesMaster</span><span class="o">(</span><span class="n">companiesMasterFilePath</span><span class="o">,</span> <span class="n">env</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">broadcast</span><span class="o">(</span><span class="k">new</span> <span class="nc">MapStateDescriptor</span><span class="o">(</span>
+        <span class="s">&#34;CompanyState&#34;</span><span class="o">,</span>
+        <span class="n">classOf</span><span class="o">[</span><span class="kt">String</span><span class="o">],</span>    <span class="c1">// ticker
+</span><span class="c1"></span>        <span class="n">classOf</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span>     <span class="c1">// name
+</span><span class="c1"></span>      <span class="o">))</span>
+
+    <span class="c1">// the broadcast state pattern
+</span><span class="c1"></span>    <span class="c1">// See https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/stream/state/broadcast_state.html
+</span><span class="c1"></span>    <span class="n">env</span>
+      <span class="o">.</span><span class="n">fromCollection</span><span class="o">(</span><span class="k">new</span> <span class="nc">UnboundedStocks</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">connect</span><span class="o">(</span><span class="n">companies</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">process</span><span class="o">(</span><span class="k">new</span> <span class="nc">StockBroadcastProcessFunction</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">print</span><span class="o">()</span>
+
+    <span class="n">env</span><span class="o">.</span><span class="n">execute</span><span class="o">(</span><span class="s">&#34;flink join test&#34;</span><span class="o">)</span>
+
+    <span class="nc">FlinkCluster</span><span class="o">.</span><span class="n">after</span><span class="o">()</span>
+  <span class="o">}</span>
+
+  <span class="k">private</span> <span class="k">def</span> <span class="n">readCompaniesMaster</span><span class="o">(</span><span class="n">companiesMasterFilePath</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
+                                  <span class="n">env</span><span class="k">:</span> <span class="kt">StreamExecutionEnvironment</span><span class="o">)</span><span class="k">:</span> <span class="kt">DataStream</span><span class="o">[</span><span class="kt">Company</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="n">env</span>
+      <span class="o">.</span><span class="n">readFile</span><span class="o">(</span>
+        <span class="k">new</span> <span class="nc">TextInputFormat</span><span class="o">(</span><span class="k">new</span> <span class="nc">Path</span><span class="o">(</span><span class="n">companiesMasterFilePath</span><span class="o">)),</span>
+        <span class="n">companiesMasterFilePath</span><span class="o">,</span>
+        <span class="nc">FileProcessingMode</span><span class="o">.</span><span class="nc">PROCESS_CONTINUOUSLY</span><span class="o">,</span>
+        <span class="mi">10</span> <span class="o">*</span> <span class="mi">1000</span>
+      <span class="o">)</span>
+      <span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="n">line</span> <span class="k">=&gt;</span>
+        <span class="k">val</span> <span class="n">items</span> <span class="k">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="o">(</span><span class="s">&#34;,&#34;</span><span class="o">)</span>
+        <span class="nc">Company</span><span class="o">(</span><span class="n">items</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span> <span class="n">items</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><h4 id="records">Records</h4>
+<p>各種レコードを表す case class。
+<code>UnboundedStocks</code> は一定のインターバルで <code>Stock</code> を無限に返す iterator であり、stream data 生成に利用する。</p>
+<div class="highlight"><pre class="chroma"><code class="language-scala" data-lang="scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Company</span><span class="o">(</span><span class="n">ticker</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
+
+<span class="k">case</span> <span class="k">class</span> <span class="nc">Stock</span><span class="o">(</span><span class="n">ticker</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">price</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span>
+
+<span class="cm">/**
+</span><span class="cm"> * Iterator to generate unbounded stock data
+</span><span class="cm"> */</span>
+<span class="k">class</span> <span class="nc">UnboundedStocks</span> <span class="k">extends</span> <span class="nc">Iterator</span><span class="o">[</span><span class="kt">Stock</span><span class="o">]</span> <span class="k">with</span> <span class="nc">Serializable</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">hasNext</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">true</span>  <span class="c1">// unbounded
+</span><span class="c1"></span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">next</span><span class="o">()</span><span class="k">:</span> <span class="kt">Stock</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="nc">Thread</span><span class="o">.</span><span class="n">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">)</span>
+    <span class="k">val</span> <span class="n">tickers</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span><span class="s">&#34;GOOGL&#34;</span><span class="o">,</span> <span class="s">&#34;AAPL&#34;</span><span class="o">,</span> <span class="s">&#34;FB&#34;</span><span class="o">,</span> <span class="s">&#34;AMZN&#34;</span><span class="o">)</span>
+    <span class="k">val</span> <span class="n">ticker</span> <span class="k">=</span> <span class="n">tickers</span><span class="o">(</span><span class="nc">Random</span><span class="o">.</span><span class="n">nextInt</span><span class="o">(</span><span class="n">tickers</span><span class="o">.</span><span class="n">size</span><span class="o">))</span>  <span class="c1">// one of GAFA
+</span><span class="c1"></span>    <span class="k">val</span> <span class="n">price</span> <span class="k">=</span> <span class="mi">100</span> <span class="o">+</span> <span class="nc">Random</span><span class="o">.</span><span class="n">nextDouble</span><span class="o">()</span> <span class="o">*</span> <span class="mi">300</span>         <span class="c1">// random price
+</span><span class="c1"></span>    <span class="nc">Stock</span><span class="o">(</span><span class="n">ticker</span><span class="o">,</span> <span class="n">price</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><h4 id="broadcastprocessfunction">BroadcastProcessFunction</h4>
+<p>肝である <code>BroadcastProcessFunction</code> の実装。</p>
+<div class="highlight"><pre class="chroma"><code class="language-scala" data-lang="scala"><span class="k">package</span> <span class="nn">example</span>
+
+<span class="k">import</span> <span class="nn">org.apache.flink.api.common.state.MapStateDescriptor</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.streaming.api.functions.co.BroadcastProcessFunction</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.util.Collector</span>
+
+<span class="k">class</span> <span class="nc">StockBroadcastProcessFunction</span>
+  <span class="k">extends</span> <span class="nc">BroadcastProcessFunction</span><span class="o">[</span><span class="kt">Stock</span>, <span class="kt">Company</span>, <span class="o">(</span><span class="kt">String</span>, <span class="kt">String</span>, <span class="kt">Double</span><span class="o">)]</span> <span class="o">{</span>
+
+  <span class="k">private</span> <span class="k">val</span> <span class="nc">StateDescriptor</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">MapStateDescriptor</span><span class="o">(</span>
+    <span class="s">&#34;CompanyState&#34;</span><span class="o">,</span>
+    <span class="n">classOf</span><span class="o">[</span><span class="kt">String</span><span class="o">],</span>    <span class="c1">// ticker
+</span><span class="c1"></span>    <span class="n">classOf</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span>     <span class="c1">// name
+</span><span class="c1"></span>  <span class="o">)</span>
+
+  <span class="k">override</span> <span class="k">def</span> <span class="n">processElement</span><span class="o">(</span><span class="n">value</span><span class="k">:</span> <span class="kt">Stock</span><span class="o">,</span>
+                              <span class="n">ctx</span><span class="k">:</span> <span class="kt">BroadcastProcessFunction</span><span class="o">[</span><span class="kt">Stock</span>, <span class="kt">Company</span>, <span class="o">(</span><span class="kt">String</span>, <span class="kt">String</span>, <span class="kt">Double</span><span class="o">)]</span><span class="k">#</span><span class="nc">ReadOnlyContext</span><span class="o">,</span>
+                              <span class="n">out</span><span class="k">:</span> <span class="kt">Collector</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">String</span>, <span class="kt">Double</span><span class="o">)])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">companyName</span> <span class="k">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">getBroadcastState</span><span class="o">(</span><span class="nc">StateDescriptor</span><span class="o">).</span><span class="n">get</span><span class="o">(</span><span class="n">value</span><span class="o">.</span><span class="n">ticker</span><span class="o">)</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">collect</span><span class="o">((</span><span class="n">value</span><span class="o">.</span><span class="n">ticker</span><span class="o">,</span> <span class="nc">Option</span><span class="o">(</span><span class="n">companyName</span><span class="o">).</span><span class="n">getOrElse</span><span class="o">(</span><span class="s">&#34;-&#34;</span><span class="o">),</span> <span class="n">value</span><span class="o">.</span><span class="n">price</span><span class="o">))</span>
+  <span class="o">}</span>
+
+  <span class="k">override</span> <span class="k">def</span> <span class="n">processBroadcastElement</span><span class="o">(</span><span class="n">value</span><span class="k">:</span> <span class="kt">Company</span><span class="o">,</span>
+                                       <span class="n">ctx</span><span class="k">:</span> <span class="kt">BroadcastProcessFunction</span><span class="o">[</span><span class="kt">Stock</span>, <span class="kt">Company</span>, <span class="o">(</span><span class="kt">String</span>, <span class="kt">String</span>, <span class="kt">Double</span><span class="o">)]</span><span class="k">#</span><span class="nc">Context</span><span class="o">,</span>
+                                       <span class="n">out</span><span class="k">:</span> <span class="kt">Collector</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">String</span>, <span class="kt">Double</span><span class="o">)])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="n">getBroadcastState</span><span class="o">(</span><span class="nc">StateDescriptor</span><span class="o">).</span><span class="n">put</span><span class="o">(</span><span class="n">value</span><span class="o">.</span><span class="n">ticker</span><span class="o">,</span> <span class="n">value</span><span class="o">.</span><span class="n">name</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><h3 id="実行結果">実行結果</h3>
+<p>上記を実行すると以下のような stream と static が結合された結果レコードが流れ続ける。</p>
+<pre><code>2&gt; (FB,Facebook,158.76057838239333)
+1&gt; (GOOGL,Google,288.4271251901199)
+2&gt; (AAPL,Apple,191.00515338617706)
+1&gt; (FB,Facebook,121.98205452369652)
+2&gt; (FB,Facebook,140.05023554456997)
+</code></pre><p>この状態で会社情報が記載されている <code>data/companies.csv</code> を更新することを考える。
+例えば &quot;GOOGL&quot; の社名を &quot;Google&quot; から &quot;Alphabet&quot; に変更して保存してみた。
+するとしばらくしてその修正が反映された結果が流れてくるようになる。</p>
+<pre><code>1&gt; (GOOGL,Alphabet,288.1008081843843)
+2&gt; (AMZN,Amazon,137.11135563851838)
+1&gt; (GOOGL,Alphabet,121.78368168964735)
+2&gt; (FB,Facebook,236.53483047124948)
+1&gt; (FB,Facebook,220.44300865769645)
+</code></pre><p>static data の更新が反映されることが確認できた。
+今回は10秒に1回のインターバルで元ファイルを確認するようにファイルを読んでいるため、変更してからそれが反映されるまで最大10秒程度かかる。</p>
+<h2 id="懸念点">懸念点</h2>
+<p>join はできたが次のような懸念点がある。</p>
+<ul>
+<li>レコードの削除に対応していない
+<ul>
+<li>state を上書きしているだけなので <code>companies.csv</code> から削除されたレコードは感知できない</li>
+</ul>
+</li>
+<li>ファイルの更新時に処理が重くなる可能性がある
+<ul>
+<li><code>companies.csv</code> の更新タイミングでその中の全レコードを処理してしまう</li>
+</ul>
+</li>
+<li>checkpoint が大きくなる
+<ul>
+<li>state が broadcast されているため、task ごとに重複した state が保存されてしまう</li>
+<li>See <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/stream/state/broadcast_state.html#important-considerations">Important Considerations</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="まとめ">まとめ</h2>
+<p>このように broadcast state pattern によって stream data と static data との join 処理を行うことができた。
+ただし、まだちゃんと調べていないが DataStream API ではなく Table API を使えばもう少しカジュアルな感じで近いことができるかもしれない。
+気が向いたらそちらも試してみる。</p>]]></content>
+  </entry>
   <entry>
     <title>あまり大きな Pull Request を作ってほしくない</title>
     <author>

@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name="hugo-theme" content=" 0.7.1">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/image/brand/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/">
+  <link rel="canonical" href="https://soonraah.github.io/flink-join-by-broadcast-state-pattern/">
+<link rel="preload" as="style" href="/bundle.css?v=1596722138" media="all">
+<link rel="stylesheet" href="/bundle.css?v=1596722138" media="all">
+<style>.cdata pre{color:#edf2f7;background-color:#2d3748}.cdata :not(pre)>code{color:#805ad5;background-color:#f7fafc}.chroma .err{color:#fed7d7;background-color:#9b2c2c}.chroma .hl{background-color:#4a5568}.chroma .ln{color:#a0aec0}.chroma .k,.chroma .kc,.chroma .kd,.chroma .kn,.chroma .kp,.chroma .kr{color:#63b3ed}.chroma .kt{color:#b794f4}.chroma .na{color:#f6e05e}.chroma .nb{color:#f6ad55}.chroma .nc{color:#fc8181}.chroma .no{color:#68d391}.chroma .nd{color:#fc8181}.chroma .ne{color:#fc8181}.chroma .nf{color:#f6ad55}.chroma .nt{color:#fc8181}.chroma .l{color:#b794f4}.chroma .dl,.chroma .ld,.chroma .s,.chroma .s2,.chroma .sa,.chroma .sb,.chroma .sc,.chroma .sd{color:#68d391}.chroma .se{color:#a0aec0}.chroma .s1,.chroma .sh,.chroma .si,.chroma .sr,.chroma .ss,.chroma .sx{color:#68d391}.chroma .il,.chroma .m,.chroma .mb,.chroma .mf,.chroma .mh,.chroma .mi,.chroma .mo{color:#b794f4}.chroma .o,.chroma .ow{color:#90cdf4}.chroma .p{color:#cbd5e0}.chroma .c,.chroma .c1,.chroma .ch,.chroma .cm,.chroma .cp,.chroma .cpf,.chroma .cs{color:#a0aec0}.chroma .ge{font-style:italic}.chroma .gs{font-weight:700}</style>
+
+
+
+<title>Apache Flink の broadcast state pattern を用いた stream data と static data の join : Froglog</title>
+
+<meta property="og:title" content="Apache Flink の broadcast state pattern を用いた stream data と static data の join">
+<meta property="og:site_name" content="Froglog">
+<meta property="og:url" content="https://soonraah.github.io/flink-join-by-broadcast-state-pattern/">
+<link rel="image_src" href="https://soonraah.github.io/">
+<meta property="og:image" content="https://soonraah.github.io/">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="jp">
+<meta property="og:description" content="star schema における fact table と dimension table の join のようなことを Apache Flink におけるストリーム処理で行いたい。 stream data と static data の join ということになる。 ただし dimension table 側も更新されるため、完全な static というわけではない。 このポストでは Flink v1.11 を前提とした。 join の方法 今回は DataStream API でこれを実現することを考える。 Flink のドキュメントを読むと broadcast state pattern でできそうだ。">
+<meta name="description" content="star schema における fact table と dimension table の join のようなことを Apache Flink におけるストリーム処理で行いたい。 stream data と static data の join ということになる。 ただし dimension table 側も更新されるため、完全な static というわけではない。 このポストでは Flink v1.11 を前提とした。 join の方法 今回は DataStream API でこれを実現することを考える。 Flink のドキュメントを読むと broadcast state pattern でできそうだ。">
+<meta property="og:updated_time" content="2020-08-06T13:00:00Z">
+<meta property="fb:app_id" content="">
+<meta name="author" content="soonraah">
+<meta property="article:author" content="https://soonraah.github.io/">
+<meta property="article:published_time" content="2020-08-06T13:00:00Z">
+<meta property="article:modified_time" content="2020-08-06T13:00:00Z">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Apache Flink の broadcast state pattern を用いた stream data と static data の join",
+  "alternativeHeadline": "star schema における fact table と dimension table の join のようなことを Apache Flink におけるストリーム処理で行いたい。 stream data と static data の join ということになる。 ただし dimension table 側も更新されるため、完全な static というわけではない。 このポストでは Flink v1.11 を前提とした。 join の方法 今回は DataStream API でこれを実現することを考える。 Flink のドキュメントを読むと broadcast state pattern でできそうだ。",
+  "url": "https://soonraah.github.io/flink-join-by-broadcast-state-pattern/",
+  "image": "https://soonraah.github.io/",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://soonraah.github.io/flink-join-by-broadcast-state-pattern/"
+  },
+  "description": "star schema における fact table と dimension table の join のようなことを Apache Flink におけるストリーム処理で行いたい。 stream data と static data の join ということになる。 ただし dimension table 側も更新されるため、完全な static というわけではない。 このポストでは Flink v1.11 を前提とした。 join の方法 今回は DataStream API でこれを実現することを考える。 Flink のドキュメントを読むと broadcast state pattern でできそうだ。",
+  "author": {
+    "@type": "Person",
+    "name": "soonraah"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Froglog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://soonraah.github.io/"
+    }
+  },
+  "datePublished": "2020-08-06T13:00:00Z",
+  "dateModified": "2020-08-06T13:00:00Z",
+  "articleBody": "\u003cp\u003estar schema における fact table と dimension table の join のようなことを Apache Flink におけるストリーム処理で行いたい。\nstream data と static data の join ということになる。\nただし dimension table 側も更新されるため、完全な static というわけではない。\u003c/p\u003e\n\u003cp\u003eこのポストでは Flink v1.11 を前提とした。\u003c/p\u003e\n\u003ch2 id=\"join-の方法\"\u003ejoin の方法\u003c/h2\u003e\n\u003cp\u003e今回は DataStream API でこれを実現することを考える。\nFlink のドキュメントを読むと broadcast state pattern でできそうだ。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/stream/state/broadcast_state.html\"\u003eThe Broadcast State Pattern\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eやり方としては次のようになる。\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003estatic data のファイルを \u003ccode\u003eFileProcessingMode.PROCESS_CONTINUOUSLY\u003c/code\u003e で読み込み \u003ccode\u003eDataStream\u003c/code\u003e 化\u003c/li\u003e\n\u003cli\u003e1 を \u003ccode\u003ebroadcast()\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003estream data の \u003ccode\u003eDataStream\u003c/code\u003e と 2 を \u003ccode\u003econnect()\u003c/code\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003estatic data を \u003ccode\u003ePROCESS_CONTINUOUSLY\u003c/code\u003e で読むのは変更を得るため。\n\u003ccode\u003ePROCESS_ONCE\u003c/code\u003e で読んでしまうとストリーム処理の開始時に1回読むだけになり、dimension table の変更を得られない。\nこのあたりの仕様については \u003ca href=\"https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/datastream_api.html#data-sources\"\u003eData Sources\u003c/a\u003e を参照。\u003c/p\u003e\n\u003cp\u003eその後は broadcast state pattern にそのまま従う。\nしたがって \u003ccode\u003eBroadcastProcessFunction\u003c/code\u003e or \u003ccode\u003eKeyedBroadcastProcessFunction\u003c/code\u003e を実装する必要がある。\nその中で static data を取り込んで state として持ち、stream data 側で参照すればよい。\u003c/p\u003e\n\u003cp\u003e2つのデータの各 term に対する関係性を以下に示す。\u003c/p\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003ein star schema\u003c/th\u003e\n\u003cth\u003estream or static\u003c/th\u003e\n\u003cth\u003ebroadcast or not\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003edimension table\u003c/td\u003e\n\u003ctd\u003estatic data\u003c/td\u003e\n\u003ctd\u003ebroadcasted\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003efact table\u003c/td\u003e\n\u003ctd\u003estream data\u003c/td\u003e\n\u003ctd\u003enon-broadcasted\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\n\u003c/table\u003e\n\u003ch2 id=\"実験\"\u003e実験\u003c/h2\u003e\n\u003ch3 id=\"実験概要\"\u003e実験概要\u003c/h3\u003e\n\u003cp\u003estream data として株価のデータを考える。\n適当に乱数で作った株価が \u0026quot;GOOGL\u0026quot; 等の ticker とともに流れてくる。\n一方、会社情報が記載された dimension table 的なファイルも用意する。\n流れ続ける株価データに対して ticker を key にして会社情報を紐付ける、ということを行う。\u003c/p\u003e\n\u003ch3 id=\"コード\"\u003eコード\u003c/h3\u003e\n\u003cp\u003e上記を実行するためのコードを以下に示す。\n実行可能なプロジェクトを \u003ca href=\"https://github.com/soonraah/flink_join_test\"\u003eGitHub\u003c/a\u003e に置いたので興味があればどうぞ。\u003c/p\u003e\n\u003ch4 id=\"entry-point\"\u003eEntry Point\u003c/h4\u003e\n\u003cp\u003e\u003ccode\u003emain()\u003c/code\u003e の実装。\n\u003ccode\u003eMiniClusterWithClientResource\u003c/code\u003e は本来は単体テスト用だが、簡単に local で cluster を動かすためにここで使用している。\u003c/p\u003e\n\u003cdiv class=\"highlight\"\u003e\u003cpre class=\"chroma\"\u003e\u003ccode class=\"language-scala\" data-lang=\"scala\"\u003e\u003cspan class=\"k\"\u003epackage\u003c/span\u003e \u003cspan class=\"nn\"\u003eexample\u003c/span\u003e\n\n\u003cspan class=\"k\"\u003eimport\u003c/span\u003e \u003cspan class=\"nn\"\u003eorg.apache.flink.api.common.state.MapStateDescriptor\u003c/span\u003e\n\u003cspan class=\"k\"\u003eimport\u003c/span\u003e \u003cspan class=\"nn\"\u003eorg.apache.flink.api.java.io.TextInputFormat\u003c/span\u003e\n\u003cspan class=\"k\"\u003eimport\u003c/span\u003e \u003cspan class=\"nn\"\u003eorg.apache.flink.core.fs.Path\u003c/span\u003e\n\u003cspan class=\"k\"\u003eimport\u003c/span\u003e \u003cspan class=\"nn\"\u003eorg.apache.flink.runtime.testutils.MiniClusterResourceConfiguration\u003c/span\u003e\n\u003cspan class=\"k\"\u003eimport\u003c/span\u003e \u003cspan class=\"nn\"\u003eorg.apache.flink.streaming.api.functions.source.FileProcessingMode\u003c/span\u003e\n\u003cspan class=\"k\"\u003eimport\u003c/span\u003e \u003cspan class=\"nn\"\u003eorg.apache.flink.streaming.api.scala.\u003c/span\u003e\u003cspan class=\"o\"\u003e{\u003c/span\u003e\u003cspan class=\"nc\"\u003eDataStream\u003c/span\u003e\u003cspan class=\"o\"\u003e,\u003c/span\u003e \u003cspan class=\"nc\"\u003eStreamExecutionEnvironment\u003c/span\u003e\u003cspan class=\"o\"\u003e,\u003c/span\u003e \u003cspan class=\"n\"\u003ecreateTypeInformation\u003c/span\u003e\u003cspan class=\"o\"\u003e}\u003c/span\u003e\n\u003cspan class=\"k\"\u003eimport\u003c/span\u003e \u003cspan class=\"nn\"\u003eorg.apache.flink.test.util.MiniClusterWithClientResource\u003c/span\u003e\n\n\u003cspan class=\"k\"\u003eobject\u003c/span\u003e \u003cspan class=\"nc\"\u003eFlinkJoinTest\u003c/span\u003e \u003cspan class=\"o\"\u003e{\u003c/span\u003e\n  \u003cspan class=\"c1\"\u003e// See https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/stream/testing.html#testing-flink-jobs\n\u003c/span\u003e\u003cspan class=\"c1\"\u003e\u003c/span\u003e  \u003cspan class=\"k\"\u003eprivate\u003c/span\u003e \u003cspan class=\"k\"\u003eval\u003c/span\u003e \u003cspan class=\"nc\"\u003eFlinkCluster\u003c/span\u003e \u003cspan class=\"k\"\u003e=\u003c/span\u003e \u003cspan class=\"k\"\u003enew\u003c/span\u003e \u003cspan class=\"nc\"\u003eMiniClusterWithClientResource\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\n    \u003cspan class=\"k\"\u003enew\u003c/span\u003e \u003cspan class=\"nc\"\u003eMiniClusterResourceConfiguration\u003c/span\u003e\n    \u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"nc\"\u003eBuilder\u003c/span\u003e\u003cspan class=\"o\"\u003e()\u003c/span\u003e\n      \u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003esetNumberSlotsPerTaskManager\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"mi\"\u003e2\u003c/span\u003e\u003cspan class=\"o\"\u003e)\u003c/span\u003e\n      \u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003esetNumberTaskManagers\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"mi\"\u003e1\u003c/span\u003e\u003cspan class=\"o\"\u003e)\u003c/span\u003e\n      \u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003ebuild\u003c/span\u003e\n  \u003cspan class=\"o\"\u003e)\u003c/span\u003e\n\n  \u003cspan class=\"k\"\u003edef\u003c/span\u003e \u003cspan class=\"n\"\u003emain\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"n\"\u003eargs\u003c/span\u003e\u003cspan class=\"k\"\u003e:\u003c/span\u003e \u003cspan class=\"kt\"\u003eArray\u003c/span\u003e\u003cspan class=\"o\"\u003e[\u003c/span\u003e\u003cspan class=\"kt\"\u003eString\u003c/span\u003e\u003cspan class=\"o\"\u003e])\u003c/span\u003e\u003cspan class=\"k\"\u003e:\u003c/span\u003e \u003cspan class=\"kt\"\u003eUnit\u003c/span\u003e \u003cspan class=\"o\"\u003e=\u003c/span\u003e \u003cspan class=\"o\"\u003e{\u003c/span\u003e\n    \u003cspan class=\"nc\"\u003eFlinkCluster\u003c/span\u003e\u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003ebefore\u003c/span\u003e\u003cspan class=\"o\"\u003e()\u003c/span\u003e\n\n    \u003cspan class=\"k\"\u003eval\u003c/span\u003e \u003cspan class=\"n\"\u003eenv\u003c/span\u003e \u003cspan class=\"k\"\u003e=\u003c/span\u003e \u003cspan class=\"nc\"\u003eStreamExecutionEnvironment\u003c/span\u003e\u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003egetExecutionEnvironment\u003c/span\u003e\n    \u003cspan class=\"n\"\u003eenv\u003c/span\u003e\u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003esetParallelism\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"mi\"\u003e2\u003c/span\u003e\u003cspan class=\"o\"\u003e)\u003c/span\u003e\n\n    \u003cspan class=\"k\"\u003eval\u003c/span\u003e \u003cspan class=\"n\"\u003ecompaniesMasterFilePath\u003c/span\u003e \u003cspan class=\"k\"\u003e=\u003c/span\u003e \u003cspan class=\"s\"\u003e\u0026#34;data/companies.csv\u0026#34;\u003c/span\u003e\n\n    \u003cspan class=\"k\"\u003eval\u003c/span\u003e \u003cspan class=\"n\"\u003ecompanies\u003c/span\u003e \u003cspan class=\"k\"\u003e=\u003c/span\u003e \u003cspan class=\"n\"\u003ereadCompaniesMaster\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"n\"\u003ecompaniesMasterFilePath\u003c/span\u003e\u003cspan class=\"o\"\u003e,\u003c/span\u003e \u003cspan class=\"n\"\u003eenv\u003c/span\u003e\u003cspan class=\"o\"\u003e)\u003c/span\u003e\n      \u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003ebroadcast\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"k\"\u003enew\u003c/span\u003e \u003cspan class=\"nc\"\u003eMapStateDescriptor\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\n        \u003cspan class=\"s\"\u003e\u0026#34;CompanyState\u0026#34;\u003c/span\u003e\u003cspan class=\"o\"\u003e,\u003c/span\u003e\n        \u003cspan class=\"n\"\u003eclassOf\u003c/span\u003e\u003cspan class=\"o\"\u003e[\u003c/span\u003e\u003cspan class=\"kt\"\u003eString\u003c/span\u003e\u003cspan class=\"o\"\u003e],\u003c/span\u003e    \u003cspan class=\"c1\"\u003e// ticker\n\u003c/span\u003e\u003cspan class=\"c1\"\u003e\u003c/span\u003e        \u003cspan class=\"n\"\u003eclassOf\u003c/span\u003e\u003cspan class=\"o\"\u003e[\u003c/span\u003e\u003cspan class=\"kt\"\u003eString\u003c/span\u003e\u003cspan class=\"o\"\u003e]\u003c/span\u003e     \u003cspan class=\"c1\"\u003e// name\n\u003c/span\u003e\u003cspan class=\"c1\"\u003e\u003c/span\u003e      \u003cspan class=\"o\"\u003e))\u003c/span\u003e\n\n    \u003cspan class=\"c1\"\u003e// the broadcast state pattern\n\u003c/span\u003e\u003cspan class=\"c1\"\u003e\u003c/span\u003e    \u003cspan class=\"c1\"\u003e// See https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/stream/state/broadcast_state.html\n\u003c/span\u003e\u003cspan class=\"c1\"\u003e\u003c/span\u003e    \u003cspan class=\"n\"\u003eenv\u003c/span\u003e\n      \u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003efromCollection\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"k\"\u003enew\u003c/span\u003e \u003cspan class=\"nc\"\u003eUnboundedStocks\u003c/span\u003e\u003cspan class=\"o\"\u003e)\u003c/span\u003e\n      \u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003econnect\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"n\"\u003ecompanies\u003c/span\u003e\u003cspan class=\"o\"\u003e)\u003c/span\u003e\n      \u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003eprocess\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"k\"\u003enew\u003c/span\u003e \u003cspan class=\"nc\"\u003eStockBroadcastProcessFunction\u003c/span\u003e\u003cspan class=\"o\"\u003e)\u003c/span\u003e\n      \u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003eprint\u003c/span\u003e\u003cspan class=\"o\"\u003e()\u003c/span\u003e\n\n    \u003cspan class=\"n\"\u003eenv\u003c/span\u003e\u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003eexecute\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"s\"\u003e\u0026#34;flink join test\u0026#34;\u003c/span\u003e\u003cspan class=\"o\"\u003e)\u003c/span\u003e\n\n    \u003cspan class=\"nc\"\u003eFlinkCluster\u003c/span\u003e\u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003eafter\u003c/span\u003e\u003cspan class=\"o\"\u003e()\u003c/span\u003e\n  \u003cspan class=\"o\"\u003e}\u003c/span\u003e\n\n  \u003cspan class=\"k\"\u003eprivate\u003c/span\u003e \u003cspan class=\"k\"\u003edef\u003c/span\u003e \u003cspan class=\"n\"\u003ereadCompaniesMaster\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"n\"\u003ecompaniesMasterFilePath\u003c/span\u003e\u003cspan class=\"k\"\u003e:\u003c/span\u003e \u003cspan class=\"kt\"\u003eString\u003c/span\u003e\u003cspan class=\"o\"\u003e,\u003c/span\u003e\n                                  \u003cspan class=\"n\"\u003eenv\u003c/span\u003e\u003cspan class=\"k\"\u003e:\u003c/span\u003e \u003cspan class=\"kt\"\u003eStreamExecutionEnvironment\u003c/span\u003e\u003cspan class=\"o\"\u003e)\u003c/span\u003e\u003cspan class=\"k\"\u003e:\u003c/span\u003e \u003cspan class=\"kt\"\u003eDataStream\u003c/span\u003e\u003cspan class=\"o\"\u003e[\u003c/span\u003e\u003cspan class=\"kt\"\u003eCompany\u003c/span\u003e\u003cspan class=\"o\"\u003e]\u003c/span\u003e \u003cspan class=\"k\"\u003e=\u003c/span\u003e \u003cspan class=\"o\"\u003e{\u003c/span\u003e\n    \u003cspan class=\"n\"\u003eenv\u003c/span\u003e\n      \u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003ereadFile\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\n        \u003cspan class=\"k\"\u003enew\u003c/span\u003e \u003cspan class=\"nc\"\u003eTextInputFormat\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"k\"\u003enew\u003c/span\u003e \u003cspan class=\"nc\"\u003ePath\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"n\"\u003ecompaniesMasterFilePath\u003c/span\u003e\u003cspan class=\"o\"\u003e)),\u003c/span\u003e\n        \u003cspan class=\"n\"\u003ecompaniesMasterFilePath\u003c/span\u003e\u003cspan class=\"o\"\u003e,\u003c/span\u003e\n        \u003cspan class=\"nc\"\u003eFileProcessingMode\u003c/span\u003e\u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"nc\"\u003ePROCESS_CONTINUOUSLY\u003c/span\u003e\u003cspan class=\"o\"\u003e,\u003c/span\u003e\n        \u003cspan class=\"mi\"\u003e10\u003c/span\u003e \u003cspan class=\"o\"\u003e*\u003c/span\u003e \u003cspan class=\"mi\"\u003e1000\u003c/span\u003e\n      \u003cspan class=\"o\"\u003e)\u003c/span\u003e\n      \u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003emap\u003c/span\u003e \u003cspan class=\"o\"\u003e{\u003c/span\u003e \u003cspan class=\"n\"\u003eline\u003c/span\u003e \u003cspan class=\"k\"\u003e=\u0026gt;\u003c/span\u003e\n        \u003cspan class=\"k\"\u003eval\u003c/span\u003e \u003cspan class=\"n\"\u003eitems\u003c/span\u003e \u003cspan class=\"k\"\u003e=\u003c/span\u003e \u003cspan class=\"n\"\u003eline\u003c/span\u003e\u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003esplit\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"s\"\u003e\u0026#34;,\u0026#34;\u003c/span\u003e\u003cspan class=\"o\"\u003e)\u003c/span\u003e\n        \u003cspan class=\"nc\"\u003eCompany\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"n\"\u003eitems\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"mi\"\u003e0\u003c/span\u003e\u003cspan class=\"o\"\u003e),\u003c/span\u003e \u003cspan class=\"n\"\u003eitems\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"mi\"\u003e1\u003c/span\u003e\u003cspan class=\"o\"\u003e))\u003c/span\u003e\n      \u003cspan class=\"o\"\u003e}\u003c/span\u003e\n  \u003cspan class=\"o\"\u003e}\u003c/span\u003e\n\u003cspan class=\"o\"\u003e}\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\u003ch4 id=\"records\"\u003eRecords\u003c/h4\u003e\n\u003cp\u003e各種レコードを表す case class。\n\u003ccode\u003eUnboundedStocks\u003c/code\u003e は一定のインターバルで \u003ccode\u003eStock\u003c/code\u003e を無限に返す iterator であり、stream data 生成に利用する。\u003c/p\u003e\n\u003cdiv class=\"highlight\"\u003e\u003cpre class=\"chroma\"\u003e\u003ccode class=\"language-scala\" data-lang=\"scala\"\u003e\u003cspan class=\"k\"\u003ecase\u003c/span\u003e \u003cspan class=\"k\"\u003eclass\u003c/span\u003e \u003cspan class=\"nc\"\u003eCompany\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"n\"\u003eticker\u003c/span\u003e\u003cspan class=\"k\"\u003e:\u003c/span\u003e \u003cspan class=\"kt\"\u003eString\u003c/span\u003e\u003cspan class=\"o\"\u003e,\u003c/span\u003e \u003cspan class=\"n\"\u003ename\u003c/span\u003e\u003cspan class=\"k\"\u003e:\u003c/span\u003e \u003cspan class=\"kt\"\u003eString\u003c/span\u003e\u003cspan class=\"o\"\u003e)\u003c/span\u003e\n\n\u003cspan class=\"k\"\u003ecase\u003c/span\u003e \u003cspan class=\"k\"\u003eclass\u003c/span\u003e \u003cspan class=\"nc\"\u003eStock\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"n\"\u003eticker\u003c/span\u003e\u003cspan class=\"k\"\u003e:\u003c/span\u003e \u003cspan class=\"kt\"\u003eString\u003c/span\u003e\u003cspan class=\"o\"\u003e,\u003c/span\u003e \u003cspan class=\"n\"\u003eprice\u003c/span\u003e\u003cspan class=\"k\"\u003e:\u003c/span\u003e \u003cspan class=\"kt\"\u003eDouble\u003c/span\u003e\u003cspan class=\"o\"\u003e)\u003c/span\u003e\n\n\u003cspan class=\"cm\"\u003e/**\n\u003c/span\u003e\u003cspan class=\"cm\"\u003e * Iterator to generate unbounded stock data\n\u003c/span\u003e\u003cspan class=\"cm\"\u003e */\u003c/span\u003e\n\u003cspan class=\"k\"\u003eclass\u003c/span\u003e \u003cspan class=\"nc\"\u003eUnboundedStocks\u003c/span\u003e \u003cspan class=\"k\"\u003eextends\u003c/span\u003e \u003cspan class=\"nc\"\u003eIterator\u003c/span\u003e\u003cspan class=\"o\"\u003e[\u003c/span\u003e\u003cspan class=\"kt\"\u003eStock\u003c/span\u003e\u003cspan class=\"o\"\u003e]\u003c/span\u003e \u003cspan class=\"k\"\u003ewith\u003c/span\u003e \u003cspan class=\"nc\"\u003eSerializable\u003c/span\u003e \u003cspan class=\"o\"\u003e{\u003c/span\u003e\n  \u003cspan class=\"k\"\u003eoverride\u003c/span\u003e \u003cspan class=\"k\"\u003edef\u003c/span\u003e \u003cspan class=\"n\"\u003ehasNext\u003c/span\u003e\u003cspan class=\"k\"\u003e:\u003c/span\u003e \u003cspan class=\"kt\"\u003eBoolean\u003c/span\u003e \u003cspan class=\"o\"\u003e=\u003c/span\u003e \u003cspan class=\"kc\"\u003etrue\u003c/span\u003e  \u003cspan class=\"c1\"\u003e// unbounded\n\u003c/span\u003e\u003cspan class=\"c1\"\u003e\u003c/span\u003e\n  \u003cspan class=\"k\"\u003eoverride\u003c/span\u003e \u003cspan class=\"k\"\u003edef\u003c/span\u003e \u003cspan class=\"n\"\u003enext\u003c/span\u003e\u003cspan class=\"o\"\u003e()\u003c/span\u003e\u003cspan class=\"k\"\u003e:\u003c/span\u003e \u003cspan class=\"kt\"\u003eStock\u003c/span\u003e \u003cspan class=\"o\"\u003e=\u003c/span\u003e \u003cspan class=\"o\"\u003e{\u003c/span\u003e\n    \u003cspan class=\"nc\"\u003eThread\u003c/span\u003e\u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003esleep\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"mi\"\u003e1000\u003c/span\u003e\u003cspan class=\"o\"\u003e)\u003c/span\u003e\n    \u003cspan class=\"k\"\u003eval\u003c/span\u003e \u003cspan class=\"n\"\u003etickers\u003c/span\u003e \u003cspan class=\"k\"\u003e=\u003c/span\u003e \u003cspan class=\"nc\"\u003eSeq\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"s\"\u003e\u0026#34;GOOGL\u0026#34;\u003c/span\u003e\u003cspan class=\"o\"\u003e,\u003c/span\u003e \u003cspan class=\"s\"\u003e\u0026#34;AAPL\u0026#34;\u003c/span\u003e\u003cspan class=\"o\"\u003e,\u003c/span\u003e \u003cspan class=\"s\"\u003e\u0026#34;FB\u0026#34;\u003c/span\u003e\u003cspan class=\"o\"\u003e,\u003c/span\u003e \u003cspan class=\"s\"\u003e\u0026#34;AMZN\u0026#34;\u003c/span\u003e\u003cspan class=\"o\"\u003e)\u003c/span\u003e\n    \u003cspan class=\"k\"\u003eval\u003c/span\u003e \u003cspan class=\"n\"\u003eticker\u003c/span\u003e \u003cspan class=\"k\"\u003e=\u003c/span\u003e \u003cspan class=\"n\"\u003etickers\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"nc\"\u003eRandom\u003c/span\u003e\u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003enextInt\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"n\"\u003etickers\u003c/span\u003e\u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003esize\u003c/span\u003e\u003cspan class=\"o\"\u003e))\u003c/span\u003e  \u003cspan class=\"c1\"\u003e// one of GAFA\n\u003c/span\u003e\u003cspan class=\"c1\"\u003e\u003c/span\u003e    \u003cspan class=\"k\"\u003eval\u003c/span\u003e \u003cspan class=\"n\"\u003eprice\u003c/span\u003e \u003cspan class=\"k\"\u003e=\u003c/span\u003e \u003cspan class=\"mi\"\u003e100\u003c/span\u003e \u003cspan class=\"o\"\u003e+\u003c/span\u003e \u003cspan class=\"nc\"\u003eRandom\u003c/span\u003e\u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003enextDouble\u003c/span\u003e\u003cspan class=\"o\"\u003e()\u003c/span\u003e \u003cspan class=\"o\"\u003e*\u003c/span\u003e \u003cspan class=\"mi\"\u003e300\u003c/span\u003e         \u003cspan class=\"c1\"\u003e// random price\n\u003c/span\u003e\u003cspan class=\"c1\"\u003e\u003c/span\u003e    \u003cspan class=\"nc\"\u003eStock\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"n\"\u003eticker\u003c/span\u003e\u003cspan class=\"o\"\u003e,\u003c/span\u003e \u003cspan class=\"n\"\u003eprice\u003c/span\u003e\u003cspan class=\"o\"\u003e)\u003c/span\u003e\n  \u003cspan class=\"o\"\u003e}\u003c/span\u003e\n\u003cspan class=\"o\"\u003e}\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\u003ch4 id=\"broadcastprocessfunction\"\u003eBroadcastProcessFunction\u003c/h4\u003e\n\u003cp\u003e肝である \u003ccode\u003eBroadcastProcessFunction\u003c/code\u003e の実装。\u003c/p\u003e\n\u003cdiv class=\"highlight\"\u003e\u003cpre class=\"chroma\"\u003e\u003ccode class=\"language-scala\" data-lang=\"scala\"\u003e\u003cspan class=\"k\"\u003epackage\u003c/span\u003e \u003cspan class=\"nn\"\u003eexample\u003c/span\u003e\n\n\u003cspan class=\"k\"\u003eimport\u003c/span\u003e \u003cspan class=\"nn\"\u003eorg.apache.flink.api.common.state.MapStateDescriptor\u003c/span\u003e\n\u003cspan class=\"k\"\u003eimport\u003c/span\u003e \u003cspan class=\"nn\"\u003eorg.apache.flink.streaming.api.functions.co.BroadcastProcessFunction\u003c/span\u003e\n\u003cspan class=\"k\"\u003eimport\u003c/span\u003e \u003cspan class=\"nn\"\u003eorg.apache.flink.util.Collector\u003c/span\u003e\n\n\u003cspan class=\"k\"\u003eclass\u003c/span\u003e \u003cspan class=\"nc\"\u003eStockBroadcastProcessFunction\u003c/span\u003e\n  \u003cspan class=\"k\"\u003eextends\u003c/span\u003e \u003cspan class=\"nc\"\u003eBroadcastProcessFunction\u003c/span\u003e\u003cspan class=\"o\"\u003e[\u003c/span\u003e\u003cspan class=\"kt\"\u003eStock\u003c/span\u003e, \u003cspan class=\"kt\"\u003eCompany\u003c/span\u003e, \u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"kt\"\u003eString\u003c/span\u003e, \u003cspan class=\"kt\"\u003eString\u003c/span\u003e, \u003cspan class=\"kt\"\u003eDouble\u003c/span\u003e\u003cspan class=\"o\"\u003e)]\u003c/span\u003e \u003cspan class=\"o\"\u003e{\u003c/span\u003e\n\n  \u003cspan class=\"k\"\u003eprivate\u003c/span\u003e \u003cspan class=\"k\"\u003eval\u003c/span\u003e \u003cspan class=\"nc\"\u003eStateDescriptor\u003c/span\u003e \u003cspan class=\"k\"\u003e=\u003c/span\u003e \u003cspan class=\"k\"\u003enew\u003c/span\u003e \u003cspan class=\"nc\"\u003eMapStateDescriptor\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\n    \u003cspan class=\"s\"\u003e\u0026#34;CompanyState\u0026#34;\u003c/span\u003e\u003cspan class=\"o\"\u003e,\u003c/span\u003e\n    \u003cspan class=\"n\"\u003eclassOf\u003c/span\u003e\u003cspan class=\"o\"\u003e[\u003c/span\u003e\u003cspan class=\"kt\"\u003eString\u003c/span\u003e\u003cspan class=\"o\"\u003e],\u003c/span\u003e    \u003cspan class=\"c1\"\u003e// ticker\n\u003c/span\u003e\u003cspan class=\"c1\"\u003e\u003c/span\u003e    \u003cspan class=\"n\"\u003eclassOf\u003c/span\u003e\u003cspan class=\"o\"\u003e[\u003c/span\u003e\u003cspan class=\"kt\"\u003eString\u003c/span\u003e\u003cspan class=\"o\"\u003e]\u003c/span\u003e     \u003cspan class=\"c1\"\u003e// name\n\u003c/span\u003e\u003cspan class=\"c1\"\u003e\u003c/span\u003e  \u003cspan class=\"o\"\u003e)\u003c/span\u003e\n\n  \u003cspan class=\"k\"\u003eoverride\u003c/span\u003e \u003cspan class=\"k\"\u003edef\u003c/span\u003e \u003cspan class=\"n\"\u003eprocessElement\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"n\"\u003evalue\u003c/span\u003e\u003cspan class=\"k\"\u003e:\u003c/span\u003e \u003cspan class=\"kt\"\u003eStock\u003c/span\u003e\u003cspan class=\"o\"\u003e,\u003c/span\u003e\n                              \u003cspan class=\"n\"\u003ectx\u003c/span\u003e\u003cspan class=\"k\"\u003e:\u003c/span\u003e \u003cspan class=\"kt\"\u003eBroadcastProcessFunction\u003c/span\u003e\u003cspan class=\"o\"\u003e[\u003c/span\u003e\u003cspan class=\"kt\"\u003eStock\u003c/span\u003e, \u003cspan class=\"kt\"\u003eCompany\u003c/span\u003e, \u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"kt\"\u003eString\u003c/span\u003e, \u003cspan class=\"kt\"\u003eString\u003c/span\u003e, \u003cspan class=\"kt\"\u003eDouble\u003c/span\u003e\u003cspan class=\"o\"\u003e)]\u003c/span\u003e\u003cspan class=\"k\"\u003e#\u003c/span\u003e\u003cspan class=\"nc\"\u003eReadOnlyContext\u003c/span\u003e\u003cspan class=\"o\"\u003e,\u003c/span\u003e\n                              \u003cspan class=\"n\"\u003eout\u003c/span\u003e\u003cspan class=\"k\"\u003e:\u003c/span\u003e \u003cspan class=\"kt\"\u003eCollector\u003c/span\u003e\u003cspan class=\"o\"\u003e[(\u003c/span\u003e\u003cspan class=\"kt\"\u003eString\u003c/span\u003e, \u003cspan class=\"kt\"\u003eString\u003c/span\u003e, \u003cspan class=\"kt\"\u003eDouble\u003c/span\u003e\u003cspan class=\"o\"\u003e)])\u003c/span\u003e\u003cspan class=\"k\"\u003e:\u003c/span\u003e \u003cspan class=\"kt\"\u003eUnit\u003c/span\u003e \u003cspan class=\"o\"\u003e=\u003c/span\u003e \u003cspan class=\"o\"\u003e{\u003c/span\u003e\n    \u003cspan class=\"k\"\u003eval\u003c/span\u003e \u003cspan class=\"n\"\u003ecompanyName\u003c/span\u003e \u003cspan class=\"k\"\u003e=\u003c/span\u003e \u003cspan class=\"n\"\u003ectx\u003c/span\u003e\u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003egetBroadcastState\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"nc\"\u003eStateDescriptor\u003c/span\u003e\u003cspan class=\"o\"\u003e).\u003c/span\u003e\u003cspan class=\"n\"\u003eget\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"n\"\u003evalue\u003c/span\u003e\u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003eticker\u003c/span\u003e\u003cspan class=\"o\"\u003e)\u003c/span\u003e\n    \u003cspan class=\"n\"\u003eout\u003c/span\u003e\u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003ecollect\u003c/span\u003e\u003cspan class=\"o\"\u003e((\u003c/span\u003e\u003cspan class=\"n\"\u003evalue\u003c/span\u003e\u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003eticker\u003c/span\u003e\u003cspan class=\"o\"\u003e,\u003c/span\u003e \u003cspan class=\"nc\"\u003eOption\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"n\"\u003ecompanyName\u003c/span\u003e\u003cspan class=\"o\"\u003e).\u003c/span\u003e\u003cspan class=\"n\"\u003egetOrElse\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"s\"\u003e\u0026#34;-\u0026#34;\u003c/span\u003e\u003cspan class=\"o\"\u003e),\u003c/span\u003e \u003cspan class=\"n\"\u003evalue\u003c/span\u003e\u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003eprice\u003c/span\u003e\u003cspan class=\"o\"\u003e))\u003c/span\u003e\n  \u003cspan class=\"o\"\u003e}\u003c/span\u003e\n\n  \u003cspan class=\"k\"\u003eoverride\u003c/span\u003e \u003cspan class=\"k\"\u003edef\u003c/span\u003e \u003cspan class=\"n\"\u003eprocessBroadcastElement\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"n\"\u003evalue\u003c/span\u003e\u003cspan class=\"k\"\u003e:\u003c/span\u003e \u003cspan class=\"kt\"\u003eCompany\u003c/span\u003e\u003cspan class=\"o\"\u003e,\u003c/span\u003e\n                                       \u003cspan class=\"n\"\u003ectx\u003c/span\u003e\u003cspan class=\"k\"\u003e:\u003c/span\u003e \u003cspan class=\"kt\"\u003eBroadcastProcessFunction\u003c/span\u003e\u003cspan class=\"o\"\u003e[\u003c/span\u003e\u003cspan class=\"kt\"\u003eStock\u003c/span\u003e, \u003cspan class=\"kt\"\u003eCompany\u003c/span\u003e, \u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"kt\"\u003eString\u003c/span\u003e, \u003cspan class=\"kt\"\u003eString\u003c/span\u003e, \u003cspan class=\"kt\"\u003eDouble\u003c/span\u003e\u003cspan class=\"o\"\u003e)]\u003c/span\u003e\u003cspan class=\"k\"\u003e#\u003c/span\u003e\u003cspan class=\"nc\"\u003eContext\u003c/span\u003e\u003cspan class=\"o\"\u003e,\u003c/span\u003e\n                                       \u003cspan class=\"n\"\u003eout\u003c/span\u003e\u003cspan class=\"k\"\u003e:\u003c/span\u003e \u003cspan class=\"kt\"\u003eCollector\u003c/span\u003e\u003cspan class=\"o\"\u003e[(\u003c/span\u003e\u003cspan class=\"kt\"\u003eString\u003c/span\u003e, \u003cspan class=\"kt\"\u003eString\u003c/span\u003e, \u003cspan class=\"kt\"\u003eDouble\u003c/span\u003e\u003cspan class=\"o\"\u003e)])\u003c/span\u003e\u003cspan class=\"k\"\u003e:\u003c/span\u003e \u003cspan class=\"kt\"\u003eUnit\u003c/span\u003e \u003cspan class=\"o\"\u003e=\u003c/span\u003e \u003cspan class=\"o\"\u003e{\u003c/span\u003e\n    \u003cspan class=\"n\"\u003ectx\u003c/span\u003e\u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003egetBroadcastState\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"nc\"\u003eStateDescriptor\u003c/span\u003e\u003cspan class=\"o\"\u003e).\u003c/span\u003e\u003cspan class=\"n\"\u003eput\u003c/span\u003e\u003cspan class=\"o\"\u003e(\u003c/span\u003e\u003cspan class=\"n\"\u003evalue\u003c/span\u003e\u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003eticker\u003c/span\u003e\u003cspan class=\"o\"\u003e,\u003c/span\u003e \u003cspan class=\"n\"\u003evalue\u003c/span\u003e\u003cspan class=\"o\"\u003e.\u003c/span\u003e\u003cspan class=\"n\"\u003ename\u003c/span\u003e\u003cspan class=\"o\"\u003e)\u003c/span\u003e\n  \u003cspan class=\"o\"\u003e}\u003c/span\u003e\n\u003cspan class=\"o\"\u003e}\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\u003c/div\u003e\u003ch3 id=\"実行結果\"\u003e実行結果\u003c/h3\u003e\n\u003cp\u003e上記を実行すると以下のような stream と static が結合された結果レコードが流れ続ける。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e2\u0026gt; (FB,Facebook,158.76057838239333)\n1\u0026gt; (GOOGL,Google,288.4271251901199)\n2\u0026gt; (AAPL,Apple,191.00515338617706)\n1\u0026gt; (FB,Facebook,121.98205452369652)\n2\u0026gt; (FB,Facebook,140.05023554456997)\n\u003c/code\u003e\u003c/pre\u003e\u003cp\u003eこの状態で会社情報が記載されている \u003ccode\u003edata/companies.csv\u003c/code\u003e を更新することを考える。\n例えば \u0026quot;GOOGL\u0026quot; の社名を \u0026quot;Google\u0026quot; から \u0026quot;Alphabet\u0026quot; に変更して保存してみた。\nするとしばらくしてその修正が反映された結果が流れてくるようになる。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e1\u0026gt; (GOOGL,Alphabet,288.1008081843843)\n2\u0026gt; (AMZN,Amazon,137.11135563851838)\n1\u0026gt; (GOOGL,Alphabet,121.78368168964735)\n2\u0026gt; (FB,Facebook,236.53483047124948)\n1\u0026gt; (FB,Facebook,220.44300865769645)\n\u003c/code\u003e\u003c/pre\u003e\u003cp\u003estatic data の更新が反映されることが確認できた。\n今回は10秒に1回のインターバルで元ファイルを確認するようにファイルを読んでいるため、変更してからそれが反映されるまで最大10秒程度かかる。\u003c/p\u003e\n\u003ch2 id=\"懸念点\"\u003e懸念点\u003c/h2\u003e\n\u003cp\u003ejoin はできたが次のような懸念点がある。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eレコードの削除に対応していない\n\u003cul\u003e\n\u003cli\u003estate を上書きしているだけなので \u003ccode\u003ecompanies.csv\u003c/code\u003e から削除されたレコードは感知できない\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eファイルの更新時に処理が重くなる可能性がある\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003ecompanies.csv\u003c/code\u003e の更新タイミングでその中の全レコードを処理してしまう\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003echeckpoint が大きくなる\n\u003cul\u003e\n\u003cli\u003estate が broadcast されているため、task ごとに重複した state が保存されてしまう\u003c/li\u003e\n\u003cli\u003eSee \u003ca href=\"https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/stream/state/broadcast_state.html#important-considerations\"\u003eImportant Considerations\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"まとめ\"\u003eまとめ\u003c/h2\u003e\n\u003cp\u003eこのように broadcast state pattern によって stream data と static data との join 処理を行うことができた。\nただし、まだちゃんと調べていないが DataStream API ではなく Table API を使えばもう少しカジュアルな感じで近いことができるかもしれない。\n気が向いたらそちらも試してみる。\u003c/p\u003e"
+}
+</script>
+
+<link rel="preload" as="script" href="/bundle.js?v=1596722138">
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://stats.g.doubleclick.net">
+<link rel="preconnect" href="https://www.googleadservices.com">
+<link rel="preload" as="script" href="https://www.googletagmanager.com/gtag/js?id=UA-73329599-2">
+<script src="https://www.googletagmanager.com/gtag/js?id=UA-73329599-2"></script>
+<script>
+  window.dataLayer=window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js',new Date());
+  gtag('config','UA-73329599-2');
+</script>
+
+</head>
+<body>
+
+  <header id="nav" class="header">
+  <div class="ax-l-i max-w-6xl">
+    <div class="ax-logo">
+      <a class="block" href="/" title="Froglog"><span class="font-semibold text-raven-900">Froglog</span></a>
+    </div>
+    <div class="ax-user">
+      <a class="p-2 w-8 h-8 block text-raven-500 hover:text-gray-800 focus:text-gray-800 focus:outline-none" target="_blank" rel="noopener nofollow" href="https://www.google.com/search?q=site:soonraah.github.io" title="">
+        <svg class="fill-current" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M2.67 12.804c0-5.6 4.544-10.134 10.133-10.134s10.134 4.544 10.134 10.134-4.544 10.133-10.134 10.133S2.67 18.393 2.67 12.804zm28.943 16.923l-8.868-8.868c4.287-5.3 3.68-13.012-1.378-17.57S8.564-1.066 3.75 3.75s-5.017 12.558-.46 17.618 12.28 5.665 17.57 1.378l8.868 8.868a1.33 1.33 0 0 0 2.231-.597c.123-.46-.008-.952-.345-1.29h0z"/></svg>
+
+      </a>
+      <a class="p-2 block text-base leading-none text-raven-500 hover:text-gray-800 focus:text-gray-800 focus:outline-none" href="/posts/">
+        Posts
+      </a>
+      <a class="p-2 block text-base leading-none text-raven-500 hover:text-gray-800 focus:text-gray-800 focus:outline-none" href="/tags/">
+        Tags
+      </a>
+      <a class="p-2 block text-base leading-none text-raven-500 hover:text-gray-800 focus:text-gray-800 focus:outline-none" href="/about/">
+        About
+      </a>
+    </div>
+  </div>
+
+  
+</header>
+
+  <main>
+<div class="default-single">
+  <div class="ax-title ax-l-o">
+    <div class="ax-l-i max-w-680">
+      <h1 class="post-title font-content-title font-normal leading-tight tracking-default text-40">Apache Flink の broadcast state pattern を用いた stream data と static data の join</h1>
+
+      <div class="ax-meta flex items-center mt-5">
+        <div class="flex-grow min-w-0">
+          <div class="flex items-center">
+  <div class="flex-shrink-0">
+    <img
+    class="w-12 h-12 sm:w-14 sm:h-14 object-cover p-3px rounded-full border border-blue-300"
+    src="/image/author/soonraah.png"
+    alt="soonraah">
+  </div>
+  <div class="flex-shrink-0 ml-2 leading-tight font-content-sans">
+    <a class="block text-sm text-raven-800 hover:text-raven-900 hover:underline focus:underline" target="_blank" rel="noopener nofollow" title="soonraah" href="https://soonraah.github.io/">soonraah</a>
+    <time class="text-sm text-raven-500" datetime="2020-08-06T13:00:00Z">2020-08-06 22:00</time>
+  </div>
+</div>
+
+        </div>
+        <div>
+          <div class="flex items-center">
+  <a class="flex-shrink-0 block text-raven-800 hover:text-raven-900" target="_blank" rel="noopener nofollow" title="" href="https://twitter.com/intent/tweet?text=Apache%20Flink%20%e3%81%ae%20broadcast%20state%20pattern%20%e3%82%92%e7%94%a8%e3%81%84%e3%81%9f%20stream%20data%20%e3%81%a8%20static%20data%20%e3%81%ae%20join%20by%20%40soonraah%20https%3a%2f%2fsoonraah.github.io%2fflink-join-by-broadcast-state-pattern%2f"><svg class="w-6 h-6 fill-current" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M32 6.078c-1.2.522-2.458.868-3.78 1.036 1.36-.812 2.398-2.088 2.886-3.626a13.11 13.11 0 0 1-4.16 1.588C25.742 3.794 24.026 3 22.154 3a6.56 6.56 0 0 0-6.556 6.562c0 .52.044 1.02.152 1.496-5.454-.266-10.28-2.88-13.522-6.862-.566.982-.898 2.106-.898 3.316a6.57 6.57 0 0 0 2.914 5.452 6.48 6.48 0 0 1-2.964-.808v.072c0 3.188 2.274 5.836 5.256 6.446-.534.146-1.116.216-1.72.216-.42 0-.844-.024-1.242-.112.85 2.598 3.262 4.508 6.13 4.57a13.18 13.18 0 0 1-8.134 2.798c-.538 0-1.054-.024-1.57-.1C2.906 27.93 6.35 29 10.064 29c12.072 0 18.672-10 18.672-18.668 0-.3-.01-.57-.024-.848C30.014 8.56 31.108 7.406 32 6.078z"/></svg>
+</a>
+  <a class="ml-3 flex-shrink-0 block text-raven-800 hover:text-raven-900" target="_blank" rel="noopener nofollow" title="" href="https://www.facebook.com/dialog/share?app_id=&display=page&href=https%3a%2f%2fsoonraah.github.io%2fflink-join-by-broadcast-state-pattern%2f"><svg class="w-6 h-6 fill-current" viewBox="-7 -3.5 39 39" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M30.234 0H1.765C.8.001 0 .79 0 1.766v28.47C.001 31.2.79 32 1.766 32h15.328V19.625h-4.156V14.78h4.156v-3.564c0-4.134 2.523-6.384 6.21-6.384 1.766 0 3.284.13 3.726.2v4.32h-2.543c-2.006 0-2.394.953-2.394 2.352v3.085h4.797l-.625 4.844h-4.172V32h8.14C31.21 32 32 31.2 32 30.234V1.765C32 .8 31.21 0 30.234 0z"/></svg>
+</a>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div><div class="ax-content ax-l-o">
+    <div class="ax-l-i max-w-680">
+      <article class="cdata">
+<p>star schema における fact table と dimension table の join のようなことを Apache Flink におけるストリーム処理で行いたい。
+stream data と static data の join ということになる。
+ただし dimension table 側も更新されるため、完全な static というわけではない。</p>
+<p>このポストでは Flink v1.11 を前提とした。</p>
+<h2 id="join-の方法">join の方法</h2>
+<p>今回は DataStream API でこれを実現することを考える。
+Flink のドキュメントを読むと broadcast state pattern でできそうだ。</p>
+<ul>
+<li><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/stream/state/broadcast_state.html">The Broadcast State Pattern</a></li>
+</ul>
+<p>やり方としては次のようになる。</p>
+<ol>
+<li>static data のファイルを <code>FileProcessingMode.PROCESS_CONTINUOUSLY</code> で読み込み <code>DataStream</code> 化</li>
+<li>1 を <code>broadcast()</code></li>
+<li>stream data の <code>DataStream</code> と 2 を <code>connect()</code></li>
+</ol>
+<p>static data を <code>PROCESS_CONTINUOUSLY</code> で読むのは変更を得るため。
+<code>PROCESS_ONCE</code> で読んでしまうとストリーム処理の開始時に1回読むだけになり、dimension table の変更を得られない。
+このあたりの仕様については <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/datastream_api.html#data-sources">Data Sources</a> を参照。</p>
+<p>その後は broadcast state pattern にそのまま従う。
+したがって <code>BroadcastProcessFunction</code> or <code>KeyedBroadcastProcessFunction</code> を実装する必要がある。
+その中で static data を取り込んで state として持ち、stream data 側で参照すればよい。</p>
+<p>2つのデータの各 term に対する関係性を以下に示す。</p>
+<table>
+<thead>
+<tr>
+<th>in star schema</th>
+<th>stream or static</th>
+<th>broadcast or not</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dimension table</td>
+<td>static data</td>
+<td>broadcasted</td>
+</tr>
+<tr>
+<td>fact table</td>
+<td>stream data</td>
+<td>non-broadcasted</td>
+</tr>
+</tbody>
+</table>
+<h2 id="実験">実験</h2>
+<h3 id="実験概要">実験概要</h3>
+<p>stream data として株価のデータを考える。
+適当に乱数で作った株価が &quot;GOOGL&quot; 等の ticker とともに流れてくる。
+一方、会社情報が記載された dimension table 的なファイルも用意する。
+流れ続ける株価データに対して ticker を key にして会社情報を紐付ける、ということを行う。</p>
+<h3 id="コード">コード</h3>
+<p>上記を実行するためのコードを以下に示す。
+実行可能なプロジェクトを <a href="https://github.com/soonraah/flink_join_test">GitHub</a> に置いたので興味があればどうぞ。</p>
+<h4 id="entry-point">Entry Point</h4>
+<p><code>main()</code> の実装。
+<code>MiniClusterWithClientResource</code> は本来は単体テスト用だが、簡単に local で cluster を動かすためにここで使用している。</p>
+<div class="highlight"><pre class="chroma"><code class="language-scala" data-lang="scala"><span class="k">package</span> <span class="nn">example</span>
+
+<span class="k">import</span> <span class="nn">org.apache.flink.api.common.state.MapStateDescriptor</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.api.java.io.TextInputFormat</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.core.fs.Path</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.runtime.testutils.MiniClusterResourceConfiguration</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.streaming.api.functions.source.FileProcessingMode</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.streaming.api.scala.</span><span class="o">{</span><span class="nc">DataStream</span><span class="o">,</span> <span class="nc">StreamExecutionEnvironment</span><span class="o">,</span> <span class="n">createTypeInformation</span><span class="o">}</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.test.util.MiniClusterWithClientResource</span>
+
+<span class="k">object</span> <span class="nc">FlinkJoinTest</span> <span class="o">{</span>
+  <span class="c1">// See https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/stream/testing.html#testing-flink-jobs
+</span><span class="c1"></span>  <span class="k">private</span> <span class="k">val</span> <span class="nc">FlinkCluster</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">MiniClusterWithClientResource</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nc">MiniClusterResourceConfiguration</span>
+    <span class="o">.</span><span class="nc">Builder</span><span class="o">()</span>
+      <span class="o">.</span><span class="n">setNumberSlotsPerTaskManager</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">setNumberTaskManagers</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">build</span>
+  <span class="o">)</span>
+
+  <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="nc">FlinkCluster</span><span class="o">.</span><span class="n">before</span><span class="o">()</span>
+
+    <span class="k">val</span> <span class="n">env</span> <span class="k">=</span> <span class="nc">StreamExecutionEnvironment</span><span class="o">.</span><span class="n">getExecutionEnvironment</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">setParallelism</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
+
+    <span class="k">val</span> <span class="n">companiesMasterFilePath</span> <span class="k">=</span> <span class="s">&#34;data/companies.csv&#34;</span>
+
+    <span class="k">val</span> <span class="n">companies</span> <span class="k">=</span> <span class="n">readCompaniesMaster</span><span class="o">(</span><span class="n">companiesMasterFilePath</span><span class="o">,</span> <span class="n">env</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">broadcast</span><span class="o">(</span><span class="k">new</span> <span class="nc">MapStateDescriptor</span><span class="o">(</span>
+        <span class="s">&#34;CompanyState&#34;</span><span class="o">,</span>
+        <span class="n">classOf</span><span class="o">[</span><span class="kt">String</span><span class="o">],</span>    <span class="c1">// ticker
+</span><span class="c1"></span>        <span class="n">classOf</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span>     <span class="c1">// name
+</span><span class="c1"></span>      <span class="o">))</span>
+
+    <span class="c1">// the broadcast state pattern
+</span><span class="c1"></span>    <span class="c1">// See https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/stream/state/broadcast_state.html
+</span><span class="c1"></span>    <span class="n">env</span>
+      <span class="o">.</span><span class="n">fromCollection</span><span class="o">(</span><span class="k">new</span> <span class="nc">UnboundedStocks</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">connect</span><span class="o">(</span><span class="n">companies</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">process</span><span class="o">(</span><span class="k">new</span> <span class="nc">StockBroadcastProcessFunction</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">print</span><span class="o">()</span>
+
+    <span class="n">env</span><span class="o">.</span><span class="n">execute</span><span class="o">(</span><span class="s">&#34;flink join test&#34;</span><span class="o">)</span>
+
+    <span class="nc">FlinkCluster</span><span class="o">.</span><span class="n">after</span><span class="o">()</span>
+  <span class="o">}</span>
+
+  <span class="k">private</span> <span class="k">def</span> <span class="n">readCompaniesMaster</span><span class="o">(</span><span class="n">companiesMasterFilePath</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
+                                  <span class="n">env</span><span class="k">:</span> <span class="kt">StreamExecutionEnvironment</span><span class="o">)</span><span class="k">:</span> <span class="kt">DataStream</span><span class="o">[</span><span class="kt">Company</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="n">env</span>
+      <span class="o">.</span><span class="n">readFile</span><span class="o">(</span>
+        <span class="k">new</span> <span class="nc">TextInputFormat</span><span class="o">(</span><span class="k">new</span> <span class="nc">Path</span><span class="o">(</span><span class="n">companiesMasterFilePath</span><span class="o">)),</span>
+        <span class="n">companiesMasterFilePath</span><span class="o">,</span>
+        <span class="nc">FileProcessingMode</span><span class="o">.</span><span class="nc">PROCESS_CONTINUOUSLY</span><span class="o">,</span>
+        <span class="mi">10</span> <span class="o">*</span> <span class="mi">1000</span>
+      <span class="o">)</span>
+      <span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="n">line</span> <span class="k">=&gt;</span>
+        <span class="k">val</span> <span class="n">items</span> <span class="k">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="o">(</span><span class="s">&#34;,&#34;</span><span class="o">)</span>
+        <span class="nc">Company</span><span class="o">(</span><span class="n">items</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span> <span class="n">items</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><h4 id="records">Records</h4>
+<p>各種レコードを表す case class。
+<code>UnboundedStocks</code> は一定のインターバルで <code>Stock</code> を無限に返す iterator であり、stream data 生成に利用する。</p>
+<div class="highlight"><pre class="chroma"><code class="language-scala" data-lang="scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Company</span><span class="o">(</span><span class="n">ticker</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
+
+<span class="k">case</span> <span class="k">class</span> <span class="nc">Stock</span><span class="o">(</span><span class="n">ticker</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">price</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span>
+
+<span class="cm">/**
+</span><span class="cm"> * Iterator to generate unbounded stock data
+</span><span class="cm"> */</span>
+<span class="k">class</span> <span class="nc">UnboundedStocks</span> <span class="k">extends</span> <span class="nc">Iterator</span><span class="o">[</span><span class="kt">Stock</span><span class="o">]</span> <span class="k">with</span> <span class="nc">Serializable</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">hasNext</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">true</span>  <span class="c1">// unbounded
+</span><span class="c1"></span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">next</span><span class="o">()</span><span class="k">:</span> <span class="kt">Stock</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="nc">Thread</span><span class="o">.</span><span class="n">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">)</span>
+    <span class="k">val</span> <span class="n">tickers</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span><span class="s">&#34;GOOGL&#34;</span><span class="o">,</span> <span class="s">&#34;AAPL&#34;</span><span class="o">,</span> <span class="s">&#34;FB&#34;</span><span class="o">,</span> <span class="s">&#34;AMZN&#34;</span><span class="o">)</span>
+    <span class="k">val</span> <span class="n">ticker</span> <span class="k">=</span> <span class="n">tickers</span><span class="o">(</span><span class="nc">Random</span><span class="o">.</span><span class="n">nextInt</span><span class="o">(</span><span class="n">tickers</span><span class="o">.</span><span class="n">size</span><span class="o">))</span>  <span class="c1">// one of GAFA
+</span><span class="c1"></span>    <span class="k">val</span> <span class="n">price</span> <span class="k">=</span> <span class="mi">100</span> <span class="o">+</span> <span class="nc">Random</span><span class="o">.</span><span class="n">nextDouble</span><span class="o">()</span> <span class="o">*</span> <span class="mi">300</span>         <span class="c1">// random price
+</span><span class="c1"></span>    <span class="nc">Stock</span><span class="o">(</span><span class="n">ticker</span><span class="o">,</span> <span class="n">price</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><h4 id="broadcastprocessfunction">BroadcastProcessFunction</h4>
+<p>肝である <code>BroadcastProcessFunction</code> の実装。</p>
+<div class="highlight"><pre class="chroma"><code class="language-scala" data-lang="scala"><span class="k">package</span> <span class="nn">example</span>
+
+<span class="k">import</span> <span class="nn">org.apache.flink.api.common.state.MapStateDescriptor</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.streaming.api.functions.co.BroadcastProcessFunction</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.util.Collector</span>
+
+<span class="k">class</span> <span class="nc">StockBroadcastProcessFunction</span>
+  <span class="k">extends</span> <span class="nc">BroadcastProcessFunction</span><span class="o">[</span><span class="kt">Stock</span>, <span class="kt">Company</span>, <span class="o">(</span><span class="kt">String</span>, <span class="kt">String</span>, <span class="kt">Double</span><span class="o">)]</span> <span class="o">{</span>
+
+  <span class="k">private</span> <span class="k">val</span> <span class="nc">StateDescriptor</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">MapStateDescriptor</span><span class="o">(</span>
+    <span class="s">&#34;CompanyState&#34;</span><span class="o">,</span>
+    <span class="n">classOf</span><span class="o">[</span><span class="kt">String</span><span class="o">],</span>    <span class="c1">// ticker
+</span><span class="c1"></span>    <span class="n">classOf</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span>     <span class="c1">// name
+</span><span class="c1"></span>  <span class="o">)</span>
+
+  <span class="k">override</span> <span class="k">def</span> <span class="n">processElement</span><span class="o">(</span><span class="n">value</span><span class="k">:</span> <span class="kt">Stock</span><span class="o">,</span>
+                              <span class="n">ctx</span><span class="k">:</span> <span class="kt">BroadcastProcessFunction</span><span class="o">[</span><span class="kt">Stock</span>, <span class="kt">Company</span>, <span class="o">(</span><span class="kt">String</span>, <span class="kt">String</span>, <span class="kt">Double</span><span class="o">)]</span><span class="k">#</span><span class="nc">ReadOnlyContext</span><span class="o">,</span>
+                              <span class="n">out</span><span class="k">:</span> <span class="kt">Collector</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">String</span>, <span class="kt">Double</span><span class="o">)])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">companyName</span> <span class="k">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">getBroadcastState</span><span class="o">(</span><span class="nc">StateDescriptor</span><span class="o">).</span><span class="n">get</span><span class="o">(</span><span class="n">value</span><span class="o">.</span><span class="n">ticker</span><span class="o">)</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">collect</span><span class="o">((</span><span class="n">value</span><span class="o">.</span><span class="n">ticker</span><span class="o">,</span> <span class="nc">Option</span><span class="o">(</span><span class="n">companyName</span><span class="o">).</span><span class="n">getOrElse</span><span class="o">(</span><span class="s">&#34;-&#34;</span><span class="o">),</span> <span class="n">value</span><span class="o">.</span><span class="n">price</span><span class="o">))</span>
+  <span class="o">}</span>
+
+  <span class="k">override</span> <span class="k">def</span> <span class="n">processBroadcastElement</span><span class="o">(</span><span class="n">value</span><span class="k">:</span> <span class="kt">Company</span><span class="o">,</span>
+                                       <span class="n">ctx</span><span class="k">:</span> <span class="kt">BroadcastProcessFunction</span><span class="o">[</span><span class="kt">Stock</span>, <span class="kt">Company</span>, <span class="o">(</span><span class="kt">String</span>, <span class="kt">String</span>, <span class="kt">Double</span><span class="o">)]</span><span class="k">#</span><span class="nc">Context</span><span class="o">,</span>
+                                       <span class="n">out</span><span class="k">:</span> <span class="kt">Collector</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">String</span>, <span class="kt">Double</span><span class="o">)])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="n">getBroadcastState</span><span class="o">(</span><span class="nc">StateDescriptor</span><span class="o">).</span><span class="n">put</span><span class="o">(</span><span class="n">value</span><span class="o">.</span><span class="n">ticker</span><span class="o">,</span> <span class="n">value</span><span class="o">.</span><span class="n">name</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><h3 id="実行結果">実行結果</h3>
+<p>上記を実行すると以下のような stream と static が結合された結果レコードが流れ続ける。</p>
+<pre><code>2&gt; (FB,Facebook,158.76057838239333)
+1&gt; (GOOGL,Google,288.4271251901199)
+2&gt; (AAPL,Apple,191.00515338617706)
+1&gt; (FB,Facebook,121.98205452369652)
+2&gt; (FB,Facebook,140.05023554456997)
+</code></pre><p>この状態で会社情報が記載されている <code>data/companies.csv</code> を更新することを考える。
+例えば &quot;GOOGL&quot; の社名を &quot;Google&quot; から &quot;Alphabet&quot; に変更して保存してみた。
+するとしばらくしてその修正が反映された結果が流れてくるようになる。</p>
+<pre><code>1&gt; (GOOGL,Alphabet,288.1008081843843)
+2&gt; (AMZN,Amazon,137.11135563851838)
+1&gt; (GOOGL,Alphabet,121.78368168964735)
+2&gt; (FB,Facebook,236.53483047124948)
+1&gt; (FB,Facebook,220.44300865769645)
+</code></pre><p>static data の更新が反映されることが確認できた。
+今回は10秒に1回のインターバルで元ファイルを確認するようにファイルを読んでいるため、変更してからそれが反映されるまで最大10秒程度かかる。</p>
+<h2 id="懸念点">懸念点</h2>
+<p>join はできたが次のような懸念点がある。</p>
+<ul>
+<li>レコードの削除に対応していない
+<ul>
+<li>state を上書きしているだけなので <code>companies.csv</code> から削除されたレコードは感知できない</li>
+</ul>
+</li>
+<li>ファイルの更新時に処理が重くなる可能性がある
+<ul>
+<li><code>companies.csv</code> の更新タイミングでその中の全レコードを処理してしまう</li>
+</ul>
+</li>
+<li>checkpoint が大きくなる
+<ul>
+<li>state が broadcast されているため、task ごとに重複した state が保存されてしまう</li>
+<li>See <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/stream/state/broadcast_state.html#important-considerations">Important Considerations</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="まとめ">まとめ</h2>
+<p>このように broadcast state pattern によって stream data と static data との join 処理を行うことができた。
+ただし、まだちゃんと調べていないが DataStream API ではなく Table API を使えばもう少しカジュアルな感じで近いことができるかもしれない。
+気が向いたらそちらも試してみる。</p>
+
+      </article>
+      
+
+      
+
+    </div>
+  </div>
+</div>
+
+  </main>
+  <footer class="footer">
+  <div class="ax-l-i max-w-6xl">
+    <nav class="flex items-center justify-center">
+      <a class="ml-3 first:ml-0 text-sm text-gray-600 hover:text-gray-800" href="/posts/">Posts</a>
+      <a class="ml-3 first:ml-0 text-sm text-gray-600 hover:text-gray-800" href="/tags/">Tags</a>
+      <a class="ml-3 first:ml-0 text-sm text-gray-600 hover:text-gray-800" href="/about/">About</a>
+    </nav>
+    <div class="footer-social flex items-center justify-center mt-4">
+      <a class="block mx-3 w-6 h-6 text-raven-700 hover:text-raven-900" target="_blank" rel="noopener nofollow" title="" href="https://twitter.com/soonraah"><svg class="fill-current" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M32 6.078c-1.2.522-2.458.868-3.78 1.036 1.36-.812 2.398-2.088 2.886-3.626a13.11 13.11 0 0 1-4.16 1.588C25.742 3.794 24.026 3 22.154 3a6.56 6.56 0 0 0-6.556 6.562c0 .52.044 1.02.152 1.496-5.454-.266-10.28-2.88-13.522-6.862-.566.982-.898 2.106-.898 3.316a6.57 6.57 0 0 0 2.914 5.452 6.48 6.48 0 0 1-2.964-.808v.072c0 3.188 2.274 5.836 5.256 6.446-.534.146-1.116.216-1.72.216-.42 0-.844-.024-1.242-.112.85 2.598 3.262 4.508 6.13 4.57a13.18 13.18 0 0 1-8.134 2.798c-.538 0-1.054-.024-1.57-.1C2.906 27.93 6.35 29 10.064 29c12.072 0 18.672-10 18.672-18.668 0-.3-.01-.57-.024-.848C30.014 8.56 31.108 7.406 32 6.078z"/></svg></a>
+      <a class="block mx-3 w-6 h-6 text-raven-700 hover:text-raven-900" target="_blank" rel="noopener nofollow" title="" href="https://github.com/soonraah"><svg class="fill-current" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M15.998 0C7.164 0 0 7.35 0 16.417 0 23.67 4.584 29.82 10.944 31.994c.8.15 1.092-.356 1.092-.79l-.022-2.792c-4.45.99-5.4-2.202-5.4-2.202-.726-1.896-1.776-2.4-1.776-2.4-1.454-1.018.108-.998.108-.998 1.606.117 2.45 1.693 2.45 1.693 1.428 2.507 3.746 1.784 4.658 1.363.144-1.06.558-1.784 1.016-2.195-3.552-.415-7.288-1.823-7.288-8.113 0-1.792.624-3.258 1.648-4.406-.166-.415-.714-2.085.156-4.344 0 0 1.344-.44 4.4 1.683 1.276-.364 2.644-.546 4.006-.552a14.98 14.98 0 0 1 4.006.554C23.062 6.37 24.404 6.8 24.404 6.8c.872 2.26.324 3.93.16 4.344 1.026 1.148 1.644 2.614 1.644 4.406 0 6.306-3.74 7.694-7.304 8.1.574.507 1.086 1.51 1.086 3.04l-.02 4.503c0 .44.288.95 1.1.788C27.42 29.817 32 23.667 32 16.417 32 7.35 24.836 0 15.998 0z"/></svg></a>
+    </div>
+
+    <div class="footer-copyright text-sm text-center text-gray-500 mt-4">
+      &#169; 2020-2020 Froglog
+    </div>
+    <div class="text-sm sm:text-xs text-center text-gray-500 mt-2">
+       <a href="https://www.axiomtheme.com/?utm_source=theme-footer&utm_medium=website&utm_campaign=referral"></a>
+    </div>
+  </div>
+</footer>
+
+<script src="/bundle.js?v=1596722138"></script>
+
+
+</body>
+</html>
