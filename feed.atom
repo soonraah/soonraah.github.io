@@ -7,24 +7,178 @@
     <name>Froglog</name>
     <uri>https://soonraah.github.io/</uri>
   </author>
-  <updated>2020-08-06T13:55:38Z</updated>
+  <updated>2020-08-15T16:17:28Z</updated>
   <link rel="self" type="application/atom+xml" href="https://soonraah.github.io/feed.atom" hreflang="jp"/>
   <link rel="alternate" type="text/html" href="https://soonraah.github.io/" hreflang="jp"/>
   <entry>
-    <title>Apache Flink の broadcast state pattern を用いた stream data と static data の join</title>
+    <title>Apache Flink の Temporary Table Function を用いた stream data と static data の join</title>
+    <author>
+      <name>soonraah</name>
+      <uri>https://soonraah.github.io/</uri>
+    </author>
+    <id>https://soonraah.github.io/flink-join-by-temporal-table-function/</id>
+    <updated>2020-08-15T15:30:00Z</updated>
+    <published>2020-08-15T15:30:00Z</published>
+    <content type="html"><![CDATA[
+
+<figure class="center">
+<img
+class="mb-2 mx-auto leading-none shadow-xl"
+src="/image/logo/flink_squirrel_200_color.png">
+<figcaption class="text-sm text-right text-raven-500">
+<p> <a href="https://flink.apache.org/">Apache Flink</a></p>
+</figcaption>
+</figure>
+
+<p><a href="https://soonraah.github.io/flink-join-by-broadcast-state-pattern/">前回の記事</a> では Apache Flink における stream data と static data の join において、DataStream API における broadcast state pattern を使う方法を示した。<br>
+今回の記事では Table API の temporal table function を用いた実験を行う。</p>
+<h2 id="table-api">Table API</h2>
+<p><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/table/">Table API</a> は名前のとおりで class <code>Table</code> を中心として SQL-like な DSL により処理を記述するという、DataStream API より high-level な API となっている。<br>
+これらの関係は Apaceh Spark の <code>RDD</code> と <code>DataFrame</code> (<code>DataSet</code>) の関係に似ている。<br>
+SQL-like な API で記述された処理が実行時に最適化されて low-level API の処理に翻訳されるところも同じだ。</p>
+<p>RDB の table の概念を元にしているものと考えられるが、本質的に table の概念とストリーム処理はあまりマッチしないと思う。<br>
+table はある時点のデータセット全体を表すのに対し、ストリーム処理ではやってくるレコードを逐次的に処理したい。<br>
+ここを合わせているため、ストリーム処理における Table API による処理の挙動の理解には注意が必要だ。<br>
+<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/table/streaming/">Streaming Concepts</a> 以下のドキュメントを確認しておきたい。</p>
+<h2 id="temporal-table-function">Temporal Table Function</h2>
+<p>star schema における、変更されうる dimension table を stream data と結合する方法として、<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/table/streaming/temporal_tables.html">temporal table</a> という仕組みが提供されている。<br>
+ドキュメントでは為替レートの例が示されている。<br>
+stream でやってくる fact table 的なレコードに対して、為替のように時々刻々と変化する dimension table をそのレコードの時刻における snap shot としてぶつけるような形となる。</p>
+<p>レコードの時刻としては processing time または event time を扱うことができる。<br>
+event time の場合であっても watermark で遅延の許容を定義できるため dimension table のすべての履歴を状態として保持する必要はなく、processing time または event time の watermark に応じて過去の履歴は捨てることが可能となっている。</p>
+<p>Table API において temporal table を使うには temporal table function という形を取ることになる。</p>
+<h2 id="実験">実験</h2>
+<p>やることは <a href="https://soonraah.github.io/flink-join-by-broadcast-state-pattern/">前回の記事</a> とまったく同じで乱数で作った株価のデータを扱う。<br>
+前回と違うのは DataStream API ではなく Table API で処理を記述したところである。</p>
+<h3 id="実験概要">実験概要</h3>
+<h3 id="コード">コード</h3>
+<p>上記を実行するためのコードを以下に示す。<br>
+実行可能なプロジェクトは <a href="https://github.com/soonraah/flink_join_test">GitHub</a> に置いておいた。</p>
+<h4 id="entry-point">Entry Point</h4>
+<p><code>toTable()</code> により入力データの <code>DataStream</code> を <code>Table</code> に変換した後、処理を記述した。<br>
+<code>func</code> が temporal table function に当たる。<br>
+今回は processing time を基準として join しているが、実際のシステムでは event time を基準としたいことが多いのではないだろうか。</p>
+<div class="highlight"><pre class="chroma"><code class="language-scala" data-lang="scala"><span class="k">package</span> <span class="nn">example</span>
+
+<span class="k">import</span> <span class="nn">org.apache.flink.api.java.io.TextInputFormat</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.api.scala._</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.core.fs.Path</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.runtime.testutils.MiniClusterResourceConfiguration</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.streaming.api.TimeCharacteristic</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.streaming.api.functions.source.FileProcessingMode</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.streaming.api.scala.</span><span class="o">{</span><span class="nc">DataStream</span><span class="o">,</span> <span class="nc">StreamExecutionEnvironment</span><span class="o">}</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.table.api.bridge.scala.</span><span class="o">{</span><span class="nc">StreamTableEnvironment</span><span class="o">,</span> <span class="k">_</span><span class="o">}</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.table.api.</span><span class="o">{</span><span class="nc">AnyWithOperations</span><span class="o">,</span> <span class="nc">EnvironmentSettings</span><span class="o">,</span> <span class="nc">FieldExpression</span><span class="o">,</span> <span class="n">call</span><span class="o">}</span>
+<span class="k">import</span> <span class="nn">org.apache.flink.test.util.MiniClusterWithClientResource</span>
+
+<span class="k">object</span> <span class="nc">FlinkTableJoinTest</span> <span class="o">{</span>
+  <span class="c1">// See https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/stream/testing.html#testing-flink-jobs
+</span><span class="c1"></span>  <span class="k">private</span> <span class="k">val</span> <span class="nc">FlinkCluster</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">MiniClusterWithClientResource</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nc">MiniClusterResourceConfiguration</span>
+    <span class="o">.</span><span class="nc">Builder</span><span class="o">()</span>
+      <span class="o">.</span><span class="n">setNumberSlotsPerTaskManager</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">setNumberTaskManagers</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">build</span>
+  <span class="o">)</span>
+
+  <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="nc">FlinkCluster</span><span class="o">.</span><span class="n">before</span><span class="o">()</span>
+
+    <span class="c1">// for batch programs use ExecutionEnvironment instead of StreamExecutionEnvironment
+</span><span class="c1"></span>    <span class="k">val</span> <span class="n">env</span> <span class="k">=</span> <span class="nc">StreamExecutionEnvironment</span><span class="o">.</span><span class="n">getExecutionEnvironment</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">setStreamTimeCharacteristic</span><span class="o">(</span><span class="nc">TimeCharacteristic</span><span class="o">.</span><span class="nc">ProcessingTime</span><span class="o">)</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">setParallelism</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
+
+    <span class="c1">// create settings
+</span><span class="c1"></span>    <span class="k">val</span> <span class="n">setting</span> <span class="k">=</span> <span class="nc">EnvironmentSettings</span>
+      <span class="o">.</span><span class="n">newInstance</span><span class="o">()</span>
+      <span class="o">.</span><span class="n">useBlinkPlanner</span><span class="o">()</span>
+      <span class="o">.</span><span class="n">inStreamingMode</span><span class="o">()</span>
+      <span class="o">.</span><span class="n">build</span><span class="o">()</span>
+
+    <span class="c1">// create a TableEnvironment
+</span><span class="c1"></span>    <span class="k">val</span> <span class="n">tableEnv</span> <span class="k">=</span> <span class="nc">StreamTableEnvironment</span><span class="o">.</span><span class="n">create</span><span class="o">(</span><span class="n">env</span><span class="o">,</span> <span class="n">setting</span><span class="o">)</span>
+
+    <span class="c1">// create a Table instance for Company
+</span><span class="c1"></span>    <span class="k">val</span> <span class="n">companiesMasterFilePath</span> <span class="k">=</span> <span class="s">&#34;data/companies.csv&#34;</span>
+    <span class="k">val</span> <span class="n">companies</span> <span class="k">=</span> <span class="n">readCompaniesMaster</span><span class="o">(</span><span class="n">companiesMasterFilePath</span><span class="o">,</span> <span class="n">env</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">toTable</span><span class="o">(</span><span class="n">tableEnv</span><span class="o">,</span> <span class="n">$</span><span class="s">&#34;ticker&#34;</span><span class="o">.</span><span class="n">as</span><span class="o">(</span><span class="s">&#34;c_ticker&#34;</span><span class="o">),</span> <span class="n">$</span><span class="s">&#34;name&#34;</span><span class="o">,</span> <span class="n">$</span><span class="s">&#34;c_proc_time&#34;</span><span class="o">.</span><span class="n">proctime</span><span class="o">)</span>
+
+    <span class="c1">// temporal table function
+</span><span class="c1"></span>    <span class="k">val</span> <span class="n">func</span> <span class="k">=</span> <span class="n">companies</span><span class="o">.</span><span class="n">createTemporalTableFunction</span><span class="o">(</span><span class="n">$</span><span class="s">&#34;c_proc_time&#34;</span><span class="o">,</span> <span class="n">$</span><span class="s">&#34;c_ticker&#34;</span><span class="o">)</span>
+
+    <span class="c1">// create a Table instance for Stock
+</span><span class="c1"></span>    <span class="k">val</span> <span class="n">stocks</span> <span class="k">=</span> <span class="n">env</span>
+      <span class="o">.</span><span class="n">fromCollection</span><span class="o">(</span><span class="k">new</span> <span class="nc">UnboundedStocks</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">toTable</span><span class="o">(</span><span class="n">tableEnv</span><span class="o">,</span> <span class="n">$</span><span class="s">&#34;ticker&#34;</span><span class="o">.</span><span class="n">as</span><span class="o">(</span><span class="s">&#34;s_ticker&#34;</span><span class="o">),</span> <span class="n">$</span><span class="s">&#34;price&#34;</span><span class="o">,</span> <span class="n">$</span><span class="s">&#34;s_proc_time&#34;</span><span class="o">.</span><span class="n">proctime</span><span class="o">)</span>
+
+    <span class="c1">// join with a temporal table function
+</span><span class="c1"></span>    <span class="k">val</span> <span class="n">results</span> <span class="k">=</span> <span class="n">stocks</span>
+      <span class="o">.</span><span class="n">joinLateral</span><span class="o">(</span><span class="n">call</span><span class="o">(</span><span class="n">func</span><span class="o">,</span> <span class="n">$</span><span class="s">&#34;s_proc_time&#34;</span><span class="o">),</span> <span class="n">$</span><span class="s">&#34;s_ticker&#34;</span> <span class="o">===</span> <span class="n">$</span><span class="s">&#34;c_ticker&#34;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">select</span><span class="o">(</span><span class="n">$</span><span class="s">&#34;s_ticker&#34;</span><span class="o">,</span> <span class="n">$</span><span class="s">&#34;name&#34;</span><span class="o">,</span> <span class="n">$</span><span class="s">&#34;price&#34;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">toAppendStream</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">String</span>, <span class="kt">Double</span><span class="o">)]</span>
+      <span class="o">.</span><span class="n">print</span>
+
+    <span class="n">env</span><span class="o">.</span><span class="n">execute</span><span class="o">()</span>
+
+    <span class="nc">FlinkCluster</span><span class="o">.</span><span class="n">after</span><span class="o">()</span>
+  <span class="o">}</span>
+
+  <span class="k">private</span> <span class="k">def</span> <span class="n">readCompaniesMaster</span><span class="o">(</span><span class="n">companiesMasterFilePath</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
+                                  <span class="n">env</span><span class="k">:</span> <span class="kt">StreamExecutionEnvironment</span><span class="o">)</span><span class="k">:</span> <span class="kt">DataStream</span><span class="o">[</span><span class="kt">Company</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="n">env</span>
+      <span class="o">.</span><span class="n">readFile</span><span class="o">(</span>
+        <span class="k">new</span> <span class="nc">TextInputFormat</span><span class="o">(</span><span class="k">new</span> <span class="nc">Path</span><span class="o">(</span><span class="n">companiesMasterFilePath</span><span class="o">)),</span>
+        <span class="n">companiesMasterFilePath</span><span class="o">,</span>
+        <span class="nc">FileProcessingMode</span><span class="o">.</span><span class="nc">PROCESS_CONTINUOUSLY</span><span class="o">,</span>
+        <span class="mi">10</span> <span class="o">*</span> <span class="mi">1000</span>
+      <span class="o">)</span>
+      <span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="n">line</span> <span class="k">=&gt;</span>
+        <span class="k">val</span> <span class="n">items</span> <span class="k">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="o">(</span><span class="s">&#34;,&#34;</span><span class="o">)</span>
+        <span class="nc">Company</span><span class="o">(</span><span class="n">items</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span> <span class="n">items</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><h3 id="実行結果">実行結果</h3>
+<p>上記を実行すると以下のような stream と static が結合された結果レコードが流れ続ける。</p>
+<pre><code>2&gt; (AMZN,Amazon,110.05826176785374)
+2&gt; (AMZN,Amazon,237.82717323588966)
+1&gt; (FB,Facebook,147.96046700184428)
+1&gt; (GOOGL,Google,393.58555322242086)
+2&gt; (AMZN,Amazon,104.18843434881401)
+</code></pre><p>前回と同様に <code>data/companies.csv</code> の中身を更新するとその結果が反映される。<br>
+削除が反映されないのも同じだった。<br>
+おそらく physical な処理としてはほぼ同じようになっていると思われる。</p>
+<h2 id="まとめ">まとめ</h2>
+<p>前回と同様の stream data と static data の join を、Table API + temporal table function で行えることを確認した。<br>
+temporal table function の概念さえ把握できれば Straem API のときに比べて簡潔に処理を記述できた。</p>]]></content>
+  </entry>
+  <entry>
+    <title>Apache Flink の Broadcast State Pattern を用いた stream data と static data の join</title>
     <author>
       <name>soonraah</name>
       <uri>https://soonraah.github.io/</uri>
     </author>
     <id>https://soonraah.github.io/flink-join-by-broadcast-state-pattern/</id>
-    <updated>2020-08-06T13:00:00Z</updated>
+    <updated>2020-08-15T15:30:00Z</updated>
     <published>2020-08-06T13:00:00Z</published>
-    <content type="html"><![CDATA[<p>star schema における fact table と dimension table の join のようなことを Apache Flink におけるストリーム処理で行いたい。
-stream data と static data の join ということになる。
+    <content type="html"><![CDATA[
+
+<figure class="center">
+<img
+class="mb-2 mx-auto leading-none shadow-xl"
+src="/image/logo/flink_squirrel_200_color.png">
+<figcaption class="text-sm text-right text-raven-500">
+<p> <a href="https://flink.apache.org/">Apache Flink</a></p>
+</figcaption>
+</figure>
+
+<p>star schema における fact table と dimension table の join のようなことを Apache Flink におけるストリーム処理で行いたい。<br>
+stream data と static data の join ということになる。<br>
 ただし dimension table 側も更新されるため、完全な static というわけではない。</p>
 <p>このポストでは Flink v1.11 を前提とした。</p>
 <h2 id="join-の方法">join の方法</h2>
-<p>今回は DataStream API でこれを実現することを考える。
+<p>今回は DataStream API でこれを実現することを考える。<br>
 Flink のドキュメントを読むと broadcast state pattern でできそうだ。</p>
 <ul>
 <li><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/stream/state/broadcast_state.html">The Broadcast State Pattern</a></li>
@@ -35,11 +189,11 @@ Flink のドキュメントを読むと broadcast state pattern でできそう�
 <li>1 を <code>broadcast()</code></li>
 <li>stream data の <code>DataStream</code> と 2 を <code>connect()</code></li>
 </ol>
-<p>static data を <code>PROCESS_CONTINUOUSLY</code> で読むのは変更を得るため。
-<code>PROCESS_ONCE</code> で読んでしまうとストリーム処理の開始時に1回読むだけになり、dimension table の変更を得られない。
+<p>static data を <code>PROCESS_CONTINUOUSLY</code> で読むのは変更を得るため。<br>
+<code>PROCESS_ONCE</code> で読んでしまうとストリーム処理の開始時に1回読むだけになり、dimension table の変更を得られない。<br>
 このあたりの仕様については <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/datastream_api.html#data-sources">Data Sources</a> を参照。</p>
-<p>その後は broadcast state pattern にそのまま従う。
-したがって <code>BroadcastProcessFunction</code> or <code>KeyedBroadcastProcessFunction</code> を実装する必要がある。
+<p>その後は broadcast state pattern にそのまま従う。<br>
+したがって <code>BroadcastProcessFunction</code> or <code>KeyedBroadcastProcessFunction</code> を実装する必要がある。<br>
 その中で static data を取り込んで state として持ち、stream data 側で参照すればよい。</p>
 <p>2つのデータの各 term に対する関係性を以下に示す。</p>
 <table>
@@ -65,15 +219,15 @@ Flink のドキュメントを読むと broadcast state pattern でできそう�
 </table>
 <h2 id="実験">実験</h2>
 <h3 id="実験概要">実験概要</h3>
-<p>stream data として株価のデータを考える。
-適当に乱数で作った株価が &quot;GOOGL&quot; 等の ticker とともに流れてくる。
-一方、会社情報が記載された dimension table 的なファイルも用意する。
+<p>stream data として株価のデータを考える。<br>
+適当に乱数で作った株価が &quot;GOOGL&quot; 等の ticker とともに流れてくる。<br>
+一方、会社情報が記載された dimension table 的なファイルも用意する。<br>
 流れ続ける株価データに対して ticker を key にして会社情報を紐付ける、ということを行う。</p>
 <h3 id="コード">コード</h3>
-<p>上記を実行するためのコードを以下に示す。
+<p>上記を実行するためのコードを以下に示す。<br>
 実行可能なプロジェクトを <a href="https://github.com/soonraah/flink_join_test">GitHub</a> に置いたので興味があればどうぞ。</p>
 <h4 id="entry-point">Entry Point</h4>
-<p><code>main()</code> の実装。
+<p><code>main()</code> の実装。<br>
 <code>MiniClusterWithClientResource</code> は本来は単体テスト用だが、簡単に local で cluster を動かすためにここで使用している。</p>
 <div class="highlight"><pre class="chroma"><code class="language-scala" data-lang="scala"><span class="k">package</span> <span class="nn">example</span>
 
@@ -139,7 +293,7 @@ Flink のドキュメントを読むと broadcast state pattern でできそう�
   <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div><h4 id="records">Records</h4>
-<p>各種レコードを表す case class。
+<p>各種レコードを表す case class。<br>
 <code>UnboundedStocks</code> は一定のインターバルで <code>Stock</code> を無限に返す iterator であり、stream data 生成に利用する。</p>
 <div class="highlight"><pre class="chroma"><code class="language-scala" data-lang="scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Company</span><span class="o">(</span><span class="n">ticker</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
 
@@ -196,15 +350,15 @@ Flink のドキュメントを読むと broadcast state pattern でできそう�
 2&gt; (AAPL,Apple,191.00515338617706)
 1&gt; (FB,Facebook,121.98205452369652)
 2&gt; (FB,Facebook,140.05023554456997)
-</code></pre><p>この状態で会社情報が記載されている <code>data/companies.csv</code> を更新することを考える。
-例えば &quot;GOOGL&quot; の社名を &quot;Google&quot; から &quot;Alphabet&quot; に変更して保存してみた。
+</code></pre><p>この状態で会社情報が記載されている <code>data/companies.csv</code> を更新することを考える。<br>
+例えば &quot;GOOGL&quot; の社名を &quot;Google&quot; から &quot;Alphabet&quot; に変更して保存してみた。<br>
 するとしばらくしてその修正が反映された結果が流れてくるようになる。</p>
 <pre><code>1&gt; (GOOGL,Alphabet,288.1008081843843)
 2&gt; (AMZN,Amazon,137.11135563851838)
 1&gt; (GOOGL,Alphabet,121.78368168964735)
 2&gt; (FB,Facebook,236.53483047124948)
 1&gt; (FB,Facebook,220.44300865769645)
-</code></pre><p>static data の更新が反映されることが確認できた。
+</code></pre><p>static data の更新が反映されることが確認できた。<br>
 今回は10秒に1回のインターバルで元ファイルを確認するようにファイルを読んでいるため、変更してからそれが反映されるまで最大10秒程度かかる。</p>
 <h2 id="懸念点">懸念点</h2>
 <p>join はできたが次のような懸念点がある。</p>
@@ -227,9 +381,14 @@ Flink のドキュメントを読むと broadcast state pattern でできそう�
 </li>
 </ul>
 <h2 id="まとめ">まとめ</h2>
-<p>このように broadcast state pattern によって stream data と static data との join 処理を行うことができた。
-ただし、まだちゃんと調べていないが DataStream API ではなく Table API を使えばもう少しカジュアルな感じで近いことができるかもしれない。
-気が向いたらそちらも試してみる。</p>]]></content>
+<p>このように broadcast state pattern によって stream data と static data との join 処理を行うことができた。<br>
+ただし、まだちゃんと調べていないが DataStream API ではなく Table API を使えばもう少しカジュアルな感じで近いことができるかもしれない。<br>
+気が向いたらそちらも試してみる。</p>
+<h3 id="追記">追記</h3>
+<p>Table API を使った場合についての記事を追加しました。</p>
+<ul>
+<li><a href="https://soonraah.github.io/flink-join-by-temporal-table-function/">Apache Flink の Temporary Table Function を用いた stream data と static data の join</a></li>
+</ul>]]></content>
   </entry>
   <entry>
     <title>あまり大きな Pull Request を作ってほしくない</title>
@@ -240,7 +399,7 @@ Flink のドキュメントを読むと broadcast state pattern でできそう�
     <id>https://soonraah.github.io/no-more-huge-pull-request/</id>
     <updated>2020-08-03T13:00:00Z</updated>
     <published>2020-08-03T13:00:00Z</published>
-    <content type="html"><![CDATA[<p>GitHub Flow ベースの開発においてはあまり大きな pull request を作ってほしくないという話。
+    <content type="html"><![CDATA[<p>GitHub Flow ベースの開発においてはあまり大きな pull request を作ってほしくないという話。<br>
 なんというか今更わざわざ言わなくてもいいんだけど…</p>
 <p>仕事で何度か大きな pull request が投げられているのを見てしまったので、それはあまりよくないよというのを自分でも指摘しやすくするためにまとめておく。</p>
 <h2 id="reference">Reference</h2>
@@ -250,7 +409,7 @@ Flink のドキュメントを読むと broadcast state pattern でできそう�
 <li><a href="https://techracho.bpsinc.jp/hachi8833/2018_02_07/51095">「巨大プルリク1件vs細かいプルリク100件」問題を考える（翻訳）</a></li>
 <li><a href="https://smallbusinessprogramming.com/optimal-pull-request-size/">Optimal pull request size</a></li>
 </ul>
-<p>これらを読めば特に私から言うこともないのだが…
+<p>これらを読めば特に私から言うこともないのだが…<br>
 これらに書いてあるとおりだが補足しておく。</p>
 <h2 id="pull-request-を小分けにしたときのメリット">Pull Request を小分けにしたときのメリット</h2>
 <h3 id="module-を適切に切り出すモチベーションが得られる">module を適切に切り出すモチベーションが得られる</h3>
@@ -267,8 +426,8 @@ Flink のドキュメントを読むと broadcast state pattern でできそう�
 </blockquote>
 
 <p>と述べており抽象化、つまりコードの意味を考慮した上で適切な単位でまとめておくことは否定していない。</p>
-<p>pull request を小さく分けるという行為のためには module や機能を適度なまとまりで切り分けること、つまり抽象化を考えていくことが必要となる。
-したがって何でもできてしまう大きな module が生まれるのを防ぐ方向に働く。
+<p>pull request を小さく分けるという行為のためには module や機能を適度なまとまりで切り分けること、つまり抽象化を考えていくことが必要となる。<br>
+したがって何でもできてしまう大きな module が生まれるのを防ぐ方向に働く。<br>
 (もちろんここで駄目な共通化がなされてしまうこともあるだろう)</p>
 <h3 id="リリースまでの期間が短く済む">リリースまでの期間が短く済む</h3>
 <p>前述の参考資料においても pull request が大きいと</p>
@@ -284,7 +443,7 @@ Flink のドキュメントを読むと broadcast state pattern でできそう�
   <footer>&#8212; Kurtis Funai <cite title="100 Duck-Sized Pull Requests"><a rel="noopener nofollow" href="http://kurtfunai.com/2017/12/100-duck-sized-pull-requests.html">100 Duck-Sized Pull Requests</a></cite></footer>
 </blockquote>
 
-<p>となると述べられている。
+<p>となると述べられている。<br>
 仮にすぐにレビューされ、かつ conflict なども発生しなかっとしても大きな1つの pull request をレビューする場合とそれを3つに分けた場合の開発プロセスの進行を比較すると</p>
 <ul>
 <li>大きな1つの pull request
@@ -302,15 +461,15 @@ Flink のドキュメントを読むと broadcast state pattern でできそう�
 </ol>
 </li>
 </ul>
-<p>のようになり、開発とレビューを並列で進められる部分があるので全体としての開発期間を短くすることができる。
-もちろんこれはうまく噛み合ったときの例だが。
+<p>のようになり、開発とレビューを並列で進められる部分があるので全体としての開発期間を短くすることができる。<br>
+もちろんこれはうまく噛み合ったときの例だが。<br>
 早めにフィードバックが得られるのも大きい。</p>
 <h2 id="pull-request-を小分けにしたときのデメリット">Pull Request を小分けにしたときのデメリット</h2>
-<p>小分けにすることでレビュワーが全体感をつかみにくくなるというのはあるかもしれない。
+<p>小分けにすることでレビュワーが全体感をつかみにくくなるというのはあるかもしれない。<br>
 part-1 と part-2 で同じレビュワーになるとも限らない。</p>
-<p>これに対しては開発に着手する前にまず全体のざっくりとした設計についてレビューを受けることで対応できる。
-このステップを入れることで「とりあえず手を動かそう」となりにくくなる。
-手を動かすと仕事してる感が出るのでとりあえず手を動かしたくなりがちだが、ちょっと待てよと。
+<p>これに対しては開発に着手する前にまず全体のざっくりとした設計についてレビューを受けることで対応できる。<br>
+このステップを入れることで「とりあえず手を動かそう」となりにくくなる。<br>
+手を動かすと仕事してる感が出るのでとりあえず手を動かしたくなりがちだが、ちょっと待てよと。<br>
 まず何を作るか、全体の工程を考えましょうと。</p>
 
 <blockquote>
@@ -330,7 +489,18 @@ part-1 と part-2 で同じレビュワーになるとも限らない。</p>
     <id>https://soonraah.github.io/spark-meetup-tokyo-3/</id>
     <updated>2020-08-01T06:00:00Z</updated>
     <published>2020-08-01T06:00:00Z</published>
-    <content type="html"><![CDATA[<p>2020-07-31 にオンライン開催された <a href="https://spark-meetup-tokyo.connpass.com/event/181422/">Spark Meetup Tokyo #3 Online</a> に参加した。
+    <content type="html"><![CDATA[
+
+<figure class="center">
+<img
+class="mb-2 mx-auto leading-none shadow-xl"
+src="/image/logo/Apache_Spark_logo.png">
+<figcaption class="text-sm text-right text-raven-500">
+<p> <a href="https://spark.apache.org/">Apache Spark</a></p>
+</figcaption>
+</figure>
+
+<p>2020-07-31 にオンライン開催された <a href="https://spark-meetup-tokyo.connpass.com/event/181422/">Spark Meetup Tokyo #3 Online</a> に参加した。<br>
 感想などメモしておく。</p>
 <h1 id="全体感">全体感</h1>
 <p>トピックとしては主に</p>
@@ -339,7 +509,7 @@ part-1 と part-2 で同じレビュワーになるとも限らない。</p>
 <li>Spark + AI Summit 2020</li>
 <li>Spark 周辺要素</li>
 </ul>
-<p>といったところだろうか。
+<p>といったところだろうか。<br>
 最近のコミュニティの動向や関心を日本語で聞くことができてよかった。</p>
 <p>運営 &amp; スピーカーの皆様、ありがとうございます。</p>
 <h1 id="発表">発表</h1>
@@ -476,9 +646,9 @@ part-1 と part-2 で同じレビュワーになるとも限らない。</p>
 </li>
 </ul>
 <h1 id="まとめ">まとめ</h1>
-<p>どんどん便利になっていくなという印象。
+<p>どんどん便利になっていくなという印象。<br>
 手でパフォーマンスチューニングする要素はどんどん減っていくのだろう。</p>
-<p>Delta Lake が盛り上がっているように感じた。
+<p>Delta Lake が盛り上がっているように感じた。<br>
 データレイクについて勉強しないと…</p>]]></content>
   </entry>
   <entry>
@@ -490,14 +660,25 @@ part-1 と part-2 で同じレビュワーになるとも限らない。</p>
     <id>https://soonraah.github.io/weak_isolation_level_of_dataframe/</id>
     <updated>2020-07-19T13:00:00Z</updated>
     <published>2020-07-19T13:00:00Z</published>
-    <content type="html"><![CDATA[<p>Spark バッチ処理の問題を調べていたら分離レベルという概念にたどりついた。
-分離レベルについて調べたので、Spark の問題の内容と絡めて記しておく。
+    <content type="html"><![CDATA[
+
+<figure class="center">
+<img
+class="mb-2 mx-auto leading-none shadow-xl"
+src="/image/logo/Apache_Spark_logo.png">
+<figcaption class="text-sm text-right text-raven-500">
+<p> <a href="https://spark.apache.org/">Apache Spark</a></p>
+</figcaption>
+</figure>
+
+<p>Spark バッチ処理の問題を調べていたら分離レベルという概念にたどりついた。<br>
+分離レベルについて調べたので、Spark の問題の内容と絡めて記しておく。<br>
 考えてみれば当たり前でたいした話ではない。</p>
 <h1 id="分離レベルとは">分離レベルとは</h1>
 <h2 id="トランザクションの挙動についての暗黙の理解">トランザクションの挙動についての暗黙の理解</h2>
-<p>アドホックな分析クエリやプロダクションコード中のクエリを書くとき、その単一のクエリのトランザクションにおいて「同時に実行されている別のクエリの commit 前の状態や commit 結果に影響され、このクエリの結果がおかしくなるかもしれない」ということは通常考えない。
+<p>アドホックな分析クエリやプロダクションコード中のクエリを書くとき、その単一のクエリのトランザクションにおいて「同時に実行されている別のクエリの commit 前の状態や commit 結果に影響され、このクエリの結果がおかしくなるかもしれない」ということは通常考えない。<br>
 トランザクションはデータベースのある時点の状態に対して正しく処理される、というほぼ無意識の理解をおそらくほとんどの開発者が持っている。</p>
-<p>多くの場合この理解は間違っていない。
+<p>多くの場合この理解は間違っていない。<br>
 それはなぜかというと DB 等のデータ処理フレームワークがある強さの分離レベルを提供しているからである。</p>
 <h2 id="いろいろな分離レベル">いろいろな分離レベル</h2>
 <p>ACID 特性のうちの1つ、分離性 (Isolation) の程度を表すのが分離レベル。</p>
@@ -507,9 +688,9 @@ part-1 と part-2 で同じレビュワーになるとも限らない。</p>
   <footer>&#8212; Wikipedia <cite title="ACID (コンピュータ科学)"><a rel="noopener nofollow" href="https://ja.wikipedia.org/wiki/ACID_%28%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E7%A7%91%E5%AD%A6%29">ACID (コンピュータ科学)</a></cite></footer>
 </blockquote>
 
-<p>分離レベルには名前のついたものがいくつかあり、分離性の保証の強さが異なる。
-具体的にはトランザクションの並行性の問題への対応力が異なる。
-名著「<a href="https://www.oreilly.co.jp/books/9784873118703/">データ指向アプリケーションデザイン</a>」の第7章で分離レベルについて詳しく述べられているので、以下ではそちらからの引用。
+<p>分離レベルには名前のついたものがいくつかあり、分離性の保証の強さが異なる。<br>
+具体的にはトランザクションの並行性の問題への対応力が異なる。<br>
+名著「<a href="https://www.oreilly.co.jp/books/9784873118703/">データ指向アプリケーションデザイン</a>」の第7章で分離レベルについて詳しく述べられているので、以下ではそちらからの引用。<br>
 分離レベルを弱い順に並べる。</p>
 <ul>
 <li>
@@ -540,12 +721,12 @@ part-1 と part-2 で同じレビュワーになるとも限らない。</p>
 </blockquote>
 </li>
 </ul>
-<p>日本語で「分離レベル」を検索すると snapshot isolation の代わりに repeatable read が出てくる事が多い。
+<p>日本語で「分離レベル」を検索すると snapshot isolation の代わりに repeatable read が出てくる事が多い。<br>
 しかし repeatable read の名前は実装によって意味が違っていたりして扱いが難しいらしい。</p>
 <h2 id="分離レベルと-race-condition-の関係">分離レベルと race condition の関係</h2>
-<p>以下に各分離レベルとトランザクションの並行性の問題 (race condition) の関係を示す。
-各 race condition の説明については割愛するが、複数のトランザクションが並行して実行されることにより起こりうる期待されていない挙動だと思えばよい。
-○はその分離レベルにおいてその race condition が発生しないことを示す。
+<p>以下に各分離レベルとトランザクションの並行性の問題 (race condition) の関係を示す。<br>
+各 race condition の説明については割愛するが、複数のトランザクションが並行して実行されることにより起こりうる期待されていない挙動だと思えばよい。<br>
+○はその分離レベルにおいてその race condition が発生しないことを示す。<br>
 △は条件によっては発生する。</p>
 <table>
 <thead>
@@ -598,7 +779,7 @@ part-1 と part-2 で同じレビュワーになるとも限らない。</p>
 </tr>
 </tbody>
 </table>
-<p>下に行くほど強い分離レベルとなっている。
+<p>下に行くほど強い分離レベルとなっている。<br>
 分離レベルが強くなるほど race condition が発生しにくくなるが、一方で lock 等によりパフォーマンスが下がっていくというトレードオフがある。</p>
 <h1 id="各種データベースの分離レベル">各種データベースの分離レベル</h1>
 <p>ここでは MySQL と Hive においてどの分離レベルが提供されているかを見てみる。</p>
@@ -614,11 +795,11 @@ part-1 と part-2 で同じレビュワーになるとも限らない。</p>
 <li><code>REPEATABLE READ</code> (default)</li>
 <li><code>SERIALIZABLE</code></li>
 </ul>
-<p>デフォルトの分離レベルは <code>REPEATABLE READ</code> だが、これは前述の snapshot isolation に相当するらしい。
+<p>デフォルトの分離レベルは <code>REPEATABLE READ</code> だが、これは前述の snapshot isolation に相当するらしい。<br>
 分離レベルは、例えば <code>set transaction</code> 構文により次のようにして指定できる。</p>
 <div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="kt">set</span> <span class="n">transaction</span> <span class="n">isolation</span> <span class="n">level</span> <span class="n">SERIALIZABLE</span><span class="p">;</span>
-</code></pre></div><p>この場合は現在のセッション内で実行される次のトランザクションについて適用される。
-すべてのセッションやすべてのトランザクション等の指定もできる。
+</code></pre></div><p>この場合は現在のセッション内で実行される次のトランザクションについて適用される。<br>
+すべてのセッションやすべてのトランザクション等の指定もできる。<br>
 詳しくは以下。</p>
 <ul>
 <li><a href="https://dev.mysql.com/doc/refman/8.0/en/set-transaction.html">13.3.7 SET TRANSACTION Statement</a></li>
@@ -638,14 +819,14 @@ part-1 と part-2 で同じレビュワーになるとも限らない。</p>
   <footer>&#8212; Apache Hive <cite title="Hive Transactions"><a rel="noopener nofollow" href="https://cwiki.apache.org/confluence/display/Hive/Hive&#43;Transactions#HiveTransactions-Transaction/LockManager">Hive Transactions</a></cite></footer>
 </blockquote>
 
-<p>lock は小さくとも partition の単位になるのだろうか。
+<p>lock は小さくとも partition の単位になるのだろうか。<br>
 であるとすると予想通りだが MySQL よりもいかつい挙動になっている。</p>
 <p>このように多くの DB では snapshot isolation の分離レベルが基本となっている。</p>
 <h1 id="spark-クエリの分離レベル">Spark クエリの分離レベル</h1>
-<p>では Spark のクエリはどうだろうか。
+<p>では Spark のクエリはどうだろうか。<br>
 ここからようやく本題となる。</p>
 <h2 id="read-committed-相当">read committed 相当</h2>
-<p>Spark において <code>DataFrame</code> を用いたデータ処理を記述するとき、それは1つの SQL クエリを書くのと近い感覚になる。
+<p>Spark において <code>DataFrame</code> を用いたデータ処理を記述するとき、それは1つの SQL クエリを書くのと近い感覚になる。<br>
 そもそも <code>DataFrame</code> は SQL-like な使い心地を目的として作られた API だから当然だ。</p>
 <p><code>DataFrame</code> で記述された処理は実行時に <code>RDD</code> として翻訳されるが、分離レベルを考えるにあたって <code>RDD</code> の特性がキーとなってくる。</p>
 
@@ -655,14 +836,14 @@ part-1 と part-2 で同じレビュワーになるとも限らない。</p>
 </blockquote>
 
 <p>あまり良い説明を見つけられなかったが、1回の action を伴う処理においても同じ <code>RDD</code> が複数回参照されるとき、その <code>RDD</code> までの計算は通常やり直されることになる。</p>
-<p>したがって例えば self join のようなことをするとき、同じデータソースを2回読みに行くということが起こってしまう。
+<p>したがって例えば self join のようなことをするとき、同じデータソースを2回読みに行くということが起こってしまう。<br>
 HDFS や S3 上のファイル、JDBC 経由の外部 DB など Spark は様々なデータソースを扱うことができるが、通常 Spark がその2回の読み込みに対して lock をかけたりすることはできない。</p>
-<p>つまり non-repeatable read や phantom read を防ぐことができない。
+<p>つまり non-repeatable read や phantom read を防ぐことができない。<br>
 read committed という弱い分離レベルに相当するということになってしまう。</p>
-<p>分離レベルという言葉はトランザクションという概念に対して使われるものであり、<code>DataFrame</code> のクエリをトランザクションと呼んでいいのかはわからない。
+<p>分離レベルという言葉はトランザクションという概念に対して使われるものであり、<code>DataFrame</code> のクエリをトランザクションと呼んでいいのかはわからない。<br>
 なので分離レベルという言葉をここで使うのが適切でないかもしれないということは述べておく。</p>
 <h2 id="検証">検証</h2>
-<p>MySQL からデータを読み取り Spark で処理することを考える。
+<p>MySQL からデータを読み取り Spark で処理することを考える。<br>
 まず local の MySQL で次のような table を用意する。</p>
 <pre><code>mysql&gt; describe employees;
 +---------------+---------+------+-----+---------+-------+
@@ -673,8 +854,8 @@ read committed という弱い分離レベルに相当するということに�
 | department_id | int(11) | YES  |     | NULL    |       |
 +---------------+---------+------+-----+---------+-------+
 3 rows in set (0.03 sec)
-</code></pre><p>部署 (department) ごとの給料 (salary) の平均から各従業員の給料がどれくらい離れているかの差分を見たいものとする。
-Spark のコードは次のようになる。
+</code></pre><p>部署 (department) ごとの給料 (salary) の平均から各従業員の給料がどれくらい離れているかの差分を見たいものとする。<br>
+Spark のコードは次のようになる。<br>
 Spark のバージョンはこれを書いている時点での最新 3.0.0 とした。</p>
 <div class="highlight"><pre class="chroma"><code class="language-scala" data-lang="scala"><span class="k">package</span> <span class="nn">com.example</span>
 
@@ -742,23 +923,23 @@ mysql&gt; show global variables like 'general_log%';
 +------------------+--------------------------------------+
 2 rows in set (0.01 sec)
 </code></pre><p>これによって MySQL に対して発行されたクエリがログとして記録されるようになる。</p>
-<p>直感的に snapshot isolation になっているのであれば MySQL に対する select 文は1回だけ発行されるはずである。
-しかし前述のとおり <code>RDD</code> や <code>DataFrame</code> の処理は途中の状態を通常保存せず、同じ <code>RDD</code> や <code>DataFrame</code> を参照していたとしても再計算される。
+<p>直感的に snapshot isolation になっているのであれば MySQL に対する select 文は1回だけ発行されるはずである。<br>
+しかし前述のとおり <code>RDD</code> や <code>DataFrame</code> の処理は途中の状態を通常保存せず、同じ <code>RDD</code> や <code>DataFrame</code> を参照していたとしても再計算される。<br>
 上記コードの例だと <code>dfEmployee</code> が2回参照されている。</p>
-<p>コードを実行すると general query log には次のように、データ取得のための select 文が2つ記録されていた。
+<p>コードを実行すると general query log には次のように、データ取得のための select 文が2つ記録されていた。<br>
 それぞれ <code>join()</code> の左右の table のデータソースを示している。</p>
 <pre><code>8 Query     SELECT `id`,`salary`,`department_id` FROM test_fout_dsp.employees
 7 Query     SELECT `salary`,`department_id` FROM test_fout_dsp.employees WHERE (`department_id` IS NOT NULL)
-</code></pre><p>2つの select 文はそれぞれ別のクエリ、トランザクションとして発行されている。
+</code></pre><p>2つの select 文はそれぞれ別のクエリ、トランザクションとして発行されている。<br>
 したがって前者の select 文が実行された後、後者の select 文が実行される前に別のトランザクションにより <code>employees</code> が更新されたり挿入・削除されたりすると non-repeatable read や phantom read が発生してしまうのである。</p>
 <p>今回はデータソースへのアクセスを確認するためにデータソースとして MySQL を使ったが、同じことはファイルや他の DB など別のデータソースで起こりうる。</p>
 <h2 id="回避策">回避策</h2>
-<p>プロダクト運用上、non-repeatable read や phantom read が発生しうる状況というのは多くの場合で厄介である。
-一時的なデータソースの状態に依存して問題が発生するため、バグの原因追求がとても困難だからだ。
+<p>プロダクト運用上、non-repeatable read や phantom read が発生しうる状況というのは多くの場合で厄介である。<br>
+一時的なデータソースの状態に依存して問題が発生するため、バグの原因追求がとても困難だからだ。<br>
 見た目上の分離レベルを強くし、これらを避けるには2つの方法が考えられる。</p>
 <h3 id="immutable-なデータにのみアクセスする">immutable なデータにのみアクセスする</h3>
-<p>単純な話で non-repeatable read や phantom read が発生するようなデータソースを参照しなければよい。
-例えばユーザの行動ログのような蓄積されていくデータが hour 単位で partitioning されているような場合、基本的に過去の partition に対しては変更や挿入・削除は行われない。
+<p>単純な話で non-repeatable read や phantom read が発生するようなデータソースを参照しなければよい。<br>
+例えばユーザの行動ログのような蓄積されていくデータが hour 単位で partitioning されているような場合、基本的に過去の partition に対しては変更や挿入・削除は行われない。<br>
 このような partition にアクセスする分には前述のような厄介な問題は起こらない。</p>
 <h3 id="cache-する">cache する</h3>
 <p>データソースから読み取った結果の <code>DataFrame</code> に対して <code>cache()</code> または <code>persist()</code> をするとよい。</p>
@@ -768,10 +949,10 @@ mysql&gt; show global variables like 'general_log%';
   <footer>&#8212; Apache Spark <cite title="Caching Data In Memory"><a rel="noopener nofollow" href="https://spark.apache.org/docs/latest/sql-performance-tuning.html#caching-data-in-memory">Caching Data In Memory</a></cite></footer>
 </blockquote>
 
-<p>前述のコードで <code>dfEmployee</code> に対して <code>.cache()</code> をした場合、MySQL へのデータ取得のための select 文の発行は1回になった。
+<p>前述のコードで <code>dfEmployee</code> に対して <code>.cache()</code> をした場合、MySQL へのデータ取得のための select 文の発行は1回になった。<br>
 大きなデータソースを <code>cache()</code> するときだけメモリや HDD 容量に気をつけておきたい。</p>
 <h1 id="まとめ">まとめ</h1>
-<p><code>DataFrame</code> はいわゆる RDBMS を操作しているように見えてしまうところが難しいところだろうか。
+<p><code>DataFrame</code> はいわゆる RDBMS を操作しているように見えてしまうところが難しいところだろうか。<br>
 「データ指向アプリケーションデザイン」に至極真っ当なことが書いてあったので、その言葉を借りて締めておく。</p>
 
 <blockquote>
@@ -788,12 +969,23 @@ mysql&gt; show global variables like 'general_log%';
     <id>https://soonraah.github.io/study-spark-3-0-0/</id>
     <updated>2020-07-12T00:00:00Z</updated>
     <published>2020-07-12T00:00:00Z</published>
-    <content type="html"><![CDATA[<h2 id="はじめに">はじめに</h2>
+    <content type="html"><![CDATA[
+
+<figure class="center">
+<img
+class="mb-2 mx-auto leading-none shadow-xl"
+src="/image/logo/Apache_Spark_logo.png">
+<figcaption class="text-sm text-right text-raven-500">
+<p> <a href="https://spark.apache.org/">Apache Spark</a></p>
+</figcaption>
+</figure>
+
+<h2 id="はじめに">はじめに</h2>
 <p>Apache Spark 3.0.0 がリリースされました。</p>
 <ul>
 <li><a href="https://spark.apache.org/releases/spark-release-3-0-0.html">Spark Release 3.0.0</a></li>
 </ul>
-<p>release note を見て個人的に気になったところなど簡単に調べました。
+<p>release note を見て個人的に気になったところなど簡単に調べました。<br>
 書いてみると Databricks の記事へのリンクばっかになってしまった…</p>
 <h2 id="全体感">全体感</h2>
 <p>こちらの記事を読めば全体感は OK.</p>
@@ -808,7 +1000,7 @@ mysql&gt; show global variables like 'general_log%';
 <blockquote>
 <p>Python is now the most widely used language on Spark and, consequently, was a key focus area of Spark 3.0 development. 68% of notebook commands on Databricks are in Python.</p>
 </blockquote>
-<p>と書いてありどうやら Databricks の notebook の話らしく、だったらまあそうかなという感じ。
+<p>と書いてありどうやら Databricks の notebook の話らしく、だったらまあそうかなという感じ。<br>
 プロダクトコードへの実装というよりは、アドホック分析や検証用途の話なんでしょう。</p>
 <h2 id="project-hydrogen-accelerator-aware-scheduler">[Project Hydrogen] Accelerator-aware Scheduler</h2>
 <ul>
@@ -818,7 +1010,7 @@ mysql&gt; show global variables like 'general_log%';
 <ul>
 <li><a href="https://www.slideshare.net/MatthewStubbs6/big-data-ldn-2018-project-hydrogen-unifying-ai-with-apache-spark/26">Big Data LDN 2018: PROJECT HYDROGEN: UNIFYING AI WITH APACHE SPARK</a></li>
 </ul>
-<p>YARN や Kubernetes では GPU や FPGA を扱えるようになっているので Spark でも扱えるようにしたいというモチベーション。
+<p>YARN や Kubernetes では GPU や FPGA を扱えるようになっているので Spark でも扱えるようにしたいというモチベーション。<br>
 <a href="https://spark.apache.org/docs/3.0.0/running-on-yarn.html#resource-allocation-and-configuration-overview">Spark のドキュメント</a> によると</p>
 <blockquote>
 <p>For example, the user wants to request 2 GPUs for each executor. The user can just specify <code>spark.executor.resource.gpu.amount=2</code> and Spark will handle requesting <code>yarn.io/gpu</code> resource type from YARN.</p>
@@ -828,7 +1020,7 @@ mysql&gt; show global variables like 'general_log%';
 <ul>
 <li><a href="https://issues.apache.org/jira/browse/SPARK-31412">SPARK-31412</a></li>
 </ul>
-<p>平たく言うと実行時に得られる統計情報を使って plan を最適化すると、静的に生成された plan より効率化できるよねという話。
+<p>平たく言うと実行時に得られる統計情報を使って plan を最適化すると、静的に生成された plan より効率化できるよねという話。<br>
 <code>spark.sql.adaptive.enabled=true</code> にすることで有効になります。</p>
 <p>処理の途中で中間生成物が materialize されるタイミングで、その時点の統計情報を使って残りの処理を最適化する、というのを繰り返します。</p>
 <p>Spark 3.0.0 では以下3つの AQE が実装されました。</p>
@@ -837,11 +1029,11 @@ mysql&gt; show global variables like 'general_log%';
 <li>Converting sort-merge join to broadcast join</li>
 <li>Optimizing Skew Join</li>
 </ul>
-<p>Spark 2 以前だとこのあたりは実行しつつチューニングするような運用になりがちでした。
-特に skew の解消は salt を追加したりなど面倒だったりします。
-これらが自動で最適化されるというのは運用上うれしいところ。
+<p>Spark 2 以前だとこのあたりは実行しつつチューニングするような運用になりがちでした。<br>
+特に skew の解消は salt を追加したりなど面倒だったりします。<br>
+これらが自動で最適化されるというのは運用上うれしいところ。<br>
 急なデータ傾向の変化に対しても自動で最適化して対応できるという面があります。</p>
-<p>AQE に関してもやはり Databricks の解説記事がわかりやすいです。
+<p>AQE に関してもやはり Databricks の解説記事がわかりやすいです。<br>
 図もいい感じ。</p>
 <ul>
 <li><a href="https://databricks.com/blog/2020/05/29/adaptive-query-execution-speeding-up-spark-sql-at-runtime.html">Adaptive Query Execution: Speeding Up Spark SQL at Runtime</a></li>
@@ -850,10 +1042,10 @@ mysql&gt; show global variables like 'general_log%';
 <ul>
 <li><a href="https://issues.apache.org/jira/browse/SPARK-11150">SPARK-11150</a></li>
 </ul>
-<p>こちらも AQE 同様にクエリのパフォーマンスを改善する目的で導入されたもの。
-改善幅は AQE より大きいようです。
+<p>こちらも AQE 同様にクエリのパフォーマンスを改善する目的で導入されたもの。<br>
+改善幅は AQE より大きいようです。<br>
 やはり実行時の情報を使って partition pruning を行い、不要な partition の参照を減らすという方法。</p>
-<p>主に <a href="https://ja.wikipedia.org/wiki/%E3%82%B9%E3%82%BF%E3%83%BC%E3%82%B9%E3%82%AD%E3%83%BC%E3%83%9E">star schema</a> における join 時のように、静的には partition pruning が行えない場合を想定しています。
+<p>主に <a href="https://ja.wikipedia.org/wiki/%E3%82%B9%E3%82%BF%E3%83%BC%E3%82%B9%E3%82%AD%E3%83%BC%E3%83%9E">star schema</a> における join 時のように、静的には partition pruning が行えない場合を想定しています。<br>
 比較的小さいことが多いと思われる dimension table 側を broadcast する broadcast join において、broadcast された情報を fact table の partition pruning に利用するというやり口。</p>
 <ul>
 <li><a href="https://www.slideshare.net/databricks/dynamic-partition-pruning-in-apache-spark">Dynamic Partition Pruning in Apache Spark</a></li>
@@ -862,7 +1054,7 @@ mysql&gt; show global variables like 'general_log%';
 <ul>
 <li><a href="https://issues.apache.org/jira/browse/SPARK-29543">SPARK-29543</a></li>
 </ul>
-<p>&quot;Structured Streaming&quot; というタブが UI に追加された件。
+<p>&quot;Structured Streaming&quot; というタブが UI に追加された件。<br>
 Spark のドキュメントに例があります。</p>
 <blockquote>
 <p><img src="https://spark.apache.org/docs/3.0.0/img/webui-structured-streaming-detail.png" alt="Structured Streaming Query Statistics"></p>
@@ -873,27 +1065,27 @@ Spark のドキュメントに例があります。</p>
   <footer>&#8212; Apache Spark <cite title="Structured Streaming Tab"><a rel="noopener nofollow" href="https://spark.apache.org/docs/3.0.0/web-ui.html#structured-streaming-tab">Structured Streaming Tab</a></cite></footer>
 </blockquote>
 
-<p>Spark 2.4 系では Structured Streaming を動かしていてもせいぜい job や stage が増えていくという味気ないものしか見えませんでした。
-Spark 3.0.0 で実際に動かしてみたけど欲しかったやつ！という感じ。
+<p>Spark 2.4 系では Structured Streaming を動かしていてもせいぜい job や stage が増えていくという味気ないものしか見えませんでした。<br>
+Spark 3.0.0 で実際に動かしてみたけど欲しかったやつ！という感じ。<br>
 ストリーム処理では入力データ量の変化の可視化がマストだと思ってます。</p>
 <h2 id="catalog-plugin-api">Catalog plugin API</h2>
 <ul>
 <li><a href="https://issues.apache.org/jira/browse/SPARK-31121">SPARK-31121</a></li>
 <li><a href="https://docs.google.com/document/d/1zLFiA1VuaWeVxeTDXNg8bL6GP3BVoOZBkewFtEnjEoo/edit">SPIP: Spark API for Table Metadata</a></li>
 </ul>
-<p>これまでは CTAS (Create Table As Select) の操作はあったが、外部のデータソースに対して DDL 的な操作をする API が足りていませんでした。
-CTAS も挙動に実装依存の曖昧さがありました。
+<p>これまでは CTAS (Create Table As Select) の操作はあったが、外部のデータソースに対して DDL 的な操作をする API が足りていませんでした。<br>
+CTAS も挙動に実装依存の曖昧さがありました。<br>
 そこで <code>create</code>, <code>alter</code>, <code>load</code>, <code>drop</code> 等のテーブル操作をできるようにしたという話。</p>
-<p>ドキュメントの <a href="https://spark.apache.org/docs/3.0.0/sql-ref-syntax.html#ddl-statements">DDL Statements</a> のあたりを読め何ができるかわかります。
+<p>ドキュメントの <a href="https://spark.apache.org/docs/3.0.0/sql-ref-syntax.html#ddl-statements">DDL Statements</a> のあたりを読め何ができるかわかります。<br>
 以前のバージョンでも一部のデータソースについてはできた模様 (ex. <a href="https://spark.apache.org/docs/2.4.6/sql-migration-guide-hive-compatibility.html#supported-hive-features">Hive</a>)。</p>
-<p>今の自分の業務では Spark から DDL を扱うようなことはしないのでそれほど恩恵は感じられません。
+<p>今の自分の業務では Spark から DDL を扱うようなことはしないのでそれほど恩恵は感じられません。<br>
 notebook からアドホックな Spark のバッチを動かすというような使い方をしていればうれしいかもしれません。</p>
 <h2 id="add-an-api-that-allows-a-user-to-define-and-observe-arbitrary-metrics-on-batch-and-streaming-queries">Add an API that allows a user to define and observe arbitrary metrics on batch and streaming queries</h2>
 <ul>
 <li><a href="https://issues.apache.org/jira/browse/SPARK-29345">SPARK-29345</a></li>
 </ul>
-<p>クエリの途中の段階で何らかの metrics を仕込んでおいて callback 的にその metrics にアクセスできる仕組み。
-<a href="https://spark.apache.org/docs/3.0.0/api/scala/org/apache/spark/sql/Dataset.html#observe(name:String,expr:org.apache.spark.sql.Column,exprs:org.apache.spark.sql.Column*):org.apache.spark.sql.Dataset%5BT%5D">Dataset#observe() の API ドキュメント</a> を読むのが一番早いです。
+<p>クエリの途中の段階で何らかの metrics を仕込んでおいて callback 的にその metrics にアクセスできる仕組み。<br>
+<a href="https://spark.apache.org/docs/3.0.0/api/scala/org/apache/spark/sql/Dataset.html#observe(name:String,expr:org.apache.spark.sql.Column,exprs:org.apache.spark.sql.Column*):org.apache.spark.sql.Dataset%5BT%5D">Dataset#observe() の API ドキュメント</a> を読むのが一番早いです。<br>
 この例ではストリーム処理を扱っているが、バッチ処理の例を自分で書いて試してみました。</p>
 <div class="highlight"><pre class="chroma"><code class="language-scala" data-lang="scala"><span class="c1">// Register listener
 </span><span class="c1"></span><span class="n">spark</span>
@@ -935,18 +1127,18 @@ notebook からアドホックな Spark のバッチを動かすというよう�
 +----+------------------+
 
 num of data: 1000
-</code></pre><p><code>observe()</code> はその出力の DataFrame に対して schema やデータの中身を変更することはありません。
-metrics を仕込むのみ。
-logical plan を出力してみると <code>observe()</code> を入れることにより途中に <code>CollectMetrics</code> という plan が挿入されていました。
-ソースを見ると accumulator を使っている模様。
-なので <code>observe()</code> の集計のみで一度 job が動くわけではなく、クエリが2回走るという感じではありません。
+</code></pre><p><code>observe()</code> はその出力の DataFrame に対して schema やデータの中身を変更することはありません。<br>
+metrics を仕込むのみ。<br>
+logical plan を出力してみると <code>observe()</code> を入れることにより途中に <code>CollectMetrics</code> という plan が挿入されていました。<br>
+ソースを見ると accumulator を使っている模様。<br>
+なので <code>observe()</code> の集計のみで一度 job が動くわけではなく、クエリが2回走るという感じではありません。<br>
 全体の処理の中でひっそりと accumulator で脇で集計しておくといった趣でしょうか。</p>
-<p>これは結構有用だと思います。
-例えば何らかの集計をやるにしてもその最初や途中で、例えば入力データは何件あったか？みたいなことをログに出しておきたいことがあります。
-というか accumulator で頑張ってそういうものを作ったことがある…
+<p>これは結構有用だと思います。<br>
+例えば何らかの集計をやるにしてもその最初や途中で、例えば入力データは何件あったか？みたいなことをログに出しておきたいことがあります。<br>
+というか accumulator で頑張ってそういうものを作ったことがある…<br>
 これがフレームワーク側でサポートされるのはうれしいです。</p>
 <h2 id="まとめ">まとめ</h2>
-<p>2つのダイナミックな最適化に期待大。
+<p>2つのダイナミックな最適化に期待大。<br>
 気が向いたら追加でまた調べるかもしれません。</p>]]></content>
   </entry>
 </feed>
