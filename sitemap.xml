@@ -2,26 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://soonraah.github.io/tags/apache-flink/</loc>
-    <lastmod>2020-09-06T07:30:00Z</lastmod>
-  </url>
-  <url>
-    <loc>https://soonraah.github.io/tags/apache-spark/</loc>
-    <lastmod>2020-09-06T07:30:00Z</lastmod>
+    <lastmod>2020-11-07T07:00:00Z</lastmod>
   </url>
   <url>
     <loc>https://soonraah.github.io/</loc>
-    <lastmod>2020-09-06T07:30:00Z</lastmod>
+    <lastmod>2020-11-07T07:00:00Z</lastmod>
   </url>
   <url>
     <loc>https://soonraah.github.io/posts/</loc>
-    <lastmod>2020-09-06T07:30:00Z</lastmod>
+    <lastmod>2020-11-07T07:00:00Z</lastmod>
   </url>
   <url>
     <loc>https://soonraah.github.io/tags/stream-processing/</loc>
-    <lastmod>2020-09-06T07:30:00Z</lastmod>
+    <lastmod>2020-11-07T07:00:00Z</lastmod>
   </url>
   <url>
     <loc>https://soonraah.github.io/tags/</loc>
+    <lastmod>2020-11-07T07:00:00Z</lastmod>
+  </url>
+  <url>
+    <loc>https://soonraah.github.io/functionality-of-streaming-system/</loc>
+    <lastmod>2020-11-07T07:00:00Z</lastmod>
+  </url>
+  <url>
+    <loc>https://soonraah.github.io/tags/apache-spark/</loc>
     <lastmod>2020-09-06T07:30:00Z</lastmod>
   </url>
   <url>
@@ -30,11 +34,11 @@
   </url>
   <url>
     <loc>https://soonraah.github.io/heavy-ab-testing-operation/</loc>
-    <lastmod>2020-08-23T03:30:00Z</lastmod>
+    <lastmod>2020-11-07T07:00:00Z</lastmod>
   </url>
   <url>
     <loc>https://soonraah.github.io/tags/ab-testing/</loc>
-    <lastmod>2020-08-23T03:30:00Z</lastmod>
+    <lastmod>2020-11-07T07:00:00Z</lastmod>
   </url>
   <url>
     <loc>https://soonraah.github.io/flink-join-by-temporal-table-function/</loc>
