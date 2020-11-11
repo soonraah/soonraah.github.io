@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Apache Flink on Froglog</title>
+    <link>https://soonraah.github.io/tags/apache-flink/</link>
+    <description>Recent content in Apache Flink on Froglog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 07 Nov 2020 16:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/apache-flink/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ストリーム処理システムに求められる機能性、および Apache Flink におけるその対応</title>
+      <link>https://soonraah.github.io/posts/functionality-of-streaming-system/</link>
+      <pubDate>Sat, 07 Nov 2020 16:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/functionality-of-streaming-system/</guid>
+      <description>はじめに このポストではストリーム処理の survay 論文の話題に対して Apache Flink における例を挙げて紹介する。
+論文概要 Fragkoulis, M., Carbone, P., Kalavri, V., &amp;amp; Katsifodimos, A. (2020). A Survey on the Evolution of Stream Processing Systems.
+2020年の論文。 過去30年ぐらいのストリーム処理のフレームワークを調査し、その発展を論じている。 ストリーム処理に特徴的に求められるいくつかの機能性 (functionality) についてその実現方法をいくつか挙げ、比較的古いフレームワークと最近のフレームワークでの対比を行っている。
+このポストのスコープ このポストでは前述のストリーム処理システムに求められる機能性とそれがなぜ必要となるかについて簡単にまとめる。 論文ではそこからさらにその実現方法がいくつか挙げられるが、ここでは個人的に興味がある Apache Flink ではどのように対処しているかを見ていく。 ちなみに論文中では Apache Flink はモダンなフレームワークの1つとしてちょいちょい引き合いに出されている。 ここでは Flink v1.11 をターゲットとする。
+以下では論文で挙げられている機能性に沿って記載していく。
+Out-of-order Data Management Out-of-order ストリーム処理システムにやってくるデータの順序は外的・内的要因により期待される順序になっていないことがある。 外的要因としてよくあるのはネットワークの問題。 データソース (producer) からストリーム処理システムに届くまでのルーティング、負荷など諸々の条件により各レコードごとに転送時間は一定にはならない。 各 operator の処理などストリーム処理システムの内的な要因で順序が乱されることもある。 out-of-order は処理の遅延や正しくない結果の原因となることがある。
+out-of-order を管理するためにストリーム処理システムは処理の進捗を検出する必要がある。 &amp;ldquo;進捗&amp;rdquo; とはある時間経過でレコードの処理がどれだけ進んだかというもので、レコードの順序を表す属性 A (ex. event time) により定量化される。 ある期間で処理された最古の A を進捗の尺度とみなすことができる。</description>
+    </item>
+    
+    <item>
+      <title>バッチ処理おじさんがストリーム処理のシステムを開発するにあたって調べたこと</title>
+      <link>https://soonraah.github.io/posts/study-streaming-system/</link>
+      <pubDate>Sun, 06 Sep 2020 16:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/study-streaming-system/</guid>
+      <description>ほとんどバッチ処理しか書いたことのない者だがストリーム処理のシステムを開発することになった。 それにあたって独学で調べたことなどまとめておく。
+ストリーム処理とは そもそも &amp;ldquo;ストリーム処理&amp;rdquo; とは何を指しているのか。 以下の引用が簡潔に示している。
+ a type of data processing engine that is designed with infinite data sets in mind. Nothing more.&amp;ndash; Streaming 101: The world beyond batch こちらは &amp;ldquo;streaming system&amp;rdquo; について述べたものだが、つまり終わりのないデータを扱うのがストリーム処理ということである。
+例えば web サービスから生まれ続けるユーザ行動ログを逐次的に処理するというのがストリーム処理。 web サービスが終了しないかぎりはユーザ行動ログの生成には終わりがない。
+これに対して &amp;ldquo;1日分のユーザ行動ログ&amp;rdquo; 等のように有限の量のデータを切り出して処理する場合、これはバッチ処理となる。 ストリーム処理とバッチ処理の違いは扱うデータが無限なのか有限なのかということだ。 この後触れていくが、この終わりのないデータを継続的に処理し続けるというところにバッチ処理にはない難しさがある。
+なぜストリーム処理なのか なぜストリーム処理なのか。 ひとえに逐次的な入力データに対する迅速なフィードバックが求められているからと言えるだろう。 迅速なフィードバックがビジネス上のメリットとなることは自明だ。
+ SNS の配信 カーシェアリングにおける配車や料金設定 クレジットカードや広告クリックなどの不正検知  もしこれらの application が例えば hourly のバッチ処理で実装されていたらどうだろうか。 まあ待っていられない。
+一般的なストリーム処理の構成 モダンな…と言っていいのかわからないが、ストリーム処理を行うための一般的なシステムは次の3つの要素で構成される。
+ producer broker consumer  producer は最初にレコードを生成する、ストリームデータの発生源となるものである。 例えばログを生成する web application であったり、何らかのセンサーを持つ IoT 機器であったりがこれに該当する。 producer は絶え間なくログを生成し、それを broker へと送る。</description>
+    </item>
+    
+    <item>
+      <title>Apache Flink の Temporary Table Function を用いた stream data と static data の join</title>
+      <link>https://soonraah.github.io/posts/flink-join-by-temporal-table-function/</link>
+      <pubDate>Sun, 16 Aug 2020 00:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/flink-join-by-temporal-table-function/</guid>
+      <description>前回の記事 では Apache Flink における stream data と static data の join において、DataStream API における broadcast state pattern を使う方法を示した。 今回の記事では Table API の temporal table function を用いた実験を行う。
+Table API Table API は名前のとおりで class Table を中心として SQL-like な DSL により処理を記述するという、DataStream API より high-level な API となっている。 これらの関係は Apaceh Spark の RDD と DataFrame (DataSet) の関係に似ている。 SQL-like な API で記述された処理が実行時に最適化されて low-level API の処理に翻訳されるところも同じだ。
+RDB の table の概念を元にしているものと考えられるが、本質的に table の概念とストリーム処理はあまりマッチしないと思う。 table はある時点のデータセット全体を表すのに対し、ストリーム処理ではやってくるレコードを逐次的に処理したい。 ここを合わせているため、ストリーム処理における Table API による処理の挙動の理解には注意が必要だ。 Streaming Concepts 以下のドキュメントを確認しておきたい。</description>
+    </item>
+    
+    <item>
+      <title>Apache Flink の Broadcast State Pattern を用いた stream data と static data の join</title>
+      <link>https://soonraah.github.io/posts/flink-join-by-broadcast-state-pattern/</link>
+      <pubDate>Thu, 06 Aug 2020 22:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/flink-join-by-broadcast-state-pattern/</guid>
+      <description>star schema における fact table と dimension table の join のようなことを Apache Flink におけるストリーム処理で行いたい。 stream data と static data の join ということになる。 ただし dimension table 側も更新されるため、完全な static というわけではない。
+このポストでは Flink v1.11 を前提とした。
+join の方法 今回は DataStream API でこれを実現することを考える。 Flink のドキュメントを読むと broadcast state pattern でできそうだ。
+ The Broadcast State Pattern  やり方としては次のようになる。
+ static data のファイルを FileProcessingMode.PROCESS_CONTINUOUSLY で読み込み DataStream 化 1 を broadcast() stream data の DataStream と 2 を connect()  static data を PROCESS_CONTINUOUSLY で読むのは変更を得るため。 PROCESS_ONCE で読んでしまうとストリーム処理の開始時に1回読むだけになり、dimension table の変更を得られない。 このあたりの仕様については Data Sources を参照。</description>
+    </item>
+    
+  </channel>
+</rss>

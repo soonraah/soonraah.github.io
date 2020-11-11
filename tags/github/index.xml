@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GitHub on Froglog</title>
+    <link>https://soonraah.github.io/tags/github/</link>
+    <description>Recent content in GitHub on Froglog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 03 Aug 2020 22:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/github/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>あまり大きな Pull Request を作ってほしくない</title>
+      <link>https://soonraah.github.io/posts/no-more-huge-pull-request/</link>
+      <pubDate>Mon, 03 Aug 2020 22:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/no-more-huge-pull-request/</guid>
+      <description>GitHub Flow ベースの開発においてはあまり大きな pull request を作ってほしくないという話。 なんというか今更わざわざ言わなくてもいいんだけど…
+仕事で何度か大きな pull request が投げられているのを見てしまったので、それはあまりよくないよというのを自分でも指摘しやすくするためにまとめておく。
+Reference 最初に参考資料を挙げておく。
+ 100 Duck-Sized Pull Requests 「巨大プルリク1件vs細かいプルリク100件」問題を考える（翻訳） Optimal pull request size  これらを読めば特に私から言うこともないのだが… これらに書いてあるとおりだが補足しておく。
+Pull Request を小分けにしたときのメリット module を適切に切り出すモチベーションが得られる 次のような話がある。
+ 共通化という考え方はアンチパターンを生み出すだけ説  これを理由に module を分けるべきところが分けられず、いろんなことができてしまうベタッと大きな module が生まれるのを見た。
+もちろんよく考えられていない共通化は駄目だが、上記ポストでは一方で
+ ただし共通化という名の下におこなわれるのは「同じロジックを持つコードをまとめる」行為であって、抽象化のようにそのコード単位の意味を捉える作業はその範疇にない。抽象化というのはロジックを意味単位ごとにひとくくりにしていく行為で、これがどういうことなのかは次以降で述べていく。&amp;ndash; 共通化という考え方はアンチパターンを生み出すだけ説 - タオルケット体操 と述べており抽象化、つまりコードの意味を考慮した上で適切な単位でまとめておくことは否定していない。
+pull request を小さく分けるという行為のためには module や機能を適度なまとまりで切り分けること、つまり抽象化を考えていくことが必要となる。 したがって何でもできてしまう大きな module が生まれるのを防ぐ方向に働く。 (もちろんここで駄目な共通化がなされてしまうこともあるだろう)
+リリースまでの期間が短く済む 前述の参考資料においても pull request が大きいと
+ Developers would put off reviews until they had time/energy and the development process would come to a halt.</description>
+    </item>
+    
+  </channel>
+</rss>

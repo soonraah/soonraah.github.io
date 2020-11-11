@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>transaction on Froglog</title>
+    <link>https://soonraah.github.io/tags/transaction/</link>
+    <description>Recent content in transaction on Froglog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 19 Jul 2020 22:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/transaction/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spark DataFrame クエリの弱い分離レベル</title>
+      <link>https://soonraah.github.io/posts/weak_isolation_level_of_dataframe/</link>
+      <pubDate>Sun, 19 Jul 2020 22:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/weak_isolation_level_of_dataframe/</guid>
+      <description>Spark バッチ処理の問題を調べていたら分離レベルという概念にたどりついた。 分離レベルについて調べたので、Spark の問題の内容と絡めて記しておく。 考えてみれば当たり前でたいした話ではない。
+分離レベルとは トランザクションの挙動についての暗黙の理解 アドホックな分析クエリやプロダクションコード中のクエリを書くとき、その単一のクエリのトランザクションにおいて「同時に実行されている別のクエリの commit 前の状態や commit 結果に影響され、このクエリの結果がおかしくなるかもしれない」ということは通常考えない。 トランザクションはデータベースのある時点の状態に対して正しく処理される、というほぼ無意識の理解をおそらくほとんどの開発者が持っている。
+多くの場合この理解は間違っていない。 それはなぜかというと DB 等のデータ処理フレームワークがある強さの分離レベルを提供しているからである。
+いろいろな分離レベル ACID 特性のうちの1つ、分離性 (Isolation) の程度を表すのが分離レベル。
+ トランザクション中に行われる操作の過程が他の操作から隠蔽されることを指し、日本語では分離性、独立性または隔離性ともいう。より形式的には、独立性とはトランザクション履歴が直列化されていることと言える。この性質と性能はトレードオフの関係にあるため、一般的にはこの性質の一部を緩和して実装される場合が多い。 &amp;ndash; Wikipedia ACID (コンピュータ科学) 分離レベルには名前のついたものがいくつかあり、分離性の保証の強さが異なる。 具体的にはトランザクションの並行性の問題への対応力が異なる。 名著「データ指向アプリケーションデザイン」の第7章で分離レベルについて詳しく述べられているので、以下ではそちらからの引用。 分離レベルを弱い順に並べる。
+  read uncommitted
+ このレベルではダーティライトは生じませんが、ダーティリードは妨げられません。
+   read committed
+  データベースからの読み取りを行った際に見えるデータは、コミットされたもののみであること（ダーティリードは生じない）。 データベースへの書き込みを行う場合、上書きするのはコミットされたデータのみであること（ダーティライトは生じない）。     snapshot isolation
+ スナップショット分離の考え方は、それぞれのトランザクションがデータベースの一貫性のあるスナップショットから読み取りを行うというものです。すなわち、トランザクションが読み取るデータは、すべてそのトランザクションの開始時点のデータベースにコミット済みのものだけということです。
+   serializability
+ この分離レベルはトランザクションが並行して実行されていても、最終的な答えはそれぞれが1つずつ順番に、並行ではなく実行された場合と同じになることを保証します。
+   日本語で「分離レベル」を検索すると snapshot isolation の代わりに repeatable read が出てくる事が多い。 しかし repeatable read の名前は実装によって意味が違っていたりして扱いが難しいらしい。</description>
+    </item>
+    
+  </channel>
+</rss>

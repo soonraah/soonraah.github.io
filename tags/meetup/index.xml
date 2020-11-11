@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>meetup on Froglog</title>
+    <link>https://soonraah.github.io/tags/meetup/</link>
+    <description>Recent content in meetup on Froglog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 01 Aug 2020 15:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/meetup/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>勉強会メモ: Spark Meetup Tokyo #3 Online</title>
+      <link>https://soonraah.github.io/posts/spark-meetup-tokyo-3/</link>
+      <pubDate>Sat, 01 Aug 2020 15:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/spark-meetup-tokyo-3/</guid>
+      <description>2020-07-31 にオンライン開催された Spark Meetup Tokyo #3 Online に参加した。 感想などメモしておく。
+全体感 トピックとしては主に
+ Spark 3.0 Spark + AI Summit 2020 Spark 周辺要素  といったところだろうか。 最近のコミュニティの動向や関心を日本語で聞くことができてよかった。
+運営 &amp;amp; スピーカーの皆様、ありがとうございます。
+発表 発表資料は公開されたら追加していく。
+SPARK+AI Summit 2020 イベント概要 スピーカー: @tokyodataguy さん
+ Summit は金融業界の参加者が増えているらしい Spark で最も使われている言語は Python とのことだったが、Databricks の notebook サービスの話だった  プロダクションコードではまた違うのだろう   Spark 3.0 の update をざっくりと Spark 周辺要素の話をざっくりと  Koalas Delta Lake Redash MLflow    Introducing Koalas 1.0   Introducing Koalas 1.</description>
+    </item>
+    
+  </channel>
+</rss>
