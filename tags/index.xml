@@ -5,7 +5,16 @@
     <link>https://soonraah.github.io/tags/</link>
     <description>Recent content in Tags on Froglog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 07 Nov 2020 16:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 12 Nov 2020 09:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>machine learning</title>
+      <link>https://soonraah.github.io/tags/machine-learning/</link>
+      <pubDate>Thu, 12 Nov 2020 09:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Apache Flink</title>
       <link>https://soonraah.github.io/tags/apache-flink/</link>
