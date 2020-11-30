@@ -3,8 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://soonraah.github.io/tags/apache-flink/</loc>
+    <lastmod>2020-12-01T00:30:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://soonraah.github.io/posts/read-csv-by-flink-datastream-api/</loc>
+    <lastmod>2020-12-01T00:30:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://soonraah.github.io/</loc>
-    <lastmod>2020-11-12T09:30:00+09:00</lastmod>
+    <lastmod>2020-12-01T00:30:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://soonraah.github.io/posts/</loc>
+    <lastmod>2020-12-01T00:30:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://soonraah.github.io/tags/stream-processing/</loc>
+    <lastmod>2020-12-01T00:30:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://soonraah.github.io/tags/</loc>
+    <lastmod>2020-12-01T00:30:00+09:00</lastmod>
   </url>
   
   <url>
@@ -13,28 +38,8 @@
   </url>
   
   <url>
-    <loc>https://soonraah.github.io/posts/</loc>
-    <lastmod>2020-11-12T09:30:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://soonraah.github.io/tags/</loc>
-    <lastmod>2020-11-12T09:30:00+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://soonraah.github.io/posts/ml-accuracy-profit-ethic-issue/</loc>
     <lastmod>2020-11-12T09:30:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://soonraah.github.io/tags/apache-flink/</loc>
-    <lastmod>2020-11-07T16:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://soonraah.github.io/tags/stream-processing/</loc>
-    <lastmod>2020-11-07T16:00:00+09:00</lastmod>
   </url>
   
   <url>

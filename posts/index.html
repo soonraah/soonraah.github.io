@@ -1,40 +1,100 @@
-<!doctype html><html lang=ja dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><title>Posts - Froglog</title><meta name=keywords content><meta name=description content="blog"><meta name=author content="soonraah"><link rel=canonical href=https://soonraah.github.io/posts/><meta name=google-site-verification content="XYZabc"><link href=https://soonraah.github.io/assets/css/stylesheet.min.595f5ecef354f9eb94e43d831cd360dcf8b7727542e731c55a7875c9e94a9577.css integrity="sha256-WV9ezvNU+euU5D2DHNNg3Pi3cnVC5zHFWnh1yelKlXc=" rel="preload stylesheet" as=style><link rel=manifest href=https://soonraah.github.io/site.webmanifest><link rel=icon href=https://soonraah.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://soonraah.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://soonraah.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://soonraah.github.io/apple-touch-icon.png><link rel=mask-icon href=https://soonraah.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.78.1"><link rel=alternate type=application/rss+xml href=https://soonraah.github.io/posts/index.xml><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-73329599-2','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script><meta property="og:title" content="Posts"><meta property="og:description" content="blog"><meta property="og:type" content="website"><meta property="og:url" content="https://soonraah.github.io/posts/"><meta property="og:image" content="https://soonraah.github.io/47"><meta property="og:updated_time" content="2020-11-12T09:30:00+09:00"><meta property="og:site_name" content="Froglog"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://soonraah.github.io/47"><meta name=twitter:title content="Posts"><meta name=twitter:description content="blog"></head><body class="list dark" id=top><script>if(localStorage.getItem("pref-theme")==="dark"){document.body.classList.add('dark');}else if(localStorage.getItem("pref-theme")==="light"){document.body.classList.remove('dark')}else{document.body.classList.add('dark');}</script><noscript><style type=text/css>.theme-toggle,.top-link{display:none}</style></noscript><header class=header><nav class=nav><div class=logo><a href=https://soonraah.github.io accesskey=h><img src=/image/brand/favicon.png alt=logo aria-label=logo height=35>Home</a>
-<span class=logo-switches><span class=theme-toggle><a id=theme-toggle accesskey=t><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></a></span></span></div><ul class=menu id=menu onscroll=menu_on_scroll()><li><a href=https://soonraah.github.io/about/><span>About</span></a></li><li><a href=https://soonraah.github.io/archives/><span>Archives</span></a></li><li><a href=https://soonraah.github.io/tags/><span>Tags</span></a></li></ul></nav></header><main class=main><header class=page-header><h1>Posts</h1></header><article class=post-entry><figure class=entry-cover><img src=https://soonraah.github.io/image/photo/sharon-mccutcheon-8lnbXtxFGZw-unsplash.jpg alt=Profit></figure><header class=entry-header><h2>機械学習の精度と利益と倫理とイシューと</h2></header><section class=entry-content><p>ちょっと昔話 かつて参画したプロジェクトの話。 そのプロジェクトでは他社から受注した受託開発として機械学習系のシステムを開発していた。 当時としては新しいフレームワークを使い、かなり頑張ってなんとか納期内で完成させた。
-その中の1つの機能として A/B テストができるようにしていた。 パラメータチューニングによりパフォーマンスを改善することを想定していた。
-しかし結局その機能は使われることがなかった。 なぜか。 A/B テストを実施するためのクライアントの追加の予算がつかなかったためである。 受託なのでなおさらなのだが、売上にならなければ工数をかけるこはできない。 工数を使ってパフォーマンス改善することはできなかった。 手はあるのに。
-機械学習の精度は必ずしも利益に結びつかない この昔話で何が言いたいかというと、機械学習の精度改善は必ずしも利益に結びつかないということである。 そのことを示しているとても素晴らしい資料がこちら。
-機械学習の精度と売上の関係 from Tokoroten Nakayama 前述の昔話の例はこの資料で言うところの③ロジスティック型 (=外注) となる。 いったん売上が立った後、追加予算がつかなかったので精度改善では売上は増えなかったのだ。
-倫理感による精度改善 受託開発を主としている組織であれば工数にはシビアなので、売上の立たない工数をかけることはあまりないだろう。 (よっぽどの炎上鎮火とかでなければ)
-しかし自社で製品やサービスを作って提供しているような組織の場合、利益にならない精度改善をしているのを時折見かける。 なぜそのようなことが起こるかと言うと多くの場合はデータサイエンティスト／機械学習エンジニアとしての倫理感からなのではないだろうか。
-「◯◯予測という機能なのでできるだけ良い予測精度を示すべきだ」 「ユーザには気づかれない部分だが精度が悪いので改善したい」
-倫理感や興味が先行してしまっているのだ。 しかしその精度を上げた先に利益があるとは限らない。 機械学習で職を得ている人間は自分の仕事を機械学習の精度を上げるゲームだとみなす傾向があるように思う。
-例えばインターネット広告の CTR 予測。 これは予測精度が高いほど利益は改善するし、広告主に価値も提供できる。 精度改善に倫理と利益が伴っている、とても機械学習がハマる例だと思う。 本来はこれらを兼ね備えているのが良い適用先であるはずだ。
+<!doctype html><html lang=ja dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><title>Posts - Froglog</title><meta name=keywords content><meta name=description content="blog"><meta name=author content="soonraah"><link rel=canonical href=https://soonraah.github.io/posts/><meta name=google-site-verification content="XYZabc"><link href=https://soonraah.github.io/assets/css/stylesheet.min.595f5ecef354f9eb94e43d831cd360dcf8b7727542e731c55a7875c9e94a9577.css integrity="sha256-WV9ezvNU+euU5D2DHNNg3Pi3cnVC5zHFWnh1yelKlXc=" rel="preload stylesheet" as=style><link rel=manifest href=https://soonraah.github.io/site.webmanifest><link rel=icon href=https://soonraah.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://soonraah.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://soonraah.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://soonraah.github.io/apple-touch-icon.png><link rel=mask-icon href=https://soonraah.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.78.1"><link rel=alternate type=application/rss+xml href=https://soonraah.github.io/posts/index.xml><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-73329599-2','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script><meta property="og:title" content="Posts"><meta property="og:description" content="blog"><meta property="og:type" content="website"><meta property="og:url" content="https://soonraah.github.io/posts/"><meta property="og:image" content="https://soonraah.github.io/47"><meta property="og:updated_time" content="2020-12-01T00:30:00+09:00"><meta property="og:site_name" content="Froglog"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://soonraah.github.io/47"><meta name=twitter:title content="Posts"><meta name=twitter:description content="blog"></head><body class="list dark" id=top><script>if(localStorage.getItem("pref-theme")==="dark"){document.body.classList.add('dark');}else if(localStorage.getItem("pref-theme")==="light"){document.body.classList.remove('dark')}else{document.body.classList.add('dark');}</script><noscript><style type=text/css>.theme-toggle,.top-link{display:none}</style></noscript><header class=header><nav class=nav><div class=logo><a href=https://soonraah.github.io accesskey=h><img src=/image/brand/favicon.png alt=logo aria-label=logo height=35>Home</a>
+<span class=logo-switches><span class=theme-toggle><a id=theme-toggle accesskey=t><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></a></span></span></div><ul class=menu id=menu onscroll=menu_on_scroll()><li><a href=https://soonraah.github.io/about/><span>About</span></a></li><li><a href=https://soonraah.github.io/archives/><span>Archives</span></a></li><li><a href=https://soonraah.github.io/tags/><span>Tags</span></a></li></ul></nav></header><main class=main><header class=page-header><h1>Posts</h1></header><article class=post-entry><figure class=entry-cover><img src=https://soonraah.github.io/image/photo/mika-baumeister-Wpnoqo2plFA-unsplash.jpg alt=CSV></figure><header class=entry-header><h2>Apache Flink の DataStream API 利用時の CSV ファイル読み込み</h2></header><section class=entry-content><p>ストリーム処理における CSV ファイルの読み込み Apache Flink は unbounded なストリームデータを処理するためのフレームワークだ。
+しかし現実的な application を開発する場合、ストリームデータに加えて static なファイルや DB 等を読み込みたいこともある。
+star schema における dimension table 的な情報をストリームに結合したい場合 等が考えられる。
+このポストでは Flink で DataStream API ベースでの実装において CSV ファイルを読むことを考える。
+Flink は現時点の stable である v1.11 を想定。
+CSV ファイルを読む方法 DataStream API ベースの実装で CSV ファイルを読むには StreamExecutionEnvironment のメソッドである readFile() を使う。
+overload された同名のメソッドがいくつか存在するが、次の2つの引数が特に重要だろう。
+まず1つめは FileInputFormat&lt;OUT> inputFormat であり、こちらは data stream の生成に用いる入力フォーマットを指定する。
+おそらく最も一般的なのが TextInputFormat だと思われる。
+もちろん単なる text として CSV ファイルを読み込み、後続の処理で各レコードを parse することも可能だが CSV 用の入力フォーマットがいくつか用意されているようだ。
+PojoCsvInputFormat RowCsvInputFormat TupleCsvInputFormat なんとなく名前でわかると思うが、それぞれ readFile() の結果として返される DataStreamSource が内包する型が異なる。...</p></section><footer class=entry-footer>December 1, 2020&nbsp;·&nbsp;soonraah</footer><a class=entry-link aria-label="post link to Apache Flink の DataStream API 利用時の CSV ファイル読み込み" href=https://soonraah.github.io/posts/read-csv-by-flink-datastream-api/></a></article><article class=post-entry><figure class=entry-cover><img src=https://soonraah.github.io/image/photo/sharon-mccutcheon-8lnbXtxFGZw-unsplash.jpg alt=Profit></figure><header class=entry-header><h2>機械学習の精度と利益と倫理とイシューと</h2></header><section class=entry-content><p>ちょっと昔話 かつて参画したプロジェクトの話。
+そのプロジェクトでは他社から受注した受託開発として機械学習系のシステムを開発していた。
+当時としては新しいフレームワークを使い、かなり頑張ってなんとか納期内で完成させた。
+その中の1つの機能として A/B テストができるようにしていた。
+パラメータチューニングによりパフォーマンスを改善することを想定していた。
+しかし結局その機能は使われることがなかった。
+なぜか。
+A/B テストを実施するためのクライアントの追加の予算がつかなかったためである。
+受託なのでなおさらなのだが、売上にならなければ工数をかけるこはできない。
+工数を使ってパフォーマンス改善することはできなかった。
+手はあるのに。
+機械学習の精度は必ずしも利益に結びつかない この昔話で何が言いたいかというと、機械学習の精度改善は必ずしも利益に結びつかないということである。
+そのことを示しているとても素晴らしい資料がこちら。
+機械学習の精度と売上の関係 from Tokoroten Nakayama 前述の昔話の例はこの資料で言うところの③ロジスティック型 (=外注) となる。
+いったん売上が立った後、追加予算がつかなかったので精度改善では売上は増えなかったのだ。
+倫理感による精度改善 受託開発を主としている組織であれば工数にはシビアなので、売上の立たない工数をかけることはあまりないだろう。
+(よっぽどの炎上鎮火とかでなければ)
+しかし自社で製品やサービスを作って提供しているような組織の場合、利益にならない精度改善をしているのを時折見かける。
+なぜそのようなことが起こるかと言うと多くの場合はデータサイエンティスト／機械学習エンジニアとしての倫理感からなのではないだろうか。
+「◯◯予測という機能なのでできるだけ良い予測精度を示すべきだ」
+「ユーザには気づかれない部分だが精度が悪いので改善したい」
+倫理感や興味が先行してしまっているのだ。
+しかしその精度を上げた先に利益があるとは限らない。
+機械学習で職を得ている人間は自分の仕事を機械学習の精度を上げるゲームだとみなす傾向があるように思う。
+例えばインターネット広告の CTR 予測。
+これは予測精度が高いほど利益は改善するし、広告主に価値も提供できる。
+精度改善に倫理と利益が伴っている、とても機械学習がハマる例だと思う。
+本来はこれらを兼ね備えているのが良い適用先であるはずだ。
 イシューは行き渡っているのか 利益に結びつかない、または間接的にしか結びつかないような精度改善をやることが許されるというのは組織に余裕があるということで悪いことではないのかもしれない。
-しかし単によいイシューの設定ができてないだけという可能性もある。 自社で製品やサービスを作って提供しているような組織において、単純なロジスティック回帰でコアなところのビジネスを大きく加速させることができた時期を過ぎると機械学習で解くのに適したよい問題を恒常的に見つけ出すのは実は難しいのではないだろうかと最近考えるようになった。 ビジネスの領域拡大よりも既存領域への機械学習の適用の方が速いということは十分ありうる。 もちろんチームの規模にもよる。
-機械学習チームの人的リソースの規模に対して機械学習で解くべきよいイシューを見つけ出せているのか、ということだ。 少し前にちょっと話題になったこちらの件もイシューが大事だと言っている。
-全ての機械学習の論文は新しいアルゴリズムを提案しているのですか？ - Quora キャリアの行く末 事業会社においてビジネスの領域拡大よりも既存領域への機械学習の適用の方が速く、よいイシューを提供しにくいということがよく起こるのであれば、機械学習チームのリソースは余剰気味になりやすいということになる。 これが続くと今後機械学習しかやらない人材の市場価値は下がっていくのかもしれない。
-もしくは自社で製品やサービスを持っている組織ではなく、受託開発やコンサルが主戦場になっていくのかもしれない。 何にせよ特定のプロダクトに commit したいのであれば機械学習エンジニアは機械学習以外のスキルも磨いていく必要があるように思う。
-おわりに 見える範囲にいる人が利益にならない精度改善をしているのを横目で見てこのようなことを考えていた。 難しいけどできるだけ金を生んでいきたい。...</p></section><footer class=entry-footer>November 12, 2020&nbsp;·&nbsp;soonraah</footer><a class=entry-link aria-label="post link to 機械学習の精度と利益と倫理とイシューと" href=https://soonraah.github.io/posts/ml-accuracy-profit-ethic-issue/></a></article><article class=post-entry><figure class=entry-cover><img src=https://soonraah.github.io/image/photo/nathan-anderson-8X1-pcDF8l0-unsplash.jpg alt=Stream></figure><header class=entry-header><h2>ストリーム処理システムに求められる機能性、および Apache Flink におけるその対応</h2></header><section class=entry-content><p>はじめに このポストではストリーム処理の survay 論文の話題に対して Apache Flink における例を挙げて紹介する。
+しかし単によいイシューの設定ができてないだけという可能性もある。
+自社で製品やサービスを作って提供しているような組織において、単純なロジスティック回帰でコアなところのビジネスを大きく加速させることができた時期を過ぎると機械学習で解くのに適したよい問題を恒常的に見つけ出すのは実は難しいのではないだろうかと最近考えるようになった。
+ビジネスの領域拡大よりも既存領域への機械学習の適用の方が速いということは十分ありうる。
+もちろんチームの規模にもよる。
+機械学習チームの人的リソースの規模に対して機械学習で解くべきよいイシューを見つけ出せているのか、ということだ。
+少し前にちょっと話題になったこちらの件もイシューが大事だと言っている。
+全ての機械学習の論文は新しいアルゴリズムを提案しているのですか？ - Quora キャリアの行く末 事業会社においてビジネスの領域拡大よりも既存領域への機械学習の適用の方が速く、よいイシューを提供しにくいということがよく起こるのであれば、機械学習チームのリソースは余剰気味になりやすいということになる。
+これが続くと今後機械学習しかやらない人材の市場価値は下がっていくのかもしれない。
+もしくは自社で製品やサービスを持っている組織ではなく、受託開発やコンサルが主戦場になっていくのかもしれない。
+何にせよ特定のプロダクトに commit したいのであれば機械学習エンジニアは機械学習以外のスキルも磨いていく必要があるように思う。
+おわりに 見える範囲にいる人が利益にならない精度改善をしているのを横目で見てこのようなことを考えていた。
+難しいけどできるだけ金を生んでいきたい。...</p></section><footer class=entry-footer>November 12, 2020&nbsp;·&nbsp;soonraah</footer><a class=entry-link aria-label="post link to 機械学習の精度と利益と倫理とイシューと" href=https://soonraah.github.io/posts/ml-accuracy-profit-ethic-issue/></a></article><article class=post-entry><figure class=entry-cover><img src=https://soonraah.github.io/image/photo/nathan-anderson-8X1-pcDF8l0-unsplash.jpg alt=Stream></figure><header class=entry-header><h2>ストリーム処理システムに求められる機能性、および Apache Flink におけるその対応</h2></header><section class=entry-content><p>はじめに このポストではストリーム処理の survay 論文の話題に対して Apache Flink における例を挙げて紹介する。
 論文概要 Fragkoulis, M., Carbone, P., Kalavri, V., & Katsifodimos, A. (2020). A Survey on the Evolution of Stream Processing Systems.
-2020年の論文。 過去30年ぐらいのストリーム処理のフレームワークを調査し、その発展を論じている。 ストリーム処理に特徴的に求められるいくつかの機能性 (functionality) についてその実現方法をいくつか挙げ、比較的古いフレームワークと最近のフレームワークでの対比を行っている。
-このポストのスコープ このポストでは前述のストリーム処理システムに求められる機能性とそれがなぜ必要となるかについて簡単にまとめる。 論文ではそこからさらにその実現方法がいくつか挙げられるが、ここでは個人的に興味がある Apache Flink ではどのように対処しているかを見ていく。 ちなみに論文中では Apache Flink はモダンなフレームワークの1つとしてちょいちょい引き合いに出されている。 ここでは Flink v1.11 をターゲットとする。
+2020年の論文。
+過去30年ぐらいのストリーム処理のフレームワークを調査し、その発展を論じている。
+ストリーム処理に特徴的に求められるいくつかの機能性 (functionality) についてその実現方法をいくつか挙げ、比較的古いフレームワークと最近のフレームワークでの対比を行っている。
+このポストのスコープ このポストでは前述のストリーム処理システムに求められる機能性とそれがなぜ必要となるかについて簡単にまとめる。
+論文ではそこからさらにその実現方法がいくつか挙げられるが、ここでは個人的に興味がある Apache Flink ではどのように対処しているかを見ていく。
+ちなみに論文中では Apache Flink はモダンなフレームワークの1つとしてちょいちょい引き合いに出されている。
+ここでは Flink v1.11 をターゲットとする。
 以下では論文で挙げられている機能性に沿って記載していく。
-Out-of-order Data Management Out-of-order ストリーム処理システムにやってくるデータの順序は外的・内的要因により期待される順序になっていないことがある。 外的要因としてよくあるのはネットワークの問題。 データソース (producer) からストリーム処理システムに届くまでのルーティング、負荷など諸々の条件により各レコードごとに転送時間は一定にはならない。 各 operator の処理などストリーム処理システムの内的な要因で順序が乱されることもある。 out-of-order は処理の遅延や正しくない結果の原因となることがある。
-out-of-order を管理するためにストリーム処理システムは処理の進捗を検出する必要がある。 “進捗” とはある時間経過でレコードの処理がどれだけ進んだかというもので、レコードの順序を表す属性 A (ex. event time) により定量化される。 ある期間で処理された最古の A を進捗の尺度とみなすことができる。...</p></section><footer class=entry-footer>November 7, 2020&nbsp;·&nbsp;soonraah</footer><a class=entry-link aria-label="post link to ストリーム処理システムに求められる機能性、および Apache Flink におけるその対応" href=https://soonraah.github.io/posts/functionality-of-streaming-system/></a></article><article class=post-entry><figure class=entry-cover><img src=https://soonraah.github.io/image/photo/jon-flobrant-rB7-LCa_diU-unsplash.jpg alt=Stream></figure><header class=entry-header><h2>バッチ処理おじさんがストリーム処理のシステムを開発するにあたって調べたこと</h2></header><section class=entry-content><p>ほとんどバッチ処理しか書いたことのない者だがストリーム処理のシステムを開発することになった。 それにあたって独学で調べたことなどまとめておく。
-ストリーム処理とは そもそも “ストリーム処理” とは何を指しているのか。 以下の引用が簡潔に示している。
+Out-of-order Data Management Out-of-order ストリーム処理システムにやってくるデータの順序は外的・内的要因により期待される順序になっていないことがある。
+外的要因としてよくあるのはネットワークの問題。
+データソース (producer) からストリーム処理システムに届くまでのルーティング、負荷など諸々の条件により各レコードごとに転送時間は一定にはならない。
+各 operator の処理などストリーム処理システムの内的な要因で順序が乱されることもある。
+out-of-order は処理の遅延や正しくない結果の原因となることがある。
+out-of-order を管理するためにストリーム処理システムは処理の進捗を検出する必要がある。
+“進捗” とはある時間経過でレコードの処理がどれだけ進んだかというもので、レコードの順序を表す属性 A (ex. event time) により定量化される。...</p></section><footer class=entry-footer>November 7, 2020&nbsp;·&nbsp;soonraah</footer><a class=entry-link aria-label="post link to ストリーム処理システムに求められる機能性、および Apache Flink におけるその対応" href=https://soonraah.github.io/posts/functionality-of-streaming-system/></a></article><article class=post-entry><figure class=entry-cover><img src=https://soonraah.github.io/image/photo/jon-flobrant-rB7-LCa_diU-unsplash.jpg alt=Stream></figure><header class=entry-header><h2>バッチ処理おじさんがストリーム処理のシステムを開発するにあたって調べたこと</h2></header><section class=entry-content><p>ほとんどバッチ処理しか書いたことのない者だがストリーム処理のシステムを開発することになった。
+それにあたって独学で調べたことなどまとめておく。
+ストリーム処理とは そもそも “ストリーム処理” とは何を指しているのか。
+以下の引用が簡潔に示している。
 a type of data processing engine that is designed with infinite data sets in mind. Nothing more.– Streaming 101: The world beyond batch こちらは “streaming system” について述べたものだが、つまり終わりのないデータを扱うのがストリーム処理ということである。
-例えば web サービスから生まれ続けるユーザ行動ログを逐次的に処理するというのがストリーム処理。 web サービスが終了しないかぎりはユーザ行動ログの生成には終わりがない。
-これに対して “1日分のユーザ行動ログ” 等のように有限の量のデータを切り出して処理する場合、これはバッチ処理となる。 ストリーム処理とバッチ処理の違いは扱うデータが無限なのか有限なのかということだ。 この後触れていくが、この終わりのないデータを継続的に処理し続けるというところにバッチ処理にはない難しさがある。
-なぜストリーム処理なのか なぜストリーム処理なのか。 ひとえに逐次的な入力データに対する迅速なフィードバックが求められているからと言えるだろう。 迅速なフィードバックがビジネス上のメリットとなることは自明だ。
-SNS の配信 カーシェアリングにおける配車や料金設定 クレジットカードや広告クリックなどの不正検知 もしこれらの application が例えば hourly のバッチ処理で実装されていたらどうだろうか。 まあ待っていられない。
+例えば web サービスから生まれ続けるユーザ行動ログを逐次的に処理するというのがストリーム処理。
+web サービスが終了しないかぎりはユーザ行動ログの生成には終わりがない。
+これに対して “1日分のユーザ行動ログ” 等のように有限の量のデータを切り出して処理する場合、これはバッチ処理となる。
+ストリーム処理とバッチ処理の違いは扱うデータが無限なのか有限なのかということだ。
+この後触れていくが、この終わりのないデータを継続的に処理し続けるというところにバッチ処理にはない難しさがある。
+なぜストリーム処理なのか なぜストリーム処理なのか。
+ひとえに逐次的な入力データに対する迅速なフィードバックが求められているからと言えるだろう。
+迅速なフィードバックがビジネス上のメリットとなることは自明だ。
+SNS の配信 カーシェアリングにおける配車や料金設定 クレジットカードや広告クリックなどの不正検知 もしこれらの application が例えば hourly のバッチ処理で実装されていたらどうだろうか。
+まあ待っていられない。
 一般的なストリーム処理の構成 モダンな…と言っていいのかわからないが、ストリーム処理を行うための一般的なシステムは次の3つの要素で構成される。
-producer broker consumer producer は最初にレコードを生成する、ストリームデータの発生源となるものである。 例えばログを生成する web application であったり、何らかのセンサーを持つ IoT 機器であったりがこれに該当する。 producer は絶え間なくログを生成し、それを broker へと送る。...</p></section><footer class=entry-footer>September 6, 2020&nbsp;·&nbsp;soonraah</footer><a class=entry-link aria-label="post link to バッチ処理おじさんがストリーム処理のシステムを開発するにあたって調べたこと" href=https://soonraah.github.io/posts/study-streaming-system/></a></article><article class=post-entry><figure class=entry-cover><img src=https://soonraah.github.io/image/photo/jason-dent-JVD3XPqjLaQ-unsplash.jpg alt="A/B Testing"></figure><header class=entry-header><h2>A/B テストの運用が重くてつらいという話</h2></header><section class=entry-content><p>前提 ここでは web システムで使われている機械学習のモデルやアルゴリズムを改善するための online の A/B テストを考える。 具体的に述べると web 広告における CTR 予測や EC サイトのレコメンデーション等が対象である。 よくあるやつ。
-web システムにおいて online の A/B テストは KPI 改善の根幹でありとても重要だ。 それが重くなるとつらい、という話。 ここで「重い」と言っているのは計算資源のことではなく、A/B テストを実施する担当者の運用コストについて。
-A/B テストの運用が重い場合のデメリット デメリット 1. KPI 改善が遅くなる デメリットと言えばこれが一番大きい。 単純に A/B テストを1回まわすのに時間がかかってしまうし、それがゆえに online の A/B テストに入るまでの offline のテストが厚くなりここでも時間がかかってしまう。 KPI 改善に時間がかかるというのはつまり売上や利益を大きくするのに時間がかかってしまうということである。
-デメリット 2. KPI 改善における offline テストの比重が大きくなる 前述のとおりだが online の A/B テストが重いとそこで失敗できなくなり、結果としてその前段の offline のテストを厚くするということになる。 offline のテストが厚いことの何が問題だろうか。
-ここで前提としている CTR 予測やレコメンデーションのようなタスクの場合、offline のデータは既存のモデルやアルゴリズムの影響を受けることになる。 例えばレコメンデーションの場合を考えると、新しいモデルを offline で評価するための実験データの正例 (コンテンツの閲覧等) は既存モデルによって生み出される。 既存モデルが「このコンテンツがいいよ」といってユーザに出したリスト、その中からコンテンツの閲覧が行われ正例となるからだ。 このような状況下での offline テストにおいては既存モデルと近い好みを持ったモデルのスコアが高くなる傾向がある。...</p></section><footer class=entry-footer>August 23, 2020&nbsp;·&nbsp;soonraah</footer><a class=entry-link aria-label="post link to A/B テストの運用が重くてつらいという話" href=https://soonraah.github.io/posts/heavy-ab-testing-operation/></a></article><article class=post-entry><figure class=entry-cover><img src=https://soonraah.github.io/image/logo/flink_squirrel_color_logo.png alt="Apache Flink"></figure><header class=entry-header><h2>Apache Flink の Temporary Table Function を用いた stream data と static data の join</h2></header><section class=entry-content><p>前回の記事 では Apache Flink における stream data と static data の join において、DataStream API における broadcast state pattern を使う方法を示した。 今回の記事では Table API の temporal table function を用いた実験を行う。
-Table API Table API は名前のとおりで class Table を中心として SQL-like な DSL により処理を記述するという、DataStream API より high-level な API となっている。 これらの関係は Apaceh Spark の RDD と DataFrame (DataSet) の関係に似ている。 SQL-like な API で記述された処理が実行時に最適化されて low-level API の処理に翻訳されるところも同じだ。
-RDB の table の概念を元にしているものと考えられるが、本質的に table の概念とストリーム処理はあまりマッチしないと思う。 table はある時点のデータセット全体を表すのに対し、ストリーム処理ではやってくるレコードを逐次的に処理したい。 ここを合わせているため、ストリーム処理における Table API による処理の挙動の理解には注意が必要だ。 Streaming Concepts 以下のドキュメントを確認しておきたい。...</p></section><footer class=entry-footer>August 16, 2020&nbsp;·&nbsp;soonraah</footer><a class=entry-link aria-label="post link to Apache Flink の Temporary Table Function を用いた stream data と static data の join" href=https://soonraah.github.io/posts/flink-join-by-temporal-table-function/></a></article><footer class=page-footer><nav class=pagination><a class=next href=/posts/page/2/>次のページ »</a></nav></footer></main><footer class=footer><span>&copy; 2020 <a href=https://soonraah.github.io>Froglog</a></span>
+producer broker consumer producer は最初にレコードを生成する、ストリームデータの発生源となるものである。...</p></section><footer class=entry-footer>September 6, 2020&nbsp;·&nbsp;soonraah</footer><a class=entry-link aria-label="post link to バッチ処理おじさんがストリーム処理のシステムを開発するにあたって調べたこと" href=https://soonraah.github.io/posts/study-streaming-system/></a></article><article class=post-entry><figure class=entry-cover><img src=https://soonraah.github.io/image/photo/jason-dent-JVD3XPqjLaQ-unsplash.jpg alt="A/B Testing"></figure><header class=entry-header><h2>A/B テストの運用が重くてつらいという話</h2></header><section class=entry-content><p>前提 ここでは web システムで使われている機械学習のモデルやアルゴリズムを改善するための online の A/B テストを考える。
+具体的に述べると web 広告における CTR 予測や EC サイトのレコメンデーション等が対象である。
+よくあるやつ。
+web システムにおいて online の A/B テストは KPI 改善の根幹でありとても重要だ。
+それが重くなるとつらい、という話。
+ここで「重い」と言っているのは計算資源のことではなく、A/B テストを実施する担当者の運用コストについて。
+A/B テストの運用が重い場合のデメリット デメリット 1. KPI 改善が遅くなる デメリットと言えばこれが一番大きい。
+単純に A/B テストを1回まわすのに時間がかかってしまうし、それがゆえに online の A/B テストに入るまでの offline のテストが厚くなりここでも時間がかかってしまう。
+KPI 改善に時間がかかるというのはつまり売上や利益を大きくするのに時間がかかってしまうということである。
+デメリット 2. KPI 改善における offline テストの比重が大きくなる 前述のとおりだが online の A/B テストが重いとそこで失敗できなくなり、結果としてその前段の offline のテストを厚くするということになる。
+offline のテストが厚いことの何が問題だろうか。
+ここで前提としている CTR 予測やレコメンデーションのようなタスクの場合、offline のデータは既存のモデルやアルゴリズムの影響を受けることになる。
+例えばレコメンデーションの場合を考えると、新しいモデルを offline で評価するための実験データの正例 (コンテンツの閲覧等) は既存モデルによって生み出される。
+既存モデルが「このコンテンツがいいよ」といってユーザに出したリスト、その中からコンテンツの閲覧が行われ正例となるからだ。...</p></section><footer class=entry-footer>August 23, 2020&nbsp;·&nbsp;soonraah</footer><a class=entry-link aria-label="post link to A/B テストの運用が重くてつらいという話" href=https://soonraah.github.io/posts/heavy-ab-testing-operation/></a></article><footer class=page-footer><nav class=pagination><a class=next href=/posts/page/2/>次のページ »</a></nav></footer></main><footer class=footer><span>&copy; 2020 <a href=https://soonraah.github.io>Froglog</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>
