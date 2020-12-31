@@ -5,7 +5,23 @@
     <link>https://soonraah.github.io/posts/</link>
     <description>Recent content in Posts on Froglog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 01 Dec 2020 00:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 31 Dec 2020 20:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>いまさらながらのデータレイク</title>
+      <link>https://soonraah.github.io/posts/what-is-a-data-lake/</link>
+      <pubDate>Thu, 31 Dec 2020 20:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/what-is-a-data-lake/</guid>
+      <description>最近よく聞かれるようになった「データレイク」という概念にあまりついていけていなかったため、いまさらながらざっと調べてみた。
+データレイクとは Wikipedia によると最初にこの言葉を使ったのは Pentaho 社の CTO である James Dixon らしい。
+その時の彼のブログ (10年前…) を読むと、既にあったデータマートに対して
+  Only a subset of the attributes are examined, so only pre-determined questions can be answered. The data is aggregated so visibility into the lowest levels is lost
+&amp;ndash;Pentaho, Hadoop, and Data Lakes - James Dixon’s Blog   というような問題意識からデータレイクというコンセプトを提案したようだ。
+最近？のデータレイクについてはベンダー等の記事が参考になる。
+ データレイクとは - AWS データレイクとは？ - talend データレイクとは？データレイクの落とし穴と効果 - Informatica  書籍だと『AWSではじめるデータレイク: クラウドによる統合型データリポジトリ構築入門』がいいだろうか。
+データレイクの概要と AWS が考えている構築・運用がざっとわかる。</description>
+    </item>
+    
     <item>
       <title>Apache Flink の DataStream API 利用時の CSV ファイル読み込み</title>
       <link>https://soonraah.github.io/posts/read-csv-by-flink-datastream-api/</link>

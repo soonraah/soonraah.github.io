@@ -5,7 +5,34 @@
     <link>https://soonraah.github.io/tags/</link>
     <description>Recent content in Tags on Froglog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 01 Dec 2020 00:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 31 Dec 2020 20:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS</title>
+      <link>https://soonraah.github.io/tags/aws/</link>
+      <pubDate>Thu, 31 Dec 2020 20:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/tags/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Lake</title>
+      <link>https://soonraah.github.io/tags/data-lake/</link>
+      <pubDate>Thu, 31 Dec 2020 20:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/tags/data-lake/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GCP</title>
+      <link>https://soonraah.github.io/tags/gcp/</link>
+      <pubDate>Thu, 31 Dec 2020 20:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/tags/gcp/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Apache Flink</title>
       <link>https://soonraah.github.io/tags/apache-flink/</link>
