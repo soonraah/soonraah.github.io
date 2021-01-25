@@ -5,22 +5,49 @@
     <link>https://soonraah.github.io/tags/</link>
     <description>Recent content in Tags on Froglog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 31 Dec 2020 20:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Jan 2021 08:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>AWS</title>
-      <link>https://soonraah.github.io/tags/aws/</link>
-      <pubDate>Thu, 31 Dec 2020 20:00:00 +0900</pubDate>
+      <title>Apache Hudi</title>
+      <link>https://soonraah.github.io/tags/apache-hudi/</link>
+      <pubDate>Tue, 26 Jan 2021 08:00:00 +0900</pubDate>
       
-      <guid>https://soonraah.github.io/tags/aws/</guid>
+      <guid>https://soonraah.github.io/tags/apache-hudi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Apache Kudu</title>
+      <link>https://soonraah.github.io/tags/apache-kudu/</link>
+      <pubDate>Tue, 26 Jan 2021 08:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/tags/apache-kudu/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Data Lake</title>
       <link>https://soonraah.github.io/tags/data-lake/</link>
-      <pubDate>Thu, 31 Dec 2020 20:00:00 +0900</pubDate>
+      <pubDate>Tue, 26 Jan 2021 08:00:00 +0900</pubDate>
       
       <guid>https://soonraah.github.io/tags/data-lake/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Delta Lake</title>
+      <link>https://soonraah.github.io/tags/delta-lake/</link>
+      <pubDate>Tue, 26 Jan 2021 08:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/tags/delta-lake/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>AWS</title>
+      <link>https://soonraah.github.io/tags/aws/</link>
+      <pubDate>Thu, 31 Dec 2020 20:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/tags/aws/</guid>
       <description></description>
     </item>
     

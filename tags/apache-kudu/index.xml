@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Apache Kudu on Froglog</title>
+    <link>https://soonraah.github.io/tags/apache-kudu/</link>
+    <description>Recent content in Apache Kudu on Froglog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 26 Jan 2021 08:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/apache-kudu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>データレイク関連の OSS - Delta Lake, Apache Hudi, Apache Kudu</title>
+      <link>https://soonraah.github.io/posts/oss-for-data-lake/</link>
+      <pubDate>Tue, 26 Jan 2021 08:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/oss-for-data-lake/</guid>
+      <description>はじめに 前回のポストではデータレイクとはどういうものかというのを調べた。
+今回はデータレイクの文脈でどのような OSS が注目されているのかを見ていきたい。
+以下は NTT データさんによる講演資料であり、その中で「近年登場してきた、リアルタイム分析に利用可能なOSSストレージレイヤソフト」というのが3つ挙げられている。
+  大規模データ活用向けストレージレイヤソフトのこれまでとこれから（NTTデータ テクノロジーカンファレンス 2019 講演資料、2019/09/05）  from NTT DATA Technology &amp;amp; Innovation    Delta Lake Apache Hudi Apache Kudu  これらはすべて論理的なストレージレイヤーを担う。
+こちらの講演資料に付け足すようなこともないかもしれないが、このポストではデータレイクという文脈から自分で調べて理解した内容をまとめるということを目的にする。
+当然 Hadoop, Hive, Spark 等もデータレイクの文脈において超重要だが、「データレイク」という言葉がよく聞かれるようになる前から普及していたのでこのポストでは触れないことにする。
+Delta Lake https://delta.io/
+ Delta Lake is an open-source storage layer that brings ACID transactions to Apache Spark™ and big data workloads.
+    Delta Lake
+  Delta Lake は Apache Spark の読み書きに ACID な transaction を提供するストレージレイヤーの OSS である。</description>
+    </item>
+    
+  </channel>
+</rss>
