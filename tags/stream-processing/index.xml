@@ -5,7 +5,28 @@
     <link>https://soonraah.github.io/tags/stream-processing/</link>
     <description>Recent content in stream processing on Froglog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 01 Dec 2020 00:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/stream-processing/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Feb 2021 21:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/stream-processing/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Flink の Backpressure の仕組みについて調べた</title>
+      <link>https://soonraah.github.io/posts/backpressure-for-flink/</link>
+      <pubDate>Sun, 28 Feb 2021 21:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/backpressure-for-flink/</guid>
+      <description>ストリーム処理のフレームワークが備える backpressure という機能がある。
+このポストでは Apache Flink の backpressure について調べたことを記載する。
+Backpressure の目的 backpressure はストリーム処理システムにおける負荷管理の仕組みの一つ。
+一時的な入力データ量の増大に対応する。
+インターネットユーザの行動履歴やセンサーデータなどは常に一定量のデータが流れているわけではなく、単位時間あたりのデータ量は常に変動している。
+一時的にスパイクしてデータ量が増大するようなことも起こりうる。
+複数の operator からなる dataflow graph により構成されるストリーム処理システムにおいては、処理スピードのボトルネックとなる operator が存在する。
+一時的に入力データ量が増えてボトルネックの operator の処理速度を上回ってしまった場合に、データの取りこぼしが発生するのを防ぐのが backpressure の目的となる。
+Backpressure の仕組み Buffer-based ここでは以前のブログでも紹介した、ストリーム処理で必要とされる機能について書かれた Fragkoulis et al. 1 を引用して一般論としての backpressure について述べたい。
+上流／下流の operator をそれぞれ producer, consumer とする。
+producer, consumer (それらの subtask と言ってもいいかも) がそれぞれ異なる物理マシンに deploy されているケースが Figure 12b となる。
+各 subtask は input と output の buffer を持っており、
+ producer は処理結果を output buffer に書き出す TCP 等の物理的な接続でデータを送信 consumer 側の output buffer にデータを格納 consumer がそれを読み込んで処理する  というような流れになる。</description>
+    </item>
+    
     <item>
       <title>Apache Flink の DataStream API 利用時の CSV ファイル読み込み</title>
       <link>https://soonraah.github.io/posts/read-csv-by-flink-datastream-api/</link>
