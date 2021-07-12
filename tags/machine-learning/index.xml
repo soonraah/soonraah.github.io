@@ -5,7 +5,37 @@
     <link>https://soonraah.github.io/tags/machine-learning/</link>
     <description>Recent content in machine learning on Froglog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 12 Nov 2020 09:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 12 Jul 2021 22:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>成熟フェーズの事業におけるデータサイエンティスト</title>
+      <link>https://soonraah.github.io/posts/ds-in-maturation-phase/</link>
+      <pubDate>Mon, 12 Jul 2021 22:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/ds-in-maturation-phase/</guid>
+      <description>ポエムです。
+事業フェーズごとのデータサイエンティストの役割 まずはこちらの発表。
+ 事業立ち上げにデータサイエンティストは必要なのか？ | CA BASE NEXT  とても納得できる内容だった。
+一部抜き出して要約すると
+ 事業の立ち上げフェーズ  データがまだなかったり、整備されていない状態 データサイエンスによる改善がしにくい   事業のグロースフェーズ  大規模なデータが使える状態 データサイエンスによる改善がやりやすい    とのこと。異論はない。
+では事業が立ち上がり、グロースが落ち着いたその後の成熟フェーズではどうなのだろうかという話。
+成熟フェーズにおける改善の難しさ 端的に言うと成熟フェーズでは ML によるさらなる改善は困難になってくると思う。
+ここで言う成熟フェーズにおいてはプロダクトの進化とともに機械学習もそれなりに適用されてきたものとする。
+成熟フェーズということで既存の ML モデル、特にビジネスインパクトが大きい箇所はこれまでいろいろな改善が重ねられてきている。
+そのモデルの精度をさらに上げるとなると、より高度なアルゴリズム、より複雑なデータ等を扱う必要がある。
+しかし技術的によっぽど大きなブレークスルーがない限りは精度の改善幅はグロースフェーズよりもかなり小さいものとなるだろう。
+精度が上がれば上がるほど、次の1%を上げるためのコストは大きくなっていく。
+改善が進むほどに次の改善業務は困難になっていく。
+(蛇足だがある程度大きな組織でなければ高度で state-of-the-art な ML アルゴリズムは運用しない方がいいと考えている)
+では既存ではない新しい適用箇所に ML を使えばいいのではとなるかもしれない。
+しかしやはりそれも難しい。
+ビジネスインパクトが大きく、かつわかりやすい適用箇所にはおそらくすでに ML が適用されているからだ。
+その状態から更によい適用箇所を見つけるには深いドメイン知識が必要になったりする。
+という感じでいわゆるキラキラした「ML でビジネスをドライブ！」みたいなことは成熟フェーズでは難しいことが多いのではないか。
+しかしデータサイエンティストにやることがないわけではない。
+成熟フェーズで何ができるか ぱっと思いつくのは次のような仕事。
+ データドリブンな施策の立案・評価  これは事業フェーズ問わずあるべき ドメイン知識が必要   ML エンジニアリング  パイプラインの改善や属人性をなくすお仕事   ML モデルの受動的なメンテナンス  精度が変化したときの調査 内部的・外部的要因によるデータの変化への対応   やっぱり ML モデルの精度改善  成熟フェーズということでビジネスもスケールしていれば 0.</description>
+    </item>
+    
     <item>
       <title>機械学習の精度と利益と倫理とイシューと</title>
       <link>https://soonraah.github.io/posts/ml-accuracy-profit-ethic-issue/</link>

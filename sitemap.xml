@@ -1,182 +1,113 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
-  <url>
-    <loc>https://soonraah.github.io/tags/apache-flink/</loc>
-    <lastmod>2021-02-28T21:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://soonraah.github.io/posts/backpressure-for-flink/</loc>
-    <lastmod>2021-02-28T21:00:00+09:00</lastmod>
-  </url>
-  
   <url>
     <loc>https://soonraah.github.io/</loc>
-    <lastmod>2021-02-28T21:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-07-12T22:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/tags/machine-learning/</loc>
+    <lastmod>2021-07-12T22:00:00+09:00</lastmod>
+  </url><url>
     <loc>https://soonraah.github.io/posts/</loc>
+    <lastmod>2021-07-12T22:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/tags/</loc>
+    <lastmod>2021-07-12T22:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/posts/ds-in-maturation-phase/</loc>
+    <lastmod>2021-07-12T22:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/tags/apache-flink/</loc>
     <lastmod>2021-02-28T21:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
+    <loc>https://soonraah.github.io/posts/backpressure-for-flink/</loc>
+    <lastmod>2021-02-28T21:00:00+09:00</lastmod>
+  </url><url>
     <loc>https://soonraah.github.io/tags/stream-processing/</loc>
     <lastmod>2021-02-28T21:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://soonraah.github.io/tags/</loc>
-    <lastmod>2021-02-28T21:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/tags/apache-hudi/</loc>
     <lastmod>2021-01-26T08:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/tags/apache-kudu/</loc>
     <lastmod>2021-01-26T08:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/tags/data-lake/</loc>
     <lastmod>2021-01-26T08:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/tags/delta-lake/</loc>
     <lastmod>2021-01-26T08:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/posts/oss-for-data-lake/</loc>
     <lastmod>2021-01-26T08:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/tags/aws/</loc>
     <lastmod>2020-12-31T20:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/tags/gcp/</loc>
     <lastmod>2020-12-31T20:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/posts/what-is-a-data-lake/</loc>
     <lastmod>2020-12-31T20:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/posts/read-csv-by-flink-datastream-api/</loc>
     <lastmod>2020-12-01T00:30:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://soonraah.github.io/tags/machine-learning/</loc>
-    <lastmod>2020-11-12T09:30:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/posts/ml-accuracy-profit-ethic-issue/</loc>
     <lastmod>2020-11-12T09:30:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/posts/functionality-of-streaming-system/</loc>
     <lastmod>2020-11-07T16:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/tags/apache-spark/</loc>
     <lastmod>2020-09-06T16:30:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/posts/study-streaming-system/</loc>
     <lastmod>2020-09-06T16:30:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/posts/heavy-ab-testing-operation/</loc>
     <lastmod>2020-08-23T12:30:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/posts/flink-join-by-temporal-table-function/</loc>
     <lastmod>2020-08-16T00:30:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/posts/flink-join-by-broadcast-state-pattern/</loc>
     <lastmod>2020-08-06T22:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/tags/development/</loc>
     <lastmod>2020-08-03T22:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/tags/git/</loc>
     <lastmod>2020-08-03T22:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/tags/github/</loc>
     <lastmod>2020-08-03T22:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/posts/no-more-huge-pull-request/</loc>
     <lastmod>2020-08-03T22:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/tags/meetup/</loc>
     <lastmod>2020-08-01T15:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/posts/spark-meetup-tokyo-3/</loc>
     <lastmod>2020-08-01T15:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/posts/weak_isolation_level_of_dataframe/</loc>
     <lastmod>2020-07-19T22:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/tags/transaction/</loc>
     <lastmod>2020-07-19T22:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/about/</loc>
     <lastmod>2020-07-12T12:16:47+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/posts/study-spark-3-0-0/</loc>
     <lastmod>2020-07-12T11:30:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/tags/a/b-testing/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/archives/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://soonraah.github.io/categories/</loc>
   </url>
-  
 </urlset>
