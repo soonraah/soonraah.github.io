@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Posts on Froglog</title>
     <link>https://soonraah.github.io/posts/</link>
     <description>Recent content in Posts on Froglog</description>
+    <image>
+      <url>https://soonraah.github.io/47</url>
+      <link>https://soonraah.github.io/47</link>
+    </image>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Mon, 12 Jul 2021 22:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -71,7 +75,7 @@ producer, consumer (それらの subtask と言ってもいいかも) がそれ�
 当然 Hadoop, Hive, Spark 等もデータレイクの文脈において超重要だが、「データレイク」という言葉がよく聞かれるようになる前から普及していたのでこのポストでは触れないことにする。
 Delta Lake https://delta.io/
  Delta Lake is an open-source storage layer that brings ACID transactions to Apache Spark™ and big data workloads.
-   Delta Lake
+    Delta Lake
   Delta Lake は Apache Spark の読み書きに ACID な transaction を提供するストレージレイヤーの OSS である。</description>
     </item>
     
