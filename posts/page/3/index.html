@@ -85,6 +85,26 @@ Posts
 <figure class=entry-cover><img loading=lazy src=https://soonraah.github.io/image/logo/flink_squirrel_color_logo.png alt="Apache Flink">
 </figure>
 <header class=entry-header>
+<h2>Apache Flink の Temporary Table Function を用いた stream data と static data の join
+</h2>
+</header>
+<div class=entry-content>
+<p>前回の記事 では Apache Flink における stream data と static data の join において、DataStream API における broadcast state pattern を使う方法を示した。
+今回の記事では Table API の temporal table function を用いた実験を行う。
+Table API Table API は名前のとおりで class Table を中心として SQL-like な DSL により処理を記述するという、DataStream API より high-level な API となっている。
+これらの関係は Apaceh Spark の RDD と DataFrame (DataSet) の関係に似ている。
+SQL-like な API で記述された処理が実行時に最適化されて low-level API の処理に翻訳されるところも同じだ。
+RDB の table の概念を元にしているものと考えられるが、本質的に table の概念とストリーム処理はあまりマッチしないと思う。
+table はある時点のデータセット全体を表すのに対し、ストリーム処理ではやってくるレコードを逐次的に処理したい。
+ここを合わせているため、ストリーム処理における Table API による処理の挙動の理解には注意が必要だ。...</p>
+</div>
+<footer class=entry-footer><span title="2020-08-16 00:30:00 +0900 JST">8月 16, 2020</span>&nbsp;·&nbsp;soonraah</footer>
+<a class=entry-link aria-label="post link to Apache Flink の Temporary Table Function を用いた stream data と static data の join" href=https://soonraah.github.io/posts/flink-join-by-temporal-table-function/></a>
+</article>
+<article class=post-entry>
+<figure class=entry-cover><img loading=lazy src=https://soonraah.github.io/image/logo/flink_squirrel_color_logo.png alt="Apache Flink">
+</figure>
+<header class=entry-header>
 <h2>Apache Flink の Broadcast State Pattern を用いた stream data と static data の join
 </h2>
 </header>
@@ -175,29 +195,10 @@ serializability
 <footer class=entry-footer><span title="2020-07-19 22:00:00 +0900 JST">7月 19, 2020</span>&nbsp;·&nbsp;soonraah</footer>
 <a class=entry-link aria-label="post link to Spark DataFrame クエリの弱い分離レベル" href=https://soonraah.github.io/posts/weak_isolation_level_of_dataframe/></a>
 </article>
-<article class=post-entry>
-<figure class=entry-cover><img loading=lazy src=https://soonraah.github.io/image/logo/Apache_Spark_logo.svg alt="Apache Spark">
-</figure>
-<header class=entry-header>
-<h2>Apache Spark 3.0.0 について調べた
-</h2>
-</header>
-<div class=entry-content>
-<p>はじめに Apache Spark 3.0.0 がリリースされました。
-Spark Release 3.0.0 release note を見て個人的に気になったところなど簡単に調べました。
-書いてみると Databricks の記事へのリンクばっかになってしまった…
-全体感 こちらの記事を読めば全体感は OK.
-Introducing Apache Spark 3.0 公式の release note には
-Python is now the most widely used language on Spark.
-とあってそうなん？ってなったけど、こちらの記事だと
-Python is now the most widely used language on Spark and, consequently, was a key focus area of Spark 3.0 development. 68% of notebook commands on Databricks are in Python....</p>
-</div>
-<footer class=entry-footer><span title="2020-07-12 11:30:00 +0900 JST">7月 12, 2020</span>&nbsp;·&nbsp;soonraah</footer>
-<a class=entry-link aria-label="post link to Apache Spark 3.0.0 について調べた" href=https://soonraah.github.io/posts/study-spark-3-0-0/></a>
-</article>
 <footer class=page-footer>
 <nav class=pagination>
 <a class=prev href=https://soonraah.github.io/posts/page/2/>« 前のページ</a>
+<a class=next href=https://soonraah.github.io/posts/page/4/>次のページ »</a>
 </nav>
 </footer>
 </main>

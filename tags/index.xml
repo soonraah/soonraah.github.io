@@ -9,7 +9,16 @@
       <link>https://soonraah.github.io/47</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 12 Jul 2021 22:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 21 Jun 2022 08:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data Lake</title>
+      <link>https://soonraah.github.io/tags/data-lake/</link>
+      <pubDate>Tue, 21 Jun 2022 08:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/tags/data-lake/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>machine learning</title>
       <link>https://soonraah.github.io/tags/machine-learning/</link>
@@ -52,15 +61,6 @@
       <pubDate>Tue, 26 Jan 2021 08:00:00 +0900</pubDate>
       
       <guid>https://soonraah.github.io/tags/apache-kudu/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Data Lake</title>
-      <link>https://soonraah.github.io/tags/data-lake/</link>
-      <pubDate>Tue, 26 Jan 2021 08:00:00 +0900</pubDate>
-      
-      <guid>https://soonraah.github.io/tags/data-lake/</guid>
       <description></description>
     </item>
     
