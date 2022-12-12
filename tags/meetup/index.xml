@@ -19,12 +19,12 @@
       <description>2020-07-31 にオンライン開催された Spark Meetup Tokyo #3 Online に参加した。
 感想などメモしておく。
 全体感 トピックとしては主に
- Spark 3.0 Spark + AI Summit 2020 Spark 周辺要素  といったところだろうか。
+Spark 3.0 Spark + AI Summit 2020 Spark 周辺要素 といったところだろうか。
 最近のコミュニティの動向や関心を日本語で聞くことができてよかった。
 運営 &amp;amp; スピーカーの皆様、ありがとうございます。
 発表 発表資料は公開されたら追加していく。
 SPARK+AI Summit 2020 イベント概要 スピーカー: @tokyodataguy さん
- Summit は金融業界の参加者が増えているらしい Spark で最も使われている言語は Python とのことだったが、Databricks の notebook サービスの話だった  プロダクションコードではまた違うのだろう   Spark 3.0 の update をざっくりと Spark 周辺要素の話をざっくりと  Koalas Delta Lake Redash MLflow    Introducing Koalas 1.0   Introducing Koalas 1.</description>
+Summit は金融業界の参加者が増えているらしい Spark で最も使われている言語は Python とのことだったが、Databricks の notebook サービスの話だった プロダクションコードではまた違うのだろう Spark 3.0 の update をざっくりと Spark 周辺要素の話をざっくりと Koalas Delta Lake Redash MLflow Introducing Koalas 1.0 Introducing Koalas 1.0 (and 1.1) from Takuya UESHIN スピーカー: @ueshin さん</description>
     </item>
     
   </channel>

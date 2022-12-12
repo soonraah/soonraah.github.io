@@ -9,7 +9,23 @@
       <link>https://soonraah.github.io/47</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 26 Jan 2021 08:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/apache-hudi/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Dec 2022 00:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/apache-hudi/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Glue Schema Registry の導入を断念した話</title>
+      <link>https://soonraah.github.io/posts/give-up-on-schema-registry/</link>
+      <pubDate>Tue, 13 Dec 2022 00:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/give-up-on-schema-registry/</guid>
+      <description>業務で AWS Glue Schema Registry を使おうとしたけど、やっぱりやめたというお話。
+Glue Schema Registry What&amp;rsquo;s Schema Registry? AWS Glue Schema Registry は2020年に発表された AWS の機能だ。
+Control the evolution of data streams using the AWS Glue Schema Registry 一方、私が最初に schema registry 的なものを見たのは Confluent の例。
+Schema Registry の概要 - Confluent AWS の Glue Schema Registry はこれより後のリリースであり、同等のものの AWS マネージド版といったところだろうか。
+schema registry で何ができるかは Confluent のリンク先の図がとてもわかりやすいので参考にしていただきたい。
+Glue Schema Registry もだいたい同じで、ストリーム処理のための機能である。
+Glue Schema Registry で解決したい課題とその機能 データ基盤上のストリーム処理における schema 管理はバッチ処理のそれとは異なる難しさがある。
+これは schema evolution と呼ばれる問題で以前のポストでも述べている。</description>
+    </item>
+    
     <item>
       <title>データレイク関連の OSS - Delta Lake, Apache Hudi, Apache Kudu</title>
       <link>https://soonraah.github.io/posts/oss-for-data-lake/</link>
@@ -19,13 +35,14 @@
       <description>はじめに 前回のポストではデータレイクとはどういうものかというのを調べた。
 今回はデータレイクの文脈でどのような OSS が注目されているのかを見ていきたい。
 以下は NTT データさんによる講演資料であり、その中で「近年登場してきた、リアルタイム分析に利用可能なOSSストレージレイヤソフト」というのが3つ挙げられている。
-  大規模データ活用向けストレージレイヤソフトのこれまでとこれから（NTTデータ テクノロジーカンファレンス 2019 講演資料、2019/09/05）  from NTT DATA Technology &amp;amp; Innovation    Delta Lake Apache Hudi Apache Kudu  これらはすべて論理的なストレージレイヤーを担う。
+大規模データ活用向けストレージレイヤソフトのこれまでとこれから（NTTデータ テクノロジーカンファレンス 2019 講演資料、2019/09/05） from NTT DATA Technology &amp;amp; Innovation Delta Lake Apache Hudi Apache Kudu これらはすべて論理的なストレージレイヤーを担う。
 こちらの講演資料に付け足すようなこともないかもしれないが、このポストではデータレイクという文脈から自分で調べて理解した内容をまとめるということを目的にする。
 当然 Hadoop, Hive, Spark 等もデータレイクの文脈において超重要だが、「データレイク」という言葉がよく聞かれるようになる前から普及していたのでこのポストでは触れないことにする。
 Delta Lake https://delta.io/
- Delta Lake is an open-source storage layer that brings ACID transactions to Apache Spark™ and big data workloads.
-    Delta Lake
-  Delta Lake は Apache Spark の読み書きに ACID な transaction を提供するストレージレイヤーの OSS である。</description>
+Delta Lake is an open-source storage layer that brings ACID transactions to Apache Spark™ and big data workloads.
+Delta Lake
+Delta Lake は Apache Spark の読み書きに ACID な transaction を提供するストレージレイヤーの OSS である。
+Databricks が作り、2019年4月に v0.1.0 がリリースされたのが最初だ。</description>
     </item>
     
   </channel>

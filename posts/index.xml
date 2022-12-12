@@ -9,7 +9,23 @@
       <link>https://soonraah.github.io/47</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 21 Jun 2022 08:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Dec 2022 00:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Glue Schema Registry の導入を断念した話</title>
+      <link>https://soonraah.github.io/posts/give-up-on-schema-registry/</link>
+      <pubDate>Tue, 13 Dec 2022 00:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/give-up-on-schema-registry/</guid>
+      <description>業務で AWS Glue Schema Registry を使おうとしたけど、やっぱりやめたというお話。
+Glue Schema Registry What&amp;rsquo;s Schema Registry? AWS Glue Schema Registry は2020年に発表された AWS の機能だ。
+Control the evolution of data streams using the AWS Glue Schema Registry 一方、私が最初に schema registry 的なものを見たのは Confluent の例。
+Schema Registry の概要 - Confluent AWS の Glue Schema Registry はこれより後のリリースであり、同等のものの AWS マネージド版といったところだろうか。
+schema registry で何ができるかは Confluent のリンク先の図がとてもわかりやすいので参考にしていただきたい。
+Glue Schema Registry もだいたい同じで、ストリーム処理のための機能である。
+Glue Schema Registry で解決したい課題とその機能 データ基盤上のストリーム処理における schema 管理はバッチ処理のそれとは異なる難しさがある。
+これは schema evolution と呼ばれる問題で以前のポストでも述べている。</description>
+    </item>
+    
     <item>
       <title>「データレイク」と「データレイク層」</title>
       <link>https://soonraah.github.io/posts/data-lake-and-data-lake-layer/</link>
@@ -22,12 +38,16 @@
 アーキテクチャ目線の「データレイク」 「データレイク」については以前こちらのポストで書いたのでここでは詳しく触れない。
 詳細はリンク先を見ていただきたい。
 ここでキーとなるのが、
-  加工前データや非構造化データを含むあらゆるデータを保存     一元的なデータ管理   という部分だ。
+加工前データや非構造化データを含むあらゆるデータを保存 一元的なデータ管理 という部分だ。
 あらゆるデータを一元的に管理するという思想であり、これができるアーキテクチャがデータレイクということだ。
 例えば AWS や Azure のドキュメントを見るとデータレイクの中が zone に分けられており、生データを保持する raw zone や加工されたデータを置いておく curated zone などがある。
 (zone の命名にもいくつかの流派があるようだ…)
- Reference architecture - Data Analytics Lens Data lake zones and containers - Cloud Adoption Framework | Microsoft Docs  次の Robinhood 社の例でもデータレイク中に生データとその派生データが存在している。
- Fresher Data Lake on AWS S3 | by Balaji Varadarajan | Robinhood  内容物目線の「データレイク層」 一方でデータレイクには生データのみを置くべき、という考えもある。</description>
+Reference architecture - Data Analytics Lens Data lake zones and containers - Cloud Adoption Framework | Microsoft Docs 次の Robinhood 社の例でもデータレイク中に生データとその派生データが存在している。
+Fresher Data Lake on AWS S3 | by Balaji Varadarajan | Robinhood 内容物目線の「データレイク層」 一方でデータレイクには生データのみを置くべき、という考えもある。
+本書におけるデータレイク（DataLake）層とは、元のデータをコピーして、1つのシステムに集約したものを指します。 データソース（＝水源）から流れてきたデータを蓄える場所なのでレイク（湖）と呼びます。
+ECサイトの注文履歴データを、分析用DBにコピーしている場合、それがデータレイクと言えます。データレイクのデータは、データソースと一対一の関係にあります。何も加工していない、ただのコピーだからです。
+何も加工していない、ただのコピーであることが重要です。仮にデータの中身に誤りがあったとしても、修正や加工をせず、そのまま集約しましょう。
+&amp;ndash; ゆずたそ,渡部 徹太郎,伊藤 徹郎. 実践的データ基盤への処方箋〜 ビジネス価値創出のためのデータ・システム・ヒトのノウハウ (Japanese Edition) (pp.</description>
     </item>
     
     <item>
@@ -38,9 +58,9 @@
       <guid>https://soonraah.github.io/posts/ds-in-maturation-phase/</guid>
       <description>ポエムです。
 事業フェーズごとのデータサイエンティストの役割 まずはこちらの発表。
- 事業立ち上げにデータサイエンティストは必要なのか？ | CA BASE NEXT  とても納得できる内容だった。
+事業立ち上げにデータサイエンティストは必要なのか？ | CA BASE NEXT とても納得できる内容だった。
 一部抜き出して要約すると
- 事業の立ち上げフェーズ  データがまだなかったり、整備されていない状態 データサイエンスによる改善がしにくい   事業のグロースフェーズ  大規模なデータが使える状態 データサイエンスによる改善がやりやすい    とのこと。異論はない。
+事業の立ち上げフェーズ データがまだなかったり、整備されていない状態 データサイエンスによる改善がしにくい 事業のグロースフェーズ 大規模なデータが使える状態 データサイエンスによる改善がやりやすい とのこと。異論はない。
 では事業が立ち上がり、グロースが落ち着いたその後の成熟フェーズではどうなのだろうかという話。
 成熟フェーズにおける改善の難しさ 端的に言うと成熟フェーズでは ML によるさらなる改善は困難になってくると思う。
 ここで言う成熟フェーズにおいてはプロダクトの進化とともに機械学習もそれなりに適用されてきたものとする。
@@ -57,7 +77,9 @@
 という感じでいわゆるキラキラした「ML でビジネスをドライブ！」みたいなことは成熟フェーズでは難しいことが多いのではないか。
 しかしデータサイエンティストにやることがないわけではない。
 成熟フェーズで何ができるか ぱっと思いつくのは次のような仕事。
- データドリブンな施策の立案・評価  これは事業フェーズ問わずあるべき ドメイン知識が必要   ML エンジニアリング  パイプラインの改善や属人性をなくすお仕事   ML モデルの受動的なメンテナンス  精度が変化したときの調査 内部的・外部的要因によるデータの変化への対応   やっぱり ML モデルの精度改善  成熟フェーズということでビジネスもスケールしていれば 0.</description>
+データドリブンな施策の立案・評価 これは事業フェーズ問わずあるべき ドメイン知識が必要 ML エンジニアリング パイプラインの改善や属人性をなくすお仕事 ML モデルの受動的なメンテナンス 精度が変化したときの調査 内部的・外部的要因によるデータの変化への対応 やっぱり ML モデルの精度改善 成熟フェーズということでビジネスもスケールしていれば 0.1% の精度改善でも売上的なインパクトは大きいかもしれない いわゆる狭義のデータサイエンスではなく、ドメイン知識であったりアナリストやエンジニア的な視点が絡んだ仕事が増えてくる。
+よくある「ML だけじゃなく◯◯もできると強いよね」みたいな話になってしまった。
+おわりに …という話が少し前に Twitter で知人との話題に上がった。</description>
     </item>
     
     <item>
@@ -78,7 +100,7 @@ Backpressure の仕組み Buffer-based ここでは以前のブログでも紹�
 上流／下流の operator をそれぞれ producer, consumer とする。
 producer, consumer (それらの subtask と言ってもいいかも) がそれぞれ異なる物理マシンに deploy されているケースが Figure 12b となる。
 各 subtask は input と output の buffer を持っており、
- producer は処理結果を output buffer に書き出す TCP 等の物理的な接続でデータを送信 consumer 側の output buffer にデータを格納 consumer がそれを読み込んで処理する  というような流れになる。</description>
+producer は処理結果を output buffer に書き出す TCP 等の物理的な接続でデータを送信 consumer 側の output buffer にデータを格納 consumer がそれを読み込んで処理する というような流れになる。</description>
     </item>
     
     <item>
@@ -90,13 +112,14 @@ producer, consumer (それらの subtask と言ってもいいかも) がそれ�
       <description>はじめに 前回のポストではデータレイクとはどういうものかというのを調べた。
 今回はデータレイクの文脈でどのような OSS が注目されているのかを見ていきたい。
 以下は NTT データさんによる講演資料であり、その中で「近年登場してきた、リアルタイム分析に利用可能なOSSストレージレイヤソフト」というのが3つ挙げられている。
-  大規模データ活用向けストレージレイヤソフトのこれまでとこれから（NTTデータ テクノロジーカンファレンス 2019 講演資料、2019/09/05）  from NTT DATA Technology &amp;amp; Innovation    Delta Lake Apache Hudi Apache Kudu  これらはすべて論理的なストレージレイヤーを担う。
+大規模データ活用向けストレージレイヤソフトのこれまでとこれから（NTTデータ テクノロジーカンファレンス 2019 講演資料、2019/09/05） from NTT DATA Technology &amp;amp; Innovation Delta Lake Apache Hudi Apache Kudu これらはすべて論理的なストレージレイヤーを担う。
 こちらの講演資料に付け足すようなこともないかもしれないが、このポストではデータレイクという文脈から自分で調べて理解した内容をまとめるということを目的にする。
 当然 Hadoop, Hive, Spark 等もデータレイクの文脈において超重要だが、「データレイク」という言葉がよく聞かれるようになる前から普及していたのでこのポストでは触れないことにする。
 Delta Lake https://delta.io/
- Delta Lake is an open-source storage layer that brings ACID transactions to Apache Spark™ and big data workloads.
-    Delta Lake
-  Delta Lake は Apache Spark の読み書きに ACID な transaction を提供するストレージレイヤーの OSS である。</description>
+Delta Lake is an open-source storage layer that brings ACID transactions to Apache Spark™ and big data workloads.
+Delta Lake
+Delta Lake は Apache Spark の読み書きに ACID な transaction を提供するストレージレイヤーの OSS である。
+Databricks が作り、2019年4月に v0.1.0 がリリースされたのが最初だ。</description>
     </item>
     
     <item>
@@ -108,11 +131,14 @@ Delta Lake https://delta.io/
       <description>最近よく聞かれるようになった「データレイク」という概念にあまりついていけていなかったため、いまさらながらざっと調べてみた。
 データレイクとは Wikipedia によると最初にこの言葉を使ったのは Pentaho 社の CTO である James Dixon らしい。
 その時の彼のブログ (10年前…) を読むと、既にあったデータマートに対して
-  Only a subset of the attributes are examined, so only pre-determined questions can be answered. The data is aggregated so visibility into the lowest levels is lost
-&amp;ndash;Pentaho, Hadoop, and Data Lakes - James Dixon’s Blog   というような問題意識からデータレイクというコンセプトを提案したようだ。
+Only a subset of the attributes are examined, so only pre-determined questions can be answered. The data is aggregated so visibility into the lowest levels is lost
+&amp;ndash;Pentaho, Hadoop, and Data Lakes - James Dixon’s Blog というような問題意識からデータレイクというコンセプトを提案したようだ。
 最近？のデータレイクについてはベンダー等の記事が参考になる。
- データレイクとは - AWS データレイクとは？ - talend データレイクとは？データレイクの落とし穴と効果 - Informatica  書籍だと『AWSではじめるデータレイク: クラウドによる統合型データリポジトリ構築入門』がいいだろうか。
-データレイクの概要と AWS が考えている構築・運用がざっとわかる。</description>
+データレイクとは - AWS データレイクとは？ - talend データレイクとは？データレイクの落とし穴と効果 - Informatica 書籍だと『AWSではじめるデータレイク: クラウドによる統合型データリポジトリ構築入門』がいいだろうか。
+データレイクの概要と AWS が考えている構築・運用がざっとわかる。
+Amazon で検索した限りだと現時点でタイトルに「データレイク」を含む和書はこれのみだった。
+上に挙げたような文献ではデータレイクはデータウェアハウスとの対比という形でよく語られている。
+共通している内容は概ね以下のとおり。</description>
     </item>
     
     <item>
@@ -131,7 +157,7 @@ overload された同名のメソッドがいくつか存在するが、次の2�
 まず1つめは FileInputFormat&amp;lt;OUT&amp;gt; inputFormat であり、こちらは data stream の生成に用いる入力フォーマットを指定する。
 おそらく最も一般的なのが TextInputFormat だと思われる。
 もちろん単なる text として CSV ファイルを読み込み、後続の処理で各レコードを parse することも可能だが CSV 用の入力フォーマットがいくつか用意されているようだ。
- PojoCsvInputFormat RowCsvInputFormat TupleCsvInputFormat  なんとなく名前でわかると思うが、それぞれ readFile() の結果として返される DataStreamSource が内包する型が異なる。</description>
+PojoCsvInputFormat RowCsvInputFormat TupleCsvInputFormat なんとなく名前でわかると思うが、それぞれ readFile() の結果として返される DataStreamSource が内包する型が異なる。</description>
     </item>
     
     <item>
@@ -153,7 +179,7 @@ A/B テストを実施するためのクライアントの追加の予算がつ�
 手はあるのに。
 機械学習の精度は必ずしも利益に結びつかない この昔話で何が言いたいかというと、機械学習の精度改善は必ずしも利益に結びつかないということである。
 そのことを示しているとても素晴らしい資料がこちら。
-  機械学習の精度と売上の関係  from Tokoroten Nakayama  前述の昔話の例はこの資料で言うところの③ロジスティック型 (=外注) となる。
+機械学習の精度と売上の関係 from Tokoroten Nakayama 前述の昔話の例はこの資料で言うところの③ロジスティック型 (=外注) となる。
 いったん売上が立った後、追加予算がつかなかったので精度改善では売上は増えなかったのだ。
 倫理感による精度改善 受託開発を主としている組織であれば工数にはシビアなので、売上の立たない工数をかけることはあまりないだろう。
 (よっぽどの炎上鎮火とかでなければ)
@@ -175,7 +201,7 @@ A/B テストを実施するためのクライアントの追加の予算がつ�
 もちろんチームの規模にもよる。
 機械学習チームの人的リソースの規模に対して機械学習で解くべきよいイシューを見つけ出せているのか、ということだ。
 少し前にちょっと話題になったこちらの件もイシューが大事だと言っている。
- 全ての機械学習の論文は新しいアルゴリズムを提案しているのですか？ - Quora  キャリアの行く末 事業会社においてビジネスの領域拡大よりも既存領域への機械学習の適用の方が速く、よいイシューを提供しにくいということがよく起こるのであれば、機械学習チームのリソースは余剰気味になりやすいということになる。
+全ての機械学習の論文は新しいアルゴリズムを提案しているのですか？ - Quora キャリアの行く末 事業会社においてビジネスの領域拡大よりも既存領域への機械学習の適用の方が速く、よいイシューを提供しにくいということがよく起こるのであれば、機械学習チームのリソースは余剰気味になりやすいということになる。
 これが続くと今後機械学習しかやらない人材の市場価値は下がっていくのかもしれない。
 もしくは自社で製品やサービスを持っている組織ではなく、受託開発やコンサルが主戦場になっていくのかもしれない。
 何にせよ特定のプロダクトに commit したいのであれば機械学習エンジニアは機械学習以外のスキルも磨いていく必要があるように思う。
@@ -218,7 +244,9 @@ out-of-order を管理するためにストリーム処理システムは処理�
 それにあたって独学で調べたことなどまとめておく。
 ストリーム処理とは そもそも &amp;ldquo;ストリーム処理&amp;rdquo; とは何を指しているのか。
 以下の引用が簡潔に示している。
- a type of data processing engine that is designed with infinite data sets in mind. Nothing more.&amp;ndash; Streaming 101: The world beyond batch こちらは &amp;ldquo;streaming system&amp;rdquo; について述べたものだが、つまり終わりのないデータを扱うのがストリーム処理ということである。
+a type of data processing engine that is designed with infinite data sets in mind. Nothing more.
+&amp;ndash; Streaming 101: The world beyond batch
+こちらは &amp;ldquo;streaming system&amp;rdquo; について述べたものだが、つまり終わりのないデータを扱うのがストリーム処理ということである。
 例えば web サービスから生まれ続けるユーザ行動ログを逐次的に処理するというのがストリーム処理。
 web サービスが終了しないかぎりはユーザ行動ログの生成には終わりがない。
 これに対して &amp;ldquo;1日分のユーザ行動ログ&amp;rdquo; 等のように有限の量のデータを切り出して処理する場合、これはバッチ処理となる。
@@ -227,10 +255,11 @@ web サービスが終了しないかぎりはユーザ行動ログの生成に�
 なぜストリーム処理なのか なぜストリーム処理なのか。
 ひとえに逐次的な入力データに対する迅速なフィードバックが求められているからと言えるだろう。
 迅速なフィードバックがビジネス上のメリットとなることは自明だ。
- SNS の配信 カーシェアリングにおける配車や料金設定 クレジットカードや広告クリックなどの不正検知  もしこれらの application が例えば hourly のバッチ処理で実装されていたらどうだろうか。
+SNS の配信 カーシェアリングにおける配車や料金設定 クレジットカードや広告クリックなどの不正検知 もしこれらの application が例えば hourly のバッチ処理で実装されていたらどうだろうか。
 まあ待っていられない。
 一般的なストリーム処理の構成 モダンな…と言っていいのかわからないが、ストリーム処理を行うための一般的なシステムは次の3つの要素で構成される。
- producer broker consumer  producer は最初にレコードを生成する、ストリームデータの発生源となるものである。</description>
+producer broker consumer producer は最初にレコードを生成する、ストリームデータの発生源となるものである。
+例えばログを生成する web application であったり、何らかのセンサーを持つ IoT 機器であったりがこれに該当する。</description>
     </item>
     
     <item>
@@ -283,8 +312,8 @@ stream data と static data の join ということになる。
 このポストでは Flink v1.11 を前提とした。
 join の方法 今回は DataStream API でこれを実現することを考える。
 Flink のドキュメントを読むと broadcast state pattern でできそうだ。
- The Broadcast State Pattern  やり方としては次のようになる。
- static data のファイルを FileProcessingMode.PROCESS_CONTINUOUSLY で読み込み DataStream 化 1 を broadcast() stream data の DataStream と 2 を connect()  static data を PROCESS_CONTINUOUSLY で読むのは変更を得るため。</description>
+The Broadcast State Pattern やり方としては次のようになる。
+static data のファイルを FileProcessingMode.PROCESS_CONTINUOUSLY で読み込み DataStream 化 1 を broadcast() stream data の DataStream と 2 を connect() static data を PROCESS_CONTINUOUSLY で読むのは変更を得るため。</description>
     </item>
     
     <item>
@@ -297,17 +326,19 @@ Flink のドキュメントを読むと broadcast state pattern でできそう�
 なんというか今更わざわざ言わなくてもいいんだけど…
 仕事で何度か大きな pull request が投げられているのを見てしまったので、それはあまりよくないよというのを自分でも指摘しやすくするためにまとめておく。
 Reference 最初に参考資料を挙げておく。
- 100 Duck-Sized Pull Requests 「巨大プルリク1件vs細かいプルリク100件」問題を考える（翻訳） Optimal pull request size  これらを読めば特に私から言うこともないのだが…
+100 Duck-Sized Pull Requests 「巨大プルリク1件vs細かいプルリク100件」問題を考える（翻訳） Optimal pull request size これらを読めば特に私から言うこともないのだが…
 これらに書いてあるとおりだが補足しておく。
 Pull Request を小分けにしたときのメリット module を適切に切り出すモチベーションが得られる 次のような話がある。
- 共通化という考え方はアンチパターンを生み出すだけ説  これを理由に module を分けるべきところが分けられず、いろんなことができてしまうベタッと大きな module が生まれるのを見た。
+共通化という考え方はアンチパターンを生み出すだけ説 これを理由に module を分けるべきところが分けられず、いろんなことができてしまうベタッと大きな module が生まれるのを見た。
 もちろんよく考えられていない共通化は駄目だが、上記ポストでは一方で
- ただし共通化という名の下におこなわれるのは「同じロジックを持つコードをまとめる」行為であって、抽象化のようにそのコード単位の意味を捉える作業はその範疇にない。抽象化というのはロジックを意味単位ごとにひとくくりにしていく行為で、これがどういうことなのかは次以降で述べていく。&amp;ndash; 共通化という考え方はアンチパターンを生み出すだけ説 - タオルケット体操 と述べており抽象化、つまりコードの意味を考慮した上で適切な単位でまとめておくことは否定していない。
+ただし共通化という名の下におこなわれるのは「同じロジックを持つコードをまとめる」行為であって、抽象化のようにそのコード単位の意味を捉える作業はその範疇にない。抽象化というのはロジックを意味単位ごとにひとくくりにしていく行為で、これがどういうことなのかは次以降で述べていく。
+&amp;ndash; 共通化という考え方はアンチパターンを生み出すだけ説 - タオルケット体操
+と述べており抽象化、つまりコードの意味を考慮した上で適切な単位でまとめておくことは否定していない。
 pull request を小さく分けるという行為のためには module や機能を適度なまとまりで切り分けること、つまり抽象化を考えていくことが必要となる。
 したがって何でもできてしまう大きな module が生まれるのを防ぐ方向に働く。
 (もちろんここで駄目な共通化がなされてしまうこともあるだろう)
 リリースまでの期間が短く済む 前述の参考資料においても pull request が大きいと
- Developers would put off reviews until they had time/energy and the development process would come to a halt.</description>
+Developers would put off reviews until they had time/energy and the development process would come to a halt.</description>
     </item>
     
     <item>
@@ -319,12 +350,12 @@ pull request を小さく分けるという行為のためには module や機�
       <description>2020-07-31 にオンライン開催された Spark Meetup Tokyo #3 Online に参加した。
 感想などメモしておく。
 全体感 トピックとしては主に
- Spark 3.0 Spark + AI Summit 2020 Spark 周辺要素  といったところだろうか。
+Spark 3.0 Spark + AI Summit 2020 Spark 周辺要素 といったところだろうか。
 最近のコミュニティの動向や関心を日本語で聞くことができてよかった。
 運営 &amp;amp; スピーカーの皆様、ありがとうございます。
 発表 発表資料は公開されたら追加していく。
 SPARK+AI Summit 2020 イベント概要 スピーカー: @tokyodataguy さん
- Summit は金融業界の参加者が増えているらしい Spark で最も使われている言語は Python とのことだったが、Databricks の notebook サービスの話だった  プロダクションコードではまた違うのだろう   Spark 3.0 の update をざっくりと Spark 周辺要素の話をざっくりと  Koalas Delta Lake Redash MLflow    Introducing Koalas 1.0   Introducing Koalas 1.</description>
+Summit は金融業界の参加者が増えているらしい Spark で最も使われている言語は Python とのことだったが、Databricks の notebook サービスの話だった プロダクションコードではまた違うのだろう Spark 3.0 の update をざっくりと Spark 周辺要素の話をざっくりと Koalas Delta Lake Redash MLflow Introducing Koalas 1.0 Introducing Koalas 1.0 (and 1.1) from Takuya UESHIN スピーカー: @ueshin さん</description>
     </item>
     
     <item>
@@ -341,18 +372,23 @@ SPARK+AI Summit 2020 イベント概要 スピーカー: @tokyodataguy さん
 多くの場合この理解は間違っていない。
 それはなぜかというと DB 等のデータ処理フレームワークがある強さの分離レベルを提供しているからである。
 いろいろな分離レベル ACID 特性のうちの1つ、分離性 (Isolation) の程度を表すのが分離レベル。
- トランザクション中に行われる操作の過程が他の操作から隠蔽されることを指し、日本語では分離性、独立性または隔離性ともいう。より形式的には、独立性とはトランザクション履歴が直列化されていることと言える。この性質と性能はトレードオフの関係にあるため、一般的にはこの性質の一部を緩和して実装される場合が多い。 &amp;ndash; Wikipedia ACID (コンピュータ科学) 分離レベルには名前のついたものがいくつかあり、分離性の保証の強さが異なる。
+トランザクション中に行われる操作の過程が他の操作から隠蔽されることを指し、日本語では分離性、独立性または隔離性ともいう。より形式的には、独立性とはトランザクション履歴が直列化されていることと言える。この性質と性能はトレードオフの関係にあるため、一般的にはこの性質の一部を緩和して実装される場合が多い。 &amp;ndash; Wikipedia ACID (コンピュータ科学)
+分離レベルには名前のついたものがいくつかあり、分離性の保証の強さが異なる。
 具体的にはトランザクションの並行性の問題への対応力が異なる。
 名著「データ指向アプリケーションデザイン」の第7章で分離レベルについて詳しく述べられているので、以下ではそちらからの引用。
 分離レベルを弱い順に並べる。
-  read uncommitted
- このレベルではダーティライトは生じませんが、ダーティリードは妨げられません。
-   read committed
-  データベースからの読み取りを行った際に見えるデータは、コミットされたもののみであること（ダーティリードは生じない）。 データベースへの書き込みを行う場合、上書きするのはコミットされたデータのみであること（ダーティライトは生じない）。     snapshot isolation
- スナップショット分離の考え方は、それぞれのトランザクションがデータベースの一貫性のあるスナップショットから読み取りを行うというものです。すなわち、トランザクションが読み取るデータは、すべてそのトランザクションの開始時点のデータベースにコミット済みのものだけということです。
-   serializability
- この分離レベルはトランザクションが並行して実行されていても、最終的な答えはそれぞれが1つずつ順番に、並行ではなく実行された場合と同じになることを保証します。
-   日本語で「分離レベル」を検索すると snapshot isolation の代わりに repeatable read が出てくる事が多い。</description>
+read uncommitted
+このレベルではダーティライトは生じませんが、ダーティリードは妨げられません。
+read committed
+データベースからの読み取りを行った際に見えるデータは、コミットされたもののみであること（ダーティリードは生じない）。 データベースへの書き込みを行う場合、上書きするのはコミットされたデータのみであること（ダーティライトは生じない）。 snapshot isolation
+スナップショット分離の考え方は、それぞれのトランザクションがデータベースの一貫性のあるスナップショットから読み取りを行うというものです。すなわち、トランザクションが読み取るデータは、すべてそのトランザクションの開始時点のデータベースにコミット済みのものだけということです。
+serializability
+この分離レベルはトランザクションが並行して実行されていても、最終的な答えはそれぞれが1つずつ順番に、並行ではなく実行された場合と同じになることを保証します。
+日本語で「分離レベル」を検索すると snapshot isolation の代わりに repeatable read が出てくる事が多い。
+しかし repeatable read の名前は実装によって意味が違っていたりして扱いが難しいらしい。
+分離レベルと race condition の関係 以下に各分離レベルとトランザクションの並行性の問題 (race condition) の関係を示す。
+各 race condition の説明については割愛するが、複数のトランザクションが並行して実行されることにより起こりうる期待されていない挙動だと思えばよい。
+○はその分離レベルにおいてその race condition が発生しないことを示す。</description>
     </item>
     
     <item>
@@ -362,13 +398,14 @@ SPARK+AI Summit 2020 イベント概要 スピーカー: @tokyodataguy さん
       
       <guid>https://soonraah.github.io/posts/study-spark-3-0-0/</guid>
       <description>はじめに Apache Spark 3.0.0 がリリースされました。
- Spark Release 3.0.0  release note を見て個人的に気になったところなど簡単に調べました。
+Spark Release 3.0.0 release note を見て個人的に気になったところなど簡単に調べました。
 書いてみると Databricks の記事へのリンクばっかになってしまった…
 全体感 こちらの記事を読めば全体感は OK.
- Introducing Apache Spark 3.0  公式の release note には
- Python is now the most widely used language on Spark.
- とあってそうなん？ってなったけど、こちらの記事だと
- Python is now the most widely used language on Spark and, consequently, was a key focus area of Spark 3.0 development. 68% of notebook commands on Databricks are in Python.</description>
+Introducing Apache Spark 3.0 公式の release note には
+Python is now the most widely used language on Spark.
+とあってそうなん？ってなったけど、こちらの記事だと
+Python is now the most widely used language on Spark and, consequently, was a key focus area of Spark 3.0 development. 68% of notebook commands on Databricks are in Python.
+と書いてありどうやら Databricks の notebook の話らしく、だったらまあそうかなという感じ。</description>
     </item>
     
   </channel>

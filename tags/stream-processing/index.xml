@@ -9,7 +9,23 @@
       <link>https://soonraah.github.io/47</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 28 Feb 2021 21:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/stream-processing/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Dec 2022 00:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/stream-processing/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Glue Schema Registry の導入を断念した話</title>
+      <link>https://soonraah.github.io/posts/give-up-on-schema-registry/</link>
+      <pubDate>Tue, 13 Dec 2022 00:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/give-up-on-schema-registry/</guid>
+      <description>業務で AWS Glue Schema Registry を使おうとしたけど、やっぱりやめたというお話。
+Glue Schema Registry What&amp;rsquo;s Schema Registry? AWS Glue Schema Registry は2020年に発表された AWS の機能だ。
+Control the evolution of data streams using the AWS Glue Schema Registry 一方、私が最初に schema registry 的なものを見たのは Confluent の例。
+Schema Registry の概要 - Confluent AWS の Glue Schema Registry はこれより後のリリースであり、同等のものの AWS マネージド版といったところだろうか。
+schema registry で何ができるかは Confluent のリンク先の図がとてもわかりやすいので参考にしていただきたい。
+Glue Schema Registry もだいたい同じで、ストリーム処理のための機能である。
+Glue Schema Registry で解決したい課題とその機能 データ基盤上のストリーム処理における schema 管理はバッチ処理のそれとは異なる難しさがある。
+これは schema evolution と呼ばれる問題で以前のポストでも述べている。</description>
+    </item>
+    
     <item>
       <title>Apache Flink の Backpressure の仕組みについて調べた</title>
       <link>https://soonraah.github.io/posts/backpressure-for-flink/</link>
@@ -28,7 +44,7 @@ Backpressure の仕組み Buffer-based ここでは以前のブログでも紹�
 上流／下流の operator をそれぞれ producer, consumer とする。
 producer, consumer (それらの subtask と言ってもいいかも) がそれぞれ異なる物理マシンに deploy されているケースが Figure 12b となる。
 各 subtask は input と output の buffer を持っており、
- producer は処理結果を output buffer に書き出す TCP 等の物理的な接続でデータを送信 consumer 側の output buffer にデータを格納 consumer がそれを読み込んで処理する  というような流れになる。</description>
+producer は処理結果を output buffer に書き出す TCP 等の物理的な接続でデータを送信 consumer 側の output buffer にデータを格納 consumer がそれを読み込んで処理する というような流れになる。</description>
     </item>
     
     <item>
@@ -47,7 +63,7 @@ overload された同名のメソッドがいくつか存在するが、次の2�
 まず1つめは FileInputFormat&amp;lt;OUT&amp;gt; inputFormat であり、こちらは data stream の生成に用いる入力フォーマットを指定する。
 おそらく最も一般的なのが TextInputFormat だと思われる。
 もちろん単なる text として CSV ファイルを読み込み、後続の処理で各レコードを parse することも可能だが CSV 用の入力フォーマットがいくつか用意されているようだ。
- PojoCsvInputFormat RowCsvInputFormat TupleCsvInputFormat  なんとなく名前でわかると思うが、それぞれ readFile() の結果として返される DataStreamSource が内包する型が異なる。</description>
+PojoCsvInputFormat RowCsvInputFormat TupleCsvInputFormat なんとなく名前でわかると思うが、それぞれ readFile() の結果として返される DataStreamSource が内包する型が異なる。</description>
     </item>
     
     <item>
@@ -85,7 +101,9 @@ out-of-order を管理するためにストリーム処理システムは処理�
 それにあたって独学で調べたことなどまとめておく。
 ストリーム処理とは そもそも &amp;ldquo;ストリーム処理&amp;rdquo; とは何を指しているのか。
 以下の引用が簡潔に示している。
- a type of data processing engine that is designed with infinite data sets in mind. Nothing more.&amp;ndash; Streaming 101: The world beyond batch こちらは &amp;ldquo;streaming system&amp;rdquo; について述べたものだが、つまり終わりのないデータを扱うのがストリーム処理ということである。
+a type of data processing engine that is designed with infinite data sets in mind. Nothing more.
+&amp;ndash; Streaming 101: The world beyond batch
+こちらは &amp;ldquo;streaming system&amp;rdquo; について述べたものだが、つまり終わりのないデータを扱うのがストリーム処理ということである。
 例えば web サービスから生まれ続けるユーザ行動ログを逐次的に処理するというのがストリーム処理。
 web サービスが終了しないかぎりはユーザ行動ログの生成には終わりがない。
 これに対して &amp;ldquo;1日分のユーザ行動ログ&amp;rdquo; 等のように有限の量のデータを切り出して処理する場合、これはバッチ処理となる。
@@ -94,10 +112,11 @@ web サービスが終了しないかぎりはユーザ行動ログの生成に�
 なぜストリーム処理なのか なぜストリーム処理なのか。
 ひとえに逐次的な入力データに対する迅速なフィードバックが求められているからと言えるだろう。
 迅速なフィードバックがビジネス上のメリットとなることは自明だ。
- SNS の配信 カーシェアリングにおける配車や料金設定 クレジットカードや広告クリックなどの不正検知  もしこれらの application が例えば hourly のバッチ処理で実装されていたらどうだろうか。
+SNS の配信 カーシェアリングにおける配車や料金設定 クレジットカードや広告クリックなどの不正検知 もしこれらの application が例えば hourly のバッチ処理で実装されていたらどうだろうか。
 まあ待っていられない。
 一般的なストリーム処理の構成 モダンな…と言っていいのかわからないが、ストリーム処理を行うための一般的なシステムは次の3つの要素で構成される。
- producer broker consumer  producer は最初にレコードを生成する、ストリームデータの発生源となるものである。</description>
+producer broker consumer producer は最初にレコードを生成する、ストリームデータの発生源となるものである。
+例えばログを生成する web application であったり、何らかのセンサーを持つ IoT 機器であったりがこれに該当する。</description>
     </item>
     
     <item>
@@ -128,8 +147,8 @@ stream data と static data の join ということになる。
 このポストでは Flink v1.11 を前提とした。
 join の方法 今回は DataStream API でこれを実現することを考える。
 Flink のドキュメントを読むと broadcast state pattern でできそうだ。
- The Broadcast State Pattern  やり方としては次のようになる。
- static data のファイルを FileProcessingMode.PROCESS_CONTINUOUSLY で読み込み DataStream 化 1 を broadcast() stream data の DataStream と 2 を connect()  static data を PROCESS_CONTINUOUSLY で読むのは変更を得るため。</description>
+The Broadcast State Pattern やり方としては次のようになる。
+static data のファイルを FileProcessingMode.PROCESS_CONTINUOUSLY で読み込み DataStream 化 1 を broadcast() stream data の DataStream と 2 を connect() static data を PROCESS_CONTINUOUSLY で読むのは変更を得るため。</description>
     </item>
     
   </channel>

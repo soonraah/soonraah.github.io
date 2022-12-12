@@ -2,17 +2,29 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://soonraah.github.io/tags/apache-hudi/</loc>
+    <lastmod>2022-12-13T00:30:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/tags/aws/</loc>
+    <lastmod>2022-12-13T00:30:00+09:00</lastmod>
+  </url><url>
     <loc>https://soonraah.github.io/tags/data-lake/</loc>
-    <lastmod>2022-06-21T08:00:00+09:00</lastmod>
+    <lastmod>2022-12-13T00:30:00+09:00</lastmod>
   </url><url>
     <loc>https://soonraah.github.io/</loc>
-    <lastmod>2022-06-21T08:00:00+09:00</lastmod>
+    <lastmod>2022-12-13T00:30:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/posts/give-up-on-schema-registry/</loc>
+    <lastmod>2022-12-13T00:30:00+09:00</lastmod>
   </url><url>
     <loc>https://soonraah.github.io/posts/</loc>
-    <lastmod>2022-06-21T08:00:00+09:00</lastmod>
+    <lastmod>2022-12-13T00:30:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/tags/stream-processing/</loc>
+    <lastmod>2022-12-13T00:30:00+09:00</lastmod>
   </url><url>
     <loc>https://soonraah.github.io/tags/</loc>
-    <lastmod>2022-06-21T08:00:00+09:00</lastmod>
+    <lastmod>2022-12-13T00:30:00+09:00</lastmod>
   </url><url>
     <loc>https://soonraah.github.io/posts/data-lake-and-data-lake-layer/</loc>
     <lastmod>2022-06-21T08:00:00+09:00</lastmod>
@@ -29,12 +41,6 @@
     <loc>https://soonraah.github.io/posts/backpressure-for-flink/</loc>
     <lastmod>2021-02-28T21:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://soonraah.github.io/tags/stream-processing/</loc>
-    <lastmod>2021-02-28T21:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://soonraah.github.io/tags/apache-hudi/</loc>
-    <lastmod>2021-01-26T08:00:00+09:00</lastmod>
-  </url><url>
     <loc>https://soonraah.github.io/tags/apache-kudu/</loc>
     <lastmod>2021-01-26T08:00:00+09:00</lastmod>
   </url><url>
@@ -43,9 +49,6 @@
   </url><url>
     <loc>https://soonraah.github.io/posts/oss-for-data-lake/</loc>
     <lastmod>2021-01-26T08:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://soonraah.github.io/tags/aws/</loc>
-    <lastmod>2020-12-31T20:00:00+09:00</lastmod>
   </url><url>
     <loc>https://soonraah.github.io/tags/gcp/</loc>
     <lastmod>2020-12-31T20:00:00+09:00</lastmod>

@@ -9,7 +9,23 @@
       <link>https://soonraah.github.io/47</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 21 Jun 2022 08:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/data-lake/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Dec 2022 00:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/data-lake/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Glue Schema Registry の導入を断念した話</title>
+      <link>https://soonraah.github.io/posts/give-up-on-schema-registry/</link>
+      <pubDate>Tue, 13 Dec 2022 00:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/give-up-on-schema-registry/</guid>
+      <description>業務で AWS Glue Schema Registry を使おうとしたけど、やっぱりやめたというお話。
+Glue Schema Registry What&amp;rsquo;s Schema Registry? AWS Glue Schema Registry は2020年に発表された AWS の機能だ。
+Control the evolution of data streams using the AWS Glue Schema Registry 一方、私が最初に schema registry 的なものを見たのは Confluent の例。
+Schema Registry の概要 - Confluent AWS の Glue Schema Registry はこれより後のリリースであり、同等のものの AWS マネージド版といったところだろうか。
+schema registry で何ができるかは Confluent のリンク先の図がとてもわかりやすいので参考にしていただきたい。
+Glue Schema Registry もだいたい同じで、ストリーム処理のための機能である。
+Glue Schema Registry で解決したい課題とその機能 データ基盤上のストリーム処理における schema 管理はバッチ処理のそれとは異なる難しさがある。
+これは schema evolution と呼ばれる問題で以前のポストでも述べている。</description>
+    </item>
+    
     <item>
       <title>「データレイク」と「データレイク層」</title>
       <link>https://soonraah.github.io/posts/data-lake-and-data-lake-layer/</link>
@@ -22,12 +38,16 @@
 アーキテクチャ目線の「データレイク」 「データレイク」については以前こちらのポストで書いたのでここでは詳しく触れない。
 詳細はリンク先を見ていただきたい。
 ここでキーとなるのが、
-  加工前データや非構造化データを含むあらゆるデータを保存     一元的なデータ管理   という部分だ。
+加工前データや非構造化データを含むあらゆるデータを保存 一元的なデータ管理 という部分だ。
 あらゆるデータを一元的に管理するという思想であり、これができるアーキテクチャがデータレイクということだ。
 例えば AWS や Azure のドキュメントを見るとデータレイクの中が zone に分けられており、生データを保持する raw zone や加工されたデータを置いておく curated zone などがある。
 (zone の命名にもいくつかの流派があるようだ…)
- Reference architecture - Data Analytics Lens Data lake zones and containers - Cloud Adoption Framework | Microsoft Docs  次の Robinhood 社の例でもデータレイク中に生データとその派生データが存在している。
- Fresher Data Lake on AWS S3 | by Balaji Varadarajan | Robinhood  内容物目線の「データレイク層」 一方でデータレイクには生データのみを置くべき、という考えもある。</description>
+Reference architecture - Data Analytics Lens Data lake zones and containers - Cloud Adoption Framework | Microsoft Docs 次の Robinhood 社の例でもデータレイク中に生データとその派生データが存在している。
+Fresher Data Lake on AWS S3 | by Balaji Varadarajan | Robinhood 内容物目線の「データレイク層」 一方でデータレイクには生データのみを置くべき、という考えもある。
+本書におけるデータレイク（DataLake）層とは、元のデータをコピーして、1つのシステムに集約したものを指します。 データソース（＝水源）から流れてきたデータを蓄える場所なのでレイク（湖）と呼びます。
+ECサイトの注文履歴データを、分析用DBにコピーしている場合、それがデータレイクと言えます。データレイクのデータは、データソースと一対一の関係にあります。何も加工していない、ただのコピーだからです。
+何も加工していない、ただのコピーであることが重要です。仮にデータの中身に誤りがあったとしても、修正や加工をせず、そのまま集約しましょう。
+&amp;ndash; ゆずたそ,渡部 徹太郎,伊藤 徹郎. 実践的データ基盤への処方箋〜 ビジネス価値創出のためのデータ・システム・ヒトのノウハウ (Japanese Edition) (pp.</description>
     </item>
     
     <item>
@@ -39,13 +59,14 @@
       <description>はじめに 前回のポストではデータレイクとはどういうものかというのを調べた。
 今回はデータレイクの文脈でどのような OSS が注目されているのかを見ていきたい。
 以下は NTT データさんによる講演資料であり、その中で「近年登場してきた、リアルタイム分析に利用可能なOSSストレージレイヤソフト」というのが3つ挙げられている。
-  大規模データ活用向けストレージレイヤソフトのこれまでとこれから（NTTデータ テクノロジーカンファレンス 2019 講演資料、2019/09/05）  from NTT DATA Technology &amp;amp; Innovation    Delta Lake Apache Hudi Apache Kudu  これらはすべて論理的なストレージレイヤーを担う。
+大規模データ活用向けストレージレイヤソフトのこれまでとこれから（NTTデータ テクノロジーカンファレンス 2019 講演資料、2019/09/05） from NTT DATA Technology &amp;amp; Innovation Delta Lake Apache Hudi Apache Kudu これらはすべて論理的なストレージレイヤーを担う。
 こちらの講演資料に付け足すようなこともないかもしれないが、このポストではデータレイクという文脈から自分で調べて理解した内容をまとめるということを目的にする。
 当然 Hadoop, Hive, Spark 等もデータレイクの文脈において超重要だが、「データレイク」という言葉がよく聞かれるようになる前から普及していたのでこのポストでは触れないことにする。
 Delta Lake https://delta.io/
- Delta Lake is an open-source storage layer that brings ACID transactions to Apache Spark™ and big data workloads.
-    Delta Lake
-  Delta Lake は Apache Spark の読み書きに ACID な transaction を提供するストレージレイヤーの OSS である。</description>
+Delta Lake is an open-source storage layer that brings ACID transactions to Apache Spark™ and big data workloads.
+Delta Lake
+Delta Lake は Apache Spark の読み書きに ACID な transaction を提供するストレージレイヤーの OSS である。
+Databricks が作り、2019年4月に v0.1.0 がリリースされたのが最初だ。</description>
     </item>
     
     <item>
@@ -57,11 +78,14 @@ Delta Lake https://delta.io/
       <description>最近よく聞かれるようになった「データレイク」という概念にあまりついていけていなかったため、いまさらながらざっと調べてみた。
 データレイクとは Wikipedia によると最初にこの言葉を使ったのは Pentaho 社の CTO である James Dixon らしい。
 その時の彼のブログ (10年前…) を読むと、既にあったデータマートに対して
-  Only a subset of the attributes are examined, so only pre-determined questions can be answered. The data is aggregated so visibility into the lowest levels is lost
-&amp;ndash;Pentaho, Hadoop, and Data Lakes - James Dixon’s Blog   というような問題意識からデータレイクというコンセプトを提案したようだ。
+Only a subset of the attributes are examined, so only pre-determined questions can be answered. The data is aggregated so visibility into the lowest levels is lost
+&amp;ndash;Pentaho, Hadoop, and Data Lakes - James Dixon’s Blog というような問題意識からデータレイクというコンセプトを提案したようだ。
 最近？のデータレイクについてはベンダー等の記事が参考になる。
- データレイクとは - AWS データレイクとは？ - talend データレイクとは？データレイクの落とし穴と効果 - Informatica  書籍だと『AWSではじめるデータレイク: クラウドによる統合型データリポジトリ構築入門』がいいだろうか。
-データレイクの概要と AWS が考えている構築・運用がざっとわかる。</description>
+データレイクとは - AWS データレイクとは？ - talend データレイクとは？データレイクの落とし穴と効果 - Informatica 書籍だと『AWSではじめるデータレイク: クラウドによる統合型データリポジトリ構築入門』がいいだろうか。
+データレイクの概要と AWS が考えている構築・運用がざっとわかる。
+Amazon で検索した限りだと現時点でタイトルに「データレイク」を含む和書はこれのみだった。
+上に挙げたような文献ではデータレイクはデータウェアハウスとの対比という形でよく語られている。
+共通している内容は概ね以下のとおり。</description>
     </item>
     
   </channel>

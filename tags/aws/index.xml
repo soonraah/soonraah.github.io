@@ -9,7 +9,23 @@
       <link>https://soonraah.github.io/47</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 31 Dec 2020 20:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Dec 2022 00:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Glue Schema Registry の導入を断念した話</title>
+      <link>https://soonraah.github.io/posts/give-up-on-schema-registry/</link>
+      <pubDate>Tue, 13 Dec 2022 00:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/give-up-on-schema-registry/</guid>
+      <description>業務で AWS Glue Schema Registry を使おうとしたけど、やっぱりやめたというお話。
+Glue Schema Registry What&amp;rsquo;s Schema Registry? AWS Glue Schema Registry は2020年に発表された AWS の機能だ。
+Control the evolution of data streams using the AWS Glue Schema Registry 一方、私が最初に schema registry 的なものを見たのは Confluent の例。
+Schema Registry の概要 - Confluent AWS の Glue Schema Registry はこれより後のリリースであり、同等のものの AWS マネージド版といったところだろうか。
+schema registry で何ができるかは Confluent のリンク先の図がとてもわかりやすいので参考にしていただきたい。
+Glue Schema Registry もだいたい同じで、ストリーム処理のための機能である。
+Glue Schema Registry で解決したい課題とその機能 データ基盤上のストリーム処理における schema 管理はバッチ処理のそれとは異なる難しさがある。
+これは schema evolution と呼ばれる問題で以前のポストでも述べている。</description>
+    </item>
+    
     <item>
       <title>いまさらながらのデータレイク</title>
       <link>https://soonraah.github.io/posts/what-is-a-data-lake/</link>
@@ -19,11 +35,14 @@
       <description>最近よく聞かれるようになった「データレイク」という概念にあまりついていけていなかったため、いまさらながらざっと調べてみた。
 データレイクとは Wikipedia によると最初にこの言葉を使ったのは Pentaho 社の CTO である James Dixon らしい。
 その時の彼のブログ (10年前…) を読むと、既にあったデータマートに対して
-  Only a subset of the attributes are examined, so only pre-determined questions can be answered. The data is aggregated so visibility into the lowest levels is lost
-&amp;ndash;Pentaho, Hadoop, and Data Lakes - James Dixon’s Blog   というような問題意識からデータレイクというコンセプトを提案したようだ。
+Only a subset of the attributes are examined, so only pre-determined questions can be answered. The data is aggregated so visibility into the lowest levels is lost
+&amp;ndash;Pentaho, Hadoop, and Data Lakes - James Dixon’s Blog というような問題意識からデータレイクというコンセプトを提案したようだ。
 最近？のデータレイクについてはベンダー等の記事が参考になる。
- データレイクとは - AWS データレイクとは？ - talend データレイクとは？データレイクの落とし穴と効果 - Informatica  書籍だと『AWSではじめるデータレイク: クラウドによる統合型データリポジトリ構築入門』がいいだろうか。
-データレイクの概要と AWS が考えている構築・運用がざっとわかる。</description>
+データレイクとは - AWS データレイクとは？ - talend データレイクとは？データレイクの落とし穴と効果 - Informatica 書籍だと『AWSではじめるデータレイク: クラウドによる統合型データリポジトリ構築入門』がいいだろうか。
+データレイクの概要と AWS が考えている構築・運用がざっとわかる。
+Amazon で検索した限りだと現時点でタイトルに「データレイク」を含む和書はこれのみだった。
+上に挙げたような文献ではデータレイクはデータウェアハウスとの対比という形でよく語られている。
+共通している内容は概ね以下のとおり。</description>
     </item>
     
   </channel>
