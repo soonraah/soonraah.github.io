@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Lakehouse on Froglog</title>
+    <link>https://soonraah.github.io/tags/lakehouse/</link>
+    <description>Recent content in Lakehouse on Froglog</description>
+    <image>
+      <url>https://soonraah.github.io/47</url>
+      <link>https://soonraah.github.io/47</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 11 May 2023 01:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/lakehouse/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Iceberg の table を near real time で更新する</title>
+      <link>https://soonraah.github.io/posts/update-iceberg-table-in-near-real-time/</link>
+      <pubDate>Thu, 11 May 2023 01:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/update-iceberg-table-in-near-real-time/</guid>
+      <description>Apache Iceberg の table を near real time に、つまり高頻度で更新するということをやってみた。
+Apache Iceberg とは Apache Iceberg (以下 Iceberg) は分散ファイルシステムやクラウドストレージ上の table format であり、Apache Hudi や Delta Lake と並んで data lake や lakehouse architecture で用いられる。
+特徴的なのは table とデータ実体 (Parquet, Avro など) の間に metadata file, manifest list, manifest file の抽象的なレイヤーがあり、ファイル単位で table の状態を track できること。
+これにより強い isolation level、パフォーマンス、schema evolution など様々な機能・性能を実現できるようになっている。
+Apache Iceberg Iceberg Table Spec
+詳しくは公式ドキュメントを参照のこと。
+最近では SmartNews 社が Iceberg で data lake を構築したことを記事にしていた。
+Flink-based Iceberg Real-Time Data Lake in SmartNews (Part I) | by SmartNews | SmartNews, Inc | Apr, 2023 | Medium ベンダー提供の DWH 中心ではなく Lakehouse Architecture を目指すのであれば最有力の table format の1つだと言えそう。</description>
+    </item>
+    
+  </channel>
+</rss>
