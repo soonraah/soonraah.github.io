@@ -9,7 +9,24 @@
       <link>https://soonraah.github.io/47</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 11 May 2023 01:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/lakehouse/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 May 2023 09:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/lakehouse/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>near real time で更新される Apache Iceberg の table のメンテナンス</title>
+      <link>https://soonraah.github.io/posts/maintain-iceberg-table-updated-in-near-real-time/</link>
+      <pubDate>Sun, 28 May 2023 09:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/maintain-iceberg-table-updated-in-near-real-time/</guid>
+      <description>前回のポストでは merge on read で Apache Iceberg の table を near real time で更新するということを行った。
+このポストではそのメンテナンスについて触れて、かつそれを実行してみる。
+merge on read の課題 merge on read で table を更新する場合、copy on write の場合と違い table 全体を洗い替えする必要はなく差分のみを追記することになる。
+したがって更新にかかる時間は copy on write よりも短くなる。
+一方で merge on read の名のとおり読み出し時に積み重なった差分とベースを merge して最新の snapshot とするため、読み出しの速度は copy on write より遅くなる。
+長時間更新され差分がたくさん存在しているとなおさら遅い。
+なので
+更新頻度が低く、参照頻度が高いユースケース -&amp;gt; copy on write 更新頻度が高く、参照頻度が低いユースケース -&amp;gt; merge on write という使い分けがよいとされている。
+前回ポストの例では一晩更新を続けた後の merge on read の table に対して簡単な select 文を実行したところ、6分程度かかってしまった。</description>
+    </item>
+    
     <item>
       <title>Apache Iceberg の table を near real time で更新する</title>
       <link>https://soonraah.github.io/posts/update-iceberg-table-in-near-real-time/</link>
