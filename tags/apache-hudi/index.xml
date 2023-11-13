@@ -5,10 +5,12 @@
     <link>https://soonraah.github.io/tags/apache-hudi/</link>
     <description>Recent content in Apache Hudi on Froglog</description>
     <image>
+      <title>Froglog</title>
       <url>https://soonraah.github.io/47</url>
       <link>https://soonraah.github.io/47</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
     <lastBuildDate>Tue, 13 Dec 2022 00:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/apache-hudi/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Glue Schema Registry の導入を断念した話</title>

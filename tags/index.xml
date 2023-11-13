@@ -5,15 +5,35 @@
     <link>https://soonraah.github.io/tags/</link>
     <description>Recent content in Tags on Froglog</description>
     <image>
+      <title>Froglog</title>
       <url>https://soonraah.github.io/47</url>
       <link>https://soonraah.github.io/47</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 28 May 2023 09:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>ja</language>
+    <lastBuildDate>Mon, 13 Nov 2023 22:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data Management</title>
+      <link>https://soonraah.github.io/tags/data-management/</link>
+      <pubDate>Mon, 13 Nov 2023 22:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/tags/data-management/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DMBOK2</title>
+      <link>https://soonraah.github.io/tags/dmbok2/</link>
+      <pubDate>Mon, 13 Nov 2023 22:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/tags/dmbok2/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Apache Iceberg</title>
       <link>https://soonraah.github.io/tags/apache-iceberg/</link>
-      <pubDate>Sun, 28 May 2023 09:00:00 +0900</pubDate>
+      <pubDate>Thu, 11 May 2023 01:30:00 +0900</pubDate>
       
       <guid>https://soonraah.github.io/tags/apache-iceberg/</guid>
       <description></description>
@@ -22,7 +42,7 @@
     <item>
       <title>Data Lake</title>
       <link>https://soonraah.github.io/tags/data-lake/</link>
-      <pubDate>Sun, 28 May 2023 09:00:00 +0900</pubDate>
+      <pubDate>Thu, 11 May 2023 01:30:00 +0900</pubDate>
       
       <guid>https://soonraah.github.io/tags/data-lake/</guid>
       <description></description>
@@ -31,7 +51,7 @@
     <item>
       <title>Lakehouse</title>
       <link>https://soonraah.github.io/tags/lakehouse/</link>
-      <pubDate>Sun, 28 May 2023 09:00:00 +0900</pubDate>
+      <pubDate>Thu, 11 May 2023 01:30:00 +0900</pubDate>
       
       <guid>https://soonraah.github.io/tags/lakehouse/</guid>
       <description></description>

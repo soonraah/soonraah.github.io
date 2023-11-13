@@ -5,26 +5,41 @@
     <link>https://soonraah.github.io/</link>
     <description>Recent content on Froglog</description>
     <image>
+      <title>Froglog</title>
       <url>https://soonraah.github.io/47</url>
       <link>https://soonraah.github.io/47</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 28 May 2023 09:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <language>ja</language>
+    <lastBuildDate>Mon, 13 Nov 2023 22:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>near real time で更新される Apache Iceberg の table のメンテナンス</title>
-      <link>https://soonraah.github.io/posts/maintain-iceberg-table-updated-in-near-real-time/</link>
-      <pubDate>Sun, 28 May 2023 09:00:00 +0900</pubDate>
+      <title>読書メモ: DMBOK2 第1章 データマネジメント</title>
+      <link>https://soonraah.github.io/posts/dmbok-chapter-1/</link>
+      <pubDate>Mon, 13 Nov 2023 22:30:00 +0900</pubDate>
       
-      <guid>https://soonraah.github.io/posts/maintain-iceberg-table-updated-in-near-real-time/</guid>
-      <description>前回のポストでは merge on read で Apache Iceberg の table を near real time で更新するということを行った。
-このポストではそのメンテナンスについて触れて、かつそれを実行してみる。
-merge on read の課題 merge on read で table を更新する場合、copy on write の場合と違い table 全体を洗い替えする必要はなく差分のみを追記することになる。
-したがって更新にかかる時間は copy on write よりも短くなる。
-一方で merge on read の名のとおり読み出し時に積み重なった差分とベースを merge して最新の snapshot とするため、読み出しの速度は copy on write より遅くなる。
-長時間更新され差分がたくさん存在しているとなおさら遅い。
-なので
-更新頻度が低く、参照頻度が高いユースケース -&amp;gt; copy on write 更新頻度が高く、参照頻度が低いユースケース -&amp;gt; merge on write という使い分けがよいとされている。
-前回ポストの例では一晩更新を続けた後の merge on read の table に対して簡単な select 文を実行したところ、6分程度かかってしまった。</description>
+      <guid>https://soonraah.github.io/posts/dmbok-chapter-1/</guid>
+      <description>このポストについて なんか個人的にデータマネジメントの機運が高まってきたので、ずっと積ん読していた DAMA-DMBOK を読んでいこうかなと。
+で、せっかくなのでデータ関係の皆さんがよくやっているように自分としても読書メモをまとめてみようと思った。
+内容を網羅するのではなく、現場のデータエンジニアとして活動した経験を踏まえて自分なりの観点でまとめてみたい。
+今回は第1章「データマネジメント」で、それ以降は関心がある章をつまみ食い的に読んでいく。
+DAMA-DMBOK とは DAMA とは DAta Management Association の略であり、
+世界各地に80の支部を持ち、8,000名を越える会員を擁する全世界のデータ専門家のための国際的な非営利団体です。 特定のベンダーや技術、手法に依存しないことを前提として、データや情報、知識をエンタープライズの重要な資産として管理する必要性の理解を促し、この分野の成長を推進しております。
+&amp;ndash; 一般社団法人 データマネジメント協会 日本支部(DAMA Japan)
+とのこと。
+この DAMA が刊行しているのがデータマネジメント知識体系ガイド (The DAMA Guide to Data Management Body of Knowledge) であり、その略称が DMBOK である。
+ＤＡＭＡ ＤＭＢＯＫは、データマネジメントプロフェッショナルにとって有益な資料かつ指針となることを目指し、データ管理のもっとも信頼できる入門書となるよう編集されています
+&amp;ndash; 一般社団法人 データマネジメント協会 日本支部(DAMA Japan)
+IT 業界歴の長い人なら PMBOK というプロジェクトマネジメントについて書かれた本をご存知かもしれないが、あれのデータマネジメント版だと思っていい。
+私としてはデータマネジメントの教科書的なものだと考えている。
+2023年現在における最新版は2018年の第2版となっている。
+以降では DMBOK2 とする。
+5年前なのでやや古いと思うかもしれないが、内容的には特定技術について書かれているわけではなく、ある程度抽象度が高い話になっているので陳腐化はしにくい。
+データマネジメントとは 以降、特に注釈のない引用は DMBOK2 第1章からの引用とする。
+データマネジメントとは、データとインフォメーションという資産の価値を提供し、管理し、守り、高めるために、それらのライフサイクルを通して計画、方針、スケジュール、手順などを開発、実施、監督することである。
+この一文にいろいろと集約されているので見ていこう。
+データとインフォーメーション ここでいう「データ」と「インフォメーション」は DIKW モデルにもとづく解釈でよい。
+データはインフォメーションの原材料であり、インフォメーションは意味と目的、つまりコンテキストを付与されたデータと言える。
+ex. 前四半期の売上レポートは「インフォメーション」、それの元になっている DWH のデータが「データ」 データマネジメントにおいては特にこのデータとインフォーメションを扱う。</description>
     </item>
     
     <item>

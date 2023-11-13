@@ -5,10 +5,12 @@
     <link>https://soonraah.github.io/tags/machine-learning/</link>
     <description>Recent content in machine learning on Froglog</description>
     <image>
+      <title>Froglog</title>
       <url>https://soonraah.github.io/47</url>
       <link>https://soonraah.github.io/47</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
     <lastBuildDate>Mon, 12 Jul 2021 22:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>成熟フェーズの事業におけるデータサイエンティスト</title>

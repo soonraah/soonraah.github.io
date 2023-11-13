@@ -5,10 +5,12 @@
     <link>https://soonraah.github.io/tags/gcp/</link>
     <description>Recent content in GCP on Froglog</description>
     <image>
+      <title>Froglog</title>
       <url>https://soonraah.github.io/47</url>
       <link>https://soonraah.github.io/47</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
     <lastBuildDate>Thu, 31 Dec 2020 20:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/gcp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>いまさらながらのデータレイク</title>

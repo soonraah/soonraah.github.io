@@ -5,10 +5,12 @@
     <link>https://soonraah.github.io/tags/delta-lake/</link>
     <description>Recent content in Delta Lake on Froglog</description>
     <image>
+      <title>Froglog</title>
       <url>https://soonraah.github.io/47</url>
       <link>https://soonraah.github.io/47</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
     <lastBuildDate>Tue, 26 Jan 2021 08:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/delta-lake/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>データレイク関連の OSS - Delta Lake, Apache Hudi, Apache Kudu</title>

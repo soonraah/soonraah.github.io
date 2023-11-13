@@ -5,10 +5,12 @@
     <link>https://soonraah.github.io/tags/git/</link>
     <description>Recent content in Git on Froglog</description>
     <image>
+      <title>Froglog</title>
       <url>https://soonraah.github.io/47</url>
       <link>https://soonraah.github.io/47</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
     <lastBuildDate>Mon, 03 Aug 2020 22:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>あまり大きな Pull Request を作ってほしくない</title>
