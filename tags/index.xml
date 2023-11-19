@@ -11,11 +11,20 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 13 Nov 2023 22:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Nov 2023 17:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data Governance</title>
+      <link>https://soonraah.github.io/tags/data-governance/</link>
+      <pubDate>Sun, 19 Nov 2023 17:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/tags/data-governance/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Data Management</title>
       <link>https://soonraah.github.io/tags/data-management/</link>
-      <pubDate>Mon, 13 Nov 2023 22:30:00 +0900</pubDate>
+      <pubDate>Sun, 19 Nov 2023 17:30:00 +0900</pubDate>
       
       <guid>https://soonraah.github.io/tags/data-management/</guid>
       <description></description>
@@ -24,7 +33,7 @@
     <item>
       <title>DMBOK2</title>
       <link>https://soonraah.github.io/tags/dmbok2/</link>
-      <pubDate>Mon, 13 Nov 2023 22:30:00 +0900</pubDate>
+      <pubDate>Sun, 19 Nov 2023 17:30:00 +0900</pubDate>
       
       <guid>https://soonraah.github.io/tags/dmbok2/</guid>
       <description></description>
