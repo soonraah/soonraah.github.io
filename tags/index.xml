@@ -11,7 +11,52 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 19 Nov 2023 17:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Dec 2023 22:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Amazon Athena</title>
+      <link>https://soonraah.github.io/tags/amazon-athena/</link>
+      <pubDate>Sun, 03 Dec 2023 22:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/tags/amazon-athena/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Apache Iceberg</title>
+      <link>https://soonraah.github.io/tags/apache-iceberg/</link>
+      <pubDate>Sun, 03 Dec 2023 22:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/tags/apache-iceberg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>AWS</title>
+      <link>https://soonraah.github.io/tags/aws/</link>
+      <pubDate>Sun, 03 Dec 2023 22:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/tags/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>AWS DMS</title>
+      <link>https://soonraah.github.io/tags/aws-dms/</link>
+      <pubDate>Sun, 03 Dec 2023 22:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/tags/aws-dms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CDC</title>
+      <link>https://soonraah.github.io/tags/cdc/</link>
+      <pubDate>Sun, 03 Dec 2023 22:00:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/tags/cdc/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Data Governance</title>
       <link>https://soonraah.github.io/tags/data-governance/</link>
@@ -36,15 +81,6 @@
       <pubDate>Sun, 19 Nov 2023 17:30:00 +0900</pubDate>
       
       <guid>https://soonraah.github.io/tags/dmbok2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Apache Iceberg</title>
-      <link>https://soonraah.github.io/tags/apache-iceberg/</link>
-      <pubDate>Sun, 28 May 2023 09:00:00 +0900</pubDate>
-      
-      <guid>https://soonraah.github.io/tags/apache-iceberg/</guid>
       <description></description>
     </item>
     
@@ -81,15 +117,6 @@
       <pubDate>Tue, 13 Dec 2022 00:30:00 +0900</pubDate>
       
       <guid>https://soonraah.github.io/tags/apache-hudi/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>AWS</title>
-      <link>https://soonraah.github.io/tags/aws/</link>
-      <pubDate>Tue, 13 Dec 2022 00:30:00 +0900</pubDate>
-      
-      <guid>https://soonraah.github.io/tags/aws/</guid>
       <description></description>
     </item>
     
