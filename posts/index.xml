@@ -11,7 +11,36 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 03 Dec 2023 22:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 09 Dec 2023 10:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>読書メモ: DMBOK2 第12章 メタデータ管理</title>
+      <link>https://soonraah.github.io/posts/dmbok-chapter-12/</link>
+      <pubDate>Sat, 09 Dec 2023 10:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/dmbok-chapter-12/</guid>
+      <description>このポストについて DMBOK2 を読み進めていくシリーズ。
+今回は第12章「メタデータ管理」について。
+仕事でメタデータを扱い始めたので読んでおきたかった。
+以降、特に注釈のない引用は DMBOK2 第12章からの引用とする。
+メタデータとは 一般的な説明としては「データに関するデータ」とよく言われている。
+データに関するデータはすべてメタデータなので、メタデータはとても幅広い内容となっている。
+DMBOK2 ではメタデータの説明として図書館の例を挙げている。
+そこには数十万の書籍と雑誌があるのに、図書目録がない。図書目録がなければ、読者は特定の本や特定のトピックの検索を開始する方法さえ分からないかもしれない。図書目録は、必要な情報 (図書館が所有する本と資料、保管場所) を提供するだけでなく、利用者が様々な着眼点 (対象分野、著者、タイトル) から資料を見つけることを可能にする。 (中略) メタデータを持たない組織は、図書目録のない図書館のようなものである。
+データという資産を管理するためにも、データを利用するためにも、リスクマネジメントのためにもメタデータは必要となる。
+メタデータの種類 メタデータはビジネス、テクニカル、オペレーショナルの3つに分類することができる。
+ビジネスメタデータ 主にデータの内容と状態に重点を置く。
+IT からは独立している。
+dataset, table, column の定義と説明 業務ルール、変換ルール、計算方法、導出方法 データモデル etc. テクニカルメタデータ 技術的詳細やシステムに関する情報。
+主に IT に関連している。
+物理 database の table, column の名称 column のプロパティ アクセス権 etc. オペレーショナルメタデータ データの処理とアクセスの詳細を示す。
+運用で得られる情報とも言える。
+バッチプログラムのジョブ実行ログ データの抽出とその結果などの履歴 運用スケジュールの以上 etc. 以上、各種のメタデータで例に挙げたのはあくまで一部であり、現実にはもっと多くのメタデータが存在する。
+メタデータを管理する意義 図書館の例からもわかるとおり、メタデータなしではデータを管理することはできない。
+信頼性が高く管理されたメタデータにより、次のようなことができるようになる。
+データのコンテキストを提供し、それによりデータ品質を測定可能にして信頼性を向上させる 業務効率の向上、および古いデータや誤ったデータの利用防止 データ利用者とエンジニアの間のコミュニケーションの改善 法令遵守の支援 etc. メタデータの管理が不十分だと次のようなことが起こる。
+一貫性のないデータ利用と誤った定義によるリスク メタデータは複製されて保管されることによる冗長性 利用者の信頼性低下 etc. メタデータアーキテクチャ メタデータの内容は幅広いがしたがってその取得元も幅広く、ビジネス用語集、BI ツール、モデリングツール、等々が挙げられる。</description>
+    </item>
+    
     <item>
       <title>CDC &#43; Apache Iceberg で Amazon Athena にデータを取り込む</title>
       <link>https://soonraah.github.io/posts/ingest-data-into-athena-by-cdc-and-iceberg/</link>

@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://soonraah.github.io/tags/data-management/</loc>
+    <lastmod>2023-12-09T10:30:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/tags/dmbok2/</loc>
+    <lastmod>2023-12-09T10:30:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/</loc>
+    <lastmod>2023-12-09T10:30:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/tags/metadata/</loc>
+    <lastmod>2023-12-09T10:30:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/posts/</loc>
+    <lastmod>2023-12-09T10:30:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/tags/</loc>
+    <lastmod>2023-12-09T10:30:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/posts/dmbok-chapter-12/</loc>
+    <lastmod>2023-12-09T10:30:00+09:00</lastmod>
+  </url><url>
     <loc>https://soonraah.github.io/tags/amazon-athena/</loc>
     <lastmod>2023-12-03T22:00:00+09:00</lastmod>
   </url><url>
@@ -20,22 +41,7 @@
     <loc>https://soonraah.github.io/posts/ingest-data-into-athena-by-cdc-and-iceberg/</loc>
     <lastmod>2023-12-03T22:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://soonraah.github.io/</loc>
-    <lastmod>2023-12-03T22:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://soonraah.github.io/posts/</loc>
-    <lastmod>2023-12-03T22:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://soonraah.github.io/tags/</loc>
-    <lastmod>2023-12-03T22:00:00+09:00</lastmod>
-  </url><url>
     <loc>https://soonraah.github.io/tags/data-governance/</loc>
-    <lastmod>2023-11-19T17:30:00+09:00</lastmod>
-  </url><url>
-    <loc>https://soonraah.github.io/tags/data-management/</loc>
-    <lastmod>2023-11-19T17:30:00+09:00</lastmod>
-  </url><url>
-    <loc>https://soonraah.github.io/tags/dmbok2/</loc>
     <lastmod>2023-11-19T17:30:00+09:00</lastmod>
   </url><url>
     <loc>https://soonraah.github.io/posts/dmbok-chapter-3/</loc>
