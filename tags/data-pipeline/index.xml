@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>data pipeline on Froglog</title>
+    <link>https://soonraah.github.io/tags/data-pipeline/</link>
+    <description>Recent content in data pipeline on Froglog</description>
+    <image>
+      <title>Froglog</title>
+      <url>https://soonraah.github.io/47</url>
+      <link>https://soonraah.github.io/47</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Mon, 18 Dec 2023 23:50:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/data-pipeline/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>dlt 入門 - ELT の Extract と Load を担う data load tool</title>
+      <link>https://soonraah.github.io/posts/what-is-dlt/</link>
+      <pubDate>Mon, 18 Dec 2023 23:50:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/what-is-dlt/</guid>
+      <description>このポストについて このポストは datatech-jp Advent Calendar 2023 の18日目の投稿です。
+web の記事で見かけた dlt というツールが気になったので調べてみた。
+dlt の概要について書いていく。
+What is dlt? https://dlthub.com/
+dlt とは &amp;ldquo;data load tool&amp;rdquo; の略。
+雑に言うとデータパイプラインにおける ELT の Extract と Load を行う ものとなっている。
+主にベルリンとニューヨークに拠点を持つ dltHub 社によって開発されており、OSS の Python ライブラリとして提供されている。
+次のような特徴を持つ。
+プラットフォームではなくあくまでライブラリであることが強調されている つまり Airflow, GitHub Actions, Google Cloud Functions, ローカル環境などどこでも動かすことができる スケールアウト可能な分散処理ではない extract と load にまつわる反復的で平凡な作業をなくすことを目指している schema 推論や schema evolution をサポート 宣言的なコードでメンテナンスを楽にする incremental loading をサポート 豊富な source GA, Salesforce, Kinesis などいろいろ例が挙げられている 要は API からの取得も含めて JSON-like な形式で Python で読めるものなら何でも 豊富な destination BigQuery, Snowflake など主要なクラウド DWH DuckDB はローカルでの動作確認に便利 Airflow, dbt などとの連携がある CLI の提供もある その他、Glossary を見ておくとドキュメントが読みやすくなる。</description>
+    </item>
+    
+  </channel>
+</rss>
