@@ -11,7 +11,26 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 18 Dec 2023 23:50:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Dec 2023 09:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>現実の CSV ファイルのデータを BigQuery に load する仕組みを作るという泥臭い作業を dlt でやってみる</title>
+      <link>https://soonraah.github.io/posts/load-csv-data-into-bq-by-dlt/</link>
+      <pubDate>Wed, 20 Dec 2023 09:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/load-csv-data-into-bq-by-dlt/</guid>
+      <description>このポストについて 前回の記事 dlt 入門 - ELT の Extract と Load を担う data load tool では dlt の概要を説明した。
+この記事ではそれを踏まえ、dlt を使って CSV ファイルを BigQuery に load するという一連の開発作業をやってみる。
+現実の CSV はそのまま使えなかったりするので、BigQuery に入れるまでに泥臭い前処理のような作業があることが多い。
+そのへんもまとめて dlt でやってみるとこんな感じ、というのが示せるとよい。
+やりたいこと 個人で管理しているお金の情報を個人用の BigQuery に置きたい、という要件を想定。
+データ概要 具体的には MoneyForward のデータを load していく。
+個人では API を利用できないので、web UI から export できる CSV のデータで収入・支出詳細と資産推移月次を対象とする。
+CSV の export 方法は以下を参照。
+入出金履歴はダウンロードできますか – マネーフォワード MEサポートサイト データの内容は次のようになっている。
+収入・支出詳細_2023-11-01_2023-11-30.csv &amp;#34;計算対象&amp;#34;,&amp;#34;日付&amp;#34;,&amp;#34;内容&amp;#34;,&amp;#34;金額（円）&amp;#34;,&amp;#34;保有金融機関&amp;#34;,&amp;#34;大項目&amp;#34;,&amp;#34;中項目&amp;#34;,&amp;#34;メモ&amp;#34;,&amp;#34;振替&amp;#34;,&amp;#34;ID&amp;#34; &amp;#34;1&amp;#34;,&amp;#34;2023/11/30&amp;#34;,&amp;#34;AMAZON.CO.JP&amp;#34;,&amp;#34;-2830&amp;#34;,&amp;#34;楽天カード&amp;#34;,&amp;#34;食費&amp;#34;,&amp;#34;食料品&amp;#34;,&amp;#34;&amp;#34;,&amp;#34;0&amp;#34;,&amp;#34;EPv92ZjQcOxgWQx_cLbhD1&amp;#34; &amp;#34;1&amp;#34;,&amp;#34;2023/11/24&amp;#34;,&amp;#34;東京ガス&amp;#34;,&amp;#34;-4321&amp;#34;,&amp;#34;楽天カード&amp;#34;,&amp;#34;水道・光熱費&amp;#34;,&amp;#34;ガス・灯油代&amp;#34;,&amp;#34;&amp;#34;,&amp;#34;0&amp;#34;,&amp;#34;r6wuQPfrIRS6aFpNYZE5Eh&amp;#34; &amp;#34;1&amp;#34;,&amp;#34;2023/11/24&amp;#34;,&amp;#34;給与 カ) フロッグログ&amp;#34;,&amp;#34;700000&amp;#34;,&amp;#34;みずほ銀行&amp;#34;,&amp;#34;収入&amp;#34;,&amp;#34;給与&amp;#34;,&amp;#34;&amp;#34;,&amp;#34;0&amp;#34;,&amp;#34;doettKpYyNp0Tml9KQQXm1&amp;#34; ヘッダーがあり、各列に名前が付いている。
+encoding が CP932 であることに注意。</description>
+    </item>
+    
     <item>
       <title>dlt 入門 - ELT の Extract と Load を担う data load tool</title>
       <link>https://soonraah.github.io/posts/what-is-dlt/</link>
