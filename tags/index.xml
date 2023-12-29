@@ -11,7 +11,34 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 20 Dec 2023 09:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Dec 2023 01:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data Management</title>
+      <link>https://soonraah.github.io/tags/data-management/</link>
+      <pubDate>Sat, 30 Dec 2023 01:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/tags/data-management/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DMBOK2</title>
+      <link>https://soonraah.github.io/tags/dmbok2/</link>
+      <pubDate>Sat, 30 Dec 2023 01:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/tags/dmbok2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DMMA</title>
+      <link>https://soonraah.github.io/tags/dmma/</link>
+      <pubDate>Sat, 30 Dec 2023 01:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/tags/dmma/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>BigQuery</title>
       <link>https://soonraah.github.io/tags/bigquery/</link>
@@ -45,24 +72,6 @@
       <pubDate>Wed, 20 Dec 2023 09:30:00 +0900</pubDate>
       
       <guid>https://soonraah.github.io/tags/elt/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Data Management</title>
-      <link>https://soonraah.github.io/tags/data-management/</link>
-      <pubDate>Sat, 09 Dec 2023 10:30:00 +0900</pubDate>
-      
-      <guid>https://soonraah.github.io/tags/data-management/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>DMBOK2</title>
-      <link>https://soonraah.github.io/tags/dmbok2/</link>
-      <pubDate>Sat, 09 Dec 2023 10:30:00 +0900</pubDate>
-      
-      <guid>https://soonraah.github.io/tags/dmbok2/</guid>
       <description></description>
     </item>
     

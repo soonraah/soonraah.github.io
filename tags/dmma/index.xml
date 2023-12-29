@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>DMMA on Froglog</title>
+    <link>https://soonraah.github.io/tags/dmma/</link>
+    <description>Recent content in DMMA on Froglog</description>
+    <image>
+      <title>Froglog</title>
+      <url>https://soonraah.github.io/47</url>
+      <link>https://soonraah.github.io/47</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sat, 30 Dec 2023 01:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/dmma/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>読書メモ: DMBOK2 第15章 データマネジメント成熟度アセスメント</title>
+      <link>https://soonraah.github.io/posts/dmbok-chapter-15/</link>
+      <pubDate>Sat, 30 Dec 2023 01:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/dmbok-chapter-15/</guid>
+      <description>このポストについて DMBOK2 を読み進めていくシリーズ。
+今回は第15章「データマネジメント成熟度アセスメント」について。
+データマネジメントの導入において重要な役割を果たしそうなので早めに確認しておきたかった。
+以降、特に注釈のない引用は DMBOK2 第15章からの引用とする。
+データマネジメント成熟度アセスメントとは データマネジメント成熟度アセスメント (DMMA: Data Management Maturity Assessment) はその名の通り、組織のデータマネジメントのレベルの評価に基づくプロセス改善の取り組みのこと。
+能力成熟度アセスメント (CMA: Capability Maturity Assessment) というものがあり、それのデータマネジメント版が DMMA。
+CMA では
+成熟度モデルは進化の観点から定義され、それにはプロセスの特性を表すレベルが使用される。組織がプロセスの特性を理解すると、組織は成熟度を測り、その能力を向上させるための計画を立てることができる。(中略) 新しいレベルに上がる度にプロセスの実行はより一貫性を増し、予測可能な状態となり、信頼性が高くなる。
+レベルは通常0~5の6段階で表される。
+DMMA は
+全体的なデータマネジメントを評価するために使用したり、単一の知識領域や、単一のプロセスに焦点を当てて使用したりできる。どのような点に焦点を当てたとしても、DMMA はデータマネジメント業務の健全性と有効性について、業務と IT の視点のギャップを埋めるために役立つ。
+組織が DMMA を実施する理由は、規制への対応、データガバナンス、プロセス改善、etc.
+DMMA の第一のゴールはデータマネジメント活動の現状を評価することであり、それにより改善計画を立てることができるようになる。
+アセスメントレベル 以下はアセスメントレベルの概要。
+データマネジメントの各知識領域 (ex. データガバナンス、メタデータ管理、etc.) ごとにレベルが評価される。
+level 0: 能力が欠如した状態 データマネジメントの取り組みがない level 1: 初期／場当たり的な状態 限られたツールセットを用いた一般的なデータマネジメント ガバナンスは低レベル データ処理は一部の専門家に依存し、役割や責任は部門別に定義されている level 2: 反復可能な状態 組織は一元化された共通ツールを使い始める 役割は明確化されており、一部の専門家のみに依存しない level 3: 定義された状態 拡張可能なプロセスの導入と制度化 組織全体である程度統制されたデータの複製 データ品質全体の総体的な向上 組織的なポリシー定義と統制 level 4: 管理された状態 新しいプロジェクトやタスクから得られる結果が予測され、リスクの管理が始まる データマネジメントに成果に対する評価尺度が含まれる データマネジメント用の標準ツールが集中管理計画とガバナンス機能に組み合わされている level 5: 最適化された状態 活動の成果は十分予測可能に 組織は継続的な改善に重点を置く 十分理解された評価尺度を使ってデータ品質とプロセスが管理・測定される 次のように各知識領域ごとに可視化することができる。</description>
+    </item>
+    
+  </channel>
+</rss>
