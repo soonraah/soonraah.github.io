@@ -11,7 +11,35 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 06 Jan 2024 20:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/data-management/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Jan 2024 21:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/data-management/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>読書メモ: DMBOK2 第5章 データモデリングとデザイン</title>
+      <link>https://soonraah.github.io/posts/dmbok-chapter-5/</link>
+      <pubDate>Sun, 21 Jan 2024 21:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/dmbok-chapter-5/</guid>
+      <description>このポストについて DMBOK2 を読み進めていくシリーズ。
+今回は第5章「データモデリングとデザイン」について。
+第4章でデータモデリングについて言及されていたが、ここで詳しく見ていく。
+以降、特に注釈のない引用は DMBOK2 第5章からの引用とする。
+データモデリングとは データモデリングとは、データ要件を洗い出し、分析し、取扱スコープを決めるプロセスであり、データ要件を記述し伝えるために、明確に定義されたデータモデルと呼ばれる様式が用いられる。このプロセスは反復的であり、概念、論理、物理モデルが含まれる。
+第4章 データアーキテクチャ ではエンタープライズ・データモデルという言葉が登場したが、この第5章ではそのデータモデルがより具体的に解説されている。
+データモデルは効果的なデータマネジメントを行うにあたり必要なものとされている。
+次のような意義がある。
+データに関する共通語彙を提供する 組織のデータや情報システムに関しての明示的な知識を捉え文書化する プロジェクトにおいて主なコミュニケーションツールとして使われる アプリケーションをカスタマイズ、統合、リプレースする際の出発点となる データモデルは組織が把握した現状、またはあるべき姿として組織のデータを記述する。
+カテゴリー情報、リソース情報、業務イベント情報、詳細取引情報がその対象となる。
+データモデルの構成要素 ほとんどのデータモデルはエンティティ、リレーションシップ、属性、ドメインにより構成される。
+エンティティ エンティティとはある組織が情報を収集する対象のこと。
+組織が使う名詞。
+以下は Marmaid の Entity Relationship Diagrams でエンティティを表現した例。
+学校を例にしており、学生、コース、インストラクタがエンティティとして表されている。
+--- title: Entity --- erDiagram Student Course Instructor リレーションシップ リレーションシップはエンティティ間の関連性を表す。
+以下の例は学生はコースを &amp;ldquo;履修する&amp;rdquo;、インストラクタはコースを &amp;ldquo;教える&amp;rdquo; ことを表している。
+--- title: Relationship --- erDiagram Student }|--|{ Course : take Instructor }|--|{ Course : teach 線の両端の形はリレーションシップの cardinality (多重度) を表している。
+この場合ではそれぞれカラスの足状になっているが、それぞれ「1またはそれ以上」という意味で、「学生は1つ以上のコースを履修する」「コースは1人以上の学生に履修される」ということを表している。
+リレーションシップの arity (項数) は一般的には二項型 (バイナリリレーションシップ) であることが多く、2つのエンティティ間の関係を表す。</description>
+    </item>
+    
     <item>
       <title>読書メモ: DMBOK2 第4章 データアーキテクチャ</title>
       <link>https://soonraah.github.io/posts/dmbok-chapter-4/</link>
