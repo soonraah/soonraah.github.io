@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>storage on Froglog</title>
+    <link>https://soonraah.github.io/tags/storage/</link>
+    <description>Recent content in storage on Froglog</description>
+    <image>
+      <title>Froglog</title>
+      <url>https://soonraah.github.io/47</url>
+      <link>https://soonraah.github.io/47</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sun, 17 Mar 2024 21:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/storage/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>読書メモ: DMBOK2 第6章 データストレージとオペレーション</title>
+      <link>https://soonraah.github.io/posts/dmbok-chapter-6/</link>
+      <pubDate>Sun, 17 Mar 2024 21:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/dmbok-chapter-6/</guid>
+      <description>このポストについて DMBOK2 を読み進めていくシリーズ。
+今回は第5章「データストレージとオペレーション」について。
+主にデータベースの運用に関する内容となっており、いわゆるデータベースエンジニアの人には当たり前の話？が書かれている。
+以降、特に注釈のない引用は DMBOK2 第6章からの引用とする。
+データストレージとオペレーションとは 以下のように定義されている。
+データの価値を最大化するために、永続化されるデータを設計し、実装し、サポートすること
+主にデータベース管理者 (DBA: Database Administrators) が行うことになる。
+次の2つのアクティビティが含まれる。
+データベースサポート: データベース環境の初期実装からデータの取得、バックアップ、廃棄までのデータライフサイクル関連アクティビティ データベース技術サポート: 技術要件を決め、技術的なアーキテクチャを定義し、技術を実装・管理する 事業がデータに依存する企業においてはデータストレージとオペレーションのアクティビティは事業の継続性のために必要不可欠である。
+ゴールは次のとおり
+データライフサイクル全体にわたるデータの可用性を管理する データ資産の完全性を保証する データ処理の性能を管理する 概念・用語など データベースアーキテクチャの種類 集中型データベース: 単一システム内で使うデータを一箇所にまとている 分散型データベース: 多数のノードにデータが配置される 連邦型データベース: 自立した複数のデータベースシステムを単一の連邦型データベースに割り当てる 仮想化／クラウドプラットフォーム: クラウド上のデータベースを実装 データベース処理のタイプ ACID: トランザクションの信頼性のための制約 原子性 (Atomicity): 操作はすべて実行されるかまったく実行されないかのどちらか 一貫性 (Consistency): トランザクションはシステムが定義するすべてのルールを常に満たさなければならない 独立性 (Isolation): 各トランザクションは実行中の他のトランザクションの影響を受けない 永続性 (Durability): トランザクションは完了すると元に戻せない BASE: データの量と多様性を受けた、ACID とは異なる考え 基本的に利用可能 (Basically Available): ノードの障害発生時もあるレベル以上の可用性を保証する ソフトステート (Soft State): データは一定の変動状態にある 最終的な一貫性の確保 (Eventual Consistency): データは最終的にすべてのノードで一貫性を保つが、各トランザクションの一貫性が常に確保されているわけではない CAP: 分散システムでは以下のどれか2つしか満たせない 一貫性 (Consistency): システムは常に想定どおり動作できなければならない 可用性 (Availability): システムは要求時に利用可能でなければならに 分断耐性 (Partition Tolerance): システムは部分的な障害の発生時に運用を続行できなければならない データベース構成 上から順により制御された構造であり、かつ古くからあるものとなっている。</description>
+    </item>
+    
+  </channel>
+</rss>
