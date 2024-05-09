@@ -11,7 +11,25 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 04 Apr 2024 06:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 May 2024 22:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data Contract CLI から考える Data Contracts ファーストのデータパイプラインの未来</title>
+      <link>https://soonraah.github.io/posts/data-contract-cli/</link>
+      <pubDate>Thu, 09 May 2024 22:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/posts/data-contract-cli/</guid>
+      <description>このポストについて Data Contract CLI を触ってみたところ、面白かったのとこれからのデータパイプライン開発について思うところがあったので書いてみる。
+Data Contract CLI とは？ datacontract/datacontract-cli
+Data Contract CLI は data contracts を運用するためのオープンソースのコマンドラインツールである。
+data contracts の概念については以前の記事で詳しく書いているのでそちらをご参考いただければと。
+ただしこちらの記事は1年前のものであり、今回取り上げる Data Contract CLI の登場などを含めて現在では data contracts を取り巻く状況も変わっている可能性があることに注意。
+Data Contract CLI は Python で開発されており、pip でインストールすることができる。
+この記事を書いている時点では v0.10.3 が最新であり、この記事の内容はこのバージョンに基づいている。
+Data Contract CLI で扱う data contracts は YAML で定義される前提となっており、その仕様は datacontract/datacontract-specification で決められている。
+この data contracts に対して Data Contract CLI では次のようなことが行える。
+lint によるフォーマットチェック データソースに接続した上での schema やデータ品質のテスト data contracts の破壊的な変更の検出 JSON Schema や dbt など、他の形式からの／へのインポートとエクスポート 以下の図がイメージしやすい。</description>
+    </item>
+    
     <item>
       <title>読書メモ: DMBOK2 第8章 データ統合と相互運用性</title>
       <link>https://soonraah.github.io/posts/dmbok-chapter-8/</link>

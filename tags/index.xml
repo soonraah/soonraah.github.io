@@ -11,9 +11,18 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 04 Apr 2024 06:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 May 2024 22:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>data integration</title>
+      <title>Data Contracts</title>
+      <link>https://soonraah.github.io/tags/data-contracts/</link>
+      <pubDate>Thu, 09 May 2024 22:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/tags/data-contracts/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Integration</title>
       <link>https://soonraah.github.io/tags/data-integration/</link>
       <pubDate>Thu, 04 Apr 2024 06:30:00 +0900</pubDate>
       
@@ -40,7 +49,7 @@
     </item>
     
     <item>
-      <title>database</title>
+      <title>Database</title>
       <link>https://soonraah.github.io/tags/database/</link>
       <pubDate>Sun, 17 Mar 2024 21:30:00 +0900</pubDate>
       
@@ -49,7 +58,7 @@
     </item>
     
     <item>
-      <title>storage</title>
+      <title>Storage</title>
       <link>https://soonraah.github.io/tags/storage/</link>
       <pubDate>Sun, 17 Mar 2024 21:30:00 +0900</pubDate>
       
@@ -94,7 +103,7 @@
     </item>
     
     <item>
-      <title>data pipeline</title>
+      <title>Data Pipeline</title>
       <link>https://soonraah.github.io/tags/data-pipeline/</link>
       <pubDate>Wed, 20 Dec 2023 09:30:00 +0900</pubDate>
       
@@ -103,7 +112,7 @@
     </item>
     
     <item>
-      <title>dlt</title>
+      <title>Dlt</title>
       <link>https://soonraah.github.io/tags/dlt/</link>
       <pubDate>Wed, 20 Dec 2023 09:30:00 +0900</pubDate>
       
@@ -121,7 +130,7 @@
     </item>
     
     <item>
-      <title>metadata</title>
+      <title>Metadata</title>
       <link>https://soonraah.github.io/tags/metadata/</link>
       <pubDate>Sat, 09 Dec 2023 10:30:00 +0900</pubDate>
       
@@ -202,15 +211,6 @@
     </item>
     
     <item>
-      <title>data contract</title>
-      <link>https://soonraah.github.io/tags/data-contract/</link>
-      <pubDate>Sat, 08 Apr 2023 17:00:00 +0900</pubDate>
-      
-      <guid>https://soonraah.github.io/tags/data-contract/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Apache Hudi</title>
       <link>https://soonraah.github.io/tags/apache-hudi/</link>
       <pubDate>Tue, 13 Dec 2022 00:30:00 +0900</pubDate>
@@ -220,7 +220,7 @@
     </item>
     
     <item>
-      <title>stream processing</title>
+      <title>Stream Processing</title>
       <link>https://soonraah.github.io/tags/stream-processing/</link>
       <pubDate>Tue, 13 Dec 2022 00:30:00 +0900</pubDate>
       
@@ -229,7 +229,7 @@
     </item>
     
     <item>
-      <title>machine learning</title>
+      <title>Machine Learning</title>
       <link>https://soonraah.github.io/tags/machine-learning/</link>
       <pubDate>Mon, 12 Jul 2021 22:00:00 +0900</pubDate>
       
@@ -283,7 +283,16 @@
     </item>
     
     <item>
-      <title>development</title>
+      <title>A/B Testing</title>
+      <link>https://soonraah.github.io/tags/a/b-testing/</link>
+      <pubDate>Sun, 23 Aug 2020 12:30:00 +0900</pubDate>
+      
+      <guid>https://soonraah.github.io/tags/a/b-testing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Development</title>
       <link>https://soonraah.github.io/tags/development/</link>
       <pubDate>Mon, 03 Aug 2020 22:00:00 +0900</pubDate>
       
@@ -310,7 +319,7 @@
     </item>
     
     <item>
-      <title>meetup</title>
+      <title>Meetup</title>
       <link>https://soonraah.github.io/tags/meetup/</link>
       <pubDate>Sat, 01 Aug 2020 15:00:00 +0900</pubDate>
       
@@ -319,20 +328,11 @@
     </item>
     
     <item>
-      <title>transaction</title>
+      <title>Transaction</title>
       <link>https://soonraah.github.io/tags/transaction/</link>
       <pubDate>Sun, 19 Jul 2020 22:00:00 +0900</pubDate>
       
       <guid>https://soonraah.github.io/tags/transaction/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>A/B testing</title>
-      <link>https://soonraah.github.io/tags/a/b-testing/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://soonraah.github.io/tags/a/b-testing/</guid>
       <description></description>
     </item>
     
