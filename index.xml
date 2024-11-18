@@ -6,769 +6,1516 @@
     <description>Recent content on Froglog</description>
     <image>
       <title>Froglog</title>
-      <url>https://soonraah.github.io/47</url>
-      <link>https://soonraah.github.io/47</link>
+      <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
+      <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.138.0</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 09 May 2024 22:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Nov 2024 20:30:00 +0900</lastBuildDate>
+    <atom:link href="https://soonraah.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>読書メモ: DMBOK2 第13章 データ品質</title>
+      <link>https://soonraah.github.io/posts/dmbok-chapter-13/</link>
+      <pubDate>Mon, 18 Nov 2024 20:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/posts/dmbok-chapter-13/</guid>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;​&lt;br&gt;
+&lt;a href=&#34;https://www.dama-japan.org/Introduction.html&#34;&gt;DMBOK2&lt;/a&gt; を読み進めていくシリーズ。&lt;br&gt;
+今回は第13章「データ品質」について。&lt;/p&gt;
+&lt;p&gt;これまで業務で「データ品質」という言葉が使われることがあったが、意味が限定的だったり人によって定義が違ったりしていた。&lt;br&gt;
+そのあたりクリアにできるとよい。&lt;br&gt;
+​&lt;/p&gt;
+&lt;h2 id=&#34;内容紹介&#34;&gt;内容紹介&lt;/h2&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;データ品質の定義&#34;&gt;データ品質の定義&lt;/h3&gt;
+&lt;p&gt;​&lt;br&gt;
+データ品質の簡潔な定義は「目的に適合している」。&lt;br&gt;
+データ品質管理の定義は「データを収集し扱うための技法を適用し、企業や地域のデータ利用者の、ニーズや利用に適したデータとすることを保証する活動を計画し、実施し、管理する」。&lt;br&gt;
+​&lt;br&gt;
+データ基盤担当の仕事柄、データ品質というとどちらかというと上流であるデータソース側の定義が重要だと思っていたが、そうではなく下流であるデータ利用においての観点が起点になるというのが気づきだった。(でも考えてみれば当たり前)&lt;br&gt;
+​&lt;/p&gt;
+&lt;h3 id=&#34;ビジネス上の意義&#34;&gt;ビジネス上の意義&lt;/h3&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ステークホルダーの体験と組織の評判を高める
+&lt;ul&gt;
+&lt;li&gt;ex. データが正しいことを顧客が信頼し、組織との取引に自信を持てる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;組織がより有効な成果を出せるようにする
+&lt;ul&gt;
+&lt;li&gt;ex. ビジネスチャンスの特定と効果的な請求により売上を獲得できる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;低品質なデータによるリスクとコストを削減する
+&lt;ul&gt;
+&lt;li&gt;ex. データが正しいかどうかをスタッフが見極める時間が減る&lt;/li&gt;
+&lt;li&gt;ex. 誤ったデータによる誤った意思決定&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;組織の効率と生産性を向上する
+&lt;ul&gt;
+&lt;li&gt;ex. カスタマーサービスにかかってくる電話が減り、問い合わせを解決できるようになる&lt;br&gt;
+​&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;重要なデータ&#34;&gt;重要なデータ&lt;/h3&gt;
+&lt;p&gt;​&lt;br&gt;
+データ品質管理における第一の原則は、組織とその顧客にとって最も重要なデータに改善努力を集中させること。&lt;br&gt;
+​&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ex.
+&lt;ul&gt;
+&lt;li&gt;顧客のメールアドレス欄のデータが不完全であれば、顧客にメールで商品情報を送ることができず、潜在的な売上を失う&lt;/li&gt;
+&lt;li&gt;1通のメールを送るごとに100円の収益が得られることが知られている&lt;/li&gt;
+&lt;li&gt;→ データ品質の改善に明確な価値があると言える&lt;br&gt;
+​&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;重要なデータは組織や業界によって異なるが、以下のような用途で使用されることが多い。&lt;br&gt;
+​&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;規制、財務、経営報告&lt;/li&gt;
+&lt;li&gt;事業運営上のニーズ&lt;/li&gt;
+&lt;li&gt;製品の品質と顧客満足度の測定&lt;/li&gt;
+&lt;li&gt;事業戦略、特に競争上の差別化への取り組み&lt;br&gt;
+​&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;データ品質評価軸&#34;&gt;データ品質評価軸&lt;/h3&gt;
+&lt;p&gt;​&lt;br&gt;
+データ品質評価軸は、測定可能なデータの特徴または特性。&lt;br&gt;
+一般的な評価軸は次のとおり。&lt;br&gt;
+​&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;No.&lt;/th&gt;
+          &lt;th&gt;評価軸&lt;/th&gt;
+          &lt;th&gt;説明&lt;/th&gt;
+          &lt;th&gt;例&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;有効性&lt;!-- raw HTML omitted --&gt;Validity&lt;/td&gt;
+          &lt;td&gt;データの値が定義された領域の値と一致しているかどうか。&lt;/td&gt;
+          &lt;td&gt;- 数値、日付などのデータ範囲&lt;!-- raw HTML omitted --&gt;- 電話番号などの書式&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;完全性&lt;!-- raw HTML omitted --&gt;Completeness&lt;/td&gt;
+          &lt;td&gt;必要なデータがすべて存在するかどうか。&lt;!-- raw HTML omitted --&gt;カラム, レコード, データセットのレベルがある。&lt;/td&gt;
+          &lt;td&gt;- カラム: 必須カラムにデータが入っているか？&lt;!-- raw HTML omitted --&gt;- データセット: 都道府県マスタに47都道府県の情報はあるか？&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;3&lt;/td&gt;
+          &lt;td&gt;一貫性&lt;!-- raw HTML omitted --&gt;Consistency&lt;/td&gt;
+          &lt;td&gt;データ値が同じアプローチ、評価、価値基準を用いてコード化されていることを保証すること。&lt;!-- raw HTML omitted --&gt;レコード内、レコード間、経時的な一貫性などがある。&lt;/td&gt;
+          &lt;td&gt;- すべての顧客企業の住所は本社住所となっているか？&lt;!-- raw HTML omitted --&gt;- 生徒の成績評価は時を経ても同じか？&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;4&lt;/td&gt;
+          &lt;td&gt;整合性&lt;!-- raw HTML omitted --&gt;Integrity&lt;/td&gt;
+          &lt;td&gt;データに非一貫性や破綻した関係性がないこと。&lt;/td&gt;
+          &lt;td&gt;- 顧客住所の国がカナダの場合、州としてカナダの州が記載されているか？&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;5&lt;/td&gt;
+          &lt;td&gt;適時性&lt;!-- raw HTML omitted --&gt;Timeliness&lt;/td&gt;
+          &lt;td&gt;データの取得または更新後、ユーザーがデータにアクセスできるようになるまでの時間を指す。&lt;/td&gt;
+          &lt;td&gt;- 電力会社は電力需要データを数秒以内に利用して需給調整する必要がある&lt;!-- raw HTML omitted --&gt;- 政府機関が四半期末の2ヶ月後に GDP 報告書を作成&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;6&lt;/td&gt;
+          &lt;td&gt;最新性&lt;!-- raw HTML omitted --&gt;Currency&lt;/td&gt;
+          &lt;td&gt;データが最後に更新されてから現在までの期間と、それがまだ正しいという可能性。&lt;!-- raw HTML omitted --&gt;データセットによって期待される最新性は異なる。&lt;/td&gt;
+          &lt;td&gt;- 国コードは比較的静的&lt;!-- raw HTML omitted --&gt;- 銀行口座残高は変動的&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;7&lt;/td&gt;
+          &lt;td&gt;妥当性&lt;!-- raw HTML omitted --&gt;Reasonableness&lt;/td&gt;
+          &lt;td&gt;データパターンが期待に合致しているかどうか。&lt;/td&gt;
+          &lt;td&gt;- 先週のクリック数と比較して今日のクリック数は普通か否か？&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;8&lt;/td&gt;
+          &lt;td&gt;一意性/重複排除&lt;!-- raw HTML omitted --&gt;Uniqueness/Deduplication&lt;/td&gt;
+          &lt;td&gt;現実世界の実体がデータセット内に2つ以上存在しないこと。&lt;/td&gt;
+          &lt;td&gt;- ユーザー ID は重複していないか？&lt;!-- raw HTML omitted --&gt;- ユーザー ID は異なるが、同一の人物を表していないか？&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;9&lt;/td&gt;
+          &lt;td&gt;正確性&lt;!-- raw HTML omitted --&gt;Accuracy&lt;/td&gt;
+          &lt;td&gt;データが「現実の」実体を正しく表している程度。&lt;/td&gt;
+          &lt;td&gt;- ユーザー名は現実世界の個人の名前なのか？&lt;!-- raw HTML omitted --&gt;- 顧客は実際にそのメールアドレスを使用しているのか？&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;​&lt;br&gt;
+ここでようやく「データ品質」が具体的なものとして見えてきた。&lt;br&gt;
+測定が比較的容易なものもあれば困難なものもある。&lt;br&gt;
+​&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Data Contract CLI から考える Data Contracts ファーストのデータパイプラインの未来</title>
       <link>https://soonraah.github.io/posts/data-contract-cli/</link>
       <pubDate>Thu, 09 May 2024 22:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/data-contract-cli/</guid>
-      <description>このポストについて Data Contract CLI を触ってみたところ、面白かったのとこれからのデータパイプライン開発について思うところがあったので書いてみる。
-Data Contract CLI とは？ datacontract/datacontract-cli
-Data Contract CLI は data contracts を運用するためのオープンソースのコマンドラインツールである。
-data contracts の概念については以前の記事で詳しく書いているのでそちらをご参考いただければと。
-ただしこちらの記事は1年前のものであり、今回取り上げる Data Contract CLI の登場などを含めて現在では data contracts を取り巻く状況も変わっている可能性があることに注意。
-Data Contract CLI は Python で開発されており、pip でインストールすることができる。
-この記事を書いている時点では v0.10.3 が最新であり、この記事の内容はこのバージョンに基づいている。
-Data Contract CLI で扱う data contracts は YAML で定義される前提となっており、その仕様は datacontract/datacontract-specification で決められている。
-この data contracts に対して Data Contract CLI では次のようなことが行える。
-lint によるフォーマットチェック データソースに接続した上での schema やデータ品質のテスト data contracts の破壊的な変更の検出 JSON Schema や dbt など、他の形式からの／へのインポートとエクスポート 以下の図がイメージしやすい。</description>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;Data Contract CLI を触ってみたところ、面白かったのとこれからのデータパイプライン開発について思うところがあったので書いてみる。&lt;/p&gt;
+&lt;h2 id=&#34;data-contract-cli-とは&#34;&gt;Data Contract CLI とは？&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/datacontract/datacontract-cli&#34;&gt;datacontract/datacontract-cli&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Data Contract CLI は data contracts を運用するためのオープンソースのコマンドラインツールである。&lt;/p&gt;
+&lt;p&gt;data contracts の概念については&lt;a href=&#34;https://soonraah.github.io/posts/looked-into-data-contracts/&#34;&gt;以前の記事&lt;/a&gt;で詳しく書いているのでそちらをご参考いただければと。&lt;br&gt;
+ただしこちらの記事は1年前のものであり、今回取り上げる Data Contract CLI の登場などを含めて現在では data contracts を取り巻く状況も変わっている可能性があることに注意。&lt;/p&gt;
+&lt;p&gt;Data Contract CLI は Python で開発されており、pip でインストールすることができる。&lt;br&gt;
+この記事を書いている時点では v0.10.3 が最新であり、この記事の内容はこのバージョンに基づいている。&lt;/p&gt;
+&lt;p&gt;Data Contract CLI で扱う data contracts は YAML で定義される前提となっており、その仕様は &lt;a href=&#34;https://github.com/datacontract/datacontract-specification&#34;&gt;datacontract/datacontract-specification&lt;/a&gt; で決められている。&lt;br&gt;
+この data contracts に対して Data Contract CLI では次のようなことが行える。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;lint によるフォーマットチェック&lt;/li&gt;
+&lt;li&gt;データソースに接続した上での schema やデータ品質のテスト&lt;/li&gt;
+&lt;li&gt;data contracts の破壊的な変更の検出&lt;/li&gt;
+&lt;li&gt;JSON Schema や dbt など、他の形式からの／へのインポートとエクスポート&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以下の図がイメージしやすい。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>読書メモ: DMBOK2 第8章 データ統合と相互運用性</title>
       <link>https://soonraah.github.io/posts/dmbok-chapter-8/</link>
       <pubDate>Thu, 04 Apr 2024 06:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/dmbok-chapter-8/</guid>
-      <description>このポストについて DMBOK2 を読み進めていくシリーズ。
-今回は第8章「データ統合と相互運用性」について。
-業務で扱っているデータ基盤はデータ統合が不完全であるため、なんとかしたいと考えている。
-以降、特に注釈のない引用は DMBOK2 第8章からの引用とする。
-データストレージと相互運用性とは データ統合と相互運用性 (DII: Data Integration and Interoperability) は次のように定義されている。
-アプリケーションや組織内および相互間におけるデータの移動と統合を管理する
-データの移動を効率的に管理することがそのビジネス上の意義となる。
-ほとんどの組織には数多くのデータストアがあり、組織内・組織間でデータを移動させることは IT 組織の重要な任務となっている。
-複雑さとそれに伴うコストを管理するために、全社的な視点からデータ統合を設計しなければならない。
-データウェアハウスなどのデータハブによりアプリケーション間のインターフェースの数を削減することができる。
-DII のゴールは以下
-法令を遵守しながら、必要とするフォーマットと時間枠でデータを安全に提供する。 共有のモデルとインターフェースを開発することでソリューションを管理するコストと複雑さを軽減する。 重要なイベントを特定し、アラートとアクションを自動的に起動する。 ビジネスインテリジェンス、アナリティクス、マスターデータ管理、業務効率化の取り組みをサポートする。 概念・用語など 抽出、変換、取込 DII の中心にあるのが、抽出 (Extract)、変換 (Transform)、取込 (Load) のいわゆる ETL という基本プロセス。
-抽出 ソースから必要なデータを選択し、抽出する 抽出されたデータはディスク上やメモリ上にステージングされる 業務システムで実行される場合は、少ないリソースを利用するように設計する 変換 ソースデータを変換してターゲットデータストアの構造と互換性を持つようにする フォーマット変更、構造の変更、意味的変換、重複排除、並べ替えなどがある 取込 ターゲットシステムに物理的に格納されるか、提供される ELT ターゲットシステムにより多くの変化機能がある場合は、プロセスの順序を ELT にすることができる データレイクへの取込を行うビッグデータ環境では一般的 レイテンシ ソースシステムでデータが生成されてから、ターゲットシステムでそのデータが利用可能になるまでの時間差。
-アプローチによってレイテンシの高低が異なる。
-バッチ 利用者や自動的な要求に応えて、定期的にアプリケーションや組織間を一定量まとまって移動させる レイテンシは高いが大量データを処理するときのパフォーマンスがいい 低レイテンシを実現するためのマイクロバッチもある 変更データキャプチャ データの変更 (挿入・変更・削除) のデータセットを監視し、その差分をターゲットのシステムに渡す DBMS のアクティビティログをコピーし、処理する形で行われることもある 準リアルタイムとイベント駆動 設定された予定により1日を通して分割された少量のデータセットで処理されたり、データ更新などのイベントが発生したときに処理されたりする 一般的にエンタープライズ・サービス・バスを利用して実装される 非同期 データ提供側は受信側の更新確認を待たずに処理を続行する リアルタイム、同期 次のトランザクションを実行する前に、他のアプリケーションからの確認を受け取るまで実行プロセスが待機する 非同期と比べて状態管理の負担が少ないが、他のトランザクションをブロックしたり遅延させたりすることもある 低レイテンシまたはストリーミング イベントが発生したときにシステムからリアルタイムで連続して流れる リプリケーション 分析やクエリによるパフォーマンス低下を防ぐために、トランザクション処理環境にリプリケーション (複製) を使用することがある。</description>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.dama-japan.org/Introduction.html&#34;&gt;DMBOK2&lt;/a&gt; を読み進めていくシリーズ。&lt;br&gt;
+今回は第8章「データ統合と相互運用性」について。&lt;br&gt;
+業務で扱っているデータ基盤はデータ統合が不完全であるため、なんとかしたいと考えている。&lt;/p&gt;
+&lt;p&gt;以降、特に注釈のない引用は DMBOK2 第8章からの引用とする。&lt;/p&gt;
+&lt;h2 id=&#34;データストレージと相互運用性とは&#34;&gt;データストレージと相互運用性とは&lt;/h2&gt;
+&lt;p&gt;データ統合と相互運用性 (DII: Data Integration and Interoperability) は次のように定義されている。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;アプリケーションや組織内および相互間におけるデータの移動と統合を管理する&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;データの移動を効率的に管理することがそのビジネス上の意義となる。&lt;br&gt;
+ほとんどの組織には数多くのデータストアがあり、組織内・組織間でデータを移動させることは IT 組織の重要な任務となっている。&lt;br&gt;
+複雑さとそれに伴うコストを管理するために、全社的な視点からデータ統合を設計しなければならない。&lt;br&gt;
+データウェアハウスなどのデータハブによりアプリケーション間のインターフェースの数を削減することができる。&lt;/p&gt;
+&lt;p&gt;DII のゴールは以下&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;法令を遵守しながら、必要とするフォーマットと時間枠でデータを安全に提供する。&lt;/li&gt;
+&lt;li&gt;共有のモデルとインターフェースを開発することでソリューションを管理するコストと複雑さを軽減する。&lt;/li&gt;
+&lt;li&gt;重要なイベントを特定し、アラートとアクションを自動的に起動する。&lt;/li&gt;
+&lt;li&gt;ビジネスインテリジェンス、アナリティクス、マスターデータ管理、業務効率化の取り組みをサポートする。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;概念用語など&#34;&gt;概念・用語など&lt;/h2&gt;
+&lt;h3 id=&#34;抽出変換取込&#34;&gt;抽出、変換、取込&lt;/h3&gt;
+&lt;p&gt;DII の中心にあるのが、抽出 (Extract)、変換 (Transform)、取込 (Load) のいわゆる ETL という基本プロセス。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;抽出
+&lt;ul&gt;
+&lt;li&gt;ソースから必要なデータを選択し、抽出する&lt;/li&gt;
+&lt;li&gt;抽出されたデータはディスク上やメモリ上にステージングされる&lt;/li&gt;
+&lt;li&gt;業務システムで実行される場合は、少ないリソースを利用するように設計する&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;変換
+&lt;ul&gt;
+&lt;li&gt;ソースデータを変換してターゲットデータストアの構造と互換性を持つようにする&lt;/li&gt;
+&lt;li&gt;フォーマット変更、構造の変更、意味的変換、重複排除、並べ替えなどがある&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;取込
+&lt;ul&gt;
+&lt;li&gt;ターゲットシステムに物理的に格納されるか、提供される&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;ELT
+&lt;ul&gt;
+&lt;li&gt;ターゲットシステムにより多くの変化機能がある場合は、プロセスの順序を ELT にすることができる&lt;/li&gt;
+&lt;li&gt;データレイクへの取込を行うビッグデータ環境では一般的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;レイテンシ&#34;&gt;レイテンシ&lt;/h3&gt;
+&lt;p&gt;ソースシステムでデータが生成されてから、ターゲットシステムでそのデータが利用可能になるまでの時間差。&lt;br&gt;
+アプローチによってレイテンシの高低が異なる。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;バッチ
+&lt;ul&gt;
+&lt;li&gt;利用者や自動的な要求に応えて、定期的にアプリケーションや組織間を一定量まとまって移動させる&lt;/li&gt;
+&lt;li&gt;レイテンシは高いが大量データを処理するときのパフォーマンスがいい&lt;/li&gt;
+&lt;li&gt;低レイテンシを実現するためのマイクロバッチもある&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;変更データキャプチャ
+&lt;ul&gt;
+&lt;li&gt;データの変更 (挿入・変更・削除) のデータセットを監視し、その差分をターゲットのシステムに渡す&lt;/li&gt;
+&lt;li&gt;DBMS のアクティビティログをコピーし、処理する形で行われることもある&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;準リアルタイムとイベント駆動
+&lt;ul&gt;
+&lt;li&gt;設定された予定により1日を通して分割された少量のデータセットで処理されたり、データ更新などのイベントが発生したときに処理されたりする&lt;/li&gt;
+&lt;li&gt;一般的にエンタープライズ・サービス・バスを利用して実装される&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;非同期
+&lt;ul&gt;
+&lt;li&gt;データ提供側は受信側の更新確認を待たずに処理を続行する&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;リアルタイム、同期
+&lt;ul&gt;
+&lt;li&gt;次のトランザクションを実行する前に、他のアプリケーションからの確認を受け取るまで実行プロセスが待機する&lt;/li&gt;
+&lt;li&gt;非同期と比べて状態管理の負担が少ないが、他のトランザクションをブロックしたり遅延させたりすることもある&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;低レイテンシまたはストリーミング
+&lt;ul&gt;
+&lt;li&gt;イベントが発生したときにシステムからリアルタイムで連続して流れる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;リプリケーション&#34;&gt;リプリケーション&lt;/h3&gt;
+&lt;p&gt;分析やクエリによるパフォーマンス低下を防ぐために、トランザクション処理環境にリプリケーション (複製) を使用することがある。&lt;br&gt;
+多くの DBMS にはリプリケーションを作るためのユーティリティ機能がある。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>読書メモ: DMBOK2 第6章 データストレージとオペレーション</title>
       <link>https://soonraah.github.io/posts/dmbok-chapter-6/</link>
       <pubDate>Sun, 17 Mar 2024 21:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/dmbok-chapter-6/</guid>
-      <description>このポストについて DMBOK2 を読み進めていくシリーズ。
-今回は第5章「データストレージとオペレーション」について。
-主にデータベースの運用に関する内容となっており、いわゆるデータベースエンジニアの人には当たり前の話？が書かれている。
-以降、特に注釈のない引用は DMBOK2 第6章からの引用とする。
-データストレージとオペレーションとは 以下のように定義されている。
-データの価値を最大化するために、永続化されるデータを設計し、実装し、サポートすること
-主にデータベース管理者 (DBA: Database Administrators) が行うことになる。
-次の2つのアクティビティが含まれる。
-データベースサポート: データベース環境の初期実装からデータの取得、バックアップ、廃棄までのデータライフサイクル関連アクティビティ データベース技術サポート: 技術要件を決め、技術的なアーキテクチャを定義し、技術を実装・管理する 事業がデータに依存する企業においてはデータストレージとオペレーションのアクティビティは事業の継続性のために必要不可欠である。
-ゴールは次のとおり
-データライフサイクル全体にわたるデータの可用性を管理する データ資産の完全性を保証する データ処理の性能を管理する 概念・用語など データベースアーキテクチャの種類 集中型データベース: 単一システム内で使うデータを一箇所にまとている 分散型データベース: 多数のノードにデータが配置される 連邦型データベース: 自立した複数のデータベースシステムを単一の連邦型データベースに割り当てる 仮想化／クラウドプラットフォーム: クラウド上のデータベースを実装 データベース処理のタイプ ACID: トランザクションの信頼性のための制約 原子性 (Atomicity): 操作はすべて実行されるかまったく実行されないかのどちらか 一貫性 (Consistency): トランザクションはシステムが定義するすべてのルールを常に満たさなければならない 独立性 (Isolation): 各トランザクションは実行中の他のトランザクションの影響を受けない 永続性 (Durability): トランザクションは完了すると元に戻せない BASE: データの量と多様性を受けた、ACID とは異なる考え 基本的に利用可能 (Basically Available): ノードの障害発生時もあるレベル以上の可用性を保証する ソフトステート (Soft State): データは一定の変動状態にある 最終的な一貫性の確保 (Eventual Consistency): データは最終的にすべてのノードで一貫性を保つが、各トランザクションの一貫性が常に確保されているわけではない CAP: 分散システムでは以下のどれか2つしか満たせない 一貫性 (Consistency): システムは常に想定どおり動作できなければならない 可用性 (Availability): システムは要求時に利用可能でなければならに 分断耐性 (Partition Tolerance): システムは部分的な障害の発生時に運用を続行できなければならない データベース構成 上から順により制御された構造であり、かつ古くからあるものとなっている。</description>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.dama-japan.org/Introduction.html&#34;&gt;DMBOK2&lt;/a&gt; を読み進めていくシリーズ。&lt;br&gt;
+今回は第5章「データストレージとオペレーション」について。&lt;br&gt;
+主にデータベースの運用に関する内容となっており、いわゆるデータベースエンジニアの人には当たり前の話？が書かれている。&lt;/p&gt;
+&lt;p&gt;以降、特に注釈のない引用は DMBOK2 第6章からの引用とする。&lt;/p&gt;
+&lt;h2 id=&#34;データストレージとオペレーションとは&#34;&gt;データストレージとオペレーションとは&lt;/h2&gt;
+&lt;p&gt;以下のように定義されている。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;データの価値を最大化するために、永続化されるデータを設計し、実装し、サポートすること&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;主にデータベース管理者 (DBA: Database Administrators) が行うことになる。&lt;br&gt;
+次の2つのアクティビティが含まれる。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;データベースサポート: データベース環境の初期実装からデータの取得、バックアップ、廃棄までのデータライフサイクル関連アクティビティ&lt;/li&gt;
+&lt;li&gt;データベース技術サポート: 技術要件を決め、技術的なアーキテクチャを定義し、技術を実装・管理する&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;事業がデータに依存する企業においてはデータストレージとオペレーションのアクティビティは事業の継続性のために必要不可欠である。&lt;br&gt;
+ゴールは次のとおり&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;データライフサイクル全体にわたるデータの可用性を管理する&lt;/li&gt;
+&lt;li&gt;データ資産の完全性を保証する&lt;/li&gt;
+&lt;li&gt;データ処理の性能を管理する&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;概念用語など&#34;&gt;概念・用語など&lt;/h2&gt;
+&lt;h3 id=&#34;データベースアーキテクチャの種類&#34;&gt;データベースアーキテクチャの種類&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;集中型データベース: 単一システム内で使うデータを一箇所にまとている&lt;/li&gt;
+&lt;li&gt;分散型データベース: 多数のノードにデータが配置される&lt;/li&gt;
+&lt;li&gt;連邦型データベース: 自立した複数のデータベースシステムを単一の連邦型データベースに割り当てる&lt;/li&gt;
+&lt;li&gt;仮想化／クラウドプラットフォーム: クラウド上のデータベースを実装&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;データベース処理のタイプ&#34;&gt;データベース処理のタイプ&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;ACID: トランザクションの信頼性のための制約
+&lt;ul&gt;
+&lt;li&gt;原子性 (Atomicity): 操作はすべて実行されるかまったく実行されないかのどちらか&lt;/li&gt;
+&lt;li&gt;一貫性 (Consistency): トランザクションはシステムが定義するすべてのルールを常に満たさなければならない&lt;/li&gt;
+&lt;li&gt;独立性 (Isolation): 各トランザクションは実行中の他のトランザクションの影響を受けない&lt;/li&gt;
+&lt;li&gt;永続性 (Durability): トランザクションは完了すると元に戻せない&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;BASE: データの量と多様性を受けた、ACID とは異なる考え
+&lt;ul&gt;
+&lt;li&gt;基本的に利用可能 (Basically Available): ノードの障害発生時もあるレベル以上の可用性を保証する&lt;/li&gt;
+&lt;li&gt;ソフトステート (Soft State): データは一定の変動状態にある&lt;/li&gt;
+&lt;li&gt;最終的な一貫性の確保 (Eventual Consistency): データは最終的にすべてのノードで一貫性を保つが、各トランザクションの一貫性が常に確保されているわけではない&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;CAP: 分散システムでは以下のどれか2つしか満たせない
+&lt;ul&gt;
+&lt;li&gt;一貫性 (Consistency): システムは常に想定どおり動作できなければならない&lt;/li&gt;
+&lt;li&gt;可用性 (Availability): システムは要求時に利用可能でなければならに&lt;/li&gt;
+&lt;li&gt;分断耐性 (Partition Tolerance): システムは部分的な障害の発生時に運用を続行できなければならない&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;データベース構成&#34;&gt;データベース構成&lt;/h3&gt;
+&lt;p&gt;上から順により制御された構造であり、かつ古くからあるものとなっている。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>読書メモ: DMBOK2 第5章 データモデリングとデザイン</title>
       <link>https://soonraah.github.io/posts/dmbok-chapter-5/</link>
       <pubDate>Sun, 21 Jan 2024 21:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/dmbok-chapter-5/</guid>
-      <description>このポストについて DMBOK2 を読み進めていくシリーズ。
-今回は第5章「データモデリングとデザイン」について。
-第4章でデータモデリングについて言及されていたが、ここで詳しく見ていく。
-以降、特に注釈のない引用は DMBOK2 第5章からの引用とする。
-データモデリングとは データモデリングとは、データ要件を洗い出し、分析し、取扱スコープを決めるプロセスであり、データ要件を記述し伝えるために、明確に定義されたデータモデルと呼ばれる様式が用いられる。このプロセスは反復的であり、概念、論理、物理モデルが含まれる。
-第4章 データアーキテクチャ ではエンタープライズ・データモデルという言葉が登場したが、この第5章ではそのデータモデルがより具体的に解説されている。
-データモデルは効果的なデータマネジメントを行うにあたり必要なものとされている。
-次のような意義がある。
-データに関する共通語彙を提供する 組織のデータや情報システムに関しての明示的な知識を捉え文書化する プロジェクトにおいて主なコミュニケーションツールとして使われる アプリケーションをカスタマイズ、統合、リプレースする際の出発点となる データモデルは組織が把握した現状、またはあるべき姿として組織のデータを記述する。
-カテゴリー情報、リソース情報、業務イベント情報、詳細取引情報がその対象となる。
-データモデルの構成要素 ほとんどのデータモデルはエンティティ、リレーションシップ、属性、ドメインにより構成される。
-エンティティ エンティティとはある組織が情報を収集する対象のこと。
-組織が使う名詞。
-以下は Marmaid の Entity Relationship Diagrams でエンティティを表現した例。
-学校を例にしており、学生、コース、インストラクタがエンティティとして表されている。
---- title: Entity --- erDiagram Student Course Instructor リレーションシップ リレーションシップはエンティティ間の関連性を表す。
-以下の例は学生はコースを &amp;ldquo;履修する&amp;rdquo;、インストラクタはコースを &amp;ldquo;教える&amp;rdquo; ことを表している。
---- title: Relationship --- erDiagram Student }|--|{ Course : take Instructor }|--|{ Course : teach 線の両端の形はリレーションシップの cardinality (多重度) を表している。
-この場合ではそれぞれカラスの足状になっているが、それぞれ「1またはそれ以上」という意味で、「学生は1つ以上のコースを履修する」「コースは1人以上の学生に履修される」ということを表している。
-リレーションシップの arity (項数) は一般的には二項型 (バイナリリレーションシップ) であることが多く、2つのエンティティ間の関係を表す。</description>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.dama-japan.org/Introduction.html&#34;&gt;DMBOK2&lt;/a&gt; を読み進めていくシリーズ。&lt;br&gt;
+今回は第5章「データモデリングとデザイン」について。&lt;br&gt;
+第4章でデータモデリングについて言及されていたが、ここで詳しく見ていく。&lt;/p&gt;
+&lt;p&gt;以降、特に注釈のない引用は DMBOK2 第5章からの引用とする。&lt;/p&gt;
+&lt;h2 id=&#34;データモデリングとは&#34;&gt;データモデリングとは&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;データモデリングとは、データ要件を洗い出し、分析し、取扱スコープを決めるプロセスであり、データ要件を記述し伝えるために、明確に定義されたデータモデルと呼ばれる様式が用いられる。このプロセスは反復的であり、概念、論理、物理モデルが含まれる。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;../dmbok-chapter-4/&#34;&gt;第4章 データアーキテクチャ&lt;/a&gt; ではエンタープライズ・データモデルという言葉が登場したが、この第5章ではそのデータモデルがより具体的に解説されている。&lt;br&gt;
+データモデルは効果的なデータマネジメントを行うにあたり必要なものとされている。&lt;br&gt;
+次のような意義がある。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;データに関する共通語彙を提供する&lt;/li&gt;
+&lt;li&gt;組織のデータや情報システムに関しての明示的な知識を捉え文書化する&lt;/li&gt;
+&lt;li&gt;プロジェクトにおいて主なコミュニケーションツールとして使われる&lt;/li&gt;
+&lt;li&gt;アプリケーションをカスタマイズ、統合、リプレースする際の出発点となる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;データモデルは組織が把握した現状、またはあるべき姿として組織のデータを記述する。&lt;br&gt;
+カテゴリー情報、リソース情報、業務イベント情報、詳細取引情報がその対象となる。&lt;/p&gt;
+&lt;h2 id=&#34;データモデルの構成要素&#34;&gt;データモデルの構成要素&lt;/h2&gt;
+&lt;p&gt;ほとんどのデータモデルはエンティティ、リレーションシップ、属性、ドメインにより構成される。&lt;/p&gt;
+&lt;h3 id=&#34;エンティティ&#34;&gt;エンティティ&lt;/h3&gt;
+&lt;p&gt;エンティティとはある組織が情報を収集する対象のこと。&lt;br&gt;
+組織が使う名詞。&lt;/p&gt;
+&lt;p&gt;以下は Marmaid の &lt;a href=&#34;https://mermaid.js.org/syntax/entityRelationshipDiagram.html&#34;&gt;Entity Relationship Diagrams&lt;/a&gt; でエンティティを表現した例。&lt;br&gt;
+学校を例にしており、学生、コース、インストラクタがエンティティとして表されている。&lt;/p&gt;
+&lt;pre class=&#34;mermaid&#34;&gt;---
+title: Entity
+---
+erDiagram
+    Student
+    Course
+    Instructor
+&lt;/pre&gt;
+
+&lt;h3 id=&#34;リレーションシップ&#34;&gt;リレーションシップ&lt;/h3&gt;
+&lt;p&gt;リレーションシップはエンティティ間の関連性を表す。&lt;br&gt;
+以下の例は学生はコースを &amp;ldquo;履修する&amp;rdquo;、インストラクタはコースを &amp;ldquo;教える&amp;rdquo; ことを表している。&lt;/p&gt;
+&lt;pre class=&#34;mermaid&#34;&gt;---
+title: Relationship
+---
+erDiagram
+    Student }|--|{ Course : take
+    Instructor }|--|{ Course : teach
+&lt;/pre&gt;
+
+&lt;p&gt;線の両端の形はリレーションシップの cardinality (多重度) を表している。&lt;br&gt;
+この場合ではそれぞれカラスの足状になっているが、それぞれ「1またはそれ以上」という意味で、「学生は1つ以上のコースを履修する」「コースは1人以上の学生に履修される」ということを表している。&lt;/p&gt;
+&lt;p&gt;リレーションシップの arity (項数) は一般的には二項型 (バイナリリレーションシップ) であることが多く、2つのエンティティ間の関係を表す。&lt;br&gt;
+一方で線の両端が同じエンティティにつながっている単項型、3のエンティティが関連する三項型もある。&lt;br&gt;
+以下は単項型の例で、前提となるコースの履修が必要であることを示す。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>読書メモ: DMBOK2 第4章 データアーキテクチャ</title>
       <link>https://soonraah.github.io/posts/dmbok-chapter-4/</link>
       <pubDate>Sat, 06 Jan 2024 20:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/dmbok-chapter-4/</guid>
-      <description>このポストについて DMBOK2 を読み進めていくシリーズ。
-今回は第4章「データアーキテクチャ」について。
-やや抽象度が高い内容となっており、理解が難しいと感じた。
-以降、特に注釈のない引用は DMBOK2 第4章からの引用とする。
-データアーキテクチャとは データアーキテクチャの定義は以下のとおり。
-企業の (組織構造に関係なく) データニーズを明確にし、ニーズに合うマスターとなる青写真を設計し、維持する。マスターとなる青写真を使ってデータ統合を手引し、データ資産をコントロールし、ビジネス戦略に合わせてデータへの投資を行う。
-業務戦略と技術実装の間を橋渡しすることがデータアーキテクチャの目的。
-以下が成果物、つまり前述の定義の「マスターとなる青写真」となる。
-データの保存と処理の要件 企業の現在のデータ要件と長期のデータ要件を満たす構造や計画の立案 これらを記述するためにエンタープライズ・データモデル (EDM) とデータフロー設計が必要となる。(後述)
-エンタープライズアーキテクチャ データアーキテクチャとビジネス、アプリケーション、テクニカルなど他の領域のアーキテクチャとの違いは下表のようになる。
-それぞれが影響を及ぼし合う関係となっており、データアーキテクチャはビジネスアーキテクチャによって決められる。
-ドメイン エンタープライズ・ビジネスアーキテクチャ エンタープライズ・データアーキテクチャ エンタープライズ・アプリケーションアーキテクチャ エンタープライズ・テクニカルアーキテクチャ 目的 企業が顧客や他のステークホルダに どのように価値提供しているかを 明らかにする データがどのように整理・管理されるべきか記述する 企業内アプリケーションの 構造と機能を記述する システムを稼働して価値を 提供するために必要な 物理実装技術を記述する 要素 ビジネスモデル、業務プロセス、業務能力、サービス、イベント、戦略、語彙集 データモデル、データ定義、データマッピング仕様、データフロー、構造化データの API ビジネスシステム、ソフトウェアパッケージ、データベース テクニカルプラットフォーム、ネットワーク、セキュリティ、統合ツール 依存関係 他のドメインに対する要件を設定する ビジネスアーキテクチャによって作られ、要求されるデータを管理する ビジネス要件に基づいて特定されたデータに対応する アプリケーションアーキテクチャを提供し実行する 役割 ビジネスアーキテクトとアナリスト、ビジネス・データスチュワード データアーキテクトとモデラー、データスチュワード アプリケーションアーキテクト インフラストラクチャアーキテクト DMBOK2 表6 アーキテクチャ領域
-web 系エンジニア的には「アーキテクチャ」という言葉だけ聞くとクラウドサービスのアイコンを使ってアーキテクチャ図をお絵描きするよくあるアレを想像しがちだが、データアーキテクチャはそれではないということ。
-(DMBOK2 の分類ではそれはテクニカルアーキテクチャの領域)
-エンタープライズ・データモデル (EDM) EDM とは
-全体的でエンタープライズレベルの実装に依存しない概念または論理モデルであり、企業全体にわたるデータに関して一貫した共通のビューを提供する。
-次の図は概念・論理モデルと物理的なデータモデルとの関係を示す。
-垂直方向には対象領域ごとに対応する異なるレベルのモデルが関係している。
-水平方向には同じレベルのモデルがあり、対象領域をまたいでエンティティが関係し合う。
-DMBOK2 図23 エンタープライズ・データモデル</description>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.dama-japan.org/Introduction.html&#34;&gt;DMBOK2&lt;/a&gt; を読み進めていくシリーズ。&lt;br&gt;
+今回は第4章「データアーキテクチャ」について。&lt;br&gt;
+やや抽象度が高い内容となっており、理解が難しいと感じた。&lt;/p&gt;
+&lt;p&gt;以降、特に注釈のない引用は DMBOK2 第4章からの引用とする。&lt;/p&gt;
+&lt;h2 id=&#34;データアーキテクチャとは&#34;&gt;データアーキテクチャとは&lt;/h2&gt;
+&lt;p&gt;データアーキテクチャの定義は以下のとおり。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;企業の (組織構造に関係なく) データニーズを明確にし、ニーズに合うマスターとなる青写真を設計し、維持する。マスターとなる青写真を使ってデータ統合を手引し、データ資産をコントロールし、ビジネス戦略に合わせてデータへの投資を行う。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;業務戦略と技術実装の間を橋渡しすることがデータアーキテクチャの目的。&lt;br&gt;
+以下が成果物、つまり前述の定義の「マスターとなる青写真」となる。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;データの保存と処理の要件&lt;/li&gt;
+&lt;li&gt;企業の現在のデータ要件と長期のデータ要件を満たす構造や計画の立案&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;これらを記述するためにエンタープライズ・データモデル (EDM) とデータフロー設計が必要となる。(後述)&lt;/p&gt;
+&lt;h2 id=&#34;エンタープライズアーキテクチャ&#34;&gt;エンタープライズアーキテクチャ&lt;/h2&gt;
+&lt;p&gt;データアーキテクチャとビジネス、アプリケーション、テクニカルなど他の領域のアーキテクチャとの違いは下表のようになる。&lt;br&gt;
+それぞれが影響を及ぼし合う関係となっており、データアーキテクチャはビジネスアーキテクチャによって決められる。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;ドメイン&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;エンタープライズ・ビジネスアーキテクチャ&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;エンタープライズ・データアーキテクチャ&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;エンタープライズ・アプリケーションアーキテクチャ&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;エンタープライズ・テクニカルアーキテクチャ&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;目的&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;企業が顧客や他のステークホルダに &lt;!-- raw HTML omitted --&gt; どのように価値提供しているかを &lt;!-- raw HTML omitted --&gt; 明らかにする&lt;/td&gt;
+          &lt;td&gt;データがどのように整理・管理されるべきか記述する&lt;/td&gt;
+          &lt;td&gt;企業内アプリケーションの &lt;!-- raw HTML omitted --&gt; 構造と機能を記述する&lt;/td&gt;
+          &lt;td&gt;システムを稼働して価値を &lt;!-- raw HTML omitted --&gt; 提供するために必要な &lt;!-- raw HTML omitted --&gt; 物理実装技術を記述する&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;要素&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;ビジネスモデル、業務プロセス、業務能力、サービス、イベント、戦略、語彙集&lt;/td&gt;
+          &lt;td&gt;データモデル、データ定義、データマッピング仕様、データフロー、構造化データの API&lt;/td&gt;
+          &lt;td&gt;ビジネスシステム、ソフトウェアパッケージ、データベース&lt;/td&gt;
+          &lt;td&gt;テクニカルプラットフォーム、ネットワーク、セキュリティ、統合ツール&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;依存関係&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;他のドメインに対する要件を設定する&lt;/td&gt;
+          &lt;td&gt;ビジネスアーキテクチャによって作られ、要求されるデータを管理する&lt;/td&gt;
+          &lt;td&gt;ビジネス要件に基づいて特定されたデータに対応する&lt;/td&gt;
+          &lt;td&gt;アプリケーションアーキテクチャを提供し実行する&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;役割&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;ビジネスアーキテクトとアナリスト、ビジネス・データスチュワード&lt;/td&gt;
+          &lt;td&gt;データアーキテクトとモデラー、データスチュワード&lt;/td&gt;
+          &lt;td&gt;アプリケーションアーキテクト&lt;/td&gt;
+          &lt;td&gt;インフラストラクチャアーキテクト&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;em&gt;DMBOK2 表6 アーキテクチャ領域&lt;/em&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>読書メモ: DMBOK2 第15章 データマネジメント成熟度アセスメント</title>
       <link>https://soonraah.github.io/posts/dmbok-chapter-15/</link>
       <pubDate>Sat, 30 Dec 2023 01:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/dmbok-chapter-15/</guid>
-      <description>このポストについて DMBOK2 を読み進めていくシリーズ。
-今回は第15章「データマネジメント成熟度アセスメント」について。
-データマネジメントの導入において重要な役割を果たしそうなので早めに確認しておきたかった。
-以降、特に注釈のない引用は DMBOK2 第15章からの引用とする。
-データマネジメント成熟度アセスメントとは データマネジメント成熟度アセスメント (DMMA: Data Management Maturity Assessment) はその名の通り、組織のデータマネジメントのレベルの評価に基づくプロセス改善の取り組みのこと。
-能力成熟度アセスメント (CMA: Capability Maturity Assessment) というものがあり、それのデータマネジメント版が DMMA。
-CMA では
-成熟度モデルは進化の観点から定義され、それにはプロセスの特性を表すレベルが使用される。組織がプロセスの特性を理解すると、組織は成熟度を測り、その能力を向上させるための計画を立てることができる。(中略) 新しいレベルに上がる度にプロセスの実行はより一貫性を増し、予測可能な状態となり、信頼性が高くなる。
-レベルは通常0~5の6段階で表される。
-DMMA は
-全体的なデータマネジメントを評価するために使用したり、単一の知識領域や、単一のプロセスに焦点を当てて使用したりできる。どのような点に焦点を当てたとしても、DMMA はデータマネジメント業務の健全性と有効性について、業務と IT の視点のギャップを埋めるために役立つ。
-組織が DMMA を実施する理由は、規制への対応、データガバナンス、プロセス改善、etc.
-DMMA の第一のゴールはデータマネジメント活動の現状を評価することであり、それにより改善計画を立てることができるようになる。
-アセスメントレベル 以下はアセスメントレベルの概要。
-データマネジメントの各知識領域 (ex. データガバナンス、メタデータ管理、etc.) ごとにレベルが評価される。
-level 0: 能力が欠如した状態 データマネジメントの取り組みがない level 1: 初期／場当たり的な状態 限られたツールセットを用いた一般的なデータマネジメント ガバナンスは低レベル データ処理は一部の専門家に依存し、役割や責任は部門別に定義されている level 2: 反復可能な状態 組織は一元化された共通ツールを使い始める 役割は明確化されており、一部の専門家のみに依存しない level 3: 定義された状態 拡張可能なプロセスの導入と制度化 組織全体である程度統制されたデータの複製 データ品質全体の総体的な向上 組織的なポリシー定義と統制 level 4: 管理された状態 新しいプロジェクトやタスクから得られる結果が予測され、リスクの管理が始まる データマネジメントに成果に対する評価尺度が含まれる データマネジメント用の標準ツールが集中管理計画とガバナンス機能に組み合わされている level 5: 最適化された状態 活動の成果は十分予測可能に 組織は継続的な改善に重点を置く 十分理解された評価尺度を使ってデータ品質とプロセスが管理・測定される 次のように各知識領域ごとに可視化することができる。</description>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.dama-japan.org/Introduction.html&#34;&gt;DMBOK2&lt;/a&gt; を読み進めていくシリーズ。&lt;br&gt;
+今回は第15章「データマネジメント成熟度アセスメント」について。&lt;br&gt;
+データマネジメントの導入において重要な役割を果たしそうなので早めに確認しておきたかった。&lt;/p&gt;
+&lt;p&gt;以降、特に注釈のない引用は DMBOK2 第15章からの引用とする。&lt;/p&gt;
+&lt;h2 id=&#34;データマネジメント成熟度アセスメントとは&#34;&gt;データマネジメント成熟度アセスメントとは&lt;/h2&gt;
+&lt;p&gt;データマネジメント成熟度アセスメント (DMMA: Data Management Maturity Assessment) はその名の通り、組織のデータマネジメントのレベルの評価に基づくプロセス改善の取り組みのこと。&lt;br&gt;
+能力成熟度アセスメント (CMA: Capability Maturity Assessment) というものがあり、それのデータマネジメント版が DMMA。&lt;/p&gt;
+&lt;p&gt;CMA では&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;成熟度モデルは進化の観点から定義され、それにはプロセスの特性を表すレベルが使用される。組織がプロセスの特性を理解すると、組織は成熟度を測り、その能力を向上させるための計画を立てることができる。(中略) 新しいレベルに上がる度にプロセスの実行はより一貫性を増し、予測可能な状態となり、信頼性が高くなる。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;レベルは通常0~5の6段階で表される。&lt;br&gt;
+DMMA は&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;全体的なデータマネジメントを評価するために使用したり、単一の知識領域や、単一のプロセスに焦点を当てて使用したりできる。どのような点に焦点を当てたとしても、DMMA はデータマネジメント業務の健全性と有効性について、業務と IT の視点のギャップを埋めるために役立つ。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;組織が DMMA を実施する理由は、規制への対応、データガバナンス、プロセス改善、etc.&lt;br&gt;
+DMMA の第一のゴールはデータマネジメント活動の現状を評価することであり、それにより改善計画を立てることができるようになる。&lt;/p&gt;
+&lt;h2 id=&#34;アセスメントレベル&#34;&gt;アセスメントレベル&lt;/h2&gt;
+&lt;p&gt;以下はアセスメントレベルの概要。&lt;br&gt;
+データマネジメントの各知識領域 (ex. データガバナンス、メタデータ管理、etc.) ごとにレベルが評価される。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;level 0: &lt;strong&gt;能力が欠如した状態&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;データマネジメントの取り組みがない&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;level 1: &lt;strong&gt;初期／場当たり的な状態&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;限られたツールセットを用いた一般的なデータマネジメント&lt;/li&gt;
+&lt;li&gt;ガバナンスは低レベル&lt;/li&gt;
+&lt;li&gt;データ処理は一部の専門家に依存し、役割や責任は部門別に定義されている&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;level 2: &lt;strong&gt;反復可能な状態&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;組織は一元化された共通ツールを使い始める&lt;/li&gt;
+&lt;li&gt;役割は明確化されており、一部の専門家のみに依存しない&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;level 3: &lt;strong&gt;定義された状態&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;拡張可能なプロセスの導入と制度化&lt;/li&gt;
+&lt;li&gt;組織全体である程度統制されたデータの複製&lt;/li&gt;
+&lt;li&gt;データ品質全体の総体的な向上&lt;/li&gt;
+&lt;li&gt;組織的なポリシー定義と統制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;level 4: &lt;strong&gt;管理された状態&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;新しいプロジェクトやタスクから得られる結果が予測され、リスクの管理が始まる&lt;/li&gt;
+&lt;li&gt;データマネジメントに成果に対する評価尺度が含まれる&lt;/li&gt;
+&lt;li&gt;データマネジメント用の標準ツールが集中管理計画とガバナンス機能に組み合わされている&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;level 5: &lt;strong&gt;最適化された状態&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;活動の成果は十分予測可能に&lt;/li&gt;
+&lt;li&gt;組織は継続的な改善に重点を置く&lt;/li&gt;
+&lt;li&gt;十分理解された評価尺度を使ってデータ品質とプロセスが管理・測定される&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;次のように各知識領域ごとに可視化することができる。&lt;br&gt;
+現状ランクと求められるランクの乖離が大きいところが組織にとってのリスクとなる。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>現実の CSV ファイルのデータを BigQuery に load する仕組みを作るという泥臭い作業を dlt でやってみる</title>
       <link>https://soonraah.github.io/posts/load-csv-data-into-bq-by-dlt/</link>
       <pubDate>Wed, 20 Dec 2023 09:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/load-csv-data-into-bq-by-dlt/</guid>
-      <description>このポストについて 前回の記事 dlt 入門 - ELT の Extract と Load を担う data load tool では dlt の概要を説明した。
-この記事ではそれを踏まえ、dlt を使って CSV ファイルを BigQuery に load するという一連の開発作業をやってみる。
-現実の CSV はそのまま使えなかったりするので、BigQuery に入れるまでに泥臭い前処理のような作業があることが多い。
-そのへんもまとめて dlt でやってみるとこんな感じ、というのが示せるとよい。
-やりたいこと 個人で管理しているお金の情報を個人用の BigQuery に置きたい、という要件を想定。
-データ概要 具体的には MoneyForward のデータを load していく。
-個人では API を利用できないので、web UI から export できる CSV のデータで収入・支出詳細と資産推移月次を対象とする。
-CSV の export 方法は以下を参照。
-入出金履歴はダウンロードできますか – マネーフォワード MEサポートサイト データの内容は次のようになっている。
-収入・支出詳細_2023-11-01_2023-11-30.csv &amp;#34;計算対象&amp;#34;,&amp;#34;日付&amp;#34;,&amp;#34;内容&amp;#34;,&amp;#34;金額（円）&amp;#34;,&amp;#34;保有金融機関&amp;#34;,&amp;#34;大項目&amp;#34;,&amp;#34;中項目&amp;#34;,&amp;#34;メモ&amp;#34;,&amp;#34;振替&amp;#34;,&amp;#34;ID&amp;#34; &amp;#34;1&amp;#34;,&amp;#34;2023/11/30&amp;#34;,&amp;#34;AMAZON.CO.JP&amp;#34;,&amp;#34;-2830&amp;#34;,&amp;#34;楽天カード&amp;#34;,&amp;#34;食費&amp;#34;,&amp;#34;食料品&amp;#34;,&amp;#34;&amp;#34;,&amp;#34;0&amp;#34;,&amp;#34;EPv92ZjQcOxgWQx_cLbhD1&amp;#34; &amp;#34;1&amp;#34;,&amp;#34;2023/11/24&amp;#34;,&amp;#34;東京ガス&amp;#34;,&amp;#34;-4321&amp;#34;,&amp;#34;楽天カード&amp;#34;,&amp;#34;水道・光熱費&amp;#34;,&amp;#34;ガス・灯油代&amp;#34;,&amp;#34;&amp;#34;,&amp;#34;0&amp;#34;,&amp;#34;r6wuQPfrIRS6aFpNYZE5Eh&amp;#34; &amp;#34;1&amp;#34;,&amp;#34;2023/11/24&amp;#34;,&amp;#34;給与 カ) フロッグログ&amp;#34;,&amp;#34;700000&amp;#34;,&amp;#34;みずほ銀行&amp;#34;,&amp;#34;収入&amp;#34;,&amp;#34;給与&amp;#34;,&amp;#34;&amp;#34;,&amp;#34;0&amp;#34;,&amp;#34;doettKpYyNp0Tml9KQQXm1&amp;#34; ヘッダーがあり、各列に名前が付いている。
-encoding が CP932 であることに注意。</description>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;前回の記事 &lt;a href=&#34;../what-is-dlt/&#34;&gt;dlt 入門 - ELT の Extract と Load を担う data load tool&lt;/a&gt; では dlt の概要を説明した。&lt;br&gt;
+この記事ではそれを踏まえ、dlt を使って CSV ファイルを BigQuery に load するという一連の開発作業をやってみる。&lt;/p&gt;
+&lt;p&gt;現実の CSV はそのまま使えなかったりするので、BigQuery に入れるまでに泥臭い前処理のような作業があることが多い。&lt;br&gt;
+そのへんもまとめて dlt でやってみるとこんな感じ、というのが示せるとよい。&lt;/p&gt;
+&lt;h2 id=&#34;やりたいこと&#34;&gt;やりたいこと&lt;/h2&gt;
+&lt;p&gt;個人で管理しているお金の情報を個人用の BigQuery に置きたい、という要件を想定。&lt;/p&gt;
+&lt;h3 id=&#34;データ概要&#34;&gt;データ概要&lt;/h3&gt;
+&lt;p&gt;具体的には MoneyForward のデータを load していく。&lt;br&gt;
+個人では API を利用できないので、web UI から export できる CSV のデータで収入・支出詳細と資産推移月次を対象とする。&lt;br&gt;
+CSV の export 方法は以下を参照。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://support.me.moneyforward.com/hc/ja/articles/900004382483-%E5%85%A5%E5%87%BA%E9%87%91%E5%B1%A5%E6%AD%B4%E3%81%AF%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%81%8B&#34;&gt;入出金履歴はダウンロードできますか – マネーフォワード MEサポートサイト&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;データの内容は次のようになっている。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;収入・支出詳細_2023-11-01_2023-11-30.csv&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;#34;計算対象&amp;#34;,&amp;#34;日付&amp;#34;,&amp;#34;内容&amp;#34;,&amp;#34;金額（円）&amp;#34;,&amp;#34;保有金融機関&amp;#34;,&amp;#34;大項目&amp;#34;,&amp;#34;中項目&amp;#34;,&amp;#34;メモ&amp;#34;,&amp;#34;振替&amp;#34;,&amp;#34;ID&amp;#34;
+&amp;#34;1&amp;#34;,&amp;#34;2023/11/30&amp;#34;,&amp;#34;AMAZON.CO.JP&amp;#34;,&amp;#34;-2830&amp;#34;,&amp;#34;楽天カード&amp;#34;,&amp;#34;食費&amp;#34;,&amp;#34;食料品&amp;#34;,&amp;#34;&amp;#34;,&amp;#34;0&amp;#34;,&amp;#34;EPv92ZjQcOxgWQx_cLbhD1&amp;#34;
+&amp;#34;1&amp;#34;,&amp;#34;2023/11/24&amp;#34;,&amp;#34;東京ガス&amp;#34;,&amp;#34;-4321&amp;#34;,&amp;#34;楽天カード&amp;#34;,&amp;#34;水道・光熱費&amp;#34;,&amp;#34;ガス・灯油代&amp;#34;,&amp;#34;&amp;#34;,&amp;#34;0&amp;#34;,&amp;#34;r6wuQPfrIRS6aFpNYZE5Eh&amp;#34;
+&amp;#34;1&amp;#34;,&amp;#34;2023/11/24&amp;#34;,&amp;#34;給与 カ) フロッグログ&amp;#34;,&amp;#34;700000&amp;#34;,&amp;#34;みずほ銀行&amp;#34;,&amp;#34;収入&amp;#34;,&amp;#34;給与&amp;#34;,&amp;#34;&amp;#34;,&amp;#34;0&amp;#34;,&amp;#34;doettKpYyNp0Tml9KQQXm1&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;ヘッダーがあり、各列に名前が付いている。&lt;br&gt;
+encoding が CP932 であることに注意。&lt;br&gt;
+&lt;code&gt;ID&lt;/code&gt; の列があるので、行の識別に使えそう。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>dlt 入門 - ELT の Extract と Load を担う data load tool</title>
       <link>https://soonraah.github.io/posts/what-is-dlt/</link>
       <pubDate>Mon, 18 Dec 2023 23:50:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/what-is-dlt/</guid>
-      <description>このポストについて このポストは datatech-jp Advent Calendar 2023 の18日目の投稿です。
-web の記事で見かけた dlt というツールが気になったので調べてみた。
-dlt の概要について書いていく。
-What is dlt? https://dlthub.com/
-dlt とは &amp;ldquo;data load tool&amp;rdquo; の略。
-雑に言うとデータパイプラインにおける ELT の Extract と Load を行う ものとなっている。
-主にベルリンとニューヨークに拠点を持つ dltHub 社によって開発されており、OSS の Python ライブラリとして提供されている。
-次のような特徴を持つ。
-プラットフォームではなくあくまでライブラリであることが強調されている つまり Airflow, GitHub Actions, Google Cloud Functions, ローカル環境などどこでも動かすことができる スケールアウト可能な分散処理ではない extract と load にまつわる反復的で平凡な作業をなくすことを目指している schema 推論や schema evolution をサポート 宣言的なコードでメンテナンスを楽にする incremental loading をサポート 豊富な source GA, Salesforce, Kinesis などいろいろ例が挙げられている 要は API からの取得も含めて JSON-like な形式で Python で読めるものなら何でも 豊富な destination BigQuery, Snowflake など主要なクラウド DWH DuckDB はローカルでの動作確認に便利 Airflow, dbt などとの連携がある CLI の提供もある その他、Glossary を見ておくとドキュメントが読みやすくなる。</description>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;このポストは &lt;a href=&#34;https://qiita.com/advent-calendar/2023/datatech-jp&#34;&gt;datatech-jp Advent Calendar 2023&lt;/a&gt; の18日目の投稿です。&lt;/p&gt;
+&lt;p&gt;web の記事で見かけた dlt というツールが気になったので調べてみた。&lt;br&gt;
+dlt の概要について書いていく。&lt;/p&gt;
+&lt;h2 id=&#34;what-is-dlt&#34;&gt;What is dlt?&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://dlthub.com/&#34;&gt;https://dlthub.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;dlt とは &amp;ldquo;data load tool&amp;rdquo; の略。&lt;br&gt;
+雑に言うとデータパイプラインにおける &lt;strong&gt;ELT の Extract と Load を行う&lt;/strong&gt; ものとなっている。&lt;br&gt;
+主にベルリンとニューヨークに拠点を持つ dltHub 社によって開発されており、OSS の Python ライブラリとして提供されている。&lt;/p&gt;
+&lt;p&gt;次のような特徴を持つ。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;プラットフォームではなくあくまでライブラリであることが強調されている
+&lt;ul&gt;
+&lt;li&gt;つまり Airflow, GitHub Actions, Google Cloud Functions, ローカル環境などどこでも動かすことができる&lt;/li&gt;
+&lt;li&gt;スケールアウト可能な分散処理ではない&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;extract と load にまつわる反復的で平凡な作業をなくすことを目指している
+&lt;ul&gt;
+&lt;li&gt;schema 推論や schema evolution をサポート&lt;/li&gt;
+&lt;li&gt;宣言的なコードでメンテナンスを楽にする&lt;/li&gt;
+&lt;li&gt;incremental loading をサポート&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;豊富な &lt;a href=&#34;https://dlthub.com/docs/dlt-ecosystem/verified-sources/&#34;&gt;source&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;GA, Salesforce, Kinesis などいろいろ例が挙げられている&lt;/li&gt;
+&lt;li&gt;要は API からの取得も含めて JSON-like な形式で Python で読めるものなら何でも&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;豊富な &lt;a href=&#34;https://dlthub.com/docs/dlt-ecosystem/destinations/&#34;&gt;destination&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;BigQuery, Snowflake など主要なクラウド DWH&lt;/li&gt;
+&lt;li&gt;DuckDB はローカルでの動作確認に便利&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Airflow, dbt などとの連携がある&lt;/li&gt;
+&lt;li&gt;CLI の提供もある&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;その他、&lt;a href=&#34;https://dlthub.com/docs/general-usage/glossary&#34;&gt;Glossary&lt;/a&gt; を見ておくとドキュメントが読みやすくなる。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>読書メモ: DMBOK2 第12章 メタデータ管理</title>
       <link>https://soonraah.github.io/posts/dmbok-chapter-12/</link>
       <pubDate>Sat, 09 Dec 2023 10:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/dmbok-chapter-12/</guid>
-      <description>このポストについて DMBOK2 を読み進めていくシリーズ。
-今回は第12章「メタデータ管理」について。
-仕事でメタデータを扱い始めたので読んでおきたかった。
-以降、特に注釈のない引用は DMBOK2 第12章からの引用とする。
-メタデータとは 一般的な説明としては「データに関するデータ」とよく言われている。
-データに関するデータはすべてメタデータなので、メタデータはとても幅広い内容となっている。
-DMBOK2 ではメタデータの説明として図書館の例を挙げている。
-そこには数十万の書籍と雑誌があるのに、図書目録がない。図書目録がなければ、読者は特定の本や特定のトピックの検索を開始する方法さえ分からないかもしれない。図書目録は、必要な情報 (図書館が所有する本と資料、保管場所) を提供するだけでなく、利用者が様々な着眼点 (対象分野、著者、タイトル) から資料を見つけることを可能にする。 (中略) メタデータを持たない組織は、図書目録のない図書館のようなものである。
-データという資産を管理するためにも、データを利用するためにも、リスクマネジメントのためにもメタデータは必要となる。
-メタデータの種類 メタデータはビジネス、テクニカル、オペレーショナルの3つに分類することができる。
-ビジネスメタデータ 主にデータの内容と状態に重点を置く。
-IT からは独立している。
-dataset, table, column の定義と説明 業務ルール、変換ルール、計算方法、導出方法 データモデル etc. テクニカルメタデータ 技術的詳細やシステムに関する情報。
-主に IT に関連している。
-物理 database の table, column の名称 column のプロパティ アクセス権 etc. オペレーショナルメタデータ データの処理とアクセスの詳細を示す。
-運用で得られる情報とも言える。
-バッチプログラムのジョブ実行ログ データの抽出とその結果などの履歴 運用スケジュールの以上 etc. 以上、各種のメタデータで例に挙げたのはあくまで一部であり、現実にはもっと多くのメタデータが存在する。
-メタデータを管理する意義 図書館の例からもわかるとおり、メタデータなしではデータを管理することはできない。
-信頼性が高く管理されたメタデータにより、次のようなことができるようになる。
-データのコンテキストを提供し、それによりデータ品質を測定可能にして信頼性を向上させる 業務効率の向上、および古いデータや誤ったデータの利用防止 データ利用者とエンジニアの間のコミュニケーションの改善 法令遵守の支援 etc. メタデータの管理が不十分だと次のようなことが起こる。
-一貫性のないデータ利用と誤った定義によるリスク メタデータは複製されて保管されることによる冗長性 利用者の信頼性低下 etc. メタデータアーキテクチャ メタデータの内容は幅広いがしたがってその取得元も幅広く、ビジネス用語集、BI ツール、モデリングツール、等々が挙げられる。</description>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.dama-japan.org/Introduction.html&#34;&gt;DMBOK2&lt;/a&gt; を読み進めていくシリーズ。&lt;br&gt;
+今回は第12章「メタデータ管理」について。&lt;br&gt;
+仕事でメタデータを扱い始めたので読んでおきたかった。&lt;/p&gt;
+&lt;p&gt;以降、特に注釈のない引用は DMBOK2 第12章からの引用とする。&lt;/p&gt;
+&lt;h2 id=&#34;メタデータとは&#34;&gt;メタデータとは&lt;/h2&gt;
+&lt;p&gt;一般的な説明としては「データに関するデータ」とよく言われている。&lt;br&gt;
+データに関するデータはすべてメタデータなので、メタデータはとても幅広い内容となっている。&lt;br&gt;
+DMBOK2 ではメタデータの説明として図書館の例を挙げている。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;そこには数十万の書籍と雑誌があるのに、図書目録がない。図書目録がなければ、読者は特定の本や特定のトピックの検索を開始する方法さえ分からないかもしれない。図書目録は、必要な情報 (図書館が所有する本と資料、保管場所) を提供するだけでなく、利用者が様々な着眼点 (対象分野、著者、タイトル) から資料を見つけることを可能にする。 &lt;em&gt;(中略)&lt;/em&gt; メタデータを持たない組織は、図書目録のない図書館のようなものである。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;データという資産を管理するためにも、データを利用するためにも、リスクマネジメントのためにもメタデータは必要となる。&lt;/p&gt;
+&lt;h2 id=&#34;メタデータの種類&#34;&gt;メタデータの種類&lt;/h2&gt;
+&lt;p&gt;メタデータはビジネス、テクニカル、オペレーショナルの3つに分類することができる。&lt;/p&gt;
+&lt;h3 id=&#34;ビジネスメタデータ&#34;&gt;ビジネスメタデータ&lt;/h3&gt;
+&lt;p&gt;主にデータの内容と状態に重点を置く。&lt;br&gt;
+IT からは独立している。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;dataset, table, column の定義と説明&lt;/li&gt;
+&lt;li&gt;業務ルール、変換ルール、計算方法、導出方法&lt;/li&gt;
+&lt;li&gt;データモデル&lt;/li&gt;
+&lt;li&gt;etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;テクニカルメタデータ&#34;&gt;テクニカルメタデータ&lt;/h3&gt;
+&lt;p&gt;技術的詳細やシステムに関する情報。&lt;br&gt;
+主に IT に関連している。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;物理 database の table, column の名称&lt;/li&gt;
+&lt;li&gt;column のプロパティ&lt;/li&gt;
+&lt;li&gt;アクセス権&lt;/li&gt;
+&lt;li&gt;etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;オペレーショナルメタデータ&#34;&gt;オペレーショナルメタデータ&lt;/h3&gt;
+&lt;p&gt;データの処理とアクセスの詳細を示す。&lt;br&gt;
+運用で得られる情報とも言える。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;バッチプログラムのジョブ実行ログ&lt;/li&gt;
+&lt;li&gt;データの抽出とその結果などの履歴&lt;/li&gt;
+&lt;li&gt;運用スケジュールの以上&lt;/li&gt;
+&lt;li&gt;etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以上、各種のメタデータで例に挙げたのはあくまで一部であり、現実にはもっと多くのメタデータが存在する。&lt;/p&gt;
+&lt;h2 id=&#34;メタデータを管理する意義&#34;&gt;メタデータを管理する意義&lt;/h2&gt;
+&lt;p&gt;図書館の例からもわかるとおり、メタデータなしではデータを管理することはできない。&lt;br&gt;
+信頼性が高く管理されたメタデータにより、次のようなことができるようになる。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;データのコンテキストを提供し、それによりデータ品質を測定可能にして信頼性を向上させる&lt;/li&gt;
+&lt;li&gt;業務効率の向上、および古いデータや誤ったデータの利用防止&lt;/li&gt;
+&lt;li&gt;データ利用者とエンジニアの間のコミュニケーションの改善&lt;/li&gt;
+&lt;li&gt;法令遵守の支援&lt;/li&gt;
+&lt;li&gt;etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;メタデータの管理が不十分だと次のようなことが起こる。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一貫性のないデータ利用と誤った定義によるリスク&lt;/li&gt;
+&lt;li&gt;メタデータは複製されて保管されることによる冗長性&lt;/li&gt;
+&lt;li&gt;利用者の信頼性低下&lt;/li&gt;
+&lt;li&gt;etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;メタデータアーキテクチャ&#34;&gt;メタデータアーキテクチャ&lt;/h2&gt;
+&lt;p&gt;メタデータの内容は幅広いがしたがってその取得元も幅広く、ビジネス用語集、BI ツール、モデリングツール、等々が挙げられる。&lt;br&gt;
+これらを何らかの方法で集約し、一箇所のメタデータポータルで閲覧できるようにする必要がある。&lt;br&gt;
+つまり「ここに来ればデータについてのことがわかる」という入り口を設けることになる。&lt;br&gt;
+そのためのアーキテクチャの構成が4つ挙げられている。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>CDC &#43; Apache Iceberg で Amazon Athena にデータを取り込む</title>
       <link>https://soonraah.github.io/posts/ingest-data-into-athena-by-cdc-and-iceberg/</link>
       <pubDate>Sun, 03 Dec 2023 22:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/ingest-data-into-athena-by-cdc-and-iceberg/</guid>
-      <description>このポストについて このポストは Distributed computing Advent Calendar 2023 の3日目の記事になります。
-1日目、2日目に続いて Apache Iceberg について書きますが、このポストでは Iceberg の実用例を書きます。
-AWS DMS による CDC の結果を Apache Iceberg 形式にして Amazon Athena でクエリできるようにするという内容になります。
-やっていることとしては Perform upserts in a data lake using Amazon Athena and Apache Iceberg | AWS Big Data Blog で紹介されている内容と近いですが、実務としての背景や工夫したところなどを書いていきます。
-背景 私の所属する事業会社では日々プロダクトから様々なデータが発生しており、プロダクトの分析やレポーティング、ML など様々な用途で利用されている。
-それを支える基盤としてデータ基盤が存在している。
-データ基盤ではクエリエンジンとして Amazon Athena を使っている。
-ストレージとしては S3 を使用しており、主に分析用として Parquet 形式でデータが置かれる。
-ここに業務用の operational な database から日次でデータを取り込んでいる。
-データソースは RDS (Aurora MySQL) であり、比較的大きなデータとなっている。
-これまではこの RDS -&amp;gt; S3 のデータ取り込みには RDS の S3 snapshot export という機能を利用していた。</description>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;このポストは &lt;a href=&#34;https://qiita.com/advent-calendar/2023/distributed-computing&#34;&gt;Distributed computing Advent Calendar 2023&lt;/a&gt; の3日目の記事になります。&lt;br&gt;
+1日目、2日目に続いて Apache Iceberg について書きますが、このポストでは Iceberg の実用例を書きます。&lt;/p&gt;
+&lt;p&gt;AWS DMS による CDC の結果を Apache Iceberg 形式にして Amazon Athena でクエリできるようにするという内容になります。&lt;br&gt;
+やっていることとしては &lt;a href=&#34;https://aws.amazon.com/jp/blogs/big-data/perform-upserts-in-a-data-lake-using-amazon-athena-and-apache-iceberg/&#34;&gt;Perform upserts in a data lake using Amazon Athena and Apache Iceberg | AWS Big Data Blog&lt;/a&gt; で紹介されている内容と近いですが、実務としての背景や工夫したところなどを書いていきます。&lt;/p&gt;
+&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+&lt;p&gt;私の所属する事業会社では日々プロダクトから様々なデータが発生しており、プロダクトの分析やレポーティング、ML など様々な用途で利用されている。&lt;br&gt;
+それを支える基盤としてデータ基盤が存在している。&lt;/p&gt;
+&lt;p&gt;データ基盤ではクエリエンジンとして &lt;a href=&#34;https://docs.aws.amazon.com/athena/latest/ug/what-is.html&#34;&gt;Amazon Athena&lt;/a&gt; を使っている。&lt;br&gt;
+ストレージとしては S3 を使用しており、主に分析用として Parquet 形式でデータが置かれる。&lt;/p&gt;
+&lt;p&gt;ここに業務用の operational な database から日次でデータを取り込んでいる。&lt;br&gt;
+データソースは RDS (Aurora MySQL) であり、比較的大きなデータとなっている。&lt;/p&gt;
+&lt;p&gt;これまではこの RDS -&amp;gt; S3 のデータ取り込みには RDS の &lt;a href=&#34;https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ExportSnapshot.html&#34;&gt;S3 snapshot export&lt;/a&gt; という機能を利用していた。&lt;br&gt;
+この機能では比較的簡単な設定により、バックアップ用のスナップショットの内容を S3 に export することができる。&lt;br&gt;
+ちなみに対象 database のスナップショットのサイズは数十 TB ある。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>読書メモ: DMBOK2 第3章 データガバナンス</title>
       <link>https://soonraah.github.io/posts/dmbok-chapter-3/</link>
       <pubDate>Sun, 19 Nov 2023 17:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/dmbok-chapter-3/</guid>
-      <description>このポストについて DMBOK2 を読み進めていくシリーズ。
-今回は第3章「データガバナンス」について。
-DAMA ホイール図において中心に置かれているので先に読んでおこうと思った次第。
-以降、特に注釈のない引用は DMBOK2 第3章からの引用とする。
-データガバナンスとは データガバナンス (DG) の定義は、データ資産の管理 (マネジメント) に対して職務権限を通し統制 (コントロール) することである。統制とは計画を立て、実行を監視し、徹底させることを指す。
-この定義からデータガバナンスがなぜ DAMA ホイール図の中心に位置しているかがわかる。
-データガバナンスにより周囲の各知識領域の計画や実施を統制するという建付けになる。
-データガバナンス (DG) のゴールは組織がデータを資産として管理できるようにすることである。DG はデータを資産として管理するための原則、ポリシー、プロセス、フレームワーク、評価指標を提供し、組織の各階層レベルでデータマネジメントアクティビティを牽引する。
-これを可能にするためにデータガバナンスは持続可能であり、業務プロセスに組み込まれており、測定可能になっている必要がある。
-データガバナンス組織 次の組織構成が一般的なデータガバナンスモデルであるとのこと。
-DMBOK2 データガバナンス組織構成
-右側がデータマネジメントを実施するロールになっており、左側がデータガバナンスによりデータマネジメントさせるロールになっている。
-データガバナンス運営委員会が組織のデータガバナンスの頂点となっており、最も権限が強い。
-各部門にはデータガバナンス評議会 (DGC) が置かれており、これらがポリシー・評価指標の開発などのデータガバナンスの取り組みや課題、報告を管理する。
-データガバナンスオフィス (DGO) はデータスチュワード (後述) などで構成され、企業レベルのデータ定義とデータマネジメントにフォーカスする。
-大規模、かつデータマネジメントの意識が高い組織でないとこういった組織構成はなかなか作れないのではと思った。
-ライト版の図も欲しいところ。
-DMBOK2 データ問題の報告経路
-ポリシーやステークホルダー利害の不一致、権限、データ品質などなど、データに関する問題は上記のような報告経路をたどる。
-データスチュワード制 データスチュワード制はデータとプロセスの実行責任と結果責任を表す最も一般的な呼び名であり、データ資産の効率的な統制と利用を確かなものとする。
-ちょっとこの説明ではイメージしにくいかもしれない。
-データガバナンスの文脈において、データスチュワードは現場を含む組織の各レベルでデータガバナンスを効かせるための活動を行う実務者だと理解した。
-データスチュワードという職務名があってもいいが、そうでなくてもよいらしい。
-次のようなことをやる。
-核となるメタデータの作成と管理 ルールと標準の文書化 データ品質の問題管理 データガバナンス運営アクティビティの実施 データスチュワードについては以下も参考。
-参考: データスチュワードとは？役割やメリット、育成方法、選定基準について解説！ | trocco®(トロッコ) データポリシー データポリシーとは、データとインフォーメーションを生成し、取得し、健全性を保ち、セキュリティを守り、品質を維持し、利用することを統制する基本的なルールに、原則と管理糸を盛り込む指示である。
-ポリシーはデータガバナンスの &amp;ldquo;What&amp;rdquo; を説明する。
-通常はデータマネジメント・プロフェッショナルか業務ポリシー担当者が起草し、最終的に DGC により承認される。
-組織に対して効果的に伝達、実施される必要があり、そのためには簡潔で直感的な表現であるべき。
-社内ポータルなどオンラインで閲覧できるようになっているのがよい。</description>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.dama-japan.org/Introduction.html&#34;&gt;DMBOK2&lt;/a&gt; を読み進めていくシリーズ。&lt;br&gt;
+今回は第3章「データガバナンス」について。&lt;br&gt;
+&lt;a href=&#34;../dmbok-chapter-1/#dama-dmbok-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF&#34;&gt;DAMA ホイール図&lt;/a&gt;において中心に置かれているので先に読んでおこうと思った次第。&lt;/p&gt;
+&lt;p&gt;以降、特に注釈のない引用は DMBOK2 第3章からの引用とする。&lt;/p&gt;
+&lt;h2 id=&#34;データガバナンスとは&#34;&gt;データガバナンスとは&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;データガバナンス (DG) の定義は、データ資産の管理 (マネジメント) に対して職務権限を通し統制 (コントロール) することである。統制とは計画を立て、実行を監視し、徹底させることを指す。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;この定義からデータガバナンスがなぜ DAMA ホイール図の中心に位置しているかがわかる。&lt;br&gt;
+データガバナンスにより周囲の各知識領域の計画や実施を統制するという建付けになる。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;データガバナンス (DG) のゴールは組織がデータを資産として管理できるようにすることである。DG はデータを資産として管理するための原則、ポリシー、プロセス、フレームワーク、評価指標を提供し、組織の各階層レベルでデータマネジメントアクティビティを牽引する。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;これを可能にするためにデータガバナンスは持続可能であり、業務プロセスに組み込まれており、測定可能になっている必要がある。&lt;/p&gt;
+&lt;h2 id=&#34;データガバナンス組織&#34;&gt;データガバナンス組織&lt;/h2&gt;
+&lt;p&gt;次の組織構成が一般的なデータガバナンスモデルであるとのこと。&lt;/p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;https://soonraah.github.io/image/dmbok/data_governance_org_structure.png&#34;
+         alt=&#34;DMBOK2 データガバナンス組織構成&#34;/&gt; &lt;figcaption&gt;
+            &lt;p&gt;DMBOK2 データガバナンス組織構成&lt;/p&gt;
+        &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;右側がデータマネジメントを実施するロールになっており、左側がデータガバナンスによりデータマネジメントさせるロールになっている。&lt;br&gt;
+データガバナンス運営委員会が組織のデータガバナンスの頂点となっており、最も権限が強い。&lt;br&gt;
+各部門にはデータガバナンス評議会 (DGC) が置かれており、これらがポリシー・評価指標の開発などのデータガバナンスの取り組みや課題、報告を管理する。&lt;br&gt;
+データガバナンスオフィス (DGO) はデータスチュワード (後述) などで構成され、企業レベルのデータ定義とデータマネジメントにフォーカスする。&lt;/p&gt;
+&lt;p&gt;大規模、かつデータマネジメントの意識が高い組織でないとこういった組織構成はなかなか作れないのではと思った。&lt;br&gt;
+ライト版の図も欲しいところ。&lt;/p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;https://soonraah.github.io/image/dmbok/data_problem_reporting_path.png&#34;
+         alt=&#34;DMBOK2 データ問題の報告経路&#34;/&gt; &lt;figcaption&gt;
+            &lt;p&gt;DMBOK2 データ問題の報告経路&lt;/p&gt;
+        &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;ポリシーやステークホルダー利害の不一致、権限、データ品質などなど、データに関する問題は上記のような報告経路をたどる。&lt;/p&gt;
+&lt;h2 id=&#34;データスチュワード制&#34;&gt;データスチュワード制&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;データスチュワード制はデータとプロセスの実行責任と結果責任を表す最も一般的な呼び名であり、データ資産の効率的な統制と利用を確かなものとする。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;ちょっとこの説明ではイメージしにくいかもしれない。&lt;br&gt;
+データガバナンスの文脈において、データスチュワードは現場を含む組織の各レベルでデータガバナンスを効かせるための活動を行う実務者だと理解した。&lt;br&gt;
+データスチュワードという職務名があってもいいが、そうでなくてもよいらしい。&lt;br&gt;
+次のようなことをやる。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;核となるメタデータの作成と管理&lt;/li&gt;
+&lt;li&gt;ルールと標準の文書化&lt;/li&gt;
+&lt;li&gt;データ品質の問題管理&lt;/li&gt;
+&lt;li&gt;データガバナンス運営アクティビティの実施&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;データスチュワードについては以下も参考。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;参考: &lt;a href=&#34;https://blog.trocco.io/glossary/data-steward&#34;&gt;データスチュワードとは？役割やメリット、育成方法、選定基準について解説！ | trocco®(トロッコ)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;データポリシー&#34;&gt;データポリシー&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;データポリシーとは、データとインフォーメーションを生成し、取得し、健全性を保ち、セキュリティを守り、品質を維持し、利用することを統制する基本的なルールに、原則と管理糸を盛り込む指示である。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;ポリシーはデータガバナンスの &amp;ldquo;What&amp;rdquo; を説明する。&lt;br&gt;
+通常はデータマネジメント・プロフェッショナルか業務ポリシー担当者が起草し、最終的に DGC により承認される。&lt;/p&gt;
+&lt;p&gt;組織に対して効果的に伝達、実施される必要があり、そのためには簡潔で直感的な表現であるべき。&lt;br&gt;
+社内ポータルなどオンラインで閲覧できるようになっているのがよい。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>読書メモ: DMBOK2 第1章 データマネジメント</title>
       <link>https://soonraah.github.io/posts/dmbok-chapter-1/</link>
       <pubDate>Mon, 13 Nov 2023 22:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/dmbok-chapter-1/</guid>
-      <description>このポストについて なんか個人的にデータマネジメントの機運が高まってきたので、ずっと積ん読していた DAMA-DMBOK を読んでいこうかなと。
-で、せっかくなのでデータ関係の皆さんがよくやっているように自分としても読書メモをまとめてみようと思った。
-内容を網羅するのではなく、現場のデータエンジニアとして活動した経験を踏まえて自分なりの観点でまとめてみたい。
-今回は第1章「データマネジメント」で、それ以降は関心がある章をつまみ食い的に読んでいく。
-DAMA-DMBOK とは DAMA とは DAta Management Association の略であり、
-世界各地に80の支部を持ち、8,000名を越える会員を擁する全世界のデータ専門家のための国際的な非営利団体です。 特定のベンダーや技術、手法に依存しないことを前提として、データや情報、知識をエンタープライズの重要な資産として管理する必要性の理解を促し、この分野の成長を推進しております。
-&amp;ndash; 一般社団法人 データマネジメント協会 日本支部(DAMA Japan)
-とのこと。
-この DAMA が刊行しているのがデータマネジメント知識体系ガイド (The DAMA Guide to Data Management Body of Knowledge) であり、その略称が DMBOK である。
-ＤＡＭＡ ＤＭＢＯＫは、データマネジメントプロフェッショナルにとって有益な資料かつ指針となることを目指し、データ管理のもっとも信頼できる入門書となるよう編集されています
-&amp;ndash; 一般社団法人 データマネジメント協会 日本支部(DAMA Japan)
-IT 業界歴の長い人なら PMBOK というプロジェクトマネジメントについて書かれた本をご存知かもしれないが、あれのデータマネジメント版だと思っていい。
-私としてはデータマネジメントの教科書的なものだと考えている。
-2023年現在における最新版は2018年の第2版となっている。
-以降では DMBOK2 とする。
-5年前なのでやや古いと思うかもしれないが、内容的には特定技術について書かれているわけではなく、ある程度抽象度が高い話になっているので陳腐化はしにくい。
-データマネジメントとは 以降、特に注釈のない引用は DMBOK2 第1章からの引用とする。
-データマネジメントとは、データとインフォメーションという資産の価値を提供し、管理し、守り、高めるために、それらのライフサイクルを通して計画、方針、スケジュール、手順などを開発、実施、監督することである。
-この一文にいろいろと集約されているので見ていこう。
-データとインフォーメーション ここでいう「データ」と「インフォメーション」は DIKW モデルにもとづく解釈でよい。
-データはインフォメーションの原材料であり、インフォメーションは意味と目的、つまりコンテキストを付与されたデータと言える。
-ex. 前四半期の売上レポートは「インフォメーション」、それの元になっている DWH のデータが「データ」 データマネジメントにおいては特にこのデータとインフォーメションを扱う。</description>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;なんか個人的にデータマネジメントの機運が高まってきたので、ずっと積ん読していた DAMA-DMBOK を読んでいこうかなと。&lt;br&gt;
+で、せっかくなのでデータ関係の皆さんがよくやっているように自分としても読書メモをまとめてみようと思った。&lt;br&gt;
+内容を網羅するのではなく、現場のデータエンジニアとして活動した経験を踏まえて自分なりの観点でまとめてみたい。&lt;br&gt;
+今回は第1章「データマネジメント」で、それ以降は関心がある章をつまみ食い的に読んでいく。&lt;/p&gt;
+&lt;h2 id=&#34;dama-dmbok-とは&#34;&gt;DAMA-DMBOK とは&lt;/h2&gt;
+&lt;p&gt;DAMA とは DAta Management Association の略であり、&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;世界各地に80の支部を持ち、8,000名を越える会員を擁する全世界のデータ専門家のための国際的な非営利団体です。 特定のベンダーや技術、手法に依存しないことを前提として、データや情報、知識をエンタープライズの重要な資産として管理する必要性の理解を促し、この分野の成長を推進しております。&lt;!-- raw HTML omitted --&gt;&lt;br&gt;
+&amp;ndash; &lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;https://www.dama-japan.org/Introduction.html&#34;&gt;一般社団法人 データマネジメント協会 日本支部(DAMA Japan)&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;とのこと。&lt;br&gt;
+この DAMA が刊行しているのがデータマネジメント知識体系ガイド (The DAMA Guide to Data Management Body of Knowledge) であり、その略称が DMBOK である。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ＤＡＭＡ ＤＭＢＯＫは、データマネジメントプロフェッショナルにとって有益な資料かつ指針となることを目指し、データ管理のもっとも信頼できる入門書となるよう編集されています&lt;br&gt;
+&amp;ndash; &lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;https://www.dama-japan.org/Introduction.html&#34;&gt;一般社団法人 データマネジメント協会 日本支部(DAMA Japan)&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;IT 業界歴の長い人なら PMBOK というプロジェクトマネジメントについて書かれた本をご存知かもしれないが、あれのデータマネジメント版だと思っていい。&lt;br&gt;
+私としてはデータマネジメントの教科書的なものだと考えている。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>near real time で更新される Apache Iceberg の table のメンテナンス</title>
       <link>https://soonraah.github.io/posts/maintain-iceberg-table-updated-in-near-real-time/</link>
       <pubDate>Sun, 28 May 2023 09:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/maintain-iceberg-table-updated-in-near-real-time/</guid>
-      <description>前回のポストでは merge on read で Apache Iceberg の table を near real time で更新するということを行った。
-このポストではそのメンテナンスについて触れて、かつそれを実行してみる。
-merge on read の課題 merge on read で table を更新する場合、copy on write の場合と違い table 全体を洗い替えする必要はなく差分のみを追記することになる。
-したがって更新にかかる時間は copy on write よりも短くなる。
-一方で merge on read の名のとおり読み出し時に積み重なった差分とベースを merge して最新の snapshot とするため、読み出しの速度は copy on write より遅くなる。
-長時間更新され差分がたくさん存在しているとなおさら遅い。
-なので
-更新頻度が低く、参照頻度が高いユースケース -&amp;gt; copy on write 更新頻度が高く、参照頻度が低いユースケース -&amp;gt; merge on write という使い分けがよいとされている。
-前回ポストの例では一晩更新を続けた後の merge on read の table に対して簡単な select 文を実行したところ、6分程度かかってしまった。</description>
+      <description>&lt;p&gt;&lt;a href=&#34;../update-iceberg-table-in-near-real-time&#34;&gt;前回のポスト&lt;/a&gt;では merge on read で Apache Iceberg の table を near real time で更新するということを行った。&lt;br&gt;
+このポストではそのメンテナンスについて触れて、かつそれを実行してみる。&lt;/p&gt;
+&lt;h2 id=&#34;merge-on-read-の課題&#34;&gt;merge on read の課題&lt;/h2&gt;
+&lt;p&gt;merge on read で table を更新する場合、copy on write の場合と違い table 全体を洗い替えする必要はなく差分のみを追記することになる。&lt;br&gt;
+したがって更新にかかる時間は copy on write よりも短くなる。&lt;br&gt;
+一方で merge on read の名のとおり読み出し時に積み重なった差分とベースを merge して最新の snapshot とするため、読み出しの速度は copy on write より遅くなる。&lt;br&gt;
+長時間更新され差分がたくさん存在しているとなおさら遅い。&lt;br&gt;
+なので&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;更新頻度が低く、参照頻度が高いユースケース -&amp;gt; copy on write&lt;/li&gt;
+&lt;li&gt;更新頻度が高く、参照頻度が低いユースケース -&amp;gt; merge on write&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;という使い分けがよいとされている。&lt;/p&gt;
+&lt;p&gt;前回ポストの例では一晩更新を続けた後の merge on read の table に対して簡単な &lt;code&gt;select&lt;/code&gt; 文を実行したところ、6分程度かかってしまった。&lt;br&gt;
+レコード数はたかだか128件程度であることを考えるとかなり遅いと言える。&lt;br&gt;
+このままでは使い物にならない。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Apache Iceberg の table を near real time で更新する</title>
       <link>https://soonraah.github.io/posts/update-iceberg-table-in-near-real-time/</link>
       <pubDate>Thu, 11 May 2023 01:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/update-iceberg-table-in-near-real-time/</guid>
-      <description>Apache Iceberg の table を near real time に、つまり高頻度で更新するということをやってみた。
-Apache Iceberg とは Apache Iceberg (以下 Iceberg) は分散ファイルシステムやクラウドストレージ上の table format であり、Apache Hudi や Delta Lake と並んで data lake や lakehouse architecture で用いられる。
-特徴的なのは table とデータ実体 (Parquet, Avro など) の間に metadata file, manifest list, manifest file の抽象的なレイヤーがあり、ファイル単位で table の状態を track できること。
-これにより強い isolation level、パフォーマンス、schema evolution など様々な機能・性能を実現できるようになっている。
-Apache Iceberg Iceberg Table Spec
-詳しくは公式ドキュメントを参照のこと。
-最近では SmartNews 社が Iceberg で data lake を構築したことを記事にしていた。
-Flink-based Iceberg Real-Time Data Lake in SmartNews (Part I) | by SmartNews | SmartNews, Inc | Apr, 2023 | Medium ベンダー提供の DWH 中心ではなく Lakehouse Architecture を目指すのであれば最有力の table format の1つだと言えそう。</description>
+      <description>&lt;p&gt;Apache Iceberg の table を near real time に、つまり高頻度で更新するということをやってみた。&lt;/p&gt;
+&lt;h2 id=&#34;apache-iceberg-とは&#34;&gt;Apache Iceberg とは&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://iceberg.apache.org/&#34;&gt;Apache Iceberg&lt;/a&gt; (以下 Iceberg) は分散ファイルシステムやクラウドストレージ上の table format であり、Apache Hudi や Delta Lake と並んで data lake や lakehouse architecture で用いられる。&lt;br&gt;
+特徴的なのは table とデータ実体 (Parquet, Avro など) の間に metadata file, manifest list, manifest file の抽象的なレイヤーがあり、ファイル単位で table の状態を track できること。&lt;br&gt;
+これにより強い isolation level、パフォーマンス、schema evolution など様々な機能・性能を実現できるようになっている。&lt;/p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;https://soonraah.github.io/image/iceberg/iceberg_metadata.png&#34;
+         alt=&#34;Apache Iceberg&#34;/&gt; &lt;figcaption&gt;
+            &lt;p&gt;Apache Iceberg
+                    &lt;a href=&#34;https://iceberg.apache.org/spec/&#34;&gt;Iceberg Table Spec&lt;/a&gt;&lt;/p&gt;
+        &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;詳しくは公式ドキュメントを参照のこと。&lt;br&gt;
+最近では SmartNews 社が Iceberg で data lake を構築したことを記事にしていた。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://medium.com/smartnews-inc/flink-based-iceberg-real-time-data-lake-in-smartnews-part-i-19a7628ce110&#34;&gt;Flink-based Iceberg Real-Time Data Lake in SmartNews (Part I) | by SmartNews | SmartNews, Inc | Apr, 2023 | Medium&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;ベンダー提供の DWH 中心ではなく Lakehouse Architecture を目指すのであれば最有力の table format の1つだと言えそう。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Data Contract について調べた</title>
       <link>https://soonraah.github.io/posts/looked-into-data-contracts/</link>
       <pubDate>Sat, 08 Apr 2023 17:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/looked-into-data-contracts/</guid>
-      <description>データエンジニアリングの領域で少し前から目にするようになった &amp;ldquo;data contract&amp;rdquo; という言葉。
-なんとなく今の業務で困っている課題の解決になりそうな気がしつつもよくわかっていなかったので調べてみた。
-data contract について語られているいくつかのブログ記事などを参考にしている。
-Data Contract とは データの schema というのはナマモノで、いろいろな理由で変更されることがある。
-schema を変更する場合、その schema のデータ (table や log) が所属する単一のビジネス機能や application のドメインで行われることになる。
-そのドメインの閉じた世界で考える分にはこれで問題ないのだが、DWH や data lake など組織レベルのデータ基盤でデータを流通していた場合はその先のことも考えないといけなくなる。
-このようにチームを超える影響というのは、ビジネス機能に責任を持っているチームからは見えにくくなっていることが多い。
-上流の application 側で schema を変更したら下流のデータ基盤の ETL 処理がぶっ壊れてしまった、というのはデータ基盤運用あるあるではないだろうか。
-というところを解決して平和に過ごせるようにすることが data contract の主なモチベーションだと思われる。
-&amp;ldquo;contract&amp;rdquo; は日本語で言うところの「契約」。
-組織におけるデータ流通において、データの送り手である producer 側と受け手である consumer 側との間で合意した契約を遵守することにより、前述のような問題を避けることができるというのが data contract である。
-組織内のデータの見通しがよくなったり、パイプラインを宣言的に開発することができるようになるというメリットもある。
-エンジニアにとっては Datafold のブログ記事の例を読むとイメージしやすいかもしれない。
-To provide another analogy, data contracts are what API is for the web services. Say we want to get data from Twitter.</description>
+      <description>&lt;p&gt;データエンジニアリングの領域で少し前から目にするようになった &amp;ldquo;data contract&amp;rdquo; という言葉。&lt;br&gt;
+なんとなく今の業務で困っている課題の解決になりそうな気がしつつもよくわかっていなかったので調べてみた。&lt;br&gt;
+data contract について語られているいくつかのブログ記事などを参考にしている。&lt;/p&gt;
+&lt;h2 id=&#34;data-contract-とは&#34;&gt;Data Contract とは&lt;/h2&gt;
+&lt;p&gt;データの schema というのはナマモノで、いろいろな理由で変更されることがある。&lt;br&gt;
+schema を変更する場合、その schema のデータ (table や log) が所属する単一のビジネス機能や application のドメインで行われることになる。&lt;br&gt;
+そのドメインの閉じた世界で考える分にはこれで問題ないのだが、DWH や data lake など組織レベルのデータ基盤でデータを流通していた場合はその先のことも考えないといけなくなる。&lt;br&gt;
+このようにチームを超える影響というのは、ビジネス機能に責任を持っているチームからは見えにくくなっていることが多い。&lt;br&gt;
+上流の application 側で schema を変更したら下流のデータ基盤の ETL 処理がぶっ壊れてしまった、というのはデータ基盤運用あるあるではないだろうか。&lt;/p&gt;
+&lt;p&gt;というところを解決して平和に過ごせるようにすることが data contract の主なモチベーションだと思われる。&lt;br&gt;
+&amp;ldquo;contract&amp;rdquo; は日本語で言うところの「契約」。&lt;br&gt;
+組織におけるデータ流通において、データの送り手である producer 側と受け手である consumer 側との間で合意した契約を遵守することにより、前述のような問題を避けることができるというのが data contract である。&lt;br&gt;
+組織内のデータの見通しがよくなったり、パイプラインを宣言的に開発することができるようになるというメリットもある。&lt;/p&gt;
+&lt;p&gt;エンジニアにとっては Datafold のブログ記事の例を読むとイメージしやすいかもしれない。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To provide another analogy, data contracts are what API is for the web services. Say we want to get data from Twitter. One way is to scrape it by downloading and parsing the HTML of Twitter’s webpage. This may work, but our scraper will likely break occasionally, if Twitter, for instance, changes a name of a CSS class or HTML structure. There is no contract between Twitter’s web page and our scraper. However, if we access the same data via Twitter’s API, we know exactly the structure of the response we’re going to get. An API has required inputs, predictable outputs, error codes, SLAs (service level agreements – e.g. uptime), and terms of use, and other important properties. Importantly, API is also versioned which helps ensure that changes to the API won’t break end user’s applications, and to take advantage of those changes users would graciously migrate to the new version.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Glue Schema Registry の導入を断念した話</title>
       <link>https://soonraah.github.io/posts/give-up-on-schema-registry/</link>
       <pubDate>Tue, 13 Dec 2022 00:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/give-up-on-schema-registry/</guid>
-      <description>業務で AWS Glue Schema Registry を使おうとしたけど、やっぱりやめたというお話。
-Glue Schema Registry What&amp;rsquo;s Schema Registry? AWS Glue Schema Registry は2020年に発表された AWS の機能だ。
-Control the evolution of data streams using the AWS Glue Schema Registry 一方、私が最初に schema registry 的なものを見たのは Confluent の例。
-Schema Registry の概要 - Confluent AWS の Glue Schema Registry はこれより後のリリースであり、同等のものの AWS マネージド版といったところだろうか。
-schema registry で何ができるかは Confluent のリンク先の図がとてもわかりやすいので参考にしていただきたい。
-Glue Schema Registry もだいたい同じで、ストリーム処理のための機能である。
-Glue Schema Registry で解決したい課題とその機能 データ基盤上のストリーム処理における schema 管理はバッチ処理のそれとは異なる難しさがある。
-これは schema evolution と呼ばれる問題で以前のポストでも述べている。</description>
+      <description>&lt;p&gt;業務で &lt;a href=&#34;https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html&#34;&gt;AWS Glue Schema Registry&lt;/a&gt; を使おうとしたけど、やっぱりやめたというお話。&lt;/p&gt;
+&lt;h2 id=&#34;glue-schema-registry&#34;&gt;Glue Schema Registry&lt;/h2&gt;
+&lt;h3 id=&#34;whats-schema-registry&#34;&gt;What&amp;rsquo;s Schema Registry?&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html&#34;&gt;AWS Glue Schema Registry&lt;/a&gt; は2020年に発表された AWS の機能だ。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://aws.amazon.com/about-aws/whats-new/2020/11/control-evolution-data-streams-using-aws-glue-schema-registry/&#34;&gt;Control the evolution of data streams using the AWS Glue Schema Registry&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一方、私が最初に schema registry 的なものを見たのは Confluent の例。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.confluent.io/ja-jp/platform/7.1.1/schema-registry/index.html&#34;&gt;Schema Registry の概要 - Confluent&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;AWS の Glue Schema Registry はこれより後のリリースであり、同等のものの AWS マネージド版といったところだろうか。&lt;br&gt;
+schema registry で何ができるかは Confluent のリンク先の図がとてもわかりやすいので参考にしていただきたい。&lt;br&gt;
+Glue Schema Registry もだいたい同じで、ストリーム処理のための機能である。&lt;/p&gt;
+&lt;h3 id=&#34;glue-schema-registry-で解決したい課題とその機能&#34;&gt;Glue Schema Registry で解決したい課題とその機能&lt;/h3&gt;
+&lt;p&gt;データ基盤上のストリーム処理における schema 管理はバッチ処理のそれとは異なる難しさがある。&lt;br&gt;
+これは schema evolution と呼ばれる問題で以前のポストでも述べている。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../study-streaming-system/#schema-evolution&#34;&gt;バッチ処理おじさんがストリーム処理のシステムを開発するにあたって調べたこと&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;難しい点として以下のようなことが挙げられる。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>「データレイク」と「データレイク層」</title>
       <link>https://soonraah.github.io/posts/data-lake-and-data-lake-layer/</link>
       <pubDate>Tue, 21 Jun 2022 08:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/data-lake-and-data-lake-layer/</guid>
-      <description>「データレイク」という言葉は使う人によって異なった意味があるように感じており、気になっていた。
-このポストではアーキテクチャ目線でのデータレイクと内容物目線でのデータレイクの違いについて書いてみる。
-便宜上前者を「データレイク」、後者を「データレイク層」と呼ぶことにする。
-アーキテクチャ目線の「データレイク」 「データレイク」については以前こちらのポストで書いたのでここでは詳しく触れない。
-詳細はリンク先を見ていただきたい。
-ここでキーとなるのが、
-加工前データや非構造化データを含むあらゆるデータを保存 一元的なデータ管理 という部分だ。
-あらゆるデータを一元的に管理するという思想であり、これができるアーキテクチャがデータレイクということだ。
-例えば AWS や Azure のドキュメントを見るとデータレイクの中が zone に分けられており、生データを保持する raw zone や加工されたデータを置いておく curated zone などがある。
-(zone の命名にもいくつかの流派があるようだ…)
-Reference architecture - Data Analytics Lens Data lake zones and containers - Cloud Adoption Framework | Microsoft Docs 次の Robinhood 社の例でもデータレイク中に生データとその派生データが存在している。
-Fresher Data Lake on AWS S3 | by Balaji Varadarajan | Robinhood 内容物目線の「データレイク層」 一方でデータレイクには生データのみを置くべき、という考えもある。
-本書におけるデータレイク（DataLake）層とは、元のデータをコピーして、1つのシステムに集約したものを指します。 データソース（＝水源）から流れてきたデータを蓄える場所なのでレイク（湖）と呼びます。
-ECサイトの注文履歴データを、分析用DBにコピーしている場合、それがデータレイクと言えます。データレイクのデータは、データソースと一対一の関係にあります。何も加工していない、ただのコピーだからです。
-何も加工していない、ただのコピーであることが重要です。仮にデータの中身に誤りがあったとしても、修正や加工をせず、そのまま集約しましょう。
-&amp;ndash; ゆずたそ,渡部 徹太郎,伊藤 徹郎. 実践的データ基盤への処方箋〜 ビジネス価値創出のためのデータ・システム・ヒトのノウハウ (Japanese Edition) (pp.</description>
+      <description>&lt;p&gt;「データレイク」という言葉は使う人によって異なった意味があるように感じており、気になっていた。&lt;br&gt;
+このポストではアーキテクチャ目線でのデータレイクと内容物目線でのデータレイクの違いについて書いてみる。&lt;br&gt;
+便宜上前者を「データレイク」、後者を「データレイク層」と呼ぶことにする。&lt;/p&gt;
+&lt;h2 id=&#34;アーキテクチャ目線のデータレイク&#34;&gt;アーキテクチャ目線の「データレイク」&lt;/h2&gt;
+&lt;p&gt;「データレイク」については以前&lt;a href=&#34;../what-is-a-data-lake&#34;&gt;こちらのポスト&lt;/a&gt;で書いたのでここでは詳しく触れない。&lt;br&gt;
+詳細はリンク先を見ていただきたい。&lt;br&gt;
+ここでキーとなるのが、&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;加工前データや非構造化データを含むあらゆるデータを保存&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;一元的なデータ管理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;という部分だ。&lt;br&gt;
+あらゆるデータを一元的に管理するという思想であり、これができるアーキテクチャがデータレイクということだ。&lt;/p&gt;
+&lt;p&gt;例えば AWS や Azure のドキュメントを見るとデータレイクの中が zone に分けられており、生データを保持する raw zone や加工されたデータを置いておく curated zone などがある。&lt;br&gt;
+(zone の命名にもいくつかの流派があるようだ…)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.aws.amazon.com/wellarchitected/latest/analytics-lens/modern-data-architecture-reference-architecture.html&#34;&gt;Reference architecture - Data Analytics Lens&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/cloud-scale-analytics/best-practices/data-lake-zones&#34;&gt;Data lake zones and containers - Cloud Adoption Framework | Microsoft Docs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;次の Robinhood 社の例でもデータレイク中に生データとその派生データが存在している。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://robinhood.engineering/author-balaji-varadarajan-e3f496815ebf&#34;&gt;Fresher Data Lake on AWS S3 | by Balaji Varadarajan | Robinhood&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;内容物目線のデータレイク層&#34;&gt;内容物目線の「データレイク層」&lt;/h2&gt;
+&lt;p&gt;一方でデータレイクには生データのみを置くべき、という考えもある。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;　本書におけるデータレイク（DataLake）層とは、元のデータをコピーして、1つのシステムに集約したものを指します。 データソース（＝水源）から流れてきたデータを蓄える場所なのでレイク（湖）と呼びます。&lt;br&gt;
+　ECサイトの注文履歴データを、分析用DBにコピーしている場合、それがデータレイクと言えます。データレイクのデータは、データソースと一対一の関係にあります。何も加工していない、ただのコピーだからです。&lt;br&gt;
+　&lt;strong&gt;何も加工していない、ただのコピーであることが重要です。仮にデータの中身に誤りがあったとしても、修正や加工をせず、そのまま集約しましょう。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&amp;ndash; &lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;https://soonraah.github.io/&#34;&gt;ゆずたそ,渡部 徹太郎,伊藤 徹郎. 実践的データ基盤への処方箋〜 ビジネス価値創出のためのデータ・システム・ヒトのノウハウ (Japanese Edition) (pp.57-58). Kindle 版.&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>成熟フェーズの事業におけるデータサイエンティスト</title>
       <link>https://soonraah.github.io/posts/ds-in-maturation-phase/</link>
       <pubDate>Mon, 12 Jul 2021 22:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/ds-in-maturation-phase/</guid>
-      <description>ポエムです。
-事業フェーズごとのデータサイエンティストの役割 まずはこちらの発表。
-事業立ち上げにデータサイエンティストは必要なのか？ | CA BASE NEXT とても納得できる内容だった。
-一部抜き出して要約すると
-事業の立ち上げフェーズ データがまだなかったり、整備されていない状態 データサイエンスによる改善がしにくい 事業のグロースフェーズ 大規模なデータが使える状態 データサイエンスによる改善がやりやすい とのこと。異論はない。
-では事業が立ち上がり、グロースが落ち着いたその後の成熟フェーズではどうなのだろうかという話。
-成熟フェーズにおける改善の難しさ 端的に言うと成熟フェーズでは ML によるさらなる改善は困難になってくると思う。
-ここで言う成熟フェーズにおいてはプロダクトの進化とともに機械学習もそれなりに適用されてきたものとする。
-成熟フェーズということで既存の ML モデル、特にビジネスインパクトが大きい箇所はこれまでいろいろな改善が重ねられてきている。
-そのモデルの精度をさらに上げるとなると、より高度なアルゴリズム、より複雑なデータ等を扱う必要がある。
-しかし技術的によっぽど大きなブレークスルーがない限りは精度の改善幅はグロースフェーズよりもかなり小さいものとなるだろう。
-精度が上がれば上がるほど、次の1%を上げるためのコストは大きくなっていく。
-改善が進むほどに次の改善業務は困難になっていく。
-(蛇足だがある程度大きな組織でなければ高度で state-of-the-art な ML アルゴリズムは運用しない方がいいと考えている)
-では既存ではない新しい適用箇所に ML を使えばいいのではとなるかもしれない。
-しかしやはりそれも難しい。
-ビジネスインパクトが大きく、かつわかりやすい適用箇所にはおそらくすでに ML が適用されているからだ。
-その状態から更によい適用箇所を見つけるには深いドメイン知識が必要になったりする。
-という感じでいわゆるキラキラした「ML でビジネスをドライブ！」みたいなことは成熟フェーズでは難しいことが多いのではないか。
-しかしデータサイエンティストにやることがないわけではない。
-成熟フェーズで何ができるか ぱっと思いつくのは次のような仕事。
-データドリブンな施策の立案・評価 これは事業フェーズ問わずあるべき ドメイン知識が必要 ML エンジニアリング パイプラインの改善や属人性をなくすお仕事 ML モデルの受動的なメンテナンス 精度が変化したときの調査 内部的・外部的要因によるデータの変化への対応 やっぱり ML モデルの精度改善 成熟フェーズということでビジネスもスケールしていれば 0.1% の精度改善でも売上的なインパクトは大きいかもしれない いわゆる狭義のデータサイエンスではなく、ドメイン知識であったりアナリストやエンジニア的な視点が絡んだ仕事が増えてくる。
-よくある「ML だけじゃなく◯◯もできると強いよね」みたいな話になってしまった。
-おわりに …という話が少し前に Twitter で知人との話題に上がった。</description>
+      <description>&lt;p&gt;ポエムです。&lt;/p&gt;
+&lt;h2 id=&#34;事業フェーズごとのデータサイエンティストの役割&#34;&gt;事業フェーズごとのデータサイエンティストの役割&lt;/h2&gt;
+&lt;p&gt;まずはこちらの発表。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://ca-base-next.cyberagent.co.jp/sessions/start-up-and-data-science/&#34;&gt;事業立ち上げにデータサイエンティストは必要なのか？ | CA BASE NEXT&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;とても納得できる内容だった。&lt;br&gt;
+一部抜き出して要約すると&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;事業の立ち上げフェーズ
+&lt;ul&gt;
+&lt;li&gt;データがまだなかったり、整備されていない状態&lt;/li&gt;
+&lt;li&gt;データサイエンスによる改善がしにくい&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;事業のグロースフェーズ
+&lt;ul&gt;
+&lt;li&gt;大規模なデータが使える状態&lt;/li&gt;
+&lt;li&gt;データサイエンスによる改善がやりやすい&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;とのこと。異論はない。&lt;br&gt;
+では事業が立ち上がり、グロースが落ち着いたその後の成熟フェーズではどうなのだろうかという話。&lt;/p&gt;
+&lt;h2 id=&#34;成熟フェーズにおける改善の難しさ&#34;&gt;成熟フェーズにおける改善の難しさ&lt;/h2&gt;
+&lt;p&gt;端的に言うと成熟フェーズでは ML によるさらなる改善は困難になってくると思う。&lt;br&gt;
+ここで言う成熟フェーズにおいてはプロダクトの進化とともに機械学習もそれなりに適用されてきたものとする。&lt;/p&gt;
+&lt;p&gt;成熟フェーズということで既存の ML モデル、特にビジネスインパクトが大きい箇所はこれまでいろいろな改善が重ねられてきている。&lt;br&gt;
+そのモデルの精度をさらに上げるとなると、より高度なアルゴリズム、より複雑なデータ等を扱う必要がある。&lt;br&gt;
+しかし技術的によっぽど大きなブレークスルーがない限りは精度の改善幅はグロースフェーズよりもかなり小さいものとなるだろう。&lt;br&gt;
+精度が上がれば上がるほど、次の1%を上げるためのコストは大きくなっていく。&lt;br&gt;
+改善が進むほどに次の改善業務は困難になっていく。&lt;/p&gt;
+&lt;p&gt;(蛇足だがある程度大きな組織でなければ高度で state-of-the-art な ML アルゴリズムは運用しない方がいいと考えている)&lt;/p&gt;
+&lt;p&gt;では既存ではない新しい適用箇所に ML を使えばいいのではとなるかもしれない。&lt;br&gt;
+しかしやはりそれも難しい。&lt;br&gt;
+ビジネスインパクトが大きく、かつわかりやすい適用箇所にはおそらくすでに ML が適用されているからだ。&lt;br&gt;
+その状態から更によい適用箇所を見つけるには深いドメイン知識が必要になったりする。&lt;/p&gt;
+&lt;p&gt;という感じでいわゆるキラキラした「ML でビジネスをドライブ！」みたいなことは成熟フェーズでは難しいことが多いのではないか。&lt;br&gt;
+しかしデータサイエンティストにやることがないわけではない。&lt;/p&gt;
+&lt;h2 id=&#34;成熟フェーズで何ができるか&#34;&gt;成熟フェーズで何ができるか&lt;/h2&gt;
+&lt;p&gt;ぱっと思いつくのは次のような仕事。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;データドリブンな施策の立案・評価
+&lt;ul&gt;
+&lt;li&gt;これは事業フェーズ問わずあるべき&lt;/li&gt;
+&lt;li&gt;ドメイン知識が必要&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;ML エンジニアリング
+&lt;ul&gt;
+&lt;li&gt;パイプラインの改善や属人性をなくすお仕事&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;ML モデルの受動的なメンテナンス
+&lt;ul&gt;
+&lt;li&gt;精度が変化したときの調査&lt;/li&gt;
+&lt;li&gt;内部的・外部的要因によるデータの変化への対応&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;やっぱり ML モデルの精度改善
+&lt;ul&gt;
+&lt;li&gt;成熟フェーズということでビジネスもスケールしていれば 0.1% の精度改善でも売上的なインパクトは大きいかもしれない&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;いわゆる狭義のデータサイエンスではなく、ドメイン知識であったりアナリストやエンジニア的な視点が絡んだ仕事が増えてくる。&lt;br&gt;
+よくある「ML だけじゃなく◯◯もできると強いよね」みたいな話になってしまった。&lt;/p&gt;
+&lt;h2 id=&#34;おわりに&#34;&gt;おわりに&lt;/h2&gt;
+&lt;p&gt;…という話が少し前に Twitter で知人との話題に上がった。&lt;br&gt;
+若者が歴史的にいろんな人が改善に取り組んできた ML モデルの改善にアサインされている、というのが近いところで観測されたのでたいへんそうだなあと思いつつこの件を思い出したので書いてみた。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Apache Flink の Backpressure の仕組みについて調べた</title>
       <link>https://soonraah.github.io/posts/backpressure-for-flink/</link>
       <pubDate>Sun, 28 Feb 2021 21:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/backpressure-for-flink/</guid>
-      <description>ストリーム処理のフレームワークが備える backpressure という機能がある。
-このポストでは Apache Flink の backpressure について調べたことを記載する。
-Backpressure の目的 backpressure はストリーム処理システムにおける負荷管理の仕組みの一つ。
-一時的な入力データ量の増大に対応する。
-インターネットユーザの行動履歴やセンサーデータなどは常に一定量のデータが流れているわけではなく、単位時間あたりのデータ量は常に変動している。
-一時的にスパイクしてデータ量が増大するようなことも起こりうる。
-複数の operator からなる dataflow graph により構成されるストリーム処理システムにおいては、処理スピードのボトルネックとなる operator が存在する。
-一時的に入力データ量が増えてボトルネックの operator の処理速度を上回ってしまった場合に、データの取りこぼしが発生するのを防ぐのが backpressure の目的となる。
-Backpressure の仕組み Buffer-based ここでは以前のブログでも紹介した、ストリーム処理で必要とされる機能について書かれた Fragkoulis et al. 1 を引用して一般論としての backpressure について述べたい。
-上流／下流の operator をそれぞれ producer, consumer とする。
-producer, consumer (それらの subtask と言ってもいいかも) がそれぞれ異なる物理マシンに deploy されているケースが Figure 12b となる。
-各 subtask は input と output の buffer を持っており、
-producer は処理結果を output buffer に書き出す TCP 等の物理的な接続でデータを送信 consumer 側の output buffer にデータを格納 consumer がそれを読み込んで処理する というような流れになる。</description>
+      <description>&lt;p&gt;ストリーム処理のフレームワークが備える backpressure という機能がある。&lt;br&gt;
+このポストでは Apache Flink の backpressure について調べたことを記載する。&lt;/p&gt;
+&lt;h2 id=&#34;backpressure-の目的&#34;&gt;Backpressure の目的&lt;/h2&gt;
+&lt;p&gt;backpressure はストリーム処理システムにおける負荷管理の仕組みの一つ。&lt;br&gt;
+一時的な入力データ量の増大に対応する。&lt;/p&gt;
+&lt;p&gt;インターネットユーザの行動履歴やセンサーデータなどは常に一定量のデータが流れているわけではなく、単位時間あたりのデータ量は常に変動している。&lt;br&gt;
+一時的にスパイクしてデータ量が増大するようなことも起こりうる。&lt;/p&gt;
+&lt;p&gt;複数の operator からなる dataflow graph により構成されるストリーム処理システムにおいては、処理スピードのボトルネックとなる operator が存在する。&lt;br&gt;
+一時的に入力データ量が増えてボトルネックの operator の処理速度を上回ってしまった場合に、データの取りこぼしが発生するのを防ぐのが backpressure の目的となる。&lt;/p&gt;
+&lt;h2 id=&#34;backpressure-の仕組み&#34;&gt;Backpressure の仕組み&lt;/h2&gt;
+&lt;h3 id=&#34;buffer-based&#34;&gt;Buffer-based&lt;/h3&gt;
+&lt;p&gt;ここでは&lt;a href=&#34;https://soonraah.github.io/posts/functionality-of-streaming-system/&#34;&gt;以前のブログ&lt;/a&gt;でも紹介した、ストリーム処理で必要とされる機能について書かれた Fragkoulis et al. &lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; を引用して一般論としての backpressure について述べたい。&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Figure 12&#34; loading=&#34;lazy&#34; src=&#34;https://soonraah.github.io/image/paper/fragkoulis_et_al_2020/fig12.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;上流／下流の operator をそれぞれ producer, consumer とする。&lt;br&gt;
+producer, consumer (それらの subtask と言ってもいいかも) がそれぞれ異なる物理マシンに deploy されているケースが Figure 12b となる。&lt;br&gt;
+各 subtask は input と output の buffer を持っており、&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;producer は処理結果を output buffer に書き出す&lt;/li&gt;
+&lt;li&gt;TCP 等の物理的な接続でデータを送信&lt;/li&gt;
+&lt;li&gt;consumer 側の output buffer にデータを格納&lt;/li&gt;
+&lt;li&gt;consumer がそれを読み込んで処理する&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;というような流れになる。&lt;br&gt;
+buffer はマシンごとの buffer pool で管理されており、input/output で buffer が必要となった場合はこの buffer pool に buffer が要求される。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>データレイク関連の OSS - Delta Lake, Apache Hudi, Apache Kudu</title>
       <link>https://soonraah.github.io/posts/oss-for-data-lake/</link>
       <pubDate>Tue, 26 Jan 2021 08:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/oss-for-data-lake/</guid>
-      <description>はじめに 前回のポストではデータレイクとはどういうものかというのを調べた。
-今回はデータレイクの文脈でどのような OSS が注目されているのかを見ていきたい。
-以下は NTT データさんによる講演資料であり、その中で「近年登場してきた、リアルタイム分析に利用可能なOSSストレージレイヤソフト」というのが3つ挙げられている。
-大規模データ活用向けストレージレイヤソフトのこれまでとこれから（NTTデータ テクノロジーカンファレンス 2019 講演資料、2019/09/05） from NTT DATA Technology &amp;amp; Innovation Delta Lake Apache Hudi Apache Kudu これらはすべて論理的なストレージレイヤーを担う。
-こちらの講演資料に付け足すようなこともないかもしれないが、このポストではデータレイクという文脈から自分で調べて理解した内容をまとめるということを目的にする。
-当然 Hadoop, Hive, Spark 等もデータレイクの文脈において超重要だが、「データレイク」という言葉がよく聞かれるようになる前から普及していたのでこのポストでは触れないことにする。
-Delta Lake https://delta.io/
-Delta Lake is an open-source storage layer that brings ACID transactions to Apache Spark™ and big data workloads.
-Delta Lake
-Delta Lake は Apache Spark の読み書きに ACID な transaction を提供するストレージレイヤーの OSS である。
-Databricks が作り、2019年4月に v0.1.0 がリリースされたのが最初だ。</description>
+      <description>&lt;h2 id=&#34;はじめに&#34;&gt;はじめに&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://soonraah.github.io/posts/what-is-a-data-lake/&#34;&gt;前回のポスト&lt;/a&gt;ではデータレイクとはどういうものかというのを調べた。&lt;br&gt;
+今回はデータレイクの文脈でどのような OSS が注目されているのかを見ていきたい。&lt;/p&gt;
+&lt;p&gt;以下は NTT データさんによる講演資料であり、その中で「近年登場してきた、リアルタイム分析に利用可能なOSSストレージレイヤソフト」というのが3つ挙げられている。&lt;/p&gt;
+
+&lt;div style=&#34;text-align: center&#34;&gt;
+&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/5sVeEqby7oL0AE?startSlide=37&#34; width=&#34;510&#34; height=&#34;420&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&#34;margin-bottom:5px&#34;&gt; &lt;strong&gt; &lt;a href=&#34;//www.slideshare.net/nttdata-tech/bigdata-storage-layer-software-nttdata&#34; title=&#34;大規模データ活用向けストレージレイヤソフトのこれまでとこれから（NTTデータ テクノロジーカンファレンス 2019 講演資料、2019/09/05）&#34; target=&#34;_blank&#34;&gt;大規模データ活用向けストレージレイヤソフトのこれまでとこれから（NTTデータ テクノロジーカンファレンス 2019 講演資料、2019/09/05）&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a href=&#34;//www.slideshare.net/nttdata-tech&#34; target=&#34;_blank&#34;&gt;NTT DATA Technology &amp;amp; Innovation&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;
+&lt;/div&gt;
+&lt;br&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Delta Lake&lt;/li&gt;
+&lt;li&gt;Apache Hudi&lt;/li&gt;
+&lt;li&gt;Apache Kudu&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;これらはすべて論理的なストレージレイヤーを担う。&lt;br&gt;
+こちらの講演資料に付け足すようなこともないかもしれないが、このポストではデータレイクという文脈から自分で調べて理解した内容をまとめるということを目的にする。&lt;/p&gt;
+&lt;p&gt;当然 Hadoop, Hive, Spark 等もデータレイクの文脈において超重要だが、「データレイク」という言葉がよく聞かれるようになる前から普及していたのでこのポストでは触れないことにする。&lt;/p&gt;
+&lt;h2 id=&#34;delta-lake&#34;&gt;Delta Lake&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://delta.io/&#34;&gt;https://delta.io/&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Delta Lake is an open-source storage layer that brings ACID transactions to Apache Spark™ and big data workloads.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;https://soonraah.github.io/image/deltalake/Delta-Lake-marketecture-0423c.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;p&gt;
+                    &lt;a href=&#34;https://delta.io/&#34;&gt;Delta Lake&lt;/a&gt;&lt;/p&gt;
+        &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Delta Lake は Apache Spark の読み書きに ACID な transaction を提供するストレージレイヤーの OSS である。&lt;br&gt;
+Databricks が作り、2019年4月に v0.1.0 がリリースされたのが最初だ。&lt;br&gt;
+使い方はめちゃ簡単で、dependency を設定した上で Spark で&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>いまさらながらのデータレイク</title>
       <link>https://soonraah.github.io/posts/what-is-a-data-lake/</link>
       <pubDate>Thu, 31 Dec 2020 20:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/what-is-a-data-lake/</guid>
-      <description>最近よく聞かれるようになった「データレイク」という概念にあまりついていけていなかったため、いまさらながらざっと調べてみた。
-データレイクとは Wikipedia によると最初にこの言葉を使ったのは Pentaho 社の CTO である James Dixon らしい。
-その時の彼のブログ (10年前…) を読むと、既にあったデータマートに対して
-Only a subset of the attributes are examined, so only pre-determined questions can be answered. The data is aggregated so visibility into the lowest levels is lost
-&amp;ndash;Pentaho, Hadoop, and Data Lakes - James Dixon’s Blog というような問題意識からデータレイクというコンセプトを提案したようだ。
-最近？のデータレイクについてはベンダー等の記事が参考になる。
-データレイクとは - AWS データレイクとは？ - talend データレイクとは？データレイクの落とし穴と効果 - Informatica 書籍だと『AWSではじめるデータレイク: クラウドによる統合型データリポジトリ構築入門』がいいだろうか。
-データレイクの概要と AWS が考えている構築・運用がざっとわかる。
-Amazon で検索した限りだと現時点でタイトルに「データレイク」を含む和書はこれのみだった。
-上に挙げたような文献ではデータレイクはデータウェアハウスとの対比という形でよく語られている。
-共通している内容は概ね以下のとおり。</description>
+      <description>&lt;p&gt;最近よく聞かれるようになった「データレイク」という概念にあまりついていけていなかったため、いまさらながらざっと調べてみた。&lt;/p&gt;
+&lt;h2 id=&#34;データレイクとは&#34;&gt;データレイクとは&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Data_lake&#34;&gt;Wikipedia&lt;/a&gt; によると最初にこの言葉を使ったのは Pentaho 社の CTO である James Dixon らしい。&lt;br&gt;
+その時の&lt;a href=&#34;https://jamesdixon.wordpress.com/2010/10/14/pentaho-hadoop-and-data-lakes/&#34;&gt;彼のブログ&lt;/a&gt; (10年前…) を読むと、既にあったデータマートに対して&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Only a subset of the attributes are examined, so only pre-determined questions can be answered.&lt;/li&gt;
+&lt;li&gt;The data is aggregated so visibility into the lowest levels is lost&lt;br&gt;
+&amp;ndash;&lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;https://jamesdixon.wordpress.com/2010/10/14/pentaho-hadoop-and-data-lakes/&#34;&gt;Pentaho, Hadoop, and Data Lakes - James Dixon’s Blog&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;というような問題意識からデータレイクというコンセプトを提案したようだ。&lt;/p&gt;
+&lt;p&gt;最近？のデータレイクについてはベンダー等の記事が参考になる。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://aws.amazon.com/jp/big-data/datalakes-and-analytics/what-is-a-data-lake/&#34;&gt;データレイクとは - AWS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.talend.com/jp/resources/what-is-data-lake/&#34;&gt;データレイクとは？ - talend&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blogs.informatica.com/jp/2019/09/30/data-lake/&#34;&gt;データレイクとは？データレイクの落とし穴と効果 - Informatica&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;書籍だと&lt;a href=&#34;https://www.amazon.co.jp/gp/product/491031301X/ref=as_li_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=491031301X&amp;linkCode=as2&amp;tag=froglog02-22&amp;linkId=4e6220e28ad8d55e37e1884c69938ab0&#34;&gt;『AWSではじめるデータレイク: クラウドによる統合型データリポジトリ構築入門』&lt;/a&gt;がいいだろうか。&lt;br&gt;
+データレイクの概要と AWS が考えている構築・運用がざっとわかる。&lt;br&gt;
+Amazon で検索した限りだと現時点でタイトルに「データレイク」を含む和書はこれのみだった。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Apache Flink の DataStream API 利用時の CSV ファイル読み込み</title>
       <link>https://soonraah.github.io/posts/read-csv-by-flink-datastream-api/</link>
       <pubDate>Tue, 01 Dec 2020 00:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/read-csv-by-flink-datastream-api/</guid>
-      <description>ストリーム処理における CSV ファイルの読み込み Apache Flink は unbounded なストリームデータを処理するためのフレームワークだ。
-しかし現実的な application を開発する場合、ストリームデータに加えて static なファイルや DB 等を読み込みたいこともある。
-star schema における dimension table 的な情報をストリームに結合したい場合 等が考えられる。
-このポストでは Flink で DataStream API ベースでの実装において CSV ファイルを読むことを考える。
-Flink は現時点の stable である v1.11 を想定。
-CSV ファイルを読む方法 DataStream API ベースの実装で CSV ファイルを読むには StreamExecutionEnvironment のメソッドである readFile() を使う。
-overload された同名のメソッドがいくつか存在するが、次の2つの引数が特に重要だろう。
-まず1つめは FileInputFormat&amp;lt;OUT&amp;gt; inputFormat であり、こちらは data stream の生成に用いる入力フォーマットを指定する。
-おそらく最も一般的なのが TextInputFormat だと思われる。
-もちろん単なる text として CSV ファイルを読み込み、後続の処理で各レコードを parse することも可能だが CSV 用の入力フォーマットがいくつか用意されているようだ。
-PojoCsvInputFormat RowCsvInputFormat TupleCsvInputFormat なんとなく名前でわかると思うが、それぞれ readFile() の結果として返される DataStreamSource が内包する型が異なる。</description>
+      <description>&lt;h2 id=&#34;ストリーム処理における-csv-ファイルの読み込み&#34;&gt;ストリーム処理における CSV ファイルの読み込み&lt;/h2&gt;
+&lt;p&gt;Apache Flink は unbounded なストリームデータを処理するためのフレームワークだ。&lt;br&gt;
+しかし現実的な application を開発する場合、ストリームデータに加えて static なファイルや DB 等を読み込みたいこともある。&lt;br&gt;
+&lt;a href=&#34;https://soonraah.github.io/posts/flink-join-by-broadcast-state-pattern/&#34;&gt;star schema における dimension table 的な情報をストリームに結合したい場合&lt;/a&gt; 等が考えられる。&lt;/p&gt;
+&lt;p&gt;このポストでは Flink で DataStream API ベースでの実装において CSV ファイルを読むことを考える。&lt;br&gt;
+Flink は現時点の stable である v1.11 を想定。&lt;/p&gt;
+&lt;h2 id=&#34;csv-ファイルを読む方法&#34;&gt;CSV ファイルを読む方法&lt;/h2&gt;
+&lt;p&gt;DataStream API ベースの実装で CSV ファイルを読むには &lt;code&gt;StreamExecutionEnvironment&lt;/code&gt; のメソッドである &lt;a href=&#34;https://ci.apache.org/projects/flink/flink-docs-release-1.11/api/java/org/apache/flink/streaming/api/environment/StreamExecutionEnvironment.html#readFile-org.apache.flink.api.common.io.FileInputFormat-java.lang.String-org.apache.flink.streaming.api.functions.source.FileProcessingMode-long-&#34;&gt;&lt;code&gt;readFile()&lt;/code&gt;&lt;/a&gt; を使う。&lt;br&gt;
+overload された同名のメソッドがいくつか存在するが、次の2つの引数が特に重要だろう。&lt;/p&gt;
+&lt;p&gt;まず1つめは &lt;code&gt;FileInputFormat&amp;lt;OUT&amp;gt; inputFormat&lt;/code&gt; であり、こちらは data stream の生成に用いる入力フォーマットを指定する。&lt;br&gt;
+おそらく最も一般的なのが &lt;code&gt;TextInputFormat&lt;/code&gt; だと思われる。&lt;br&gt;
+もちろん単なる text として CSV ファイルを読み込み、後続の処理で各レコードを parse することも可能だが CSV 用の入力フォーマットがいくつか用意されているようだ。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;PojoCsvInputFormat&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RowCsvInputFormat&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;TupleCsvInputFormat&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;なんとなく名前でわかると思うが、それぞれ &lt;code&gt;readFile()&lt;/code&gt; の結果として返される &lt;code&gt;DataStreamSource&lt;/code&gt; が内包する型が異なる。&lt;br&gt;
+これについては後述の実験にて確認する。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>機械学習の精度と利益と倫理とイシューと</title>
       <link>https://soonraah.github.io/posts/ml-accuracy-profit-ethic-issue/</link>
       <pubDate>Thu, 12 Nov 2020 09:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/ml-accuracy-profit-ethic-issue/</guid>
-      <description>ちょっと昔話 かつて参画したプロジェクトの話。
-そのプロジェクトでは他社から受注した受託開発として機械学習系のシステムを開発していた。
-当時としては新しいフレームワークを使い、かなり頑張ってなんとか納期内で完成させた。
-その中の1つの機能として A/B テストができるようにしていた。
-パラメータチューニングによりパフォーマンスを改善することを想定していた。
-しかし結局その機能は使われることがなかった。
-なぜか。
-A/B テストを実施するためのクライアントの追加の予算がつかなかったためである。
-受託なのでなおさらなのだが、売上にならなければ工数をかけるこはできない。
-工数を使ってパフォーマンス改善することはできなかった。
-手はあるのに。
-機械学習の精度は必ずしも利益に結びつかない この昔話で何が言いたいかというと、機械学習の精度改善は必ずしも利益に結びつかないということである。
-そのことを示しているとても素晴らしい資料がこちら。
-機械学習の精度と売上の関係 from Tokoroten Nakayama 前述の昔話の例はこの資料で言うところの③ロジスティック型 (=外注) となる。
-いったん売上が立った後、追加予算がつかなかったので精度改善では売上は増えなかったのだ。
-倫理感による精度改善 受託開発を主としている組織であれば工数にはシビアなので、売上の立たない工数をかけることはあまりないだろう。
-(よっぽどの炎上鎮火とかでなければ)
-しかし自社で製品やサービスを作って提供しているような組織の場合、利益にならない精度改善をしているのを時折見かける。
-なぜそのようなことが起こるかと言うと多くの場合はデータサイエンティスト／機械学習エンジニアとしての倫理感からなのではないだろうか。
-「◯◯予測という機能なのでできるだけ良い予測精度を示すべきだ」
-「ユーザには気づかれない部分だが精度が悪いので改善したい」
-倫理感や興味が先行してしまっているのだ。
-しかしその精度を上げた先に利益があるとは限らない。
-機械学習で職を得ている人間は自分の仕事を機械学習の精度を上げるゲームだとみなす傾向があるように思う。
-例えばインターネット広告の CTR 予測。
-これは予測精度が高いほど利益は改善するし、広告主に価値も提供できる。
-精度改善に倫理と利益が伴っている、とても機械学習がハマる例だと思う。
-本来はこれらを兼ね備えているのが良い適用先であるはずだ。
-イシューは行き渡っているのか 利益に結びつかない、または間接的にしか結びつかないような精度改善をやることが許されるというのは組織に余裕があるということで悪いことではないのかもしれない。
-しかし単によいイシューの設定ができてないだけという可能性もある。
-自社で製品やサービスを作って提供しているような組織において、単純なロジスティック回帰でコアなところのビジネスを大きく加速させることができた時期を過ぎると機械学習で解くのに適したよい問題を恒常的に見つけ出すのは実は難しいのではないだろうかと最近考えるようになった。
-ビジネスの領域拡大よりも既存領域への機械学習の適用の方が速いということは十分ありうる。
-もちろんチームの規模にもよる。
-機械学習チームの人的リソースの規模に対して機械学習で解くべきよいイシューを見つけ出せているのか、ということだ。
-少し前にちょっと話題になったこちらの件もイシューが大事だと言っている。
-全ての機械学習の論文は新しいアルゴリズムを提案しているのですか？ - Quora キャリアの行く末 事業会社においてビジネスの領域拡大よりも既存領域への機械学習の適用の方が速く、よいイシューを提供しにくいということがよく起こるのであれば、機械学習チームのリソースは余剰気味になりやすいということになる。
-これが続くと今後機械学習しかやらない人材の市場価値は下がっていくのかもしれない。
-もしくは自社で製品やサービスを持っている組織ではなく、受託開発やコンサルが主戦場になっていくのかもしれない。
-何にせよ特定のプロダクトに commit したいのであれば機械学習エンジニアは機械学習以外のスキルも磨いていく必要があるように思う。
-おわりに 見える範囲にいる人が利益にならない精度改善をしているのを横目で見てこのようなことを考えていた。
-難しいけどできるだけ金を生んでいきたい。</description>
+      <description>&lt;h2 id=&#34;ちょっと昔話&#34;&gt;ちょっと昔話&lt;/h2&gt;
+&lt;p&gt;かつて参画したプロジェクトの話。&lt;br&gt;
+そのプロジェクトでは他社から受注した受託開発として機械学習系のシステムを開発していた。&lt;br&gt;
+当時としては新しいフレームワークを使い、かなり頑張ってなんとか納期内で完成させた。&lt;/p&gt;
+&lt;p&gt;その中の1つの機能として A/B テストができるようにしていた。&lt;br&gt;
+パラメータチューニングによりパフォーマンスを改善することを想定していた。&lt;/p&gt;
+&lt;p&gt;しかし結局その機能は使われることがなかった。&lt;br&gt;
+なぜか。&lt;br&gt;
+A/B テストを実施するためのクライアントの追加の予算がつかなかったためである。&lt;br&gt;
+受託なのでなおさらなのだが、売上にならなければ工数をかけるこはできない。&lt;br&gt;
+工数を使ってパフォーマンス改善することはできなかった。&lt;br&gt;
+手はあるのに。&lt;/p&gt;
+&lt;h2 id=&#34;機械学習の精度は必ずしも利益に結びつかない&#34;&gt;機械学習の精度は必ずしも利益に結びつかない&lt;/h2&gt;
+&lt;p&gt;この昔話で何が言いたいかというと、機械学習の精度改善は必ずしも利益に結びつかないということである。&lt;br&gt;
+そのことを示しているとても素晴らしい資料がこちら。&lt;/p&gt;
+
+&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/pIXmCy2QsvkYxs&#34; width=&#34;510&#34; height=&#34;420&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&#34;margin-bottom:5px&#34;&gt; &lt;strong&gt; &lt;a href=&#34;//www.slideshare.net/TokorotenNakayama/ss-93185418&#34; title=&#34;機械学習の精度と売上の関係&#34; target=&#34;_blank&#34;&gt;機械学習の精度と売上の関係&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a href=&#34;//www.slideshare.net/TokorotenNakayama&#34; target=&#34;_blank&#34;&gt;Tokoroten Nakayama&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;
+
+&lt;p&gt;前述の昔話の例はこの資料で言うところの③ロジスティック型 (=外注) となる。&lt;br&gt;
+いったん売上が立った後、追加予算がつかなかったので精度改善では売上は増えなかったのだ。&lt;/p&gt;
+&lt;h2 id=&#34;倫理感による精度改善&#34;&gt;倫理感による精度改善&lt;/h2&gt;
+&lt;p&gt;受託開発を主としている組織であれば工数にはシビアなので、売上の立たない工数をかけることはあまりないだろう。&lt;br&gt;
+(よっぽどの炎上鎮火とかでなければ)&lt;/p&gt;
+&lt;p&gt;しかし自社で製品やサービスを作って提供しているような組織の場合、利益にならない精度改善をしているのを時折見かける。&lt;br&gt;
+なぜそのようなことが起こるかと言うと多くの場合はデータサイエンティスト／機械学習エンジニアとしての倫理感からなのではないだろうか。&lt;/p&gt;
+&lt;p&gt;「◯◯予測という機能なのでできるだけ良い予測精度を示すべきだ」&lt;br&gt;
+「ユーザには気づかれない部分だが精度が悪いので改善したい」&lt;/p&gt;
+&lt;p&gt;倫理感や興味が先行してしまっているのだ。&lt;br&gt;
+しかしその精度を上げた先に利益があるとは限らない。&lt;br&gt;
+機械学習で職を得ている人間は自分の仕事を機械学習の精度を上げるゲームだとみなす傾向があるように思う。&lt;/p&gt;
+&lt;p&gt;例えばインターネット広告の CTR 予測。&lt;br&gt;
+これは予測精度が高いほど利益は改善するし、広告主に価値も提供できる。&lt;br&gt;
+精度改善に倫理と利益が伴っている、とても機械学習がハマる例だと思う。&lt;br&gt;
+本来はこれらを兼ね備えているのが良い適用先であるはずだ。&lt;/p&gt;
+&lt;h2 id=&#34;イシューは行き渡っているのか&#34;&gt;イシューは行き渡っているのか&lt;/h2&gt;
+&lt;p&gt;利益に結びつかない、または間接的にしか結びつかないような精度改善をやることが許されるというのは組織に余裕があるということで悪いことではないのかもしれない。&lt;/p&gt;
+&lt;p&gt;しかし単によいイシューの設定ができてないだけという可能性もある。&lt;br&gt;
+自社で製品やサービスを作って提供しているような組織において、単純なロジスティック回帰でコアなところのビジネスを大きく加速させることができた時期を過ぎると機械学習で解くのに適したよい問題を恒常的に見つけ出すのは実は難しいのではないだろうかと最近考えるようになった。&lt;br&gt;
+ビジネスの領域拡大よりも既存領域への機械学習の適用の方が速いということは十分ありうる。&lt;br&gt;
+もちろんチームの規模にもよる。&lt;/p&gt;
+&lt;p&gt;機械学習チームの人的リソースの規模に対して機械学習で解くべきよいイシューを見つけ出せているのか、ということだ。&lt;br&gt;
+少し前にちょっと話題になったこちらの件もイシューが大事だと言っている。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://jp.quora.com/%E5%85%A8%E3%81%A6%E3%81%AE%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92%E3%81%AE%E8%AB%96%E6%96%87%E3%81%AF%E6%96%B0%E3%81%97%E3%81%84%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0%E3%82%92%E6%8F%90%E6%A1%88&#34;&gt;全ての機械学習の論文は新しいアルゴリズムを提案しているのですか？ - Quora&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;キャリアの行く末&#34;&gt;キャリアの行く末&lt;/h2&gt;
+&lt;p&gt;事業会社においてビジネスの領域拡大よりも既存領域への機械学習の適用の方が速く、よいイシューを提供しにくいということがよく起こるのであれば、機械学習チームのリソースは余剰気味になりやすいということになる。&lt;br&gt;
+これが続くと今後機械学習しかやらない人材の市場価値は下がっていくのかもしれない。&lt;/p&gt;
+&lt;p&gt;もしくは自社で製品やサービスを持っている組織ではなく、受託開発やコンサルが主戦場になっていくのかもしれない。&lt;br&gt;
+何にせよ特定のプロダクトに commit したいのであれば機械学習エンジニアは機械学習以外のスキルも磨いていく必要があるように思う。&lt;/p&gt;
+&lt;h2 id=&#34;おわりに&#34;&gt;おわりに&lt;/h2&gt;
+&lt;p&gt;見える範囲にいる人が利益にならない精度改善をしているのを横目で見てこのようなことを考えていた。&lt;br&gt;
+難しいけどできるだけ金を生んでいきたい。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>ストリーム処理システムに求められる機能性、および Apache Flink におけるその対応</title>
       <link>https://soonraah.github.io/posts/functionality-of-streaming-system/</link>
       <pubDate>Sat, 07 Nov 2020 16:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/functionality-of-streaming-system/</guid>
-      <description>はじめに このポストではストリーム処理の survay 論文の話題に対して Apache Flink における例を挙げて紹介する。
-論文概要 Fragkoulis, M., Carbone, P., Kalavri, V., &amp;amp; Katsifodimos, A. (2020). A Survey on the Evolution of Stream Processing Systems.
-2020年の論文。
-過去30年ぐらいのストリーム処理のフレームワークを調査し、その発展を論じている。
-ストリーム処理に特徴的に求められるいくつかの機能性 (functionality) についてその実現方法をいくつか挙げ、比較的古いフレームワークと最近のフレームワークでの対比を行っている。
-このポストのスコープ このポストでは前述のストリーム処理システムに求められる機能性とそれがなぜ必要となるかについて簡単にまとめる。
-論文ではそこからさらにその実現方法がいくつか挙げられるが、ここでは個人的に興味がある Apache Flink ではどのように対処しているかを見ていく。
-ちなみに論文中では Apache Flink はモダンなフレームワークの1つとしてちょいちょい引き合いに出されている。
-ここでは Flink v1.11 をターゲットとする。
-以下では論文で挙げられている機能性に沿って記載していく。
-Out-of-order Data Management Out-of-order ストリーム処理システムにやってくるデータの順序は外的・内的要因により期待される順序になっていないことがある。
-外的要因としてよくあるのはネットワークの問題。
-データソース (producer) からストリーム処理システムに届くまでのルーティング、負荷など諸々の条件により各レコードごとに転送時間は一定にはならない。
-各 operator の処理などストリーム処理システムの内的な要因で順序が乱されることもある。
-out-of-order は処理の遅延や正しくない結果の原因となることがある。
-out-of-order を管理するためにストリーム処理システムは処理の進捗を検出する必要がある。
-&amp;ldquo;進捗&amp;rdquo; とはある時間経過でレコードの処理がどれだけ進んだかというもので、レコードの順序を表す属性 A (ex. event time) により定量化される。</description>
+      <description>&lt;h2 id=&#34;はじめに&#34;&gt;はじめに&lt;/h2&gt;
+&lt;p&gt;このポストではストリーム処理の survay 論文の話題に対して Apache Flink における例を挙げて紹介する。&lt;/p&gt;
+&lt;h3 id=&#34;論文概要&#34;&gt;論文概要&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/2008.00842&#34;&gt;Fragkoulis, M., Carbone, P., Kalavri, V., &amp;amp; Katsifodimos, A. (2020). A Survey on the Evolution of Stream Processing Systems.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2020年の論文。&lt;br&gt;
+過去30年ぐらいのストリーム処理のフレームワークを調査し、その発展を論じている。&lt;br&gt;
+ストリーム処理に特徴的に求められるいくつかの機能性 (functionality) についてその実現方法をいくつか挙げ、比較的古いフレームワークと最近のフレームワークでの対比を行っている。&lt;/p&gt;
+&lt;h3 id=&#34;このポストのスコープ&#34;&gt;このポストのスコープ&lt;/h3&gt;
+&lt;p&gt;このポストでは前述のストリーム処理システムに求められる機能性とそれがなぜ必要となるかについて簡単にまとめる。&lt;br&gt;
+論文ではそこからさらにその実現方法がいくつか挙げられるが、ここでは個人的に興味がある Apache Flink ではどのように対処しているかを見ていく。&lt;br&gt;
+ちなみに論文中では Apache Flink はモダンなフレームワークの1つとしてちょいちょい引き合いに出されている。&lt;br&gt;
+ここでは Flink v1.11 をターゲットとする。&lt;/p&gt;
+&lt;p&gt;以下では論文で挙げられている機能性に沿って記載していく。&lt;/p&gt;
+&lt;h2 id=&#34;out-of-order-data-management&#34;&gt;Out-of-order Data Management&lt;/h2&gt;
+&lt;h3 id=&#34;out-of-order&#34;&gt;Out-of-order&lt;/h3&gt;
+&lt;p&gt;ストリーム処理システムにやってくるデータの順序は外的・内的要因により期待される順序になっていないことがある。&lt;br&gt;
+外的要因としてよくあるのはネットワークの問題。&lt;br&gt;
+データソース (producer) からストリーム処理システムに届くまでのルーティング、負荷など諸々の条件により各レコードごとに転送時間は一定にはならない。&lt;br&gt;
+各 operator の処理などストリーム処理システムの内的な要因で順序が乱されることもある。&lt;br&gt;
+out-of-order は処理の遅延や正しくない結果の原因となることがある。&lt;/p&gt;
+&lt;p&gt;out-of-order を管理するためにストリーム処理システムは処理の進捗を検出する必要がある。&lt;br&gt;
+&amp;ldquo;進捗&amp;rdquo; とはある時間経過でレコードの処理がどれだけ進んだかというもので、レコードの順序を表す属性 &lt;em&gt;A&lt;/em&gt; (ex. event time) により定量化される。&lt;br&gt;
+ある期間で処理された最古の &lt;em&gt;A&lt;/em&gt; を進捗の尺度とみなすことができる。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>バッチ処理おじさんがストリーム処理のシステムを開発するにあたって調べたこと</title>
       <link>https://soonraah.github.io/posts/study-streaming-system/</link>
       <pubDate>Sun, 06 Sep 2020 16:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/study-streaming-system/</guid>
-      <description>ほとんどバッチ処理しか書いたことのない者だがストリーム処理のシステムを開発することになった。
-それにあたって独学で調べたことなどまとめておく。
-ストリーム処理とは そもそも &amp;ldquo;ストリーム処理&amp;rdquo; とは何を指しているのか。
-以下の引用が簡潔に示している。
-a type of data processing engine that is designed with infinite data sets in mind. Nothing more.
-&amp;ndash; Streaming 101: The world beyond batch
-こちらは &amp;ldquo;streaming system&amp;rdquo; について述べたものだが、つまり終わりのないデータを扱うのがストリーム処理ということである。
-例えば web サービスから生まれ続けるユーザ行動ログを逐次的に処理するというのがストリーム処理。
-web サービスが終了しないかぎりはユーザ行動ログの生成には終わりがない。
-これに対して &amp;ldquo;1日分のユーザ行動ログ&amp;rdquo; 等のように有限の量のデータを切り出して処理する場合、これはバッチ処理となる。
-ストリーム処理とバッチ処理の違いは扱うデータが無限なのか有限なのかということだ。
-この後触れていくが、この終わりのないデータを継続的に処理し続けるというところにバッチ処理にはない難しさがある。
-なぜストリーム処理なのか なぜストリーム処理なのか。
-ひとえに逐次的な入力データに対する迅速なフィードバックが求められているからと言えるだろう。
-迅速なフィードバックがビジネス上のメリットとなることは自明だ。
-SNS の配信 カーシェアリングにおける配車や料金設定 クレジットカードや広告クリックなどの不正検知 もしこれらの application が例えば hourly のバッチ処理で実装されていたらどうだろうか。
-まあ待っていられない。
-一般的なストリーム処理の構成 モダンな…と言っていいのかわからないが、ストリーム処理を行うための一般的なシステムは次の3つの要素で構成される。
-producer broker consumer producer は最初にレコードを生成する、ストリームデータの発生源となるものである。
-例えばログを生成する web application であったり、何らかのセンサーを持つ IoT 機器であったりがこれに該当する。</description>
+      <description>&lt;p&gt;ほとんどバッチ処理しか書いたことのない者だがストリーム処理のシステムを開発することになった。&lt;br&gt;
+それにあたって独学で調べたことなどまとめておく。&lt;/p&gt;
+&lt;h2 id=&#34;ストリーム処理とは&#34;&gt;ストリーム処理とは&lt;/h2&gt;
+&lt;p&gt;そもそも &amp;ldquo;ストリーム処理&amp;rdquo; とは何を指しているのか。&lt;br&gt;
+以下の引用が簡潔に示している。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;a type of data processing engine that is designed with infinite data sets in mind. Nothing more.&lt;!-- raw HTML omitted --&gt;&lt;br&gt;
+&amp;ndash; &lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;https://www.oreilly.com/radar/the-world-beyond-batch-streaming-101/&#34;&gt;Streaming 101: The world beyond batch&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;こちらは &amp;ldquo;streaming system&amp;rdquo; について述べたものだが、つまり終わりのないデータを扱うのがストリーム処理ということである。&lt;/p&gt;
+&lt;p&gt;例えば web サービスから生まれ続けるユーザ行動ログを逐次的に処理するというのがストリーム処理。&lt;br&gt;
+web サービスが終了しないかぎりはユーザ行動ログの生成には終わりがない。&lt;/p&gt;
+&lt;p&gt;これに対して &amp;ldquo;1日分のユーザ行動ログ&amp;rdquo; 等のように有限の量のデータを切り出して処理する場合、これはバッチ処理となる。&lt;br&gt;
+ストリーム処理とバッチ処理の違いは扱うデータが無限なのか有限なのかということだ。&lt;br&gt;
+この後触れていくが、この終わりのないデータを継続的に処理し続けるというところにバッチ処理にはない難しさがある。&lt;/p&gt;
+&lt;h2 id=&#34;なぜストリーム処理なのか&#34;&gt;なぜストリーム処理なのか&lt;/h2&gt;
+&lt;p&gt;なぜストリーム処理なのか。&lt;br&gt;
+ひとえに逐次的な入力データに対する迅速なフィードバックが求められているからと言えるだろう。&lt;br&gt;
+迅速なフィードバックがビジネス上のメリットとなることは自明だ。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SNS の配信&lt;/li&gt;
+&lt;li&gt;カーシェアリングにおける配車や料金設定&lt;/li&gt;
+&lt;li&gt;クレジットカードや広告クリックなどの不正検知&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;もしこれらの application が例えば hourly のバッチ処理で実装されていたらどうだろうか。&lt;br&gt;
+まあ待っていられない。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>A/B テストの運用が重くてつらいという話</title>
       <link>https://soonraah.github.io/posts/heavy-ab-testing-operation/</link>
       <pubDate>Sun, 23 Aug 2020 12:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/heavy-ab-testing-operation/</guid>
-      <description>前提 ここでは web システムで使われている機械学習のモデルやアルゴリズムを改善するための online の A/B テストを考える。
-具体的に述べると web 広告における CTR 予測や EC サイトのレコメンデーション等が対象である。
-よくあるやつ。
-web システムにおいて online の A/B テストは KPI 改善の根幹でありとても重要だ。
-それが重くなるとつらい、という話。
-ここで「重い」と言っているのは計算資源のことではなく、A/B テストを実施する担当者の運用コストについて。
-A/B テストの運用が重い場合のデメリット デメリット 1. KPI 改善が遅くなる デメリットと言えばこれが一番大きい。
-単純に A/B テストを1回まわすのに時間がかかってしまうし、それがゆえに online の A/B テストに入るまでの offline のテストが厚くなりここでも時間がかかってしまう。
-KPI 改善に時間がかかるというのはつまり売上や利益を大きくするのに時間がかかってしまうということである。
-デメリット 2. KPI 改善における offline テストの比重が大きくなる 前述のとおりだが online の A/B テストが重いとそこで失敗できなくなり、結果としてその前段の offline のテストを厚くするということになる。
-offline のテストが厚いことの何が問題だろうか。
-ここで前提としている CTR 予測やレコメンデーションのようなタスクの場合、offline のデータは既存のモデルやアルゴリズムの影響を受けることになる。
-例えばレコメンデーションの場合を考えると、新しいモデルを offline で評価するための実験データの正例 (コンテンツの閲覧等) は既存モデルによって生み出される。
-既存モデルが「このコンテンツがいいよ」といってユーザに出したリスト、その中からコンテンツの閲覧が行われ正例となるからだ。</description>
+      <description>&lt;h2 id=&#34;前提&#34;&gt;前提&lt;/h2&gt;
+&lt;p&gt;ここでは web システムで使われている機械学習のモデルやアルゴリズムを改善するための online の A/B テストを考える。&lt;br&gt;
+具体的に述べると web 広告における CTR 予測や EC サイトのレコメンデーション等が対象である。&lt;br&gt;
+よくあるやつ。&lt;/p&gt;
+&lt;p&gt;web システムにおいて online の A/B テストは KPI 改善の根幹でありとても重要だ。&lt;br&gt;
+それが重くなるとつらい、という話。&lt;br&gt;
+ここで「重い」と言っているのは計算資源のことではなく、A/B テストを実施する担当者の運用コストについて。&lt;/p&gt;
+&lt;h2 id=&#34;ab-テストの運用が重い場合のデメリット&#34;&gt;A/B テストの運用が重い場合のデメリット&lt;/h2&gt;
+&lt;h3 id=&#34;デメリット-1-kpi-改善が遅くなる&#34;&gt;デメリット 1. KPI 改善が遅くなる&lt;/h3&gt;
+&lt;p&gt;デメリットと言えばこれが一番大きい。&lt;br&gt;
+単純に A/B テストを1回まわすのに時間がかかってしまうし、それがゆえに online の A/B テストに入るまでの offline のテストが厚くなりここでも時間がかかってしまう。&lt;br&gt;
+KPI 改善に時間がかかるというのはつまり売上や利益を大きくするのに時間がかかってしまうということである。&lt;/p&gt;
+&lt;h3 id=&#34;デメリット-2-kpi-改善における-offline-テストの比重が大きくなる&#34;&gt;デメリット 2. KPI 改善における offline テストの比重が大きくなる&lt;/h3&gt;
+&lt;p&gt;前述のとおりだが online の A/B テストが重いとそこで失敗できなくなり、結果としてその前段の offline のテストを厚くするということになる。&lt;br&gt;
+offline のテストが厚いことの何が問題だろうか。&lt;/p&gt;
+&lt;p&gt;ここで前提としている CTR 予測やレコメンデーションのようなタスクの場合、offline のデータは既存のモデルやアルゴリズムの影響を受けることになる。&lt;br&gt;
+例えばレコメンデーションの場合を考えると、新しいモデルを offline で評価するための実験データの正例 (コンテンツの閲覧等) は既存モデルによって生み出される。&lt;br&gt;
+既存モデルが「このコンテンツがいいよ」といってユーザに出したリスト、その中からコンテンツの閲覧が行われ正例となるからだ。&lt;br&gt;
+このような状況下での offline テストにおいては既存モデルと近い好みを持ったモデルのスコアが高くなる傾向がある。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Apache Flink の Temporary Table Function を用いた stream data と static data の join</title>
       <link>https://soonraah.github.io/posts/flink-join-by-temporal-table-function/</link>
       <pubDate>Sun, 16 Aug 2020 00:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/flink-join-by-temporal-table-function/</guid>
-      <description>前回の記事 では Apache Flink における stream data と static data の join において、DataStream API における broadcast state pattern を使う方法を示した。
-今回の記事では Table API の temporal table function を用いた実験を行う。
-Table API Table API は名前のとおりで class Table を中心として SQL-like な DSL により処理を記述するという、DataStream API より high-level な API となっている。
-これらの関係は Apaceh Spark の RDD と DataFrame (DataSet) の関係に似ている。
-SQL-like な API で記述された処理が実行時に最適化されて low-level API の処理に翻訳されるところも同じだ。
-RDB の table の概念を元にしているものと考えられるが、本質的に table の概念とストリーム処理はあまりマッチしないと思う。
-table はある時点のデータセット全体を表すのに対し、ストリーム処理ではやってくるレコードを逐次的に処理したい。
-ここを合わせているため、ストリーム処理における Table API による処理の挙動の理解には注意が必要だ。</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://soonraah.github.io/posts/flink-join-by-broadcast-state-pattern/&#34;&gt;前回の記事&lt;/a&gt; では Apache Flink における stream data と static data の join において、DataStream API における broadcast state pattern を使う方法を示した。&lt;br&gt;
+今回の記事では Table API の temporal table function を用いた実験を行う。&lt;/p&gt;
+&lt;h2 id=&#34;table-api&#34;&gt;Table API&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/table/&#34;&gt;Table API&lt;/a&gt; は名前のとおりで class &lt;code&gt;Table&lt;/code&gt; を中心として SQL-like な DSL により処理を記述するという、DataStream API より high-level な API となっている。&lt;br&gt;
+これらの関係は Apaceh Spark の &lt;code&gt;RDD&lt;/code&gt; と &lt;code&gt;DataFrame&lt;/code&gt; (&lt;code&gt;DataSet&lt;/code&gt;) の関係に似ている。&lt;br&gt;
+SQL-like な API で記述された処理が実行時に最適化されて low-level API の処理に翻訳されるところも同じだ。&lt;/p&gt;
+&lt;p&gt;RDB の table の概念を元にしているものと考えられるが、本質的に table の概念とストリーム処理はあまりマッチしないと思う。&lt;br&gt;
+table はある時点のデータセット全体を表すのに対し、ストリーム処理ではやってくるレコードを逐次的に処理したい。&lt;br&gt;
+ここを合わせているため、ストリーム処理における Table API による処理の挙動の理解には注意が必要だ。&lt;br&gt;
+&lt;a href=&#34;https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/table/streaming/&#34;&gt;Streaming Concepts&lt;/a&gt; 以下のドキュメントを確認しておきたい。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Apache Flink の Broadcast State Pattern を用いた stream data と static data の join</title>
       <link>https://soonraah.github.io/posts/flink-join-by-broadcast-state-pattern/</link>
       <pubDate>Thu, 06 Aug 2020 22:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/flink-join-by-broadcast-state-pattern/</guid>
-      <description>star schema における fact table と dimension table の join のようなことを Apache Flink におけるストリーム処理で行いたい。
-stream data と static data の join ということになる。
-ただし dimension table 側も更新されるため、完全な static というわけではない。
-このポストでは Flink v1.11 を前提とした。
-join の方法 今回は DataStream API でこれを実現することを考える。
-Flink のドキュメントを読むと broadcast state pattern でできそうだ。
-The Broadcast State Pattern やり方としては次のようになる。
-static data のファイルを FileProcessingMode.PROCESS_CONTINUOUSLY で読み込み DataStream 化 1 を broadcast() stream data の DataStream と 2 を connect() static data を PROCESS_CONTINUOUSLY で読むのは変更を得るため。</description>
+      <description>&lt;p&gt;star schema における fact table と dimension table の join のようなことを Apache Flink におけるストリーム処理で行いたい。&lt;br&gt;
+stream data と static data の join ということになる。&lt;br&gt;
+ただし dimension table 側も更新されるため、完全な static というわけではない。&lt;/p&gt;
+&lt;p&gt;このポストでは Flink v1.11 を前提とした。&lt;/p&gt;
+&lt;h2 id=&#34;join-の方法&#34;&gt;join の方法&lt;/h2&gt;
+&lt;p&gt;今回は DataStream API でこれを実現することを考える。&lt;br&gt;
+Flink のドキュメントを読むと broadcast state pattern でできそうだ。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/stream/state/broadcast_state.html&#34;&gt;The Broadcast State Pattern&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;やり方としては次のようになる。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;static data のファイルを &lt;code&gt;FileProcessingMode.PROCESS_CONTINUOUSLY&lt;/code&gt; で読み込み &lt;code&gt;DataStream&lt;/code&gt; 化&lt;/li&gt;
+&lt;li&gt;1 を &lt;code&gt;broadcast()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;stream data の &lt;code&gt;DataStream&lt;/code&gt; と 2 を &lt;code&gt;connect()&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;static data を &lt;code&gt;PROCESS_CONTINUOUSLY&lt;/code&gt; で読むのは変更を得るため。&lt;br&gt;
+&lt;code&gt;PROCESS_ONCE&lt;/code&gt; で読んでしまうとストリーム処理の開始時に1回読むだけになり、dimension table の変更を得られない。&lt;br&gt;
+このあたりの仕様については &lt;a href=&#34;https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/datastream_api.html#data-sources&#34;&gt;Data Sources&lt;/a&gt; を参照。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>あまり大きな Pull Request を作ってほしくない</title>
       <link>https://soonraah.github.io/posts/no-more-huge-pull-request/</link>
       <pubDate>Mon, 03 Aug 2020 22:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/no-more-huge-pull-request/</guid>
-      <description>GitHub Flow ベースの開発においてはあまり大きな pull request を作ってほしくないという話。
-なんというか今更わざわざ言わなくてもいいんだけど…
-仕事で何度か大きな pull request が投げられているのを見てしまったので、それはあまりよくないよというのを自分でも指摘しやすくするためにまとめておく。
-Reference 最初に参考資料を挙げておく。
-100 Duck-Sized Pull Requests 「巨大プルリク1件vs細かいプルリク100件」問題を考える（翻訳） Optimal pull request size これらを読めば特に私から言うこともないのだが…
-これらに書いてあるとおりだが補足しておく。
-Pull Request を小分けにしたときのメリット module を適切に切り出すモチベーションが得られる 次のような話がある。
-共通化という考え方はアンチパターンを生み出すだけ説 これを理由に module を分けるべきところが分けられず、いろんなことができてしまうベタッと大きな module が生まれるのを見た。
-もちろんよく考えられていない共通化は駄目だが、上記ポストでは一方で
-ただし共通化という名の下におこなわれるのは「同じロジックを持つコードをまとめる」行為であって、抽象化のようにそのコード単位の意味を捉える作業はその範疇にない。抽象化というのはロジックを意味単位ごとにひとくくりにしていく行為で、これがどういうことなのかは次以降で述べていく。
-&amp;ndash; 共通化という考え方はアンチパターンを生み出すだけ説 - タオルケット体操
-と述べており抽象化、つまりコードの意味を考慮した上で適切な単位でまとめておくことは否定していない。
-pull request を小さく分けるという行為のためには module や機能を適度なまとまりで切り分けること、つまり抽象化を考えていくことが必要となる。
-したがって何でもできてしまう大きな module が生まれるのを防ぐ方向に働く。
-(もちろんここで駄目な共通化がなされてしまうこともあるだろう)
-リリースまでの期間が短く済む 前述の参考資料においても pull request が大きいと
-Developers would put off reviews until they had time/energy and the development process would come to a halt.</description>
+      <description>&lt;p&gt;GitHub Flow ベースの開発においてはあまり大きな pull request を作ってほしくないという話。&lt;br&gt;
+なんというか今更わざわざ言わなくてもいいんだけど…&lt;/p&gt;
+&lt;p&gt;仕事で何度か大きな pull request が投げられているのを見てしまったので、それはあまりよくないよというのを自分でも指摘しやすくするためにまとめておく。&lt;/p&gt;
+&lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;
+&lt;p&gt;最初に参考資料を挙げておく。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://kurtfunai.com/2017/12/100-duck-sized-pull-requests.html&#34;&gt;100 Duck-Sized Pull Requests&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://techracho.bpsinc.jp/hachi8833/2018_02_07/51095&#34;&gt;「巨大プルリク1件vs細かいプルリク100件」問題を考える（翻訳）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://smallbusinessprogramming.com/optimal-pull-request-size/&#34;&gt;Optimal pull request size&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;これらを読めば特に私から言うこともないのだが…&lt;br&gt;
+これらに書いてあるとおりだが補足しておく。&lt;/p&gt;
+&lt;h2 id=&#34;pull-request-を小分けにしたときのメリット&#34;&gt;Pull Request を小分けにしたときのメリット&lt;/h2&gt;
+&lt;h3 id=&#34;module-を適切に切り出すモチベーションが得られる&#34;&gt;module を適切に切り出すモチベーションが得られる&lt;/h3&gt;
+&lt;p&gt;次のような話がある。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://hachibeechan.hateblo.jp/entry/dont-think-just-make-it-abstract&#34;&gt;共通化という考え方はアンチパターンを生み出すだけ説&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;これを理由に module を分けるべきところが分けられず、いろんなことができてしまうベタッと大きな module が生まれるのを見た。&lt;/p&gt;
+&lt;p&gt;もちろんよく考えられていない共通化は駄目だが、上記ポストでは一方で&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ただし共通化という名の下におこなわれるのは「同じロジックを持つコードをまとめる」行為であって、抽象化のようにそのコード単位の意味を捉える作業はその範疇にない。抽象化というのはロジックを意味単位ごとにひとくくりにしていく行為で、これがどういうことなのかは次以降で述べていく。&lt;!-- raw HTML omitted --&gt;&lt;br&gt;
+&amp;ndash; &lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;https://hachibeechan.hateblo.jp/entry/dont-think-just-make-it-abstract&#34;&gt;共通化という考え方はアンチパターンを生み出すだけ説 - タオルケット体操&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;と述べており抽象化、つまりコードの意味を考慮した上で適切な単位でまとめておくことは否定していない。&lt;/p&gt;
+&lt;p&gt;pull request を小さく分けるという行為のためには module や機能を適度なまとまりで切り分けること、つまり抽象化を考えていくことが必要となる。&lt;br&gt;
+したがって何でもできてしまう大きな module が生まれるのを防ぐ方向に働く。&lt;br&gt;
+(もちろんここで駄目な共通化がなされてしまうこともあるだろう)&lt;/p&gt;
+&lt;h3 id=&#34;リリースまでの期間が短く済む&#34;&gt;リリースまでの期間が短く済む&lt;/h3&gt;
+&lt;p&gt;前述の参考資料においても pull request が大きいと&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Developers would put off reviews until they had time/energy and the development process would come to a halt.&lt;!-- raw HTML omitted --&gt;&lt;br&gt;
+&amp;ndash; &lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;http://kurtfunai.com/2017/12/100-duck-sized-pull-requests.html&#34;&gt;100 Duck-Sized Pull Requests&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>勉強会メモ: Spark Meetup Tokyo #3 Online</title>
       <link>https://soonraah.github.io/posts/spark-meetup-tokyo-3/</link>
       <pubDate>Sat, 01 Aug 2020 15:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/spark-meetup-tokyo-3/</guid>
-      <description>2020-07-31 にオンライン開催された Spark Meetup Tokyo #3 Online に参加した。
-感想などメモしておく。
-全体感 トピックとしては主に
-Spark 3.0 Spark + AI Summit 2020 Spark 周辺要素 といったところだろうか。
-最近のコミュニティの動向や関心を日本語で聞くことができてよかった。
-運営 &amp;amp; スピーカーの皆様、ありがとうございます。
-発表 発表資料は公開されたら追加していく。
-SPARK+AI Summit 2020 イベント概要 スピーカー: @tokyodataguy さん
-Summit は金融業界の参加者が増えているらしい Spark で最も使われている言語は Python とのことだったが、Databricks の notebook サービスの話だった プロダクションコードではまた違うのだろう Spark 3.0 の update をざっくりと Spark 周辺要素の話をざっくりと Koalas Delta Lake Redash MLflow Introducing Koalas 1.0 Introducing Koalas 1.0 (and 1.1) from Takuya UESHIN スピーカー: @ueshin さん</description>
+      <description>&lt;p&gt;2020-07-31 にオンライン開催された &lt;a href=&#34;https://spark-meetup-tokyo.connpass.com/event/181422/&#34;&gt;Spark Meetup Tokyo #3 Online&lt;/a&gt; に参加した。&lt;br&gt;
+感想などメモしておく。&lt;/p&gt;
+&lt;h1 id=&#34;全体感&#34;&gt;全体感&lt;/h1&gt;
+&lt;p&gt;トピックとしては主に&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Spark 3.0&lt;/li&gt;
+&lt;li&gt;Spark + AI Summit 2020&lt;/li&gt;
+&lt;li&gt;Spark 周辺要素&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;といったところだろうか。&lt;br&gt;
+最近のコミュニティの動向や関心を日本語で聞くことができてよかった。&lt;/p&gt;
+&lt;p&gt;運営 &amp;amp; スピーカーの皆様、ありがとうございます。&lt;/p&gt;
+&lt;h1 id=&#34;発表&#34;&gt;発表&lt;/h1&gt;
+&lt;p&gt;発表資料は公開されたら追加していく。&lt;/p&gt;
+&lt;h2 id=&#34;sparkai-summit-2020-イベント概要&#34;&gt;SPARK+AI Summit 2020 イベント概要&lt;/h2&gt;
+&lt;p&gt;スピーカー: &lt;a href=&#34;https://twitter.com/tokyodataguy&#34;&gt;@tokyodataguy&lt;/a&gt; さん&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Summit は金融業界の参加者が増えているらしい&lt;/li&gt;
+&lt;li&gt;Spark で最も使われている言語は Python とのことだったが、Databricks の notebook サービスの話だった
+&lt;ul&gt;
+&lt;li&gt;プロダクションコードではまた違うのだろう&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Spark 3.0 の update をざっくりと&lt;/li&gt;
+&lt;li&gt;Spark 周辺要素の話をざっくりと
+&lt;ul&gt;
+&lt;li&gt;Koalas&lt;/li&gt;
+&lt;li&gt;Delta Lake&lt;/li&gt;
+&lt;li&gt;Redash&lt;/li&gt;
+&lt;li&gt;MLflow&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;introducing-koalas-10&#34;&gt;Introducing Koalas 1.0&lt;/h2&gt;
+
+&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/42rsX5ywWZbk5b&#34; width=&#34;510&#34; height=&#34;420&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&#34;margin-bottom:5px&#34;&gt; &lt;strong&gt; &lt;a href=&#34;//www.slideshare.net/ueshin/introducing-koalas-10-and-11&#34; title=&#34;Introducing Koalas 1.0 (and 1.1)&#34; target=&#34;_blank&#34;&gt;Introducing Koalas 1.0 (and 1.1)&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a href=&#34;//www.slideshare.net/ueshin&#34; target=&#34;_blank&#34;&gt;Takuya UESHIN&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;
+
+&lt;p&gt;スピーカー: &lt;a href=&#34;https://twitter.com/ueshin&#34;&gt;@ueshin&lt;/a&gt; さん&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Spark DataFrame クエリの弱い分離レベル</title>
       <link>https://soonraah.github.io/posts/weak_isolation_level_of_dataframe/</link>
       <pubDate>Sun, 19 Jul 2020 22:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/weak_isolation_level_of_dataframe/</guid>
-      <description>Spark バッチ処理の問題を調べていたら分離レベルという概念にたどりついた。
-分離レベルについて調べたので、Spark の問題の内容と絡めて記しておく。
-考えてみれば当たり前でたいした話ではない。
-分離レベルとは トランザクションの挙動についての暗黙の理解 アドホックな分析クエリやプロダクションコード中のクエリを書くとき、その単一のクエリのトランザクションにおいて「同時に実行されている別のクエリの commit 前の状態や commit 結果に影響され、このクエリの結果がおかしくなるかもしれない」ということは通常考えない。
-トランザクションはデータベースのある時点の状態に対して正しく処理される、というほぼ無意識の理解をおそらくほとんどの開発者が持っている。
-多くの場合この理解は間違っていない。
-それはなぜかというと DB 等のデータ処理フレームワークがある強さの分離レベルを提供しているからである。
-いろいろな分離レベル ACID 特性のうちの1つ、分離性 (Isolation) の程度を表すのが分離レベル。
-トランザクション中に行われる操作の過程が他の操作から隠蔽されることを指し、日本語では分離性、独立性または隔離性ともいう。より形式的には、独立性とはトランザクション履歴が直列化されていることと言える。この性質と性能はトレードオフの関係にあるため、一般的にはこの性質の一部を緩和して実装される場合が多い。 &amp;ndash; Wikipedia ACID (コンピュータ科学)
-分離レベルには名前のついたものがいくつかあり、分離性の保証の強さが異なる。
-具体的にはトランザクションの並行性の問題への対応力が異なる。
-名著「データ指向アプリケーションデザイン」の第7章で分離レベルについて詳しく述べられているので、以下ではそちらからの引用。
-分離レベルを弱い順に並べる。
-read uncommitted
-このレベルではダーティライトは生じませんが、ダーティリードは妨げられません。
-read committed
-データベースからの読み取りを行った際に見えるデータは、コミットされたもののみであること（ダーティリードは生じない）。 データベースへの書き込みを行う場合、上書きするのはコミットされたデータのみであること（ダーティライトは生じない）。 snapshot isolation
-スナップショット分離の考え方は、それぞれのトランザクションがデータベースの一貫性のあるスナップショットから読み取りを行うというものです。すなわち、トランザクションが読み取るデータは、すべてそのトランザクションの開始時点のデータベースにコミット済みのものだけということです。
-serializability
-この分離レベルはトランザクションが並行して実行されていても、最終的な答えはそれぞれが1つずつ順番に、並行ではなく実行された場合と同じになることを保証します。
-日本語で「分離レベル」を検索すると snapshot isolation の代わりに repeatable read が出てくる事が多い。
-しかし repeatable read の名前は実装によって意味が違っていたりして扱いが難しいらしい。
-分離レベルと race condition の関係 以下に各分離レベルとトランザクションの並行性の問題 (race condition) の関係を示す。
-各 race condition の説明については割愛するが、複数のトランザクションが並行して実行されることにより起こりうる期待されていない挙動だと思えばよい。
-○はその分離レベルにおいてその race condition が発生しないことを示す。</description>
+      <description>&lt;p&gt;Spark バッチ処理の問題を調べていたら分離レベルという概念にたどりついた。&lt;br&gt;
+分離レベルについて調べたので、Spark の問題の内容と絡めて記しておく。&lt;br&gt;
+考えてみれば当たり前でたいした話ではない。&lt;/p&gt;
+&lt;h1 id=&#34;分離レベルとは&#34;&gt;分離レベルとは&lt;/h1&gt;
+&lt;h2 id=&#34;トランザクションの挙動についての暗黙の理解&#34;&gt;トランザクションの挙動についての暗黙の理解&lt;/h2&gt;
+&lt;p&gt;アドホックな分析クエリやプロダクションコード中のクエリを書くとき、その単一のクエリのトランザクションにおいて「同時に実行されている別のクエリの commit 前の状態や commit 結果に影響され、このクエリの結果がおかしくなるかもしれない」ということは通常考えない。&lt;br&gt;
+トランザクションはデータベースのある時点の状態に対して正しく処理される、というほぼ無意識の理解をおそらくほとんどの開発者が持っている。&lt;/p&gt;
+&lt;p&gt;多くの場合この理解は間違っていない。&lt;br&gt;
+それはなぜかというと DB 等のデータ処理フレームワークがある強さの分離レベルを提供しているからである。&lt;/p&gt;
+&lt;h2 id=&#34;いろいろな分離レベル&#34;&gt;いろいろな分離レベル&lt;/h2&gt;
+&lt;p&gt;ACID 特性のうちの1つ、分離性 (Isolation) の程度を表すのが分離レベル。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;トランザクション中に行われる操作の過程が他の操作から隠蔽されることを指し、日本語では分離性、独立性または隔離性ともいう。より形式的には、独立性とはトランザクション履歴が直列化されていることと言える。この性質と性能はトレードオフの関係にあるため、一般的にはこの性質の一部を緩和して実装される場合が多い。 &lt;!-- raw HTML omitted --&gt;&lt;br&gt;
+&amp;ndash; &lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;https://ja.wikipedia.org/wiki/ACID_(%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E7%A7%91%E5%AD%A6)&#34;&gt;Wikipedia ACID (コンピュータ科学)&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;分離レベルには名前のついたものがいくつかあり、分離性の保証の強さが異なる。&lt;br&gt;
+具体的にはトランザクションの並行性の問題への対応力が異なる。&lt;br&gt;
+名著「&lt;a href=&#34;https://www.amazon.co.jp/gp/product/4873118700/ref=as_li_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4873118700&amp;linkCode=as2&amp;tag=froglog02-22&amp;linkId=19bf71b38427997bd19423b1bb219d3f&#34;&gt;データ指向アプリケーションデザイン&lt;/a&gt;」の第7章で分離レベルについて詳しく述べられているので、以下ではそちらからの引用。&lt;/p&gt;
+
+&lt;a target=&#34;_blank&#34;  href=&#34;https://www.amazon.co.jp/gp/product/4873118700/ref=as_li_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4873118700&amp;linkCode=as2&amp;tag=froglog02-22&amp;linkId=4d28525a2e352660b372d4d1027b72fb&#34;&gt;&lt;img border=&#34;0&#34; src=&#34;//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;MarketPlace=JP&amp;ASIN=4873118700&amp;ServiceVersion=20070822&amp;ID=AsinImage&amp;WS=1&amp;Format=_SL250_&amp;tag=froglog02-22&#34; &gt;&lt;/a&gt;&lt;img src=&#34;//ir-jp.amazon-adsystem.com/e/ir?t=froglog02-22&amp;l=am2&amp;o=9&amp;a=4873118700&#34; width=&#34;1&#34; height=&#34;1&#34; border=&#34;0&#34; alt=&#34;&#34; style=&#34;border:none !important; margin:0px !important;&#34; /&gt;
+&lt;br&gt;
+
+&lt;p&gt;分離レベルを弱い順に並べる。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;read uncommitted&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;このレベルではダーティライトは生じませんが、ダーティリードは妨げられません。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;read committed&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;データベースからの読み取りを行った際に見えるデータは、コミットされたもののみであること（ダーティリードは生じない）。&lt;/li&gt;
+&lt;li&gt;データベースへの書き込みを行う場合、上書きするのはコミットされたデータのみであること（ダーティライトは生じない）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;snapshot isolation&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;スナップショット分離の考え方は、それぞれのトランザクションがデータベースの一貫性のあるスナップショットから読み取りを行うというものです。すなわち、トランザクションが読み取るデータは、すべてそのトランザクションの開始時点のデータベースにコミット済みのものだけということです。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;serializability&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;この分離レベルはトランザクションが並行して実行されていても、最終的な答えはそれぞれが1つずつ順番に、並行ではなく実行された場合と同じになることを保証します。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;日本語で「分離レベル」を検索すると snapshot isolation の代わりに repeatable read が出てくる事が多い。&lt;br&gt;
+しかし repeatable read の名前は実装によって意味が違っていたりして扱いが難しいらしい。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>About</title>
       <link>https://soonraah.github.io/about/</link>
       <pubDate>Sun, 12 Jul 2020 12:16:47 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/about/</guid>
-      <description>東京の IT 企業で働く中年エンジニアが勉強したことや考えていることなどを書きます。
-このブログは Hugo で作成しました。
-Theme には PaperMod を利用しています。</description>
+      <description>&lt;p&gt;東京の IT 企業で働く中年エンジニアが勉強したことや考えていることなどを書きます。&lt;/p&gt;
+&lt;p&gt;このブログは &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; で作成しました。&lt;br&gt;
+Theme には &lt;a href=&#34;https://themes.gohugo.io/hugo-papermod/&#34;&gt;PaperMod&lt;/a&gt; を利用しています。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Apache Spark 3.0.0 について調べた</title>
       <link>https://soonraah.github.io/posts/study-spark-3-0-0/</link>
       <pubDate>Sun, 12 Jul 2020 11:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/study-spark-3-0-0/</guid>
-      <description>はじめに Apache Spark 3.0.0 がリリースされました。
-Spark Release 3.0.0 release note を見て個人的に気になったところなど簡単に調べました。
-書いてみると Databricks の記事へのリンクばっかになってしまった…
-全体感 こちらの記事を読めば全体感は OK.
-Introducing Apache Spark 3.0 公式の release note には
-Python is now the most widely used language on Spark.
-とあってそうなん？ってなったけど、こちらの記事だと
-Python is now the most widely used language on Spark and, consequently, was a key focus area of Spark 3.0 development. 68% of notebook commands on Databricks are in Python.
-と書いてありどうやら Databricks の notebook の話らしく、だったらまあそうかなという感じ。</description>
+      <description>&lt;h2 id=&#34;はじめに&#34;&gt;はじめに&lt;/h2&gt;
+&lt;p&gt;Apache Spark 3.0.0 がリリースされました。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://spark.apache.org/releases/spark-release-3-0-0.html&#34;&gt;Spark Release 3.0.0&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;release note を見て個人的に気になったところなど簡単に調べました。&lt;br&gt;
+書いてみると Databricks の記事へのリンクばっかになってしまった…&lt;/p&gt;
+&lt;h2 id=&#34;全体感&#34;&gt;全体感&lt;/h2&gt;
+&lt;p&gt;こちらの記事を読めば全体感は OK.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://databricks.com/jp/blog/2020/06/18/introducing-apache-spark-3-0-now-available-in-databricks-runtime-7-0.html&#34;&gt;Introducing Apache Spark 3.0&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;公式の release note には&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Python is now the most widely used language on Spark.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;とあってそうなん？ってなったけど、こちらの記事だと&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Python is now the most widely used language on Spark and, consequently, was a key focus area of Spark 3.0 development. 68% of notebook commands on Databricks are in Python.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;と書いてありどうやら Databricks の notebook の話らしく、だったらまあそうかなという感じ。&lt;br&gt;
+プロダクトコードへの実装というよりは、アドホック分析や検証用途の話なんでしょう。&lt;/p&gt;</description>
     </item>
-    
-    
-    
   </channel>
 </rss>

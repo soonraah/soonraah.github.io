@@ -6,65 +6,87 @@
     <description>Recent content in AWS on Froglog</description>
     <image>
       <title>Froglog</title>
-      <url>https://soonraah.github.io/47</url>
-      <link>https://soonraah.github.io/47</link>
+      <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
+      <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.138.0</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 03 Dec 2023 22:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Dec 2023 22:00:00 +0900</lastBuildDate>
+    <atom:link href="https://soonraah.github.io/tags/aws/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CDC &#43; Apache Iceberg で Amazon Athena にデータを取り込む</title>
       <link>https://soonraah.github.io/posts/ingest-data-into-athena-by-cdc-and-iceberg/</link>
       <pubDate>Sun, 03 Dec 2023 22:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/ingest-data-into-athena-by-cdc-and-iceberg/</guid>
-      <description>このポストについて このポストは Distributed computing Advent Calendar 2023 の3日目の記事になります。
-1日目、2日目に続いて Apache Iceberg について書きますが、このポストでは Iceberg の実用例を書きます。
-AWS DMS による CDC の結果を Apache Iceberg 形式にして Amazon Athena でクエリできるようにするという内容になります。
-やっていることとしては Perform upserts in a data lake using Amazon Athena and Apache Iceberg | AWS Big Data Blog で紹介されている内容と近いですが、実務としての背景や工夫したところなどを書いていきます。
-背景 私の所属する事業会社では日々プロダクトから様々なデータが発生しており、プロダクトの分析やレポーティング、ML など様々な用途で利用されている。
-それを支える基盤としてデータ基盤が存在している。
-データ基盤ではクエリエンジンとして Amazon Athena を使っている。
-ストレージとしては S3 を使用しており、主に分析用として Parquet 形式でデータが置かれる。
-ここに業務用の operational な database から日次でデータを取り込んでいる。
-データソースは RDS (Aurora MySQL) であり、比較的大きなデータとなっている。
-これまではこの RDS -&amp;gt; S3 のデータ取り込みには RDS の S3 snapshot export という機能を利用していた。</description>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;このポストは &lt;a href=&#34;https://qiita.com/advent-calendar/2023/distributed-computing&#34;&gt;Distributed computing Advent Calendar 2023&lt;/a&gt; の3日目の記事になります。&lt;br&gt;
+1日目、2日目に続いて Apache Iceberg について書きますが、このポストでは Iceberg の実用例を書きます。&lt;/p&gt;
+&lt;p&gt;AWS DMS による CDC の結果を Apache Iceberg 形式にして Amazon Athena でクエリできるようにするという内容になります。&lt;br&gt;
+やっていることとしては &lt;a href=&#34;https://aws.amazon.com/jp/blogs/big-data/perform-upserts-in-a-data-lake-using-amazon-athena-and-apache-iceberg/&#34;&gt;Perform upserts in a data lake using Amazon Athena and Apache Iceberg | AWS Big Data Blog&lt;/a&gt; で紹介されている内容と近いですが、実務としての背景や工夫したところなどを書いていきます。&lt;/p&gt;
+&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+&lt;p&gt;私の所属する事業会社では日々プロダクトから様々なデータが発生しており、プロダクトの分析やレポーティング、ML など様々な用途で利用されている。&lt;br&gt;
+それを支える基盤としてデータ基盤が存在している。&lt;/p&gt;
+&lt;p&gt;データ基盤ではクエリエンジンとして &lt;a href=&#34;https://docs.aws.amazon.com/athena/latest/ug/what-is.html&#34;&gt;Amazon Athena&lt;/a&gt; を使っている。&lt;br&gt;
+ストレージとしては S3 を使用しており、主に分析用として Parquet 形式でデータが置かれる。&lt;/p&gt;
+&lt;p&gt;ここに業務用の operational な database から日次でデータを取り込んでいる。&lt;br&gt;
+データソースは RDS (Aurora MySQL) であり、比較的大きなデータとなっている。&lt;/p&gt;
+&lt;p&gt;これまではこの RDS -&amp;gt; S3 のデータ取り込みには RDS の &lt;a href=&#34;https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ExportSnapshot.html&#34;&gt;S3 snapshot export&lt;/a&gt; という機能を利用していた。&lt;br&gt;
+この機能では比較的簡単な設定により、バックアップ用のスナップショットの内容を S3 に export することができる。&lt;br&gt;
+ちなみに対象 database のスナップショットのサイズは数十 TB ある。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Glue Schema Registry の導入を断念した話</title>
       <link>https://soonraah.github.io/posts/give-up-on-schema-registry/</link>
       <pubDate>Tue, 13 Dec 2022 00:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/give-up-on-schema-registry/</guid>
-      <description>業務で AWS Glue Schema Registry を使おうとしたけど、やっぱりやめたというお話。
-Glue Schema Registry What&amp;rsquo;s Schema Registry? AWS Glue Schema Registry は2020年に発表された AWS の機能だ。
-Control the evolution of data streams using the AWS Glue Schema Registry 一方、私が最初に schema registry 的なものを見たのは Confluent の例。
-Schema Registry の概要 - Confluent AWS の Glue Schema Registry はこれより後のリリースであり、同等のものの AWS マネージド版といったところだろうか。
-schema registry で何ができるかは Confluent のリンク先の図がとてもわかりやすいので参考にしていただきたい。
-Glue Schema Registry もだいたい同じで、ストリーム処理のための機能である。
-Glue Schema Registry で解決したい課題とその機能 データ基盤上のストリーム処理における schema 管理はバッチ処理のそれとは異なる難しさがある。
-これは schema evolution と呼ばれる問題で以前のポストでも述べている。</description>
+      <description>&lt;p&gt;業務で &lt;a href=&#34;https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html&#34;&gt;AWS Glue Schema Registry&lt;/a&gt; を使おうとしたけど、やっぱりやめたというお話。&lt;/p&gt;
+&lt;h2 id=&#34;glue-schema-registry&#34;&gt;Glue Schema Registry&lt;/h2&gt;
+&lt;h3 id=&#34;whats-schema-registry&#34;&gt;What&amp;rsquo;s Schema Registry?&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html&#34;&gt;AWS Glue Schema Registry&lt;/a&gt; は2020年に発表された AWS の機能だ。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://aws.amazon.com/about-aws/whats-new/2020/11/control-evolution-data-streams-using-aws-glue-schema-registry/&#34;&gt;Control the evolution of data streams using the AWS Glue Schema Registry&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一方、私が最初に schema registry 的なものを見たのは Confluent の例。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.confluent.io/ja-jp/platform/7.1.1/schema-registry/index.html&#34;&gt;Schema Registry の概要 - Confluent&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;AWS の Glue Schema Registry はこれより後のリリースであり、同等のものの AWS マネージド版といったところだろうか。&lt;br&gt;
+schema registry で何ができるかは Confluent のリンク先の図がとてもわかりやすいので参考にしていただきたい。&lt;br&gt;
+Glue Schema Registry もだいたい同じで、ストリーム処理のための機能である。&lt;/p&gt;
+&lt;h3 id=&#34;glue-schema-registry-で解決したい課題とその機能&#34;&gt;Glue Schema Registry で解決したい課題とその機能&lt;/h3&gt;
+&lt;p&gt;データ基盤上のストリーム処理における schema 管理はバッチ処理のそれとは異なる難しさがある。&lt;br&gt;
+これは schema evolution と呼ばれる問題で以前のポストでも述べている。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../study-streaming-system/#schema-evolution&#34;&gt;バッチ処理おじさんがストリーム処理のシステムを開発するにあたって調べたこと&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;難しい点として以下のようなことが挙げられる。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>いまさらながらのデータレイク</title>
       <link>https://soonraah.github.io/posts/what-is-a-data-lake/</link>
       <pubDate>Thu, 31 Dec 2020 20:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/what-is-a-data-lake/</guid>
-      <description>最近よく聞かれるようになった「データレイク」という概念にあまりついていけていなかったため、いまさらながらざっと調べてみた。
-データレイクとは Wikipedia によると最初にこの言葉を使ったのは Pentaho 社の CTO である James Dixon らしい。
-その時の彼のブログ (10年前…) を読むと、既にあったデータマートに対して
-Only a subset of the attributes are examined, so only pre-determined questions can be answered. The data is aggregated so visibility into the lowest levels is lost
-&amp;ndash;Pentaho, Hadoop, and Data Lakes - James Dixon’s Blog というような問題意識からデータレイクというコンセプトを提案したようだ。
-最近？のデータレイクについてはベンダー等の記事が参考になる。
-データレイクとは - AWS データレイクとは？ - talend データレイクとは？データレイクの落とし穴と効果 - Informatica 書籍だと『AWSではじめるデータレイク: クラウドによる統合型データリポジトリ構築入門』がいいだろうか。
-データレイクの概要と AWS が考えている構築・運用がざっとわかる。
-Amazon で検索した限りだと現時点でタイトルに「データレイク」を含む和書はこれのみだった。
-上に挙げたような文献ではデータレイクはデータウェアハウスとの対比という形でよく語られている。
-共通している内容は概ね以下のとおり。</description>
+      <description>&lt;p&gt;最近よく聞かれるようになった「データレイク」という概念にあまりついていけていなかったため、いまさらながらざっと調べてみた。&lt;/p&gt;
+&lt;h2 id=&#34;データレイクとは&#34;&gt;データレイクとは&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Data_lake&#34;&gt;Wikipedia&lt;/a&gt; によると最初にこの言葉を使ったのは Pentaho 社の CTO である James Dixon らしい。&lt;br&gt;
+その時の&lt;a href=&#34;https://jamesdixon.wordpress.com/2010/10/14/pentaho-hadoop-and-data-lakes/&#34;&gt;彼のブログ&lt;/a&gt; (10年前…) を読むと、既にあったデータマートに対して&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Only a subset of the attributes are examined, so only pre-determined questions can be answered.&lt;/li&gt;
+&lt;li&gt;The data is aggregated so visibility into the lowest levels is lost&lt;br&gt;
+&amp;ndash;&lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;https://jamesdixon.wordpress.com/2010/10/14/pentaho-hadoop-and-data-lakes/&#34;&gt;Pentaho, Hadoop, and Data Lakes - James Dixon’s Blog&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;というような問題意識からデータレイクというコンセプトを提案したようだ。&lt;/p&gt;
+&lt;p&gt;最近？のデータレイクについてはベンダー等の記事が参考になる。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://aws.amazon.com/jp/big-data/datalakes-and-analytics/what-is-a-data-lake/&#34;&gt;データレイクとは - AWS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.talend.com/jp/resources/what-is-data-lake/&#34;&gt;データレイクとは？ - talend&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blogs.informatica.com/jp/2019/09/30/data-lake/&#34;&gt;データレイクとは？データレイクの落とし穴と効果 - Informatica&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;書籍だと&lt;a href=&#34;https://www.amazon.co.jp/gp/product/491031301X/ref=as_li_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=491031301X&amp;linkCode=as2&amp;tag=froglog02-22&amp;linkId=4e6220e28ad8d55e37e1884c69938ab0&#34;&gt;『AWSではじめるデータレイク: クラウドによる統合型データリポジトリ構築入門』&lt;/a&gt;がいいだろうか。&lt;br&gt;
+データレイクの概要と AWS が考えている構築・運用がざっとわかる。&lt;br&gt;
+Amazon で検索した限りだと現時点でタイトルに「データレイク」を含む和書はこれのみだった。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

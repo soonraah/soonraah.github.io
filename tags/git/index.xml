@@ -6,36 +6,51 @@
     <description>Recent content in Git on Froglog</description>
     <image>
       <title>Froglog</title>
-      <url>https://soonraah.github.io/47</url>
-      <link>https://soonraah.github.io/47</link>
+      <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
+      <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.138.0</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 03 Aug 2020 22:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 03 Aug 2020 22:00:00 +0900</lastBuildDate>
+    <atom:link href="https://soonraah.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>あまり大きな Pull Request を作ってほしくない</title>
       <link>https://soonraah.github.io/posts/no-more-huge-pull-request/</link>
       <pubDate>Mon, 03 Aug 2020 22:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/no-more-huge-pull-request/</guid>
-      <description>GitHub Flow ベースの開発においてはあまり大きな pull request を作ってほしくないという話。
-なんというか今更わざわざ言わなくてもいいんだけど…
-仕事で何度か大きな pull request が投げられているのを見てしまったので、それはあまりよくないよというのを自分でも指摘しやすくするためにまとめておく。
-Reference 最初に参考資料を挙げておく。
-100 Duck-Sized Pull Requests 「巨大プルリク1件vs細かいプルリク100件」問題を考える（翻訳） Optimal pull request size これらを読めば特に私から言うこともないのだが…
-これらに書いてあるとおりだが補足しておく。
-Pull Request を小分けにしたときのメリット module を適切に切り出すモチベーションが得られる 次のような話がある。
-共通化という考え方はアンチパターンを生み出すだけ説 これを理由に module を分けるべきところが分けられず、いろんなことができてしまうベタッと大きな module が生まれるのを見た。
-もちろんよく考えられていない共通化は駄目だが、上記ポストでは一方で
-ただし共通化という名の下におこなわれるのは「同じロジックを持つコードをまとめる」行為であって、抽象化のようにそのコード単位の意味を捉える作業はその範疇にない。抽象化というのはロジックを意味単位ごとにひとくくりにしていく行為で、これがどういうことなのかは次以降で述べていく。
-&amp;ndash; 共通化という考え方はアンチパターンを生み出すだけ説 - タオルケット体操
-と述べており抽象化、つまりコードの意味を考慮した上で適切な単位でまとめておくことは否定していない。
-pull request を小さく分けるという行為のためには module や機能を適度なまとまりで切り分けること、つまり抽象化を考えていくことが必要となる。
-したがって何でもできてしまう大きな module が生まれるのを防ぐ方向に働く。
-(もちろんここで駄目な共通化がなされてしまうこともあるだろう)
-リリースまでの期間が短く済む 前述の参考資料においても pull request が大きいと
-Developers would put off reviews until they had time/energy and the development process would come to a halt.</description>
+      <description>&lt;p&gt;GitHub Flow ベースの開発においてはあまり大きな pull request を作ってほしくないという話。&lt;br&gt;
+なんというか今更わざわざ言わなくてもいいんだけど…&lt;/p&gt;
+&lt;p&gt;仕事で何度か大きな pull request が投げられているのを見てしまったので、それはあまりよくないよというのを自分でも指摘しやすくするためにまとめておく。&lt;/p&gt;
+&lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;
+&lt;p&gt;最初に参考資料を挙げておく。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://kurtfunai.com/2017/12/100-duck-sized-pull-requests.html&#34;&gt;100 Duck-Sized Pull Requests&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://techracho.bpsinc.jp/hachi8833/2018_02_07/51095&#34;&gt;「巨大プルリク1件vs細かいプルリク100件」問題を考える（翻訳）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://smallbusinessprogramming.com/optimal-pull-request-size/&#34;&gt;Optimal pull request size&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;これらを読めば特に私から言うこともないのだが…&lt;br&gt;
+これらに書いてあるとおりだが補足しておく。&lt;/p&gt;
+&lt;h2 id=&#34;pull-request-を小分けにしたときのメリット&#34;&gt;Pull Request を小分けにしたときのメリット&lt;/h2&gt;
+&lt;h3 id=&#34;module-を適切に切り出すモチベーションが得られる&#34;&gt;module を適切に切り出すモチベーションが得られる&lt;/h3&gt;
+&lt;p&gt;次のような話がある。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://hachibeechan.hateblo.jp/entry/dont-think-just-make-it-abstract&#34;&gt;共通化という考え方はアンチパターンを生み出すだけ説&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;これを理由に module を分けるべきところが分けられず、いろんなことができてしまうベタッと大きな module が生まれるのを見た。&lt;/p&gt;
+&lt;p&gt;もちろんよく考えられていない共通化は駄目だが、上記ポストでは一方で&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ただし共通化という名の下におこなわれるのは「同じロジックを持つコードをまとめる」行為であって、抽象化のようにそのコード単位の意味を捉える作業はその範疇にない。抽象化というのはロジックを意味単位ごとにひとくくりにしていく行為で、これがどういうことなのかは次以降で述べていく。&lt;!-- raw HTML omitted --&gt;&lt;br&gt;
+&amp;ndash; &lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;https://hachibeechan.hateblo.jp/entry/dont-think-just-make-it-abstract&#34;&gt;共通化という考え方はアンチパターンを生み出すだけ説 - タオルケット体操&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;と述べており抽象化、つまりコードの意味を考慮した上で適切な単位でまとめておくことは否定していない。&lt;/p&gt;
+&lt;p&gt;pull request を小さく分けるという行為のためには module や機能を適度なまとまりで切り分けること、つまり抽象化を考えていくことが必要となる。&lt;br&gt;
+したがって何でもできてしまう大きな module が生まれるのを防ぐ方向に働く。&lt;br&gt;
+(もちろんここで駄目な共通化がなされてしまうこともあるだろう)&lt;/p&gt;
+&lt;h3 id=&#34;リリースまでの期間が短く済む&#34;&gt;リリースまでの期間が短く済む&lt;/h3&gt;
+&lt;p&gt;前述の参考資料においても pull request が大きいと&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Developers would put off reviews until they had time/energy and the development process would come to a halt.&lt;!-- raw HTML omitted --&gt;&lt;br&gt;
+&amp;ndash; &lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;http://kurtfunai.com/2017/12/100-duck-sized-pull-requests.html&#34;&gt;100 Duck-Sized Pull Requests&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

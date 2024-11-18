@@ -6,44 +6,72 @@
     <description>Recent content in Transaction on Froglog</description>
     <image>
       <title>Froglog</title>
-      <url>https://soonraah.github.io/47</url>
-      <link>https://soonraah.github.io/47</link>
+      <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
+      <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.138.0</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 19 Jul 2020 22:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/transaction/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Jul 2020 22:00:00 +0900</lastBuildDate>
+    <atom:link href="https://soonraah.github.io/tags/transaction/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Spark DataFrame クエリの弱い分離レベル</title>
       <link>https://soonraah.github.io/posts/weak_isolation_level_of_dataframe/</link>
       <pubDate>Sun, 19 Jul 2020 22:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/weak_isolation_level_of_dataframe/</guid>
-      <description>Spark バッチ処理の問題を調べていたら分離レベルという概念にたどりついた。
-分離レベルについて調べたので、Spark の問題の内容と絡めて記しておく。
-考えてみれば当たり前でたいした話ではない。
-分離レベルとは トランザクションの挙動についての暗黙の理解 アドホックな分析クエリやプロダクションコード中のクエリを書くとき、その単一のクエリのトランザクションにおいて「同時に実行されている別のクエリの commit 前の状態や commit 結果に影響され、このクエリの結果がおかしくなるかもしれない」ということは通常考えない。
-トランザクションはデータベースのある時点の状態に対して正しく処理される、というほぼ無意識の理解をおそらくほとんどの開発者が持っている。
-多くの場合この理解は間違っていない。
-それはなぜかというと DB 等のデータ処理フレームワークがある強さの分離レベルを提供しているからである。
-いろいろな分離レベル ACID 特性のうちの1つ、分離性 (Isolation) の程度を表すのが分離レベル。
-トランザクション中に行われる操作の過程が他の操作から隠蔽されることを指し、日本語では分離性、独立性または隔離性ともいう。より形式的には、独立性とはトランザクション履歴が直列化されていることと言える。この性質と性能はトレードオフの関係にあるため、一般的にはこの性質の一部を緩和して実装される場合が多い。 &amp;ndash; Wikipedia ACID (コンピュータ科学)
-分離レベルには名前のついたものがいくつかあり、分離性の保証の強さが異なる。
-具体的にはトランザクションの並行性の問題への対応力が異なる。
-名著「データ指向アプリケーションデザイン」の第7章で分離レベルについて詳しく述べられているので、以下ではそちらからの引用。
-分離レベルを弱い順に並べる。
-read uncommitted
-このレベルではダーティライトは生じませんが、ダーティリードは妨げられません。
-read committed
-データベースからの読み取りを行った際に見えるデータは、コミットされたもののみであること（ダーティリードは生じない）。 データベースへの書き込みを行う場合、上書きするのはコミットされたデータのみであること（ダーティライトは生じない）。 snapshot isolation
-スナップショット分離の考え方は、それぞれのトランザクションがデータベースの一貫性のあるスナップショットから読み取りを行うというものです。すなわち、トランザクションが読み取るデータは、すべてそのトランザクションの開始時点のデータベースにコミット済みのものだけということです。
-serializability
-この分離レベルはトランザクションが並行して実行されていても、最終的な答えはそれぞれが1つずつ順番に、並行ではなく実行された場合と同じになることを保証します。
-日本語で「分離レベル」を検索すると snapshot isolation の代わりに repeatable read が出てくる事が多い。
-しかし repeatable read の名前は実装によって意味が違っていたりして扱いが難しいらしい。
-分離レベルと race condition の関係 以下に各分離レベルとトランザクションの並行性の問題 (race condition) の関係を示す。
-各 race condition の説明については割愛するが、複数のトランザクションが並行して実行されることにより起こりうる期待されていない挙動だと思えばよい。
-○はその分離レベルにおいてその race condition が発生しないことを示す。</description>
+      <description>&lt;p&gt;Spark バッチ処理の問題を調べていたら分離レベルという概念にたどりついた。&lt;br&gt;
+分離レベルについて調べたので、Spark の問題の内容と絡めて記しておく。&lt;br&gt;
+考えてみれば当たり前でたいした話ではない。&lt;/p&gt;
+&lt;h1 id=&#34;分離レベルとは&#34;&gt;分離レベルとは&lt;/h1&gt;
+&lt;h2 id=&#34;トランザクションの挙動についての暗黙の理解&#34;&gt;トランザクションの挙動についての暗黙の理解&lt;/h2&gt;
+&lt;p&gt;アドホックな分析クエリやプロダクションコード中のクエリを書くとき、その単一のクエリのトランザクションにおいて「同時に実行されている別のクエリの commit 前の状態や commit 結果に影響され、このクエリの結果がおかしくなるかもしれない」ということは通常考えない。&lt;br&gt;
+トランザクションはデータベースのある時点の状態に対して正しく処理される、というほぼ無意識の理解をおそらくほとんどの開発者が持っている。&lt;/p&gt;
+&lt;p&gt;多くの場合この理解は間違っていない。&lt;br&gt;
+それはなぜかというと DB 等のデータ処理フレームワークがある強さの分離レベルを提供しているからである。&lt;/p&gt;
+&lt;h2 id=&#34;いろいろな分離レベル&#34;&gt;いろいろな分離レベル&lt;/h2&gt;
+&lt;p&gt;ACID 特性のうちの1つ、分離性 (Isolation) の程度を表すのが分離レベル。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;トランザクション中に行われる操作の過程が他の操作から隠蔽されることを指し、日本語では分離性、独立性または隔離性ともいう。より形式的には、独立性とはトランザクション履歴が直列化されていることと言える。この性質と性能はトレードオフの関係にあるため、一般的にはこの性質の一部を緩和して実装される場合が多い。 &lt;!-- raw HTML omitted --&gt;&lt;br&gt;
+&amp;ndash; &lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;https://ja.wikipedia.org/wiki/ACID_(%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E7%A7%91%E5%AD%A6)&#34;&gt;Wikipedia ACID (コンピュータ科学)&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;分離レベルには名前のついたものがいくつかあり、分離性の保証の強さが異なる。&lt;br&gt;
+具体的にはトランザクションの並行性の問題への対応力が異なる。&lt;br&gt;
+名著「&lt;a href=&#34;https://www.amazon.co.jp/gp/product/4873118700/ref=as_li_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4873118700&amp;linkCode=as2&amp;tag=froglog02-22&amp;linkId=19bf71b38427997bd19423b1bb219d3f&#34;&gt;データ指向アプリケーションデザイン&lt;/a&gt;」の第7章で分離レベルについて詳しく述べられているので、以下ではそちらからの引用。&lt;/p&gt;
+
+&lt;a target=&#34;_blank&#34;  href=&#34;https://www.amazon.co.jp/gp/product/4873118700/ref=as_li_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4873118700&amp;linkCode=as2&amp;tag=froglog02-22&amp;linkId=4d28525a2e352660b372d4d1027b72fb&#34;&gt;&lt;img border=&#34;0&#34; src=&#34;//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;MarketPlace=JP&amp;ASIN=4873118700&amp;ServiceVersion=20070822&amp;ID=AsinImage&amp;WS=1&amp;Format=_SL250_&amp;tag=froglog02-22&#34; &gt;&lt;/a&gt;&lt;img src=&#34;//ir-jp.amazon-adsystem.com/e/ir?t=froglog02-22&amp;l=am2&amp;o=9&amp;a=4873118700&#34; width=&#34;1&#34; height=&#34;1&#34; border=&#34;0&#34; alt=&#34;&#34; style=&#34;border:none !important; margin:0px !important;&#34; /&gt;
+&lt;br&gt;
+
+&lt;p&gt;分離レベルを弱い順に並べる。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;read uncommitted&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;このレベルではダーティライトは生じませんが、ダーティリードは妨げられません。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;read committed&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;データベースからの読み取りを行った際に見えるデータは、コミットされたもののみであること（ダーティリードは生じない）。&lt;/li&gt;
+&lt;li&gt;データベースへの書き込みを行う場合、上書きするのはコミットされたデータのみであること（ダーティライトは生じない）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;snapshot isolation&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;スナップショット分離の考え方は、それぞれのトランザクションがデータベースの一貫性のあるスナップショットから読み取りを行うというものです。すなわち、トランザクションが読み取るデータは、すべてそのトランザクションの開始時点のデータベースにコミット済みのものだけということです。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;serializability&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;この分離レベルはトランザクションが並行して実行されていても、最終的な答えはそれぞれが1つずつ順番に、並行ではなく実行された場合と同じになることを保証します。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;日本語で「分離レベル」を検索すると snapshot isolation の代わりに repeatable read が出てくる事が多い。&lt;br&gt;
+しかし repeatable read の名前は実装によって意味が違っていたりして扱いが難しいらしい。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

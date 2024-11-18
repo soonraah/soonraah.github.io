@@ -6,28 +6,56 @@
     <description>Recent content in Meetup on Froglog</description>
     <image>
       <title>Froglog</title>
-      <url>https://soonraah.github.io/47</url>
-      <link>https://soonraah.github.io/47</link>
+      <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
+      <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.138.0</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 01 Aug 2020 15:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/meetup/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 01 Aug 2020 15:00:00 +0900</lastBuildDate>
+    <atom:link href="https://soonraah.github.io/tags/meetup/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>勉強会メモ: Spark Meetup Tokyo #3 Online</title>
       <link>https://soonraah.github.io/posts/spark-meetup-tokyo-3/</link>
       <pubDate>Sat, 01 Aug 2020 15:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/spark-meetup-tokyo-3/</guid>
-      <description>2020-07-31 にオンライン開催された Spark Meetup Tokyo #3 Online に参加した。
-感想などメモしておく。
-全体感 トピックとしては主に
-Spark 3.0 Spark + AI Summit 2020 Spark 周辺要素 といったところだろうか。
-最近のコミュニティの動向や関心を日本語で聞くことができてよかった。
-運営 &amp;amp; スピーカーの皆様、ありがとうございます。
-発表 発表資料は公開されたら追加していく。
-SPARK+AI Summit 2020 イベント概要 スピーカー: @tokyodataguy さん
-Summit は金融業界の参加者が増えているらしい Spark で最も使われている言語は Python とのことだったが、Databricks の notebook サービスの話だった プロダクションコードではまた違うのだろう Spark 3.0 の update をざっくりと Spark 周辺要素の話をざっくりと Koalas Delta Lake Redash MLflow Introducing Koalas 1.0 Introducing Koalas 1.0 (and 1.1) from Takuya UESHIN スピーカー: @ueshin さん</description>
+      <description>&lt;p&gt;2020-07-31 にオンライン開催された &lt;a href=&#34;https://spark-meetup-tokyo.connpass.com/event/181422/&#34;&gt;Spark Meetup Tokyo #3 Online&lt;/a&gt; に参加した。&lt;br&gt;
+感想などメモしておく。&lt;/p&gt;
+&lt;h1 id=&#34;全体感&#34;&gt;全体感&lt;/h1&gt;
+&lt;p&gt;トピックとしては主に&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Spark 3.0&lt;/li&gt;
+&lt;li&gt;Spark + AI Summit 2020&lt;/li&gt;
+&lt;li&gt;Spark 周辺要素&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;といったところだろうか。&lt;br&gt;
+最近のコミュニティの動向や関心を日本語で聞くことができてよかった。&lt;/p&gt;
+&lt;p&gt;運営 &amp;amp; スピーカーの皆様、ありがとうございます。&lt;/p&gt;
+&lt;h1 id=&#34;発表&#34;&gt;発表&lt;/h1&gt;
+&lt;p&gt;発表資料は公開されたら追加していく。&lt;/p&gt;
+&lt;h2 id=&#34;sparkai-summit-2020-イベント概要&#34;&gt;SPARK+AI Summit 2020 イベント概要&lt;/h2&gt;
+&lt;p&gt;スピーカー: &lt;a href=&#34;https://twitter.com/tokyodataguy&#34;&gt;@tokyodataguy&lt;/a&gt; さん&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Summit は金融業界の参加者が増えているらしい&lt;/li&gt;
+&lt;li&gt;Spark で最も使われている言語は Python とのことだったが、Databricks の notebook サービスの話だった
+&lt;ul&gt;
+&lt;li&gt;プロダクションコードではまた違うのだろう&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Spark 3.0 の update をざっくりと&lt;/li&gt;
+&lt;li&gt;Spark 周辺要素の話をざっくりと
+&lt;ul&gt;
+&lt;li&gt;Koalas&lt;/li&gt;
+&lt;li&gt;Delta Lake&lt;/li&gt;
+&lt;li&gt;Redash&lt;/li&gt;
+&lt;li&gt;MLflow&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;introducing-koalas-10&#34;&gt;Introducing Koalas 1.0&lt;/h2&gt;
+
+&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/42rsX5ywWZbk5b&#34; width=&#34;510&#34; height=&#34;420&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&#34;margin-bottom:5px&#34;&gt; &lt;strong&gt; &lt;a href=&#34;//www.slideshare.net/ueshin/introducing-koalas-10-and-11&#34; title=&#34;Introducing Koalas 1.0 (and 1.1)&#34; target=&#34;_blank&#34;&gt;Introducing Koalas 1.0 (and 1.1)&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a href=&#34;//www.slideshare.net/ueshin&#34; target=&#34;_blank&#34;&gt;Takuya UESHIN&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;
+
+&lt;p&gt;スピーカー: &lt;a href=&#34;https://twitter.com/ueshin&#34;&gt;@ueshin&lt;/a&gt; さん&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

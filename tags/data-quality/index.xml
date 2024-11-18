@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Data Quality on Froglog</title>
+    <link>https://soonraah.github.io/tags/data-quality/</link>
+    <description>Recent content in Data Quality on Froglog</description>
+    <image>
+      <title>Froglog</title>
+      <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
+      <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
+    </image>
+    <generator>Hugo -- 0.138.0</generator>
+    <language>ja</language>
+    <lastBuildDate>Mon, 18 Nov 2024 20:30:00 +0900</lastBuildDate>
+    <atom:link href="https://soonraah.github.io/tags/data-quality/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>読書メモ: DMBOK2 第13章 データ品質</title>
+      <link>https://soonraah.github.io/posts/dmbok-chapter-13/</link>
+      <pubDate>Mon, 18 Nov 2024 20:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/posts/dmbok-chapter-13/</guid>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;​&lt;br&gt;
+&lt;a href=&#34;https://www.dama-japan.org/Introduction.html&#34;&gt;DMBOK2&lt;/a&gt; を読み進めていくシリーズ。&lt;br&gt;
+今回は第13章「データ品質」について。&lt;/p&gt;
+&lt;p&gt;これまで業務で「データ品質」という言葉が使われることがあったが、意味が限定的だったり人によって定義が違ったりしていた。&lt;br&gt;
+そのあたりクリアにできるとよい。&lt;br&gt;
+​&lt;/p&gt;
+&lt;h2 id=&#34;内容紹介&#34;&gt;内容紹介&lt;/h2&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;データ品質の定義&#34;&gt;データ品質の定義&lt;/h3&gt;
+&lt;p&gt;​&lt;br&gt;
+データ品質の簡潔な定義は「目的に適合している」。&lt;br&gt;
+データ品質管理の定義は「データを収集し扱うための技法を適用し、企業や地域のデータ利用者の、ニーズや利用に適したデータとすることを保証する活動を計画し、実施し、管理する」。&lt;br&gt;
+​&lt;br&gt;
+データ基盤担当の仕事柄、データ品質というとどちらかというと上流であるデータソース側の定義が重要だと思っていたが、そうではなく下流であるデータ利用においての観点が起点になるというのが気づきだった。(でも考えてみれば当たり前)&lt;br&gt;
+​&lt;/p&gt;
+&lt;h3 id=&#34;ビジネス上の意義&#34;&gt;ビジネス上の意義&lt;/h3&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ステークホルダーの体験と組織の評判を高める
+&lt;ul&gt;
+&lt;li&gt;ex. データが正しいことを顧客が信頼し、組織との取引に自信を持てる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;組織がより有効な成果を出せるようにする
+&lt;ul&gt;
+&lt;li&gt;ex. ビジネスチャンスの特定と効果的な請求により売上を獲得できる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;低品質なデータによるリスクとコストを削減する
+&lt;ul&gt;
+&lt;li&gt;ex. データが正しいかどうかをスタッフが見極める時間が減る&lt;/li&gt;
+&lt;li&gt;ex. 誤ったデータによる誤った意思決定&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;組織の効率と生産性を向上する
+&lt;ul&gt;
+&lt;li&gt;ex. カスタマーサービスにかかってくる電話が減り、問い合わせを解決できるようになる&lt;br&gt;
+​&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;重要なデータ&#34;&gt;重要なデータ&lt;/h3&gt;
+&lt;p&gt;​&lt;br&gt;
+データ品質管理における第一の原則は、組織とその顧客にとって最も重要なデータに改善努力を集中させること。&lt;br&gt;
+​&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ex.
+&lt;ul&gt;
+&lt;li&gt;顧客のメールアドレス欄のデータが不完全であれば、顧客にメールで商品情報を送ることができず、潜在的な売上を失う&lt;/li&gt;
+&lt;li&gt;1通のメールを送るごとに100円の収益が得られることが知られている&lt;/li&gt;
+&lt;li&gt;→ データ品質の改善に明確な価値があると言える&lt;br&gt;
+​&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;重要なデータは組織や業界によって異なるが、以下のような用途で使用されることが多い。&lt;br&gt;
+​&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;規制、財務、経営報告&lt;/li&gt;
+&lt;li&gt;事業運営上のニーズ&lt;/li&gt;
+&lt;li&gt;製品の品質と顧客満足度の測定&lt;/li&gt;
+&lt;li&gt;事業戦略、特に競争上の差別化への取り組み&lt;br&gt;
+​&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;データ品質評価軸&#34;&gt;データ品質評価軸&lt;/h3&gt;
+&lt;p&gt;​&lt;br&gt;
+データ品質評価軸は、測定可能なデータの特徴または特性。&lt;br&gt;
+一般的な評価軸は次のとおり。&lt;br&gt;
+​&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;No.&lt;/th&gt;
+          &lt;th&gt;評価軸&lt;/th&gt;
+          &lt;th&gt;説明&lt;/th&gt;
+          &lt;th&gt;例&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;有効性&lt;!-- raw HTML omitted --&gt;Validity&lt;/td&gt;
+          &lt;td&gt;データの値が定義された領域の値と一致しているかどうか。&lt;/td&gt;
+          &lt;td&gt;- 数値、日付などのデータ範囲&lt;!-- raw HTML omitted --&gt;- 電話番号などの書式&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;完全性&lt;!-- raw HTML omitted --&gt;Completeness&lt;/td&gt;
+          &lt;td&gt;必要なデータがすべて存在するかどうか。&lt;!-- raw HTML omitted --&gt;カラム, レコード, データセットのレベルがある。&lt;/td&gt;
+          &lt;td&gt;- カラム: 必須カラムにデータが入っているか？&lt;!-- raw HTML omitted --&gt;- データセット: 都道府県マスタに47都道府県の情報はあるか？&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;3&lt;/td&gt;
+          &lt;td&gt;一貫性&lt;!-- raw HTML omitted --&gt;Consistency&lt;/td&gt;
+          &lt;td&gt;データ値が同じアプローチ、評価、価値基準を用いてコード化されていることを保証すること。&lt;!-- raw HTML omitted --&gt;レコード内、レコード間、経時的な一貫性などがある。&lt;/td&gt;
+          &lt;td&gt;- すべての顧客企業の住所は本社住所となっているか？&lt;!-- raw HTML omitted --&gt;- 生徒の成績評価は時を経ても同じか？&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;4&lt;/td&gt;
+          &lt;td&gt;整合性&lt;!-- raw HTML omitted --&gt;Integrity&lt;/td&gt;
+          &lt;td&gt;データに非一貫性や破綻した関係性がないこと。&lt;/td&gt;
+          &lt;td&gt;- 顧客住所の国がカナダの場合、州としてカナダの州が記載されているか？&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;5&lt;/td&gt;
+          &lt;td&gt;適時性&lt;!-- raw HTML omitted --&gt;Timeliness&lt;/td&gt;
+          &lt;td&gt;データの取得または更新後、ユーザーがデータにアクセスできるようになるまでの時間を指す。&lt;/td&gt;
+          &lt;td&gt;- 電力会社は電力需要データを数秒以内に利用して需給調整する必要がある&lt;!-- raw HTML omitted --&gt;- 政府機関が四半期末の2ヶ月後に GDP 報告書を作成&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;6&lt;/td&gt;
+          &lt;td&gt;最新性&lt;!-- raw HTML omitted --&gt;Currency&lt;/td&gt;
+          &lt;td&gt;データが最後に更新されてから現在までの期間と、それがまだ正しいという可能性。&lt;!-- raw HTML omitted --&gt;データセットによって期待される最新性は異なる。&lt;/td&gt;
+          &lt;td&gt;- 国コードは比較的静的&lt;!-- raw HTML omitted --&gt;- 銀行口座残高は変動的&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;7&lt;/td&gt;
+          &lt;td&gt;妥当性&lt;!-- raw HTML omitted --&gt;Reasonableness&lt;/td&gt;
+          &lt;td&gt;データパターンが期待に合致しているかどうか。&lt;/td&gt;
+          &lt;td&gt;- 先週のクリック数と比較して今日のクリック数は普通か否か？&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;8&lt;/td&gt;
+          &lt;td&gt;一意性/重複排除&lt;!-- raw HTML omitted --&gt;Uniqueness/Deduplication&lt;/td&gt;
+          &lt;td&gt;現実世界の実体がデータセット内に2つ以上存在しないこと。&lt;/td&gt;
+          &lt;td&gt;- ユーザー ID は重複していないか？&lt;!-- raw HTML omitted --&gt;- ユーザー ID は異なるが、同一の人物を表していないか？&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;9&lt;/td&gt;
+          &lt;td&gt;正確性&lt;!-- raw HTML omitted --&gt;Accuracy&lt;/td&gt;
+          &lt;td&gt;データが「現実の」実体を正しく表している程度。&lt;/td&gt;
+          &lt;td&gt;- ユーザー名は現実世界の個人の名前なのか？&lt;!-- raw HTML omitted --&gt;- 顧客は実際にそのメールアドレスを使用しているのか？&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;​&lt;br&gt;
+ここでようやく「データ品質」が具体的なものとして見えてきた。&lt;br&gt;
+測定が比較的容易なものもあれば困難なものもある。&lt;br&gt;
+​&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -6,39 +6,72 @@
     <description>Recent content in Data Modeling on Froglog</description>
     <image>
       <title>Froglog</title>
-      <url>https://soonraah.github.io/47</url>
-      <link>https://soonraah.github.io/47</link>
+      <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
+      <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.138.0</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 21 Jan 2024 21:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/data-modeling/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Jan 2024 21:30:00 +0900</lastBuildDate>
+    <atom:link href="https://soonraah.github.io/tags/data-modeling/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>読書メモ: DMBOK2 第5章 データモデリングとデザイン</title>
       <link>https://soonraah.github.io/posts/dmbok-chapter-5/</link>
       <pubDate>Sun, 21 Jan 2024 21:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/dmbok-chapter-5/</guid>
-      <description>このポストについて DMBOK2 を読み進めていくシリーズ。
-今回は第5章「データモデリングとデザイン」について。
-第4章でデータモデリングについて言及されていたが、ここで詳しく見ていく。
-以降、特に注釈のない引用は DMBOK2 第5章からの引用とする。
-データモデリングとは データモデリングとは、データ要件を洗い出し、分析し、取扱スコープを決めるプロセスであり、データ要件を記述し伝えるために、明確に定義されたデータモデルと呼ばれる様式が用いられる。このプロセスは反復的であり、概念、論理、物理モデルが含まれる。
-第4章 データアーキテクチャ ではエンタープライズ・データモデルという言葉が登場したが、この第5章ではそのデータモデルがより具体的に解説されている。
-データモデルは効果的なデータマネジメントを行うにあたり必要なものとされている。
-次のような意義がある。
-データに関する共通語彙を提供する 組織のデータや情報システムに関しての明示的な知識を捉え文書化する プロジェクトにおいて主なコミュニケーションツールとして使われる アプリケーションをカスタマイズ、統合、リプレースする際の出発点となる データモデルは組織が把握した現状、またはあるべき姿として組織のデータを記述する。
-カテゴリー情報、リソース情報、業務イベント情報、詳細取引情報がその対象となる。
-データモデルの構成要素 ほとんどのデータモデルはエンティティ、リレーションシップ、属性、ドメインにより構成される。
-エンティティ エンティティとはある組織が情報を収集する対象のこと。
-組織が使う名詞。
-以下は Marmaid の Entity Relationship Diagrams でエンティティを表現した例。
-学校を例にしており、学生、コース、インストラクタがエンティティとして表されている。
---- title: Entity --- erDiagram Student Course Instructor リレーションシップ リレーションシップはエンティティ間の関連性を表す。
-以下の例は学生はコースを &amp;ldquo;履修する&amp;rdquo;、インストラクタはコースを &amp;ldquo;教える&amp;rdquo; ことを表している。
---- title: Relationship --- erDiagram Student }|--|{ Course : take Instructor }|--|{ Course : teach 線の両端の形はリレーションシップの cardinality (多重度) を表している。
-この場合ではそれぞれカラスの足状になっているが、それぞれ「1またはそれ以上」という意味で、「学生は1つ以上のコースを履修する」「コースは1人以上の学生に履修される」ということを表している。
-リレーションシップの arity (項数) は一般的には二項型 (バイナリリレーションシップ) であることが多く、2つのエンティティ間の関係を表す。</description>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.dama-japan.org/Introduction.html&#34;&gt;DMBOK2&lt;/a&gt; を読み進めていくシリーズ。&lt;br&gt;
+今回は第5章「データモデリングとデザイン」について。&lt;br&gt;
+第4章でデータモデリングについて言及されていたが、ここで詳しく見ていく。&lt;/p&gt;
+&lt;p&gt;以降、特に注釈のない引用は DMBOK2 第5章からの引用とする。&lt;/p&gt;
+&lt;h2 id=&#34;データモデリングとは&#34;&gt;データモデリングとは&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;データモデリングとは、データ要件を洗い出し、分析し、取扱スコープを決めるプロセスであり、データ要件を記述し伝えるために、明確に定義されたデータモデルと呼ばれる様式が用いられる。このプロセスは反復的であり、概念、論理、物理モデルが含まれる。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;../dmbok-chapter-4/&#34;&gt;第4章 データアーキテクチャ&lt;/a&gt; ではエンタープライズ・データモデルという言葉が登場したが、この第5章ではそのデータモデルがより具体的に解説されている。&lt;br&gt;
+データモデルは効果的なデータマネジメントを行うにあたり必要なものとされている。&lt;br&gt;
+次のような意義がある。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;データに関する共通語彙を提供する&lt;/li&gt;
+&lt;li&gt;組織のデータや情報システムに関しての明示的な知識を捉え文書化する&lt;/li&gt;
+&lt;li&gt;プロジェクトにおいて主なコミュニケーションツールとして使われる&lt;/li&gt;
+&lt;li&gt;アプリケーションをカスタマイズ、統合、リプレースする際の出発点となる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;データモデルは組織が把握した現状、またはあるべき姿として組織のデータを記述する。&lt;br&gt;
+カテゴリー情報、リソース情報、業務イベント情報、詳細取引情報がその対象となる。&lt;/p&gt;
+&lt;h2 id=&#34;データモデルの構成要素&#34;&gt;データモデルの構成要素&lt;/h2&gt;
+&lt;p&gt;ほとんどのデータモデルはエンティティ、リレーションシップ、属性、ドメインにより構成される。&lt;/p&gt;
+&lt;h3 id=&#34;エンティティ&#34;&gt;エンティティ&lt;/h3&gt;
+&lt;p&gt;エンティティとはある組織が情報を収集する対象のこと。&lt;br&gt;
+組織が使う名詞。&lt;/p&gt;
+&lt;p&gt;以下は Marmaid の &lt;a href=&#34;https://mermaid.js.org/syntax/entityRelationshipDiagram.html&#34;&gt;Entity Relationship Diagrams&lt;/a&gt; でエンティティを表現した例。&lt;br&gt;
+学校を例にしており、学生、コース、インストラクタがエンティティとして表されている。&lt;/p&gt;
+&lt;pre class=&#34;mermaid&#34;&gt;---
+title: Entity
+---
+erDiagram
+    Student
+    Course
+    Instructor
+&lt;/pre&gt;
+
+&lt;h3 id=&#34;リレーションシップ&#34;&gt;リレーションシップ&lt;/h3&gt;
+&lt;p&gt;リレーションシップはエンティティ間の関連性を表す。&lt;br&gt;
+以下の例は学生はコースを &amp;ldquo;履修する&amp;rdquo;、インストラクタはコースを &amp;ldquo;教える&amp;rdquo; ことを表している。&lt;/p&gt;
+&lt;pre class=&#34;mermaid&#34;&gt;---
+title: Relationship
+---
+erDiagram
+    Student }|--|{ Course : take
+    Instructor }|--|{ Course : teach
+&lt;/pre&gt;
+
+&lt;p&gt;線の両端の形はリレーションシップの cardinality (多重度) を表している。&lt;br&gt;
+この場合ではそれぞれカラスの足状になっているが、それぞれ「1またはそれ以上」という意味で、「学生は1つ以上のコースを履修する」「コースは1人以上の学生に履修される」ということを表している。&lt;/p&gt;
+&lt;p&gt;リレーションシップの arity (項数) は一般的には二項型 (バイナリリレーションシップ) であることが多く、2つのエンティティ間の関係を表す。&lt;br&gt;
+一方で線の両端が同じエンティティにつながっている単項型、3のエンティティが関連する三項型もある。&lt;br&gt;
+以下は単項型の例で、前提となるコースの履修が必要であることを示す。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

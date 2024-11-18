@@ -6,10 +6,11 @@
     <description>Recent content in Categories on Froglog</description>
     <image>
       <title>Froglog</title>
-      <url>https://soonraah.github.io/47</url>
-      <link>https://soonraah.github.io/47</link>
+      <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
+      <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>ja</language><atom:link href="https://soonraah.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- 0.138.0</generator>
+    <language>ja</language>
+    <atom:link href="https://soonraah.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

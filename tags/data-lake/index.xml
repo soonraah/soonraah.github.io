@@ -6,122 +6,194 @@
     <description>Recent content in Data Lake on Froglog</description>
     <image>
       <title>Froglog</title>
-      <url>https://soonraah.github.io/47</url>
-      <link>https://soonraah.github.io/47</link>
+      <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
+      <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.138.0</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 28 May 2023 09:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/data-lake/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 May 2023 09:00:00 +0900</lastBuildDate>
+    <atom:link href="https://soonraah.github.io/tags/data-lake/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>near real time で更新される Apache Iceberg の table のメンテナンス</title>
       <link>https://soonraah.github.io/posts/maintain-iceberg-table-updated-in-near-real-time/</link>
       <pubDate>Sun, 28 May 2023 09:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/maintain-iceberg-table-updated-in-near-real-time/</guid>
-      <description>前回のポストでは merge on read で Apache Iceberg の table を near real time で更新するということを行った。
-このポストではそのメンテナンスについて触れて、かつそれを実行してみる。
-merge on read の課題 merge on read で table を更新する場合、copy on write の場合と違い table 全体を洗い替えする必要はなく差分のみを追記することになる。
-したがって更新にかかる時間は copy on write よりも短くなる。
-一方で merge on read の名のとおり読み出し時に積み重なった差分とベースを merge して最新の snapshot とするため、読み出しの速度は copy on write より遅くなる。
-長時間更新され差分がたくさん存在しているとなおさら遅い。
-なので
-更新頻度が低く、参照頻度が高いユースケース -&amp;gt; copy on write 更新頻度が高く、参照頻度が低いユースケース -&amp;gt; merge on write という使い分けがよいとされている。
-前回ポストの例では一晩更新を続けた後の merge on read の table に対して簡単な select 文を実行したところ、6分程度かかってしまった。</description>
+      <description>&lt;p&gt;&lt;a href=&#34;../update-iceberg-table-in-near-real-time&#34;&gt;前回のポスト&lt;/a&gt;では merge on read で Apache Iceberg の table を near real time で更新するということを行った。&lt;br&gt;
+このポストではそのメンテナンスについて触れて、かつそれを実行してみる。&lt;/p&gt;
+&lt;h2 id=&#34;merge-on-read-の課題&#34;&gt;merge on read の課題&lt;/h2&gt;
+&lt;p&gt;merge on read で table を更新する場合、copy on write の場合と違い table 全体を洗い替えする必要はなく差分のみを追記することになる。&lt;br&gt;
+したがって更新にかかる時間は copy on write よりも短くなる。&lt;br&gt;
+一方で merge on read の名のとおり読み出し時に積み重なった差分とベースを merge して最新の snapshot とするため、読み出しの速度は copy on write より遅くなる。&lt;br&gt;
+長時間更新され差分がたくさん存在しているとなおさら遅い。&lt;br&gt;
+なので&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;更新頻度が低く、参照頻度が高いユースケース -&amp;gt; copy on write&lt;/li&gt;
+&lt;li&gt;更新頻度が高く、参照頻度が低いユースケース -&amp;gt; merge on write&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;という使い分けがよいとされている。&lt;/p&gt;
+&lt;p&gt;前回ポストの例では一晩更新を続けた後の merge on read の table に対して簡単な &lt;code&gt;select&lt;/code&gt; 文を実行したところ、6分程度かかってしまった。&lt;br&gt;
+レコード数はたかだか128件程度であることを考えるとかなり遅いと言える。&lt;br&gt;
+このままでは使い物にならない。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Apache Iceberg の table を near real time で更新する</title>
       <link>https://soonraah.github.io/posts/update-iceberg-table-in-near-real-time/</link>
       <pubDate>Thu, 11 May 2023 01:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/update-iceberg-table-in-near-real-time/</guid>
-      <description>Apache Iceberg の table を near real time に、つまり高頻度で更新するということをやってみた。
-Apache Iceberg とは Apache Iceberg (以下 Iceberg) は分散ファイルシステムやクラウドストレージ上の table format であり、Apache Hudi や Delta Lake と並んで data lake や lakehouse architecture で用いられる。
-特徴的なのは table とデータ実体 (Parquet, Avro など) の間に metadata file, manifest list, manifest file の抽象的なレイヤーがあり、ファイル単位で table の状態を track できること。
-これにより強い isolation level、パフォーマンス、schema evolution など様々な機能・性能を実現できるようになっている。
-Apache Iceberg Iceberg Table Spec
-詳しくは公式ドキュメントを参照のこと。
-最近では SmartNews 社が Iceberg で data lake を構築したことを記事にしていた。
-Flink-based Iceberg Real-Time Data Lake in SmartNews (Part I) | by SmartNews | SmartNews, Inc | Apr, 2023 | Medium ベンダー提供の DWH 中心ではなく Lakehouse Architecture を目指すのであれば最有力の table format の1つだと言えそう。</description>
+      <description>&lt;p&gt;Apache Iceberg の table を near real time に、つまり高頻度で更新するということをやってみた。&lt;/p&gt;
+&lt;h2 id=&#34;apache-iceberg-とは&#34;&gt;Apache Iceberg とは&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://iceberg.apache.org/&#34;&gt;Apache Iceberg&lt;/a&gt; (以下 Iceberg) は分散ファイルシステムやクラウドストレージ上の table format であり、Apache Hudi や Delta Lake と並んで data lake や lakehouse architecture で用いられる。&lt;br&gt;
+特徴的なのは table とデータ実体 (Parquet, Avro など) の間に metadata file, manifest list, manifest file の抽象的なレイヤーがあり、ファイル単位で table の状態を track できること。&lt;br&gt;
+これにより強い isolation level、パフォーマンス、schema evolution など様々な機能・性能を実現できるようになっている。&lt;/p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;https://soonraah.github.io/image/iceberg/iceberg_metadata.png&#34;
+         alt=&#34;Apache Iceberg&#34;/&gt; &lt;figcaption&gt;
+            &lt;p&gt;Apache Iceberg
+                    &lt;a href=&#34;https://iceberg.apache.org/spec/&#34;&gt;Iceberg Table Spec&lt;/a&gt;&lt;/p&gt;
+        &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;詳しくは公式ドキュメントを参照のこと。&lt;br&gt;
+最近では SmartNews 社が Iceberg で data lake を構築したことを記事にしていた。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://medium.com/smartnews-inc/flink-based-iceberg-real-time-data-lake-in-smartnews-part-i-19a7628ce110&#34;&gt;Flink-based Iceberg Real-Time Data Lake in SmartNews (Part I) | by SmartNews | SmartNews, Inc | Apr, 2023 | Medium&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;ベンダー提供の DWH 中心ではなく Lakehouse Architecture を目指すのであれば最有力の table format の1つだと言えそう。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Glue Schema Registry の導入を断念した話</title>
       <link>https://soonraah.github.io/posts/give-up-on-schema-registry/</link>
       <pubDate>Tue, 13 Dec 2022 00:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/give-up-on-schema-registry/</guid>
-      <description>業務で AWS Glue Schema Registry を使おうとしたけど、やっぱりやめたというお話。
-Glue Schema Registry What&amp;rsquo;s Schema Registry? AWS Glue Schema Registry は2020年に発表された AWS の機能だ。
-Control the evolution of data streams using the AWS Glue Schema Registry 一方、私が最初に schema registry 的なものを見たのは Confluent の例。
-Schema Registry の概要 - Confluent AWS の Glue Schema Registry はこれより後のリリースであり、同等のものの AWS マネージド版といったところだろうか。
-schema registry で何ができるかは Confluent のリンク先の図がとてもわかりやすいので参考にしていただきたい。
-Glue Schema Registry もだいたい同じで、ストリーム処理のための機能である。
-Glue Schema Registry で解決したい課題とその機能 データ基盤上のストリーム処理における schema 管理はバッチ処理のそれとは異なる難しさがある。
-これは schema evolution と呼ばれる問題で以前のポストでも述べている。</description>
+      <description>&lt;p&gt;業務で &lt;a href=&#34;https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html&#34;&gt;AWS Glue Schema Registry&lt;/a&gt; を使おうとしたけど、やっぱりやめたというお話。&lt;/p&gt;
+&lt;h2 id=&#34;glue-schema-registry&#34;&gt;Glue Schema Registry&lt;/h2&gt;
+&lt;h3 id=&#34;whats-schema-registry&#34;&gt;What&amp;rsquo;s Schema Registry?&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html&#34;&gt;AWS Glue Schema Registry&lt;/a&gt; は2020年に発表された AWS の機能だ。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://aws.amazon.com/about-aws/whats-new/2020/11/control-evolution-data-streams-using-aws-glue-schema-registry/&#34;&gt;Control the evolution of data streams using the AWS Glue Schema Registry&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一方、私が最初に schema registry 的なものを見たのは Confluent の例。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.confluent.io/ja-jp/platform/7.1.1/schema-registry/index.html&#34;&gt;Schema Registry の概要 - Confluent&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;AWS の Glue Schema Registry はこれより後のリリースであり、同等のものの AWS マネージド版といったところだろうか。&lt;br&gt;
+schema registry で何ができるかは Confluent のリンク先の図がとてもわかりやすいので参考にしていただきたい。&lt;br&gt;
+Glue Schema Registry もだいたい同じで、ストリーム処理のための機能である。&lt;/p&gt;
+&lt;h3 id=&#34;glue-schema-registry-で解決したい課題とその機能&#34;&gt;Glue Schema Registry で解決したい課題とその機能&lt;/h3&gt;
+&lt;p&gt;データ基盤上のストリーム処理における schema 管理はバッチ処理のそれとは異なる難しさがある。&lt;br&gt;
+これは schema evolution と呼ばれる問題で以前のポストでも述べている。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../study-streaming-system/#schema-evolution&#34;&gt;バッチ処理おじさんがストリーム処理のシステムを開発するにあたって調べたこと&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;難しい点として以下のようなことが挙げられる。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>「データレイク」と「データレイク層」</title>
       <link>https://soonraah.github.io/posts/data-lake-and-data-lake-layer/</link>
       <pubDate>Tue, 21 Jun 2022 08:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/data-lake-and-data-lake-layer/</guid>
-      <description>「データレイク」という言葉は使う人によって異なった意味があるように感じており、気になっていた。
-このポストではアーキテクチャ目線でのデータレイクと内容物目線でのデータレイクの違いについて書いてみる。
-便宜上前者を「データレイク」、後者を「データレイク層」と呼ぶことにする。
-アーキテクチャ目線の「データレイク」 「データレイク」については以前こちらのポストで書いたのでここでは詳しく触れない。
-詳細はリンク先を見ていただきたい。
-ここでキーとなるのが、
-加工前データや非構造化データを含むあらゆるデータを保存 一元的なデータ管理 という部分だ。
-あらゆるデータを一元的に管理するという思想であり、これができるアーキテクチャがデータレイクということだ。
-例えば AWS や Azure のドキュメントを見るとデータレイクの中が zone に分けられており、生データを保持する raw zone や加工されたデータを置いておく curated zone などがある。
-(zone の命名にもいくつかの流派があるようだ…)
-Reference architecture - Data Analytics Lens Data lake zones and containers - Cloud Adoption Framework | Microsoft Docs 次の Robinhood 社の例でもデータレイク中に生データとその派生データが存在している。
-Fresher Data Lake on AWS S3 | by Balaji Varadarajan | Robinhood 内容物目線の「データレイク層」 一方でデータレイクには生データのみを置くべき、という考えもある。
-本書におけるデータレイク（DataLake）層とは、元のデータをコピーして、1つのシステムに集約したものを指します。 データソース（＝水源）から流れてきたデータを蓄える場所なのでレイク（湖）と呼びます。
-ECサイトの注文履歴データを、分析用DBにコピーしている場合、それがデータレイクと言えます。データレイクのデータは、データソースと一対一の関係にあります。何も加工していない、ただのコピーだからです。
-何も加工していない、ただのコピーであることが重要です。仮にデータの中身に誤りがあったとしても、修正や加工をせず、そのまま集約しましょう。
-&amp;ndash; ゆずたそ,渡部 徹太郎,伊藤 徹郎. 実践的データ基盤への処方箋〜 ビジネス価値創出のためのデータ・システム・ヒトのノウハウ (Japanese Edition) (pp.</description>
+      <description>&lt;p&gt;「データレイク」という言葉は使う人によって異なった意味があるように感じており、気になっていた。&lt;br&gt;
+このポストではアーキテクチャ目線でのデータレイクと内容物目線でのデータレイクの違いについて書いてみる。&lt;br&gt;
+便宜上前者を「データレイク」、後者を「データレイク層」と呼ぶことにする。&lt;/p&gt;
+&lt;h2 id=&#34;アーキテクチャ目線のデータレイク&#34;&gt;アーキテクチャ目線の「データレイク」&lt;/h2&gt;
+&lt;p&gt;「データレイク」については以前&lt;a href=&#34;../what-is-a-data-lake&#34;&gt;こちらのポスト&lt;/a&gt;で書いたのでここでは詳しく触れない。&lt;br&gt;
+詳細はリンク先を見ていただきたい。&lt;br&gt;
+ここでキーとなるのが、&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;加工前データや非構造化データを含むあらゆるデータを保存&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;一元的なデータ管理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;という部分だ。&lt;br&gt;
+あらゆるデータを一元的に管理するという思想であり、これができるアーキテクチャがデータレイクということだ。&lt;/p&gt;
+&lt;p&gt;例えば AWS や Azure のドキュメントを見るとデータレイクの中が zone に分けられており、生データを保持する raw zone や加工されたデータを置いておく curated zone などがある。&lt;br&gt;
+(zone の命名にもいくつかの流派があるようだ…)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.aws.amazon.com/wellarchitected/latest/analytics-lens/modern-data-architecture-reference-architecture.html&#34;&gt;Reference architecture - Data Analytics Lens&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/cloud-scale-analytics/best-practices/data-lake-zones&#34;&gt;Data lake zones and containers - Cloud Adoption Framework | Microsoft Docs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;次の Robinhood 社の例でもデータレイク中に生データとその派生データが存在している。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://robinhood.engineering/author-balaji-varadarajan-e3f496815ebf&#34;&gt;Fresher Data Lake on AWS S3 | by Balaji Varadarajan | Robinhood&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;内容物目線のデータレイク層&#34;&gt;内容物目線の「データレイク層」&lt;/h2&gt;
+&lt;p&gt;一方でデータレイクには生データのみを置くべき、という考えもある。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;　本書におけるデータレイク（DataLake）層とは、元のデータをコピーして、1つのシステムに集約したものを指します。 データソース（＝水源）から流れてきたデータを蓄える場所なのでレイク（湖）と呼びます。&lt;br&gt;
+　ECサイトの注文履歴データを、分析用DBにコピーしている場合、それがデータレイクと言えます。データレイクのデータは、データソースと一対一の関係にあります。何も加工していない、ただのコピーだからです。&lt;br&gt;
+　&lt;strong&gt;何も加工していない、ただのコピーであることが重要です。仮にデータの中身に誤りがあったとしても、修正や加工をせず、そのまま集約しましょう。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&amp;ndash; &lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;https://soonraah.github.io/&#34;&gt;ゆずたそ,渡部 徹太郎,伊藤 徹郎. 実践的データ基盤への処方箋〜 ビジネス価値創出のためのデータ・システム・ヒトのノウハウ (Japanese Edition) (pp.57-58). Kindle 版.&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>データレイク関連の OSS - Delta Lake, Apache Hudi, Apache Kudu</title>
       <link>https://soonraah.github.io/posts/oss-for-data-lake/</link>
       <pubDate>Tue, 26 Jan 2021 08:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/oss-for-data-lake/</guid>
-      <description>はじめに 前回のポストではデータレイクとはどういうものかというのを調べた。
-今回はデータレイクの文脈でどのような OSS が注目されているのかを見ていきたい。
-以下は NTT データさんによる講演資料であり、その中で「近年登場してきた、リアルタイム分析に利用可能なOSSストレージレイヤソフト」というのが3つ挙げられている。
-大規模データ活用向けストレージレイヤソフトのこれまでとこれから（NTTデータ テクノロジーカンファレンス 2019 講演資料、2019/09/05） from NTT DATA Technology &amp;amp; Innovation Delta Lake Apache Hudi Apache Kudu これらはすべて論理的なストレージレイヤーを担う。
-こちらの講演資料に付け足すようなこともないかもしれないが、このポストではデータレイクという文脈から自分で調べて理解した内容をまとめるということを目的にする。
-当然 Hadoop, Hive, Spark 等もデータレイクの文脈において超重要だが、「データレイク」という言葉がよく聞かれるようになる前から普及していたのでこのポストでは触れないことにする。
-Delta Lake https://delta.io/
-Delta Lake is an open-source storage layer that brings ACID transactions to Apache Spark™ and big data workloads.
-Delta Lake
-Delta Lake は Apache Spark の読み書きに ACID な transaction を提供するストレージレイヤーの OSS である。
-Databricks が作り、2019年4月に v0.1.0 がリリースされたのが最初だ。</description>
+      <description>&lt;h2 id=&#34;はじめに&#34;&gt;はじめに&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://soonraah.github.io/posts/what-is-a-data-lake/&#34;&gt;前回のポスト&lt;/a&gt;ではデータレイクとはどういうものかというのを調べた。&lt;br&gt;
+今回はデータレイクの文脈でどのような OSS が注目されているのかを見ていきたい。&lt;/p&gt;
+&lt;p&gt;以下は NTT データさんによる講演資料であり、その中で「近年登場してきた、リアルタイム分析に利用可能なOSSストレージレイヤソフト」というのが3つ挙げられている。&lt;/p&gt;
+
+&lt;div style=&#34;text-align: center&#34;&gt;
+&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/5sVeEqby7oL0AE?startSlide=37&#34; width=&#34;510&#34; height=&#34;420&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&#34;margin-bottom:5px&#34;&gt; &lt;strong&gt; &lt;a href=&#34;//www.slideshare.net/nttdata-tech/bigdata-storage-layer-software-nttdata&#34; title=&#34;大規模データ活用向けストレージレイヤソフトのこれまでとこれから（NTTデータ テクノロジーカンファレンス 2019 講演資料、2019/09/05）&#34; target=&#34;_blank&#34;&gt;大規模データ活用向けストレージレイヤソフトのこれまでとこれから（NTTデータ テクノロジーカンファレンス 2019 講演資料、2019/09/05）&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a href=&#34;//www.slideshare.net/nttdata-tech&#34; target=&#34;_blank&#34;&gt;NTT DATA Technology &amp;amp; Innovation&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;
+&lt;/div&gt;
+&lt;br&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Delta Lake&lt;/li&gt;
+&lt;li&gt;Apache Hudi&lt;/li&gt;
+&lt;li&gt;Apache Kudu&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;これらはすべて論理的なストレージレイヤーを担う。&lt;br&gt;
+こちらの講演資料に付け足すようなこともないかもしれないが、このポストではデータレイクという文脈から自分で調べて理解した内容をまとめるということを目的にする。&lt;/p&gt;
+&lt;p&gt;当然 Hadoop, Hive, Spark 等もデータレイクの文脈において超重要だが、「データレイク」という言葉がよく聞かれるようになる前から普及していたのでこのポストでは触れないことにする。&lt;/p&gt;
+&lt;h2 id=&#34;delta-lake&#34;&gt;Delta Lake&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://delta.io/&#34;&gt;https://delta.io/&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Delta Lake is an open-source storage layer that brings ACID transactions to Apache Spark™ and big data workloads.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;https://soonraah.github.io/image/deltalake/Delta-Lake-marketecture-0423c.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;p&gt;
+                    &lt;a href=&#34;https://delta.io/&#34;&gt;Delta Lake&lt;/a&gt;&lt;/p&gt;
+        &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Delta Lake は Apache Spark の読み書きに ACID な transaction を提供するストレージレイヤーの OSS である。&lt;br&gt;
+Databricks が作り、2019年4月に v0.1.0 がリリースされたのが最初だ。&lt;br&gt;
+使い方はめちゃ簡単で、dependency を設定した上で Spark で&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>いまさらながらのデータレイク</title>
       <link>https://soonraah.github.io/posts/what-is-a-data-lake/</link>
       <pubDate>Thu, 31 Dec 2020 20:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/what-is-a-data-lake/</guid>
-      <description>最近よく聞かれるようになった「データレイク」という概念にあまりついていけていなかったため、いまさらながらざっと調べてみた。
-データレイクとは Wikipedia によると最初にこの言葉を使ったのは Pentaho 社の CTO である James Dixon らしい。
-その時の彼のブログ (10年前…) を読むと、既にあったデータマートに対して
-Only a subset of the attributes are examined, so only pre-determined questions can be answered. The data is aggregated so visibility into the lowest levels is lost
-&amp;ndash;Pentaho, Hadoop, and Data Lakes - James Dixon’s Blog というような問題意識からデータレイクというコンセプトを提案したようだ。
-最近？のデータレイクについてはベンダー等の記事が参考になる。
-データレイクとは - AWS データレイクとは？ - talend データレイクとは？データレイクの落とし穴と効果 - Informatica 書籍だと『AWSではじめるデータレイク: クラウドによる統合型データリポジトリ構築入門』がいいだろうか。
-データレイクの概要と AWS が考えている構築・運用がざっとわかる。
-Amazon で検索した限りだと現時点でタイトルに「データレイク」を含む和書はこれのみだった。
-上に挙げたような文献ではデータレイクはデータウェアハウスとの対比という形でよく語られている。
-共通している内容は概ね以下のとおり。</description>
+      <description>&lt;p&gt;最近よく聞かれるようになった「データレイク」という概念にあまりついていけていなかったため、いまさらながらざっと調べてみた。&lt;/p&gt;
+&lt;h2 id=&#34;データレイクとは&#34;&gt;データレイクとは&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Data_lake&#34;&gt;Wikipedia&lt;/a&gt; によると最初にこの言葉を使ったのは Pentaho 社の CTO である James Dixon らしい。&lt;br&gt;
+その時の&lt;a href=&#34;https://jamesdixon.wordpress.com/2010/10/14/pentaho-hadoop-and-data-lakes/&#34;&gt;彼のブログ&lt;/a&gt; (10年前…) を読むと、既にあったデータマートに対して&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Only a subset of the attributes are examined, so only pre-determined questions can be answered.&lt;/li&gt;
+&lt;li&gt;The data is aggregated so visibility into the lowest levels is lost&lt;br&gt;
+&amp;ndash;&lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;https://jamesdixon.wordpress.com/2010/10/14/pentaho-hadoop-and-data-lakes/&#34;&gt;Pentaho, Hadoop, and Data Lakes - James Dixon’s Blog&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;というような問題意識からデータレイクというコンセプトを提案したようだ。&lt;/p&gt;
+&lt;p&gt;最近？のデータレイクについてはベンダー等の記事が参考になる。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://aws.amazon.com/jp/big-data/datalakes-and-analytics/what-is-a-data-lake/&#34;&gt;データレイクとは - AWS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.talend.com/jp/resources/what-is-data-lake/&#34;&gt;データレイクとは？ - talend&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blogs.informatica.com/jp/2019/09/30/data-lake/&#34;&gt;データレイクとは？データレイクの落とし穴と効果 - Informatica&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;書籍だと&lt;a href=&#34;https://www.amazon.co.jp/gp/product/491031301X/ref=as_li_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=491031301X&amp;linkCode=as2&amp;tag=froglog02-22&amp;linkId=4e6220e28ad8d55e37e1884c69938ab0&#34;&gt;『AWSではじめるデータレイク: クラウドによる統合型データリポジトリ構築入門』&lt;/a&gt;がいいだろうか。&lt;br&gt;
+データレイクの概要と AWS が考えている構築・運用がざっとわかる。&lt;br&gt;
+Amazon で検索した限りだと現時点でタイトルに「データレイク」を含む和書はこれのみだった。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

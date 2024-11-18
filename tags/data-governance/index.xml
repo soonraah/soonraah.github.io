@@ -6,49 +6,82 @@
     <description>Recent content in Data Governance on Froglog</description>
     <image>
       <title>Froglog</title>
-      <url>https://soonraah.github.io/47</url>
-      <link>https://soonraah.github.io/47</link>
+      <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
+      <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.138.0</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 19 Nov 2023 17:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/data-governance/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Nov 2023 17:30:00 +0900</lastBuildDate>
+    <atom:link href="https://soonraah.github.io/tags/data-governance/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>読書メモ: DMBOK2 第3章 データガバナンス</title>
       <link>https://soonraah.github.io/posts/dmbok-chapter-3/</link>
       <pubDate>Sun, 19 Nov 2023 17:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/dmbok-chapter-3/</guid>
-      <description>このポストについて DMBOK2 を読み進めていくシリーズ。
-今回は第3章「データガバナンス」について。
-DAMA ホイール図において中心に置かれているので先に読んでおこうと思った次第。
-以降、特に注釈のない引用は DMBOK2 第3章からの引用とする。
-データガバナンスとは データガバナンス (DG) の定義は、データ資産の管理 (マネジメント) に対して職務権限を通し統制 (コントロール) することである。統制とは計画を立て、実行を監視し、徹底させることを指す。
-この定義からデータガバナンスがなぜ DAMA ホイール図の中心に位置しているかがわかる。
-データガバナンスにより周囲の各知識領域の計画や実施を統制するという建付けになる。
-データガバナンス (DG) のゴールは組織がデータを資産として管理できるようにすることである。DG はデータを資産として管理するための原則、ポリシー、プロセス、フレームワーク、評価指標を提供し、組織の各階層レベルでデータマネジメントアクティビティを牽引する。
-これを可能にするためにデータガバナンスは持続可能であり、業務プロセスに組み込まれており、測定可能になっている必要がある。
-データガバナンス組織 次の組織構成が一般的なデータガバナンスモデルであるとのこと。
-DMBOK2 データガバナンス組織構成
-右側がデータマネジメントを実施するロールになっており、左側がデータガバナンスによりデータマネジメントさせるロールになっている。
-データガバナンス運営委員会が組織のデータガバナンスの頂点となっており、最も権限が強い。
-各部門にはデータガバナンス評議会 (DGC) が置かれており、これらがポリシー・評価指標の開発などのデータガバナンスの取り組みや課題、報告を管理する。
-データガバナンスオフィス (DGO) はデータスチュワード (後述) などで構成され、企業レベルのデータ定義とデータマネジメントにフォーカスする。
-大規模、かつデータマネジメントの意識が高い組織でないとこういった組織構成はなかなか作れないのではと思った。
-ライト版の図も欲しいところ。
-DMBOK2 データ問題の報告経路
-ポリシーやステークホルダー利害の不一致、権限、データ品質などなど、データに関する問題は上記のような報告経路をたどる。
-データスチュワード制 データスチュワード制はデータとプロセスの実行責任と結果責任を表す最も一般的な呼び名であり、データ資産の効率的な統制と利用を確かなものとする。
-ちょっとこの説明ではイメージしにくいかもしれない。
-データガバナンスの文脈において、データスチュワードは現場を含む組織の各レベルでデータガバナンスを効かせるための活動を行う実務者だと理解した。
-データスチュワードという職務名があってもいいが、そうでなくてもよいらしい。
-次のようなことをやる。
-核となるメタデータの作成と管理 ルールと標準の文書化 データ品質の問題管理 データガバナンス運営アクティビティの実施 データスチュワードについては以下も参考。
-参考: データスチュワードとは？役割やメリット、育成方法、選定基準について解説！ | trocco®(トロッコ) データポリシー データポリシーとは、データとインフォーメーションを生成し、取得し、健全性を保ち、セキュリティを守り、品質を維持し、利用することを統制する基本的なルールに、原則と管理糸を盛り込む指示である。
-ポリシーはデータガバナンスの &amp;ldquo;What&amp;rdquo; を説明する。
-通常はデータマネジメント・プロフェッショナルか業務ポリシー担当者が起草し、最終的に DGC により承認される。
-組織に対して効果的に伝達、実施される必要があり、そのためには簡潔で直感的な表現であるべき。
-社内ポータルなどオンラインで閲覧できるようになっているのがよい。</description>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.dama-japan.org/Introduction.html&#34;&gt;DMBOK2&lt;/a&gt; を読み進めていくシリーズ。&lt;br&gt;
+今回は第3章「データガバナンス」について。&lt;br&gt;
+&lt;a href=&#34;../dmbok-chapter-1/#dama-dmbok-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF&#34;&gt;DAMA ホイール図&lt;/a&gt;において中心に置かれているので先に読んでおこうと思った次第。&lt;/p&gt;
+&lt;p&gt;以降、特に注釈のない引用は DMBOK2 第3章からの引用とする。&lt;/p&gt;
+&lt;h2 id=&#34;データガバナンスとは&#34;&gt;データガバナンスとは&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;データガバナンス (DG) の定義は、データ資産の管理 (マネジメント) に対して職務権限を通し統制 (コントロール) することである。統制とは計画を立て、実行を監視し、徹底させることを指す。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;この定義からデータガバナンスがなぜ DAMA ホイール図の中心に位置しているかがわかる。&lt;br&gt;
+データガバナンスにより周囲の各知識領域の計画や実施を統制するという建付けになる。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;データガバナンス (DG) のゴールは組織がデータを資産として管理できるようにすることである。DG はデータを資産として管理するための原則、ポリシー、プロセス、フレームワーク、評価指標を提供し、組織の各階層レベルでデータマネジメントアクティビティを牽引する。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;これを可能にするためにデータガバナンスは持続可能であり、業務プロセスに組み込まれており、測定可能になっている必要がある。&lt;/p&gt;
+&lt;h2 id=&#34;データガバナンス組織&#34;&gt;データガバナンス組織&lt;/h2&gt;
+&lt;p&gt;次の組織構成が一般的なデータガバナンスモデルであるとのこと。&lt;/p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;https://soonraah.github.io/image/dmbok/data_governance_org_structure.png&#34;
+         alt=&#34;DMBOK2 データガバナンス組織構成&#34;/&gt; &lt;figcaption&gt;
+            &lt;p&gt;DMBOK2 データガバナンス組織構成&lt;/p&gt;
+        &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;右側がデータマネジメントを実施するロールになっており、左側がデータガバナンスによりデータマネジメントさせるロールになっている。&lt;br&gt;
+データガバナンス運営委員会が組織のデータガバナンスの頂点となっており、最も権限が強い。&lt;br&gt;
+各部門にはデータガバナンス評議会 (DGC) が置かれており、これらがポリシー・評価指標の開発などのデータガバナンスの取り組みや課題、報告を管理する。&lt;br&gt;
+データガバナンスオフィス (DGO) はデータスチュワード (後述) などで構成され、企業レベルのデータ定義とデータマネジメントにフォーカスする。&lt;/p&gt;
+&lt;p&gt;大規模、かつデータマネジメントの意識が高い組織でないとこういった組織構成はなかなか作れないのではと思った。&lt;br&gt;
+ライト版の図も欲しいところ。&lt;/p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;https://soonraah.github.io/image/dmbok/data_problem_reporting_path.png&#34;
+         alt=&#34;DMBOK2 データ問題の報告経路&#34;/&gt; &lt;figcaption&gt;
+            &lt;p&gt;DMBOK2 データ問題の報告経路&lt;/p&gt;
+        &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;ポリシーやステークホルダー利害の不一致、権限、データ品質などなど、データに関する問題は上記のような報告経路をたどる。&lt;/p&gt;
+&lt;h2 id=&#34;データスチュワード制&#34;&gt;データスチュワード制&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;データスチュワード制はデータとプロセスの実行責任と結果責任を表す最も一般的な呼び名であり、データ資産の効率的な統制と利用を確かなものとする。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;ちょっとこの説明ではイメージしにくいかもしれない。&lt;br&gt;
+データガバナンスの文脈において、データスチュワードは現場を含む組織の各レベルでデータガバナンスを効かせるための活動を行う実務者だと理解した。&lt;br&gt;
+データスチュワードという職務名があってもいいが、そうでなくてもよいらしい。&lt;br&gt;
+次のようなことをやる。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;核となるメタデータの作成と管理&lt;/li&gt;
+&lt;li&gt;ルールと標準の文書化&lt;/li&gt;
+&lt;li&gt;データ品質の問題管理&lt;/li&gt;
+&lt;li&gt;データガバナンス運営アクティビティの実施&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;データスチュワードについては以下も参考。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;参考: &lt;a href=&#34;https://blog.trocco.io/glossary/data-steward&#34;&gt;データスチュワードとは？役割やメリット、育成方法、選定基準について解説！ | trocco®(トロッコ)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;データポリシー&#34;&gt;データポリシー&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;データポリシーとは、データとインフォーメーションを生成し、取得し、健全性を保ち、セキュリティを守り、品質を維持し、利用することを統制する基本的なルールに、原則と管理糸を盛り込む指示である。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;ポリシーはデータガバナンスの &amp;ldquo;What&amp;rdquo; を説明する。&lt;br&gt;
+通常はデータマネジメント・プロフェッショナルか業務ポリシー担当者が起草し、最終的に DGC により承認される。&lt;/p&gt;
+&lt;p&gt;組織に対して効果的に伝達、実施される必要があり、そのためには簡潔で直感的な表現であるべき。&lt;br&gt;
+社内ポータルなどオンラインで閲覧できるようになっているのがよい。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

@@ -6,30 +6,33 @@
     <description>Recent content in Amazon Athena on Froglog</description>
     <image>
       <title>Froglog</title>
-      <url>https://soonraah.github.io/47</url>
-      <link>https://soonraah.github.io/47</link>
+      <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
+      <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.138.0</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 03 Dec 2023 22:00:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/amazon-athena/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Dec 2023 22:00:00 +0900</lastBuildDate>
+    <atom:link href="https://soonraah.github.io/tags/amazon-athena/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CDC &#43; Apache Iceberg で Amazon Athena にデータを取り込む</title>
       <link>https://soonraah.github.io/posts/ingest-data-into-athena-by-cdc-and-iceberg/</link>
       <pubDate>Sun, 03 Dec 2023 22:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/ingest-data-into-athena-by-cdc-and-iceberg/</guid>
-      <description>このポストについて このポストは Distributed computing Advent Calendar 2023 の3日目の記事になります。
-1日目、2日目に続いて Apache Iceberg について書きますが、このポストでは Iceberg の実用例を書きます。
-AWS DMS による CDC の結果を Apache Iceberg 形式にして Amazon Athena でクエリできるようにするという内容になります。
-やっていることとしては Perform upserts in a data lake using Amazon Athena and Apache Iceberg | AWS Big Data Blog で紹介されている内容と近いですが、実務としての背景や工夫したところなどを書いていきます。
-背景 私の所属する事業会社では日々プロダクトから様々なデータが発生しており、プロダクトの分析やレポーティング、ML など様々な用途で利用されている。
-それを支える基盤としてデータ基盤が存在している。
-データ基盤ではクエリエンジンとして Amazon Athena を使っている。
-ストレージとしては S3 を使用しており、主に分析用として Parquet 形式でデータが置かれる。
-ここに業務用の operational な database から日次でデータを取り込んでいる。
-データソースは RDS (Aurora MySQL) であり、比較的大きなデータとなっている。
-これまではこの RDS -&amp;gt; S3 のデータ取り込みには RDS の S3 snapshot export という機能を利用していた。</description>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;このポストは &lt;a href=&#34;https://qiita.com/advent-calendar/2023/distributed-computing&#34;&gt;Distributed computing Advent Calendar 2023&lt;/a&gt; の3日目の記事になります。&lt;br&gt;
+1日目、2日目に続いて Apache Iceberg について書きますが、このポストでは Iceberg の実用例を書きます。&lt;/p&gt;
+&lt;p&gt;AWS DMS による CDC の結果を Apache Iceberg 形式にして Amazon Athena でクエリできるようにするという内容になります。&lt;br&gt;
+やっていることとしては &lt;a href=&#34;https://aws.amazon.com/jp/blogs/big-data/perform-upserts-in-a-data-lake-using-amazon-athena-and-apache-iceberg/&#34;&gt;Perform upserts in a data lake using Amazon Athena and Apache Iceberg | AWS Big Data Blog&lt;/a&gt; で紹介されている内容と近いですが、実務としての背景や工夫したところなどを書いていきます。&lt;/p&gt;
+&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+&lt;p&gt;私の所属する事業会社では日々プロダクトから様々なデータが発生しており、プロダクトの分析やレポーティング、ML など様々な用途で利用されている。&lt;br&gt;
+それを支える基盤としてデータ基盤が存在している。&lt;/p&gt;
+&lt;p&gt;データ基盤ではクエリエンジンとして &lt;a href=&#34;https://docs.aws.amazon.com/athena/latest/ug/what-is.html&#34;&gt;Amazon Athena&lt;/a&gt; を使っている。&lt;br&gt;
+ストレージとしては S3 を使用しており、主に分析用として Parquet 形式でデータが置かれる。&lt;/p&gt;
+&lt;p&gt;ここに業務用の operational な database から日次でデータを取り込んでいる。&lt;br&gt;
+データソースは RDS (Aurora MySQL) であり、比較的大きなデータとなっている。&lt;/p&gt;
+&lt;p&gt;これまではこの RDS -&amp;gt; S3 のデータ取り込みには RDS の &lt;a href=&#34;https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ExportSnapshot.html&#34;&gt;S3 snapshot export&lt;/a&gt; という機能を利用していた。&lt;br&gt;
+この機能では比較的簡単な設定により、バックアップ用のスナップショットの内容を S3 に export することができる。&lt;br&gt;
+ちなみに対象 database のスナップショットのサイズは数十 TB ある。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

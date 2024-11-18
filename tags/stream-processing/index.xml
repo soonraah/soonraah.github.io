@@ -6,152 +6,196 @@
     <description>Recent content in Stream Processing on Froglog</description>
     <image>
       <title>Froglog</title>
-      <url>https://soonraah.github.io/47</url>
-      <link>https://soonraah.github.io/47</link>
+      <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
+      <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.138.0</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 13 Dec 2022 00:30:00 +0900</lastBuildDate><atom:link href="https://soonraah.github.io/tags/stream-processing/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Dec 2022 00:30:00 +0900</lastBuildDate>
+    <atom:link href="https://soonraah.github.io/tags/stream-processing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Glue Schema Registry の導入を断念した話</title>
       <link>https://soonraah.github.io/posts/give-up-on-schema-registry/</link>
       <pubDate>Tue, 13 Dec 2022 00:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/give-up-on-schema-registry/</guid>
-      <description>業務で AWS Glue Schema Registry を使おうとしたけど、やっぱりやめたというお話。
-Glue Schema Registry What&amp;rsquo;s Schema Registry? AWS Glue Schema Registry は2020年に発表された AWS の機能だ。
-Control the evolution of data streams using the AWS Glue Schema Registry 一方、私が最初に schema registry 的なものを見たのは Confluent の例。
-Schema Registry の概要 - Confluent AWS の Glue Schema Registry はこれより後のリリースであり、同等のものの AWS マネージド版といったところだろうか。
-schema registry で何ができるかは Confluent のリンク先の図がとてもわかりやすいので参考にしていただきたい。
-Glue Schema Registry もだいたい同じで、ストリーム処理のための機能である。
-Glue Schema Registry で解決したい課題とその機能 データ基盤上のストリーム処理における schema 管理はバッチ処理のそれとは異なる難しさがある。
-これは schema evolution と呼ばれる問題で以前のポストでも述べている。</description>
+      <description>&lt;p&gt;業務で &lt;a href=&#34;https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html&#34;&gt;AWS Glue Schema Registry&lt;/a&gt; を使おうとしたけど、やっぱりやめたというお話。&lt;/p&gt;
+&lt;h2 id=&#34;glue-schema-registry&#34;&gt;Glue Schema Registry&lt;/h2&gt;
+&lt;h3 id=&#34;whats-schema-registry&#34;&gt;What&amp;rsquo;s Schema Registry?&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html&#34;&gt;AWS Glue Schema Registry&lt;/a&gt; は2020年に発表された AWS の機能だ。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://aws.amazon.com/about-aws/whats-new/2020/11/control-evolution-data-streams-using-aws-glue-schema-registry/&#34;&gt;Control the evolution of data streams using the AWS Glue Schema Registry&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一方、私が最初に schema registry 的なものを見たのは Confluent の例。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.confluent.io/ja-jp/platform/7.1.1/schema-registry/index.html&#34;&gt;Schema Registry の概要 - Confluent&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;AWS の Glue Schema Registry はこれより後のリリースであり、同等のものの AWS マネージド版といったところだろうか。&lt;br&gt;
+schema registry で何ができるかは Confluent のリンク先の図がとてもわかりやすいので参考にしていただきたい。&lt;br&gt;
+Glue Schema Registry もだいたい同じで、ストリーム処理のための機能である。&lt;/p&gt;
+&lt;h3 id=&#34;glue-schema-registry-で解決したい課題とその機能&#34;&gt;Glue Schema Registry で解決したい課題とその機能&lt;/h3&gt;
+&lt;p&gt;データ基盤上のストリーム処理における schema 管理はバッチ処理のそれとは異なる難しさがある。&lt;br&gt;
+これは schema evolution と呼ばれる問題で以前のポストでも述べている。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../study-streaming-system/#schema-evolution&#34;&gt;バッチ処理おじさんがストリーム処理のシステムを開発するにあたって調べたこと&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;難しい点として以下のようなことが挙げられる。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Apache Flink の Backpressure の仕組みについて調べた</title>
       <link>https://soonraah.github.io/posts/backpressure-for-flink/</link>
       <pubDate>Sun, 28 Feb 2021 21:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/backpressure-for-flink/</guid>
-      <description>ストリーム処理のフレームワークが備える backpressure という機能がある。
-このポストでは Apache Flink の backpressure について調べたことを記載する。
-Backpressure の目的 backpressure はストリーム処理システムにおける負荷管理の仕組みの一つ。
-一時的な入力データ量の増大に対応する。
-インターネットユーザの行動履歴やセンサーデータなどは常に一定量のデータが流れているわけではなく、単位時間あたりのデータ量は常に変動している。
-一時的にスパイクしてデータ量が増大するようなことも起こりうる。
-複数の operator からなる dataflow graph により構成されるストリーム処理システムにおいては、処理スピードのボトルネックとなる operator が存在する。
-一時的に入力データ量が増えてボトルネックの operator の処理速度を上回ってしまった場合に、データの取りこぼしが発生するのを防ぐのが backpressure の目的となる。
-Backpressure の仕組み Buffer-based ここでは以前のブログでも紹介した、ストリーム処理で必要とされる機能について書かれた Fragkoulis et al. 1 を引用して一般論としての backpressure について述べたい。
-上流／下流の operator をそれぞれ producer, consumer とする。
-producer, consumer (それらの subtask と言ってもいいかも) がそれぞれ異なる物理マシンに deploy されているケースが Figure 12b となる。
-各 subtask は input と output の buffer を持っており、
-producer は処理結果を output buffer に書き出す TCP 等の物理的な接続でデータを送信 consumer 側の output buffer にデータを格納 consumer がそれを読み込んで処理する というような流れになる。</description>
+      <description>&lt;p&gt;ストリーム処理のフレームワークが備える backpressure という機能がある。&lt;br&gt;
+このポストでは Apache Flink の backpressure について調べたことを記載する。&lt;/p&gt;
+&lt;h2 id=&#34;backpressure-の目的&#34;&gt;Backpressure の目的&lt;/h2&gt;
+&lt;p&gt;backpressure はストリーム処理システムにおける負荷管理の仕組みの一つ。&lt;br&gt;
+一時的な入力データ量の増大に対応する。&lt;/p&gt;
+&lt;p&gt;インターネットユーザの行動履歴やセンサーデータなどは常に一定量のデータが流れているわけではなく、単位時間あたりのデータ量は常に変動している。&lt;br&gt;
+一時的にスパイクしてデータ量が増大するようなことも起こりうる。&lt;/p&gt;
+&lt;p&gt;複数の operator からなる dataflow graph により構成されるストリーム処理システムにおいては、処理スピードのボトルネックとなる operator が存在する。&lt;br&gt;
+一時的に入力データ量が増えてボトルネックの operator の処理速度を上回ってしまった場合に、データの取りこぼしが発生するのを防ぐのが backpressure の目的となる。&lt;/p&gt;
+&lt;h2 id=&#34;backpressure-の仕組み&#34;&gt;Backpressure の仕組み&lt;/h2&gt;
+&lt;h3 id=&#34;buffer-based&#34;&gt;Buffer-based&lt;/h3&gt;
+&lt;p&gt;ここでは&lt;a href=&#34;https://soonraah.github.io/posts/functionality-of-streaming-system/&#34;&gt;以前のブログ&lt;/a&gt;でも紹介した、ストリーム処理で必要とされる機能について書かれた Fragkoulis et al. &lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; を引用して一般論としての backpressure について述べたい。&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Figure 12&#34; loading=&#34;lazy&#34; src=&#34;https://soonraah.github.io/image/paper/fragkoulis_et_al_2020/fig12.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;上流／下流の operator をそれぞれ producer, consumer とする。&lt;br&gt;
+producer, consumer (それらの subtask と言ってもいいかも) がそれぞれ異なる物理マシンに deploy されているケースが Figure 12b となる。&lt;br&gt;
+各 subtask は input と output の buffer を持っており、&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;producer は処理結果を output buffer に書き出す&lt;/li&gt;
+&lt;li&gt;TCP 等の物理的な接続でデータを送信&lt;/li&gt;
+&lt;li&gt;consumer 側の output buffer にデータを格納&lt;/li&gt;
+&lt;li&gt;consumer がそれを読み込んで処理する&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;というような流れになる。&lt;br&gt;
+buffer はマシンごとの buffer pool で管理されており、input/output で buffer が必要となった場合はこの buffer pool に buffer が要求される。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Apache Flink の DataStream API 利用時の CSV ファイル読み込み</title>
       <link>https://soonraah.github.io/posts/read-csv-by-flink-datastream-api/</link>
       <pubDate>Tue, 01 Dec 2020 00:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/read-csv-by-flink-datastream-api/</guid>
-      <description>ストリーム処理における CSV ファイルの読み込み Apache Flink は unbounded なストリームデータを処理するためのフレームワークだ。
-しかし現実的な application を開発する場合、ストリームデータに加えて static なファイルや DB 等を読み込みたいこともある。
-star schema における dimension table 的な情報をストリームに結合したい場合 等が考えられる。
-このポストでは Flink で DataStream API ベースでの実装において CSV ファイルを読むことを考える。
-Flink は現時点の stable である v1.11 を想定。
-CSV ファイルを読む方法 DataStream API ベースの実装で CSV ファイルを読むには StreamExecutionEnvironment のメソッドである readFile() を使う。
-overload された同名のメソッドがいくつか存在するが、次の2つの引数が特に重要だろう。
-まず1つめは FileInputFormat&amp;lt;OUT&amp;gt; inputFormat であり、こちらは data stream の生成に用いる入力フォーマットを指定する。
-おそらく最も一般的なのが TextInputFormat だと思われる。
-もちろん単なる text として CSV ファイルを読み込み、後続の処理で各レコードを parse することも可能だが CSV 用の入力フォーマットがいくつか用意されているようだ。
-PojoCsvInputFormat RowCsvInputFormat TupleCsvInputFormat なんとなく名前でわかると思うが、それぞれ readFile() の結果として返される DataStreamSource が内包する型が異なる。</description>
+      <description>&lt;h2 id=&#34;ストリーム処理における-csv-ファイルの読み込み&#34;&gt;ストリーム処理における CSV ファイルの読み込み&lt;/h2&gt;
+&lt;p&gt;Apache Flink は unbounded なストリームデータを処理するためのフレームワークだ。&lt;br&gt;
+しかし現実的な application を開発する場合、ストリームデータに加えて static なファイルや DB 等を読み込みたいこともある。&lt;br&gt;
+&lt;a href=&#34;https://soonraah.github.io/posts/flink-join-by-broadcast-state-pattern/&#34;&gt;star schema における dimension table 的な情報をストリームに結合したい場合&lt;/a&gt; 等が考えられる。&lt;/p&gt;
+&lt;p&gt;このポストでは Flink で DataStream API ベースでの実装において CSV ファイルを読むことを考える。&lt;br&gt;
+Flink は現時点の stable である v1.11 を想定。&lt;/p&gt;
+&lt;h2 id=&#34;csv-ファイルを読む方法&#34;&gt;CSV ファイルを読む方法&lt;/h2&gt;
+&lt;p&gt;DataStream API ベースの実装で CSV ファイルを読むには &lt;code&gt;StreamExecutionEnvironment&lt;/code&gt; のメソッドである &lt;a href=&#34;https://ci.apache.org/projects/flink/flink-docs-release-1.11/api/java/org/apache/flink/streaming/api/environment/StreamExecutionEnvironment.html#readFile-org.apache.flink.api.common.io.FileInputFormat-java.lang.String-org.apache.flink.streaming.api.functions.source.FileProcessingMode-long-&#34;&gt;&lt;code&gt;readFile()&lt;/code&gt;&lt;/a&gt; を使う。&lt;br&gt;
+overload された同名のメソッドがいくつか存在するが、次の2つの引数が特に重要だろう。&lt;/p&gt;
+&lt;p&gt;まず1つめは &lt;code&gt;FileInputFormat&amp;lt;OUT&amp;gt; inputFormat&lt;/code&gt; であり、こちらは data stream の生成に用いる入力フォーマットを指定する。&lt;br&gt;
+おそらく最も一般的なのが &lt;code&gt;TextInputFormat&lt;/code&gt; だと思われる。&lt;br&gt;
+もちろん単なる text として CSV ファイルを読み込み、後続の処理で各レコードを parse することも可能だが CSV 用の入力フォーマットがいくつか用意されているようだ。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;PojoCsvInputFormat&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RowCsvInputFormat&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;TupleCsvInputFormat&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;なんとなく名前でわかると思うが、それぞれ &lt;code&gt;readFile()&lt;/code&gt; の結果として返される &lt;code&gt;DataStreamSource&lt;/code&gt; が内包する型が異なる。&lt;br&gt;
+これについては後述の実験にて確認する。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>ストリーム処理システムに求められる機能性、および Apache Flink におけるその対応</title>
       <link>https://soonraah.github.io/posts/functionality-of-streaming-system/</link>
       <pubDate>Sat, 07 Nov 2020 16:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/functionality-of-streaming-system/</guid>
-      <description>はじめに このポストではストリーム処理の survay 論文の話題に対して Apache Flink における例を挙げて紹介する。
-論文概要 Fragkoulis, M., Carbone, P., Kalavri, V., &amp;amp; Katsifodimos, A. (2020). A Survey on the Evolution of Stream Processing Systems.
-2020年の論文。
-過去30年ぐらいのストリーム処理のフレームワークを調査し、その発展を論じている。
-ストリーム処理に特徴的に求められるいくつかの機能性 (functionality) についてその実現方法をいくつか挙げ、比較的古いフレームワークと最近のフレームワークでの対比を行っている。
-このポストのスコープ このポストでは前述のストリーム処理システムに求められる機能性とそれがなぜ必要となるかについて簡単にまとめる。
-論文ではそこからさらにその実現方法がいくつか挙げられるが、ここでは個人的に興味がある Apache Flink ではどのように対処しているかを見ていく。
-ちなみに論文中では Apache Flink はモダンなフレームワークの1つとしてちょいちょい引き合いに出されている。
-ここでは Flink v1.11 をターゲットとする。
-以下では論文で挙げられている機能性に沿って記載していく。
-Out-of-order Data Management Out-of-order ストリーム処理システムにやってくるデータの順序は外的・内的要因により期待される順序になっていないことがある。
-外的要因としてよくあるのはネットワークの問題。
-データソース (producer) からストリーム処理システムに届くまでのルーティング、負荷など諸々の条件により各レコードごとに転送時間は一定にはならない。
-各 operator の処理などストリーム処理システムの内的な要因で順序が乱されることもある。
-out-of-order は処理の遅延や正しくない結果の原因となることがある。
-out-of-order を管理するためにストリーム処理システムは処理の進捗を検出する必要がある。
-&amp;ldquo;進捗&amp;rdquo; とはある時間経過でレコードの処理がどれだけ進んだかというもので、レコードの順序を表す属性 A (ex. event time) により定量化される。</description>
+      <description>&lt;h2 id=&#34;はじめに&#34;&gt;はじめに&lt;/h2&gt;
+&lt;p&gt;このポストではストリーム処理の survay 論文の話題に対して Apache Flink における例を挙げて紹介する。&lt;/p&gt;
+&lt;h3 id=&#34;論文概要&#34;&gt;論文概要&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/2008.00842&#34;&gt;Fragkoulis, M., Carbone, P., Kalavri, V., &amp;amp; Katsifodimos, A. (2020). A Survey on the Evolution of Stream Processing Systems.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2020年の論文。&lt;br&gt;
+過去30年ぐらいのストリーム処理のフレームワークを調査し、その発展を論じている。&lt;br&gt;
+ストリーム処理に特徴的に求められるいくつかの機能性 (functionality) についてその実現方法をいくつか挙げ、比較的古いフレームワークと最近のフレームワークでの対比を行っている。&lt;/p&gt;
+&lt;h3 id=&#34;このポストのスコープ&#34;&gt;このポストのスコープ&lt;/h3&gt;
+&lt;p&gt;このポストでは前述のストリーム処理システムに求められる機能性とそれがなぜ必要となるかについて簡単にまとめる。&lt;br&gt;
+論文ではそこからさらにその実現方法がいくつか挙げられるが、ここでは個人的に興味がある Apache Flink ではどのように対処しているかを見ていく。&lt;br&gt;
+ちなみに論文中では Apache Flink はモダンなフレームワークの1つとしてちょいちょい引き合いに出されている。&lt;br&gt;
+ここでは Flink v1.11 をターゲットとする。&lt;/p&gt;
+&lt;p&gt;以下では論文で挙げられている機能性に沿って記載していく。&lt;/p&gt;
+&lt;h2 id=&#34;out-of-order-data-management&#34;&gt;Out-of-order Data Management&lt;/h2&gt;
+&lt;h3 id=&#34;out-of-order&#34;&gt;Out-of-order&lt;/h3&gt;
+&lt;p&gt;ストリーム処理システムにやってくるデータの順序は外的・内的要因により期待される順序になっていないことがある。&lt;br&gt;
+外的要因としてよくあるのはネットワークの問題。&lt;br&gt;
+データソース (producer) からストリーム処理システムに届くまでのルーティング、負荷など諸々の条件により各レコードごとに転送時間は一定にはならない。&lt;br&gt;
+各 operator の処理などストリーム処理システムの内的な要因で順序が乱されることもある。&lt;br&gt;
+out-of-order は処理の遅延や正しくない結果の原因となることがある。&lt;/p&gt;
+&lt;p&gt;out-of-order を管理するためにストリーム処理システムは処理の進捗を検出する必要がある。&lt;br&gt;
+&amp;ldquo;進捗&amp;rdquo; とはある時間経過でレコードの処理がどれだけ進んだかというもので、レコードの順序を表す属性 &lt;em&gt;A&lt;/em&gt; (ex. event time) により定量化される。&lt;br&gt;
+ある期間で処理された最古の &lt;em&gt;A&lt;/em&gt; を進捗の尺度とみなすことができる。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>バッチ処理おじさんがストリーム処理のシステムを開発するにあたって調べたこと</title>
       <link>https://soonraah.github.io/posts/study-streaming-system/</link>
       <pubDate>Sun, 06 Sep 2020 16:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/study-streaming-system/</guid>
-      <description>ほとんどバッチ処理しか書いたことのない者だがストリーム処理のシステムを開発することになった。
-それにあたって独学で調べたことなどまとめておく。
-ストリーム処理とは そもそも &amp;ldquo;ストリーム処理&amp;rdquo; とは何を指しているのか。
-以下の引用が簡潔に示している。
-a type of data processing engine that is designed with infinite data sets in mind. Nothing more.
-&amp;ndash; Streaming 101: The world beyond batch
-こちらは &amp;ldquo;streaming system&amp;rdquo; について述べたものだが、つまり終わりのないデータを扱うのがストリーム処理ということである。
-例えば web サービスから生まれ続けるユーザ行動ログを逐次的に処理するというのがストリーム処理。
-web サービスが終了しないかぎりはユーザ行動ログの生成には終わりがない。
-これに対して &amp;ldquo;1日分のユーザ行動ログ&amp;rdquo; 等のように有限の量のデータを切り出して処理する場合、これはバッチ処理となる。
-ストリーム処理とバッチ処理の違いは扱うデータが無限なのか有限なのかということだ。
-この後触れていくが、この終わりのないデータを継続的に処理し続けるというところにバッチ処理にはない難しさがある。
-なぜストリーム処理なのか なぜストリーム処理なのか。
-ひとえに逐次的な入力データに対する迅速なフィードバックが求められているからと言えるだろう。
-迅速なフィードバックがビジネス上のメリットとなることは自明だ。
-SNS の配信 カーシェアリングにおける配車や料金設定 クレジットカードや広告クリックなどの不正検知 もしこれらの application が例えば hourly のバッチ処理で実装されていたらどうだろうか。
-まあ待っていられない。
-一般的なストリーム処理の構成 モダンな…と言っていいのかわからないが、ストリーム処理を行うための一般的なシステムは次の3つの要素で構成される。
-producer broker consumer producer は最初にレコードを生成する、ストリームデータの発生源となるものである。
-例えばログを生成する web application であったり、何らかのセンサーを持つ IoT 機器であったりがこれに該当する。</description>
+      <description>&lt;p&gt;ほとんどバッチ処理しか書いたことのない者だがストリーム処理のシステムを開発することになった。&lt;br&gt;
+それにあたって独学で調べたことなどまとめておく。&lt;/p&gt;
+&lt;h2 id=&#34;ストリーム処理とは&#34;&gt;ストリーム処理とは&lt;/h2&gt;
+&lt;p&gt;そもそも &amp;ldquo;ストリーム処理&amp;rdquo; とは何を指しているのか。&lt;br&gt;
+以下の引用が簡潔に示している。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;a type of data processing engine that is designed with infinite data sets in mind. Nothing more.&lt;!-- raw HTML omitted --&gt;&lt;br&gt;
+&amp;ndash; &lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;https://www.oreilly.com/radar/the-world-beyond-batch-streaming-101/&#34;&gt;Streaming 101: The world beyond batch&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;こちらは &amp;ldquo;streaming system&amp;rdquo; について述べたものだが、つまり終わりのないデータを扱うのがストリーム処理ということである。&lt;/p&gt;
+&lt;p&gt;例えば web サービスから生まれ続けるユーザ行動ログを逐次的に処理するというのがストリーム処理。&lt;br&gt;
+web サービスが終了しないかぎりはユーザ行動ログの生成には終わりがない。&lt;/p&gt;
+&lt;p&gt;これに対して &amp;ldquo;1日分のユーザ行動ログ&amp;rdquo; 等のように有限の量のデータを切り出して処理する場合、これはバッチ処理となる。&lt;br&gt;
+ストリーム処理とバッチ処理の違いは扱うデータが無限なのか有限なのかということだ。&lt;br&gt;
+この後触れていくが、この終わりのないデータを継続的に処理し続けるというところにバッチ処理にはない難しさがある。&lt;/p&gt;
+&lt;h2 id=&#34;なぜストリーム処理なのか&#34;&gt;なぜストリーム処理なのか&lt;/h2&gt;
+&lt;p&gt;なぜストリーム処理なのか。&lt;br&gt;
+ひとえに逐次的な入力データに対する迅速なフィードバックが求められているからと言えるだろう。&lt;br&gt;
+迅速なフィードバックがビジネス上のメリットとなることは自明だ。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SNS の配信&lt;/li&gt;
+&lt;li&gt;カーシェアリングにおける配車や料金設定&lt;/li&gt;
+&lt;li&gt;クレジットカードや広告クリックなどの不正検知&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;もしこれらの application が例えば hourly のバッチ処理で実装されていたらどうだろうか。&lt;br&gt;
+まあ待っていられない。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Apache Flink の Temporary Table Function を用いた stream data と static data の join</title>
       <link>https://soonraah.github.io/posts/flink-join-by-temporal-table-function/</link>
       <pubDate>Sun, 16 Aug 2020 00:30:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/flink-join-by-temporal-table-function/</guid>
-      <description>前回の記事 では Apache Flink における stream data と static data の join において、DataStream API における broadcast state pattern を使う方法を示した。
-今回の記事では Table API の temporal table function を用いた実験を行う。
-Table API Table API は名前のとおりで class Table を中心として SQL-like な DSL により処理を記述するという、DataStream API より high-level な API となっている。
-これらの関係は Apaceh Spark の RDD と DataFrame (DataSet) の関係に似ている。
-SQL-like な API で記述された処理が実行時に最適化されて low-level API の処理に翻訳されるところも同じだ。
-RDB の table の概念を元にしているものと考えられるが、本質的に table の概念とストリーム処理はあまりマッチしないと思う。
-table はある時点のデータセット全体を表すのに対し、ストリーム処理ではやってくるレコードを逐次的に処理したい。
-ここを合わせているため、ストリーム処理における Table API による処理の挙動の理解には注意が必要だ。</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://soonraah.github.io/posts/flink-join-by-broadcast-state-pattern/&#34;&gt;前回の記事&lt;/a&gt; では Apache Flink における stream data と static data の join において、DataStream API における broadcast state pattern を使う方法を示した。&lt;br&gt;
+今回の記事では Table API の temporal table function を用いた実験を行う。&lt;/p&gt;
+&lt;h2 id=&#34;table-api&#34;&gt;Table API&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/table/&#34;&gt;Table API&lt;/a&gt; は名前のとおりで class &lt;code&gt;Table&lt;/code&gt; を中心として SQL-like な DSL により処理を記述するという、DataStream API より high-level な API となっている。&lt;br&gt;
+これらの関係は Apaceh Spark の &lt;code&gt;RDD&lt;/code&gt; と &lt;code&gt;DataFrame&lt;/code&gt; (&lt;code&gt;DataSet&lt;/code&gt;) の関係に似ている。&lt;br&gt;
+SQL-like な API で記述された処理が実行時に最適化されて low-level API の処理に翻訳されるところも同じだ。&lt;/p&gt;
+&lt;p&gt;RDB の table の概念を元にしているものと考えられるが、本質的に table の概念とストリーム処理はあまりマッチしないと思う。&lt;br&gt;
+table はある時点のデータセット全体を表すのに対し、ストリーム処理ではやってくるレコードを逐次的に処理したい。&lt;br&gt;
+ここを合わせているため、ストリーム処理における Table API による処理の挙動の理解には注意が必要だ。&lt;br&gt;
+&lt;a href=&#34;https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/table/streaming/&#34;&gt;Streaming Concepts&lt;/a&gt; 以下のドキュメントを確認しておきたい。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Apache Flink の Broadcast State Pattern を用いた stream data と static data の join</title>
       <link>https://soonraah.github.io/posts/flink-join-by-broadcast-state-pattern/</link>
       <pubDate>Thu, 06 Aug 2020 22:00:00 +0900</pubDate>
-      
       <guid>https://soonraah.github.io/posts/flink-join-by-broadcast-state-pattern/</guid>
-      <description>star schema における fact table と dimension table の join のようなことを Apache Flink におけるストリーム処理で行いたい。
-stream data と static data の join ということになる。
-ただし dimension table 側も更新されるため、完全な static というわけではない。
-このポストでは Flink v1.11 を前提とした。
-join の方法 今回は DataStream API でこれを実現することを考える。
-Flink のドキュメントを読むと broadcast state pattern でできそうだ。
-The Broadcast State Pattern やり方としては次のようになる。
-static data のファイルを FileProcessingMode.PROCESS_CONTINUOUSLY で読み込み DataStream 化 1 を broadcast() stream data の DataStream と 2 を connect() static data を PROCESS_CONTINUOUSLY で読むのは変更を得るため。</description>
+      <description>&lt;p&gt;star schema における fact table と dimension table の join のようなことを Apache Flink におけるストリーム処理で行いたい。&lt;br&gt;
+stream data と static data の join ということになる。&lt;br&gt;
+ただし dimension table 側も更新されるため、完全な static というわけではない。&lt;/p&gt;
+&lt;p&gt;このポストでは Flink v1.11 を前提とした。&lt;/p&gt;
+&lt;h2 id=&#34;join-の方法&#34;&gt;join の方法&lt;/h2&gt;
+&lt;p&gt;今回は DataStream API でこれを実現することを考える。&lt;br&gt;
+Flink のドキュメントを読むと broadcast state pattern でできそうだ。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/stream/state/broadcast_state.html&#34;&gt;The Broadcast State Pattern&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;やり方としては次のようになる。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;static data のファイルを &lt;code&gt;FileProcessingMode.PROCESS_CONTINUOUSLY&lt;/code&gt; で読み込み &lt;code&gt;DataStream&lt;/code&gt; 化&lt;/li&gt;
+&lt;li&gt;1 を &lt;code&gt;broadcast()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;stream data の &lt;code&gt;DataStream&lt;/code&gt; と 2 を &lt;code&gt;connect()&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;static data を &lt;code&gt;PROCESS_CONTINUOUSLY&lt;/code&gt; で読むのは変更を得るため。&lt;br&gt;
+&lt;code&gt;PROCESS_ONCE&lt;/code&gt; で読んでしまうとストリーム処理の開始時に1回読むだけになり、dimension table の変更を得られない。&lt;br&gt;
+このあたりの仕様については &lt;a href=&#34;https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/datastream_api.html#data-sources&#34;&gt;Data Sources&lt;/a&gt; を参照。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

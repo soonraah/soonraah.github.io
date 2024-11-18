@@ -2,28 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://soonraah.github.io/tags/data-management/</loc>
+    <lastmod>2024-11-18T20:30:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/tags/data-quality/</loc>
+    <lastmod>2024-11-18T20:30:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/tags/dmbok2/</loc>
+    <lastmod>2024-11-18T20:30:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/</loc>
+    <lastmod>2024-11-18T20:30:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/posts/</loc>
+    <lastmod>2024-11-18T20:30:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/tags/</loc>
+    <lastmod>2024-11-18T20:30:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/posts/dmbok-chapter-13/</loc>
+    <lastmod>2024-11-18T20:30:00+09:00</lastmod>
+  </url><url>
     <loc>https://soonraah.github.io/posts/data-contract-cli/</loc>
     <lastmod>2024-05-09T22:30:00+09:00</lastmod>
   </url><url>
     <loc>https://soonraah.github.io/tags/data-contracts/</loc>
     <lastmod>2024-05-09T22:30:00+09:00</lastmod>
   </url><url>
-    <loc>https://soonraah.github.io/</loc>
-    <lastmod>2024-05-09T22:30:00+09:00</lastmod>
-  </url><url>
-    <loc>https://soonraah.github.io/posts/</loc>
-    <lastmod>2024-05-09T22:30:00+09:00</lastmod>
-  </url><url>
-    <loc>https://soonraah.github.io/tags/</loc>
-    <lastmod>2024-05-09T22:30:00+09:00</lastmod>
-  </url><url>
     <loc>https://soonraah.github.io/tags/data-integration/</loc>
-    <lastmod>2024-04-04T06:30:00+09:00</lastmod>
-  </url><url>
-    <loc>https://soonraah.github.io/tags/data-management/</loc>
-    <lastmod>2024-04-04T06:30:00+09:00</lastmod>
-  </url><url>
-    <loc>https://soonraah.github.io/tags/dmbok2/</loc>
     <lastmod>2024-04-04T06:30:00+09:00</lastmod>
   </url><url>
     <loc>https://soonraah.github.io/posts/dmbok-chapter-8/</loc>
