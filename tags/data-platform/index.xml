@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>DMMA on Froglog</title>
-    <link>https://soonraah.github.io/tags/dmma/</link>
-    <description>Recent content in DMMA on Froglog</description>
+    <title>Data Platform on Froglog</title>
+    <link>https://soonraah.github.io/tags/data-platform/</link>
+    <description>Recent content in Data Platform on Froglog</description>
     <image>
       <title>Froglog</title>
       <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
@@ -12,7 +12,7 @@
     <generator>Hugo -- 0.138.0</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 01 Dec 2024 22:30:00 +0900</lastBuildDate>
-    <atom:link href="https://soonraah.github.io/tags/dmma/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://soonraah.github.io/tags/data-platform/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ふつうのデータ基盤移行 - Part 1. 戦略策定編</title>
       <link>https://soonraah.github.io/posts/ordinary-data-platform-migration-part-1/</link>
@@ -68,78 +68,6 @@
 &lt;p&gt;まずは現場感覚、ボトムアップでの課題を明らかにすることを考えました。&lt;br&gt;
 本来は後述する戦略レベルから先に考えるべきですが、実際に目に見えている課題があり、取り組みやすかったというところで戦術のレベルから考え始めています。(良し悪しはある)&lt;br&gt;
 現状のアーキテクチャと運用では戦略策定への対応が難しいため、せめてそのための地ならしとして今見えている課題に対応できる状態にしたいというのもありました。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>読書メモ: DMBOK2 第15章 データマネジメント成熟度アセスメント</title>
-      <link>https://soonraah.github.io/posts/dmbok-chapter-15/</link>
-      <pubDate>Sat, 30 Dec 2023 01:30:00 +0900</pubDate>
-      <guid>https://soonraah.github.io/posts/dmbok-chapter-15/</guid>
-      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.dama-japan.org/Introduction.html&#34;&gt;DMBOK2&lt;/a&gt; を読み進めていくシリーズ。&lt;br&gt;
-今回は第15章「データマネジメント成熟度アセスメント」について。&lt;br&gt;
-データマネジメントの導入において重要な役割を果たしそうなので早めに確認しておきたかった。&lt;/p&gt;
-&lt;p&gt;以降、特に注釈のない引用は DMBOK2 第15章からの引用とする。&lt;/p&gt;
-&lt;h2 id=&#34;データマネジメント成熟度アセスメントとは&#34;&gt;データマネジメント成熟度アセスメントとは&lt;/h2&gt;
-&lt;p&gt;データマネジメント成熟度アセスメント (DMMA: Data Management Maturity Assessment) はその名の通り、組織のデータマネジメントのレベルの評価に基づくプロセス改善の取り組みのこと。&lt;br&gt;
-能力成熟度アセスメント (CMA: Capability Maturity Assessment) というものがあり、それのデータマネジメント版が DMMA。&lt;/p&gt;
-&lt;p&gt;CMA では&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;成熟度モデルは進化の観点から定義され、それにはプロセスの特性を表すレベルが使用される。組織がプロセスの特性を理解すると、組織は成熟度を測り、その能力を向上させるための計画を立てることができる。(中略) 新しいレベルに上がる度にプロセスの実行はより一貫性を増し、予測可能な状態となり、信頼性が高くなる。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;レベルは通常0~5の6段階で表される。&lt;br&gt;
-DMMA は&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;全体的なデータマネジメントを評価するために使用したり、単一の知識領域や、単一のプロセスに焦点を当てて使用したりできる。どのような点に焦点を当てたとしても、DMMA はデータマネジメント業務の健全性と有効性について、業務と IT の視点のギャップを埋めるために役立つ。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;組織が DMMA を実施する理由は、規制への対応、データガバナンス、プロセス改善、etc.&lt;br&gt;
-DMMA の第一のゴールはデータマネジメント活動の現状を評価することであり、それにより改善計画を立てることができるようになる。&lt;/p&gt;
-&lt;h2 id=&#34;アセスメントレベル&#34;&gt;アセスメントレベル&lt;/h2&gt;
-&lt;p&gt;以下はアセスメントレベルの概要。&lt;br&gt;
-データマネジメントの各知識領域 (ex. データガバナンス、メタデータ管理、etc.) ごとにレベルが評価される。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;level 0: &lt;strong&gt;能力が欠如した状態&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;データマネジメントの取り組みがない&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;level 1: &lt;strong&gt;初期／場当たり的な状態&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;限られたツールセットを用いた一般的なデータマネジメント&lt;/li&gt;
-&lt;li&gt;ガバナンスは低レベル&lt;/li&gt;
-&lt;li&gt;データ処理は一部の専門家に依存し、役割や責任は部門別に定義されている&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;level 2: &lt;strong&gt;反復可能な状態&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;組織は一元化された共通ツールを使い始める&lt;/li&gt;
-&lt;li&gt;役割は明確化されており、一部の専門家のみに依存しない&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;level 3: &lt;strong&gt;定義された状態&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;拡張可能なプロセスの導入と制度化&lt;/li&gt;
-&lt;li&gt;組織全体である程度統制されたデータの複製&lt;/li&gt;
-&lt;li&gt;データ品質全体の総体的な向上&lt;/li&gt;
-&lt;li&gt;組織的なポリシー定義と統制&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;level 4: &lt;strong&gt;管理された状態&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;新しいプロジェクトやタスクから得られる結果が予測され、リスクの管理が始まる&lt;/li&gt;
-&lt;li&gt;データマネジメントに成果に対する評価尺度が含まれる&lt;/li&gt;
-&lt;li&gt;データマネジメント用の標準ツールが集中管理計画とガバナンス機能に組み合わされている&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;level 5: &lt;strong&gt;最適化された状態&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;活動の成果は十分予測可能に&lt;/li&gt;
-&lt;li&gt;組織は継続的な改善に重点を置く&lt;/li&gt;
-&lt;li&gt;十分理解された評価尺度を使ってデータ品質とプロセスが管理・測定される&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;次のように各知識領域ごとに可視化することができる。&lt;br&gt;
-現状ランクと求められるランクの乖離が大きいところが組織にとってのリスクとなる。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

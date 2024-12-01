@@ -11,8 +11,64 @@
     </image>
     <generator>Hugo -- 0.138.0</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 18 Nov 2024 20:30:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 01 Dec 2024 22:30:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ふつうのデータ基盤移行 - Part 1. 戦略策定編</title>
+      <link>https://soonraah.github.io/posts/ordinary-data-platform-migration-part-1/</link>
+      <pubDate>Sun, 01 Dec 2024 22:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/posts/ordinary-data-platform-migration-part-1/</guid>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;データ基盤移行について書かれた各社の技術ブログなど見かけることがありますが、割とさらっと書かれていることが多いように思います。&lt;br&gt;
+本当はいろんな面で苦労があり、記事に表れていない辛さや工夫などがあるはず。&lt;/p&gt;
+&lt;p&gt;ということで今自分が経験している普通の会社の普通のデータ基盤移行について、詳しく記事にしてみようと考えました。&lt;br&gt;
+何回かに分けてデータ基盤移行のいろいろな側面を、うまくいったこともいかなかったことも含めて書いていきます。&lt;br&gt;
+とはいえ現在進行形なので、全編書き終わるのはかなり先になりそうです。&lt;/p&gt;
+&lt;h2 id=&#34;移行の背景&#34;&gt;移行の背景&lt;/h2&gt;
+&lt;h3 id=&#34;組織&#34;&gt;組織&lt;/h3&gt;
+&lt;p&gt;まずイメージしやすいよう、どういった組織におけるデータ基盤移行なのかについて軽く触れておきます。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;社員規模: 〜100名&lt;/li&gt;
+&lt;li&gt;web 系の B2C ビジネス&lt;/li&gt;
+&lt;li&gt;データチームの構成
+&lt;ul&gt;
+&lt;li&gt;マネージャ: 1名 (データエンジニアリングの経験はほぼない)&lt;/li&gt;
+&lt;li&gt;データエンジニア: 2 -&amp;gt; 3名 (途中で採用)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;中小のベンチャー？企業ではありますが、意思決定プロセスは JTC 感があります。&lt;br&gt;
+私はデータエンジニアのポジションとなっており、その視点からの話であることにご留意ください。&lt;br&gt;
+小さい組織ということで私は移行の計画から設計、開発その他のあらゆるフェーズに中心的に関わっています。&lt;br&gt;
+どこもそうだと思いますが、人員的にはまあまあきびしい。&lt;/p&gt;
+&lt;p&gt;よくある中小 IT 企業のよくあるデータ基盤移行の話だと思っていただきたく。&lt;br&gt;
+大企業ではないのでそこまでちゃんとはしていません。&lt;/p&gt;
+&lt;p&gt;(ちなみに自分のブログで本件を記事にしていいかは上長に確認の上、OK をもらっています)&lt;/p&gt;
+&lt;h3 id=&#34;旧データ基盤&#34;&gt;旧データ基盤&lt;/h3&gt;
+&lt;p&gt;一連のポストでは移行前のデータ基盤のことを「旧データ基盤」と表記するものとします。&lt;br&gt;
+旧データ基盤は AWS 上で構築されており、アーキテクチャについて簡単に挙げると&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;storage: S3&lt;/li&gt;
+&lt;li&gt;ETL: Glue Job, Athena&lt;/li&gt;
+&lt;li&gt;SQL engine: Athena&lt;/li&gt;
+&lt;li&gt;workflow orchestration: MWAA&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;のようになっていました。&lt;/p&gt;
+&lt;p&gt;旧データ基盤の開発・運用側 (データエンジニア) としても、また社内の利用者側としてもいろいろと問題が挙がってきてはいました。&lt;br&gt;
+しかしそれをうまく集約・言語化できていないという状況でした。&lt;br&gt;
+そんな中でエライ人の鶴の一声で移行しようぜ！ということになり、データ基盤の移行を検討することに相成りました。&lt;/p&gt;
+&lt;h2 id=&#34;移行計画を考えるにあたり&#34;&gt;移行計画を考えるにあたり&lt;/h2&gt;
+&lt;h3 id=&#34;まず考えたこと&#34;&gt;まず考えたこと&lt;/h3&gt;
+&lt;p&gt;データ基盤の移行は組織におけるデータマネジメントにおいて重要な位置づけとなるはず。&lt;br&gt;
+したがって単なる技術スタックの置き換えというスコープで考えるのはもったいないです。&lt;br&gt;
+組織のデータマネジメントの未来を想定して、戦略を持って開発・運用を進めるべきであると考えました。&lt;/p&gt;
+&lt;p&gt;そのためにはイシューを明確化しないといけません。&lt;br&gt;
+でもどの抽象度レベルで？&lt;/p&gt;
+&lt;h3 id=&#34;ボトムアップの戦術策定&#34;&gt;ボトムアップの戦術策定&lt;/h3&gt;
+&lt;p&gt;まずは現場感覚、ボトムアップでの課題を明らかにすることを考えました。&lt;br&gt;
+本来は後述する戦略レベルから先に考えるべきですが、実際に目に見えている課題があり、取り組みやすかったというところで戦術のレベルから考え始めています。(良し悪しはある)&lt;br&gt;
+現状のアーキテクチャと運用では戦略策定への対応が難しいため、せめてそのための地ならしとして今見えている課題に対応できる状態にしたいというのもありました。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>読書メモ: DMBOK2 第13章 データ品質</title>
       <link>https://soonraah.github.io/posts/dmbok-chapter-13/</link>

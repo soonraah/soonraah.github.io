@@ -11,8 +11,29 @@
     </image>
     <generator>Hugo -- 0.138.0</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 18 Nov 2024 20:30:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 01 Dec 2024 22:30:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data Platform</title>
+      <link>https://soonraah.github.io/tags/data-platform/</link>
+      <pubDate>Sun, 01 Dec 2024 22:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/data-platform/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>DMMA</title>
+      <link>https://soonraah.github.io/tags/dmma/</link>
+      <pubDate>Sun, 01 Dec 2024 22:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/dmma/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Strategy</title>
+      <link>https://soonraah.github.io/tags/strategy/</link>
+      <pubDate>Sun, 01 Dec 2024 22:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/strategy/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Data Management</title>
       <link>https://soonraah.github.io/tags/data-management/</link>
@@ -74,13 +95,6 @@
       <link>https://soonraah.github.io/tags/data-architecture/</link>
       <pubDate>Sat, 06 Jan 2024 20:00:00 +0900</pubDate>
       <guid>https://soonraah.github.io/tags/data-architecture/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>DMMA</title>
-      <link>https://soonraah.github.io/tags/dmma/</link>
-      <pubDate>Sat, 30 Dec 2023 01:30:00 +0900</pubDate>
-      <guid>https://soonraah.github.io/tags/dmma/</guid>
       <description></description>
     </item>
     <item>
