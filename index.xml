@@ -11,8 +11,51 @@
     </image>
     <generator>Hugo -- 0.138.0</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 01 Dec 2024 22:30:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 16 Dec 2024 00:30:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ふつうのデータ基盤移行 - Part 2. 技術選定編</title>
+      <link>https://soonraah.github.io/posts/ordinary-data-platform-migration-part-2/</link>
+      <pubDate>Mon, 16 Dec 2024 00:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/posts/ordinary-data-platform-migration-part-2/</guid>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;データ基盤移行について書いていくシリーズです。&lt;br&gt;
+前回は戦略策定 (実際は戦術) までのところを書きました。&lt;br&gt;
+今回はそれを踏まえた技術選定、およびその後の予算獲得について書いていきます。&lt;/p&gt;
+&lt;p&gt;また、こちらは &lt;a href=&#34;https://qiita.com/advent-calendar/2024/databricks&#34;&gt;Databricks Advent Calendar 2024&lt;/a&gt; シリーズ 2 の16日目の記事にもなっています。&lt;br&gt;
+はいそうです、出落ちですが技術選定として Databricks を選ぶことになります。&lt;/p&gt;
+&lt;h2 id=&#34;スコープ&#34;&gt;スコープ&lt;/h2&gt;
+&lt;p&gt;前回 &lt;a href=&#34;https://soonraah.github.io/posts/ordinary-data-platform-migration-part-1/&#34;&gt;Part 1. 戦略策定編&lt;/a&gt;では概ねのロードマップが決まり、まずはデータ基盤のリアーキテクチャをやっていくことになりました。&lt;br&gt;
+リアーキテクチャにおいてはどのような技術スタックを使っていくかが重要な選択になります。&lt;br&gt;
+データ基盤においてはデータ処理のためのストレージとコンピュートの選択がとても重要です。&lt;br&gt;
+以降ではこの2つをあわせた DWH 製品の選定について書いていきます。&lt;br&gt;
+「DHW 製品」という言葉は適切ではないかもしれませんが、ここではストレージ + コンピュートが組み合わさったものぐらいに考えてください。&lt;/p&gt;
+&lt;p&gt;もちろんデータ基盤には他の技術要素もあり、それらも軽くない選択ですがこのポストでは割愛します。&lt;br&gt;
+(気が向いたら別記事で書くかも)&lt;/p&gt;
+&lt;h2 id=&#34;技術選定の目的&#34;&gt;技術選定の目的&lt;/h2&gt;
+&lt;p&gt;まず何のために技術スタックの置き換え、ひいては技術選定をするかの目的を明確にしておく必要があります。&lt;br&gt;
+旧データ基盤では次のような技術スタックになっていました。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ストレージ: S3&lt;/li&gt;
+&lt;li&gt;コンピュート: Glue Job, Athena&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;この構成には次のような課題がありました。&lt;br&gt;
+主にこれらの課題を解決するために DWH 製品の乗り換えを検討することになりました。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;dbt との親和性の低さ&lt;/li&gt;
+&lt;li&gt;一貫したガバナンスの欠如&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;dbt-との親和性の低さ&#34;&gt;dbt との親和性の低さ&lt;/h3&gt;
+&lt;p&gt;前回作成した&lt;a href=&#34;https://soonraah.github.io/posts/ordinary-data-platform-migration-part-1/#ロードマップ作成&#34;&gt;ロードマップ&lt;/a&gt;において、dbt の導入が課題解決における重要なポイントになっています。&lt;br&gt;
+dbt の周辺エコシステムがデータ基盤の課題の解決に大きく貢献すると考えています。&lt;/p&gt;
+&lt;p&gt;また、データパイプラインの開発・運用の負荷も dbt 導入で軽減できそうです。&lt;br&gt;
+旧データ基盤では Glue Job と Athena クエリを組み合わせた複雑なパイプラインになっており、table を1つ追加するだけでもいろいろなコードに手をいれる必要があります。&lt;br&gt;
+ほぼ SQL で実装でき、かつ宣言的にパイプライン構築できる dbt は魅力的です。&lt;/p&gt;
+&lt;p&gt;仮に旧データ基盤に dbt を導入するとなると &lt;a href=&#34;https://docs.getdbt.com/docs/core/connect-data-platform/athena-setup&#34;&gt;dbt-athena&lt;/a&gt; を使うことになります。&lt;br&gt;
+ただ dbt による Athena のサポートはやや弱く、dbt-athena はコミュニティ版から少し前に移管されたものですし、これを書いている2024年12月の時点で dbt Cloud の Athena のサポートはまだプレビューです。&lt;br&gt;
+反論がある方もいらっしゃるかもしれませんが、モダンなデータ基盤構築において Athena はやや影が薄い印象があり、dbt のサポートの弱さもこれが原因だと思います。&lt;br&gt;
+(ただし直近の re:Invent 2024 の内容からすると潮目が変わる可能性もありそうです)&lt;/p&gt;</description>
+    </item>
     <item>
       <title>ふつうのデータ基盤移行 - Part 1. 戦略策定編</title>
       <link>https://soonraah.github.io/posts/ordinary-data-platform-migration-part-1/</link>
