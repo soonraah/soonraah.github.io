@@ -9,7 +9,7 @@
       <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
       <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- 0.138.0</generator>
+    <generator>Hugo -- 0.144.2</generator>
     <language>ja</language>
     <lastBuildDate>Mon, 03 Aug 2020 22:00:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
@@ -40,17 +40,13 @@
 &lt;p&gt;もちろんよく考えられていない共通化は駄目だが、上記ポストでは一方で&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;ただし共通化という名の下におこなわれるのは「同じロジックを持つコードをまとめる」行為であって、抽象化のようにそのコード単位の意味を捉える作業はその範疇にない。抽象化というのはロジックを意味単位ごとにひとくくりにしていく行為で、これがどういうことなのかは次以降で述べていく。&lt;!-- raw HTML omitted --&gt;&lt;br&gt;
-&amp;ndash; &lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;https://hachibeechan.hateblo.jp/entry/dont-think-just-make-it-abstract&#34;&gt;共通化という考え方はアンチパターンを生み出すだけ説 - タオルケット体操&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&amp;ndash; &lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;https://hachibeechan.hateblo.jp/entry/dont-think-just-make-it-abstract&#34;&gt;共通化という考え方はアンチパターンを生み出すだけ説 - タオルケット体操&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;と述べており抽象化、つまりコードの意味を考慮した上で適切な単位でまとめておくことは否定していない。&lt;/p&gt;
 &lt;p&gt;pull request を小さく分けるという行為のためには module や機能を適度なまとまりで切り分けること、つまり抽象化を考えていくことが必要となる。&lt;br&gt;
 したがって何でもできてしまう大きな module が生まれるのを防ぐ方向に働く。&lt;br&gt;
 (もちろんここで駄目な共通化がなされてしまうこともあるだろう)&lt;/p&gt;
 &lt;h3 id=&#34;リリースまでの期間が短く済む&#34;&gt;リリースまでの期間が短く済む&lt;/h3&gt;
-&lt;p&gt;前述の参考資料においても pull request が大きいと&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Developers would put off reviews until they had time/energy and the development process would come to a halt.&lt;!-- raw HTML omitted --&gt;&lt;br&gt;
-&amp;ndash; &lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;http://kurtfunai.com/2017/12/100-duck-sized-pull-requests.html&#34;&gt;100 Duck-Sized Pull Requests&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
+&lt;p&gt;前述の参考資料においても pull request が大きいと&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

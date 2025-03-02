@@ -9,7 +9,7 @@
       <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
       <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- 0.138.0</generator>
+    <generator>Hugo -- 0.144.2</generator>
     <language>ja</language>
     <lastBuildDate>Tue, 26 Jan 2021 08:00:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/tags/apache-kudu/index.xml" rel="self" type="application/rss+xml" />
@@ -39,8 +39,7 @@
 &lt;h2 id=&#34;delta-lake&#34;&gt;Delta Lake&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://delta.io/&#34;&gt;https://delta.io/&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Delta Lake is an open-source storage layer that brings ACID transactions to Apache Spark™ and big data workloads.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;Delta Lake is an open-source storage layer that brings ACID transactions to Apache Spark™ and big data workloads.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;figure&gt;
     &lt;img loading=&#34;lazy&#34; src=&#34;https://soonraah.github.io/image/deltalake/Delta-Lake-marketecture-0423c.png&#34;/&gt; &lt;figcaption&gt;
             &lt;p&gt;

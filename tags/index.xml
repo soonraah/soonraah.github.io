@@ -9,10 +9,45 @@
       <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
       <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- 0.138.0</generator>
+    <generator>Hugo -- 0.144.2</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 16 Dec 2024 00:30:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 02 Mar 2025 23:45:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI Agent</title>
+      <link>https://soonraah.github.io/tags/ai-agent/</link>
+      <pubDate>Sun, 02 Mar 2025 23:45:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/ai-agent/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>LangChain</title>
+      <link>https://soonraah.github.io/tags/langchain/</link>
+      <pubDate>Sun, 02 Mar 2025 23:45:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/langchain/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>LangGraph</title>
+      <link>https://soonraah.github.io/tags/langgraph/</link>
+      <pubDate>Sun, 02 Mar 2025 23:45:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/langgraph/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>LLM</title>
+      <link>https://soonraah.github.io/tags/llm/</link>
+      <pubDate>Sun, 02 Mar 2025 23:45:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/llm/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>RAG</title>
+      <link>https://soonraah.github.io/tags/rag/</link>
+      <pubDate>Sun, 02 Mar 2025 23:45:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/rag/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Data Platform</title>
       <link>https://soonraah.github.io/tags/data-platform/</link>

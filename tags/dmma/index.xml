@@ -9,7 +9,7 @@
       <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
       <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- 0.138.0</generator>
+    <generator>Hugo -- 0.144.2</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 01 Dec 2024 22:30:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/tags/dmma/index.xml" rel="self" type="application/rss+xml" />
@@ -84,13 +84,11 @@
 能力成熟度アセスメント (CMA: Capability Maturity Assessment) というものがあり、それのデータマネジメント版が DMMA。&lt;/p&gt;
 &lt;p&gt;CMA では&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;成熟度モデルは進化の観点から定義され、それにはプロセスの特性を表すレベルが使用される。組織がプロセスの特性を理解すると、組織は成熟度を測り、その能力を向上させるための計画を立てることができる。(中略) 新しいレベルに上がる度にプロセスの実行はより一貫性を増し、予測可能な状態となり、信頼性が高くなる。&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;成熟度モデルは進化の観点から定義され、それにはプロセスの特性を表すレベルが使用される。組織がプロセスの特性を理解すると、組織は成熟度を測り、その能力を向上させるための計画を立てることができる。(中略) 新しいレベルに上がる度にプロセスの実行はより一貫性を増し、予測可能な状態となり、信頼性が高くなる。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;レベルは通常0~5の6段階で表される。&lt;br&gt;
 DMMA は&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;全体的なデータマネジメントを評価するために使用したり、単一の知識領域や、単一のプロセスに焦点を当てて使用したりできる。どのような点に焦点を当てたとしても、DMMA はデータマネジメント業務の健全性と有効性について、業務と IT の視点のギャップを埋めるために役立つ。&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;全体的なデータマネジメントを評価するために使用したり、単一の知識領域や、単一のプロセスに焦点を当てて使用したりできる。どのような点に焦点を当てたとしても、DMMA はデータマネジメント業務の健全性と有効性について、業務と IT の視点のギャップを埋めるために役立つ。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;組織が DMMA を実施する理由は、規制への対応、データガバナンス、プロセス改善、etc.&lt;br&gt;
 DMMA の第一のゴールはデータマネジメント活動の現状を評価することであり、それにより改善計画を立てることができるようになる。&lt;/p&gt;
 &lt;h2 id=&#34;アセスメントレベル&#34;&gt;アセスメントレベル&lt;/h2&gt;

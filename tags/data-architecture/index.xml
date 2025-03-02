@@ -9,7 +9,7 @@
       <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
       <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- 0.138.0</generator>
+    <generator>Hugo -- 0.144.2</generator>
     <language>ja</language>
     <lastBuildDate>Sat, 06 Jan 2024 20:00:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/tags/data-architecture/index.xml" rel="self" type="application/rss+xml" />
@@ -26,16 +26,14 @@
 &lt;h2 id=&#34;データアーキテクチャとは&#34;&gt;データアーキテクチャとは&lt;/h2&gt;
 &lt;p&gt;データアーキテクチャの定義は以下のとおり。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;企業の (組織構造に関係なく) データニーズを明確にし、ニーズに合うマスターとなる青写真を設計し、維持する。マスターとなる青写真を使ってデータ統合を手引し、データ資産をコントロールし、ビジネス戦略に合わせてデータへの投資を行う。&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;企業の (組織構造に関係なく) データニーズを明確にし、ニーズに合うマスターとなる青写真を設計し、維持する。マスターとなる青写真を使ってデータ統合を手引し、データ資産をコントロールし、ビジネス戦略に合わせてデータへの投資を行う。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;業務戦略と技術実装の間を橋渡しすることがデータアーキテクチャの目的。&lt;br&gt;
 以下が成果物、つまり前述の定義の「マスターとなる青写真」となる。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;データの保存と処理の要件&lt;/li&gt;
 &lt;li&gt;企業の現在のデータ要件と長期のデータ要件を満たす構造や計画の立案&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
 &lt;p&gt;これらを記述するためにエンタープライズ・データモデル (EDM) とデータフロー設計が必要となる。(後述)&lt;/p&gt;
 &lt;h2 id=&#34;エンタープライズアーキテクチャ&#34;&gt;エンタープライズアーキテクチャ&lt;/h2&gt;
 &lt;p&gt;データアーキテクチャとビジネス、アプリケーション、テクニカルなど他の領域のアーキテクチャとの違いは下表のようになる。&lt;br&gt;

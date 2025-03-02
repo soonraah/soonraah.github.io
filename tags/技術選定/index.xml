@@ -9,7 +9,7 @@
       <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
       <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- 0.138.0</generator>
+    <generator>Hugo -- 0.144.2</generator>
     <language>ja</language>
     <lastBuildDate>Mon, 16 Dec 2024 00:30:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/tags/%E6%8A%80%E8%A1%93%E9%81%B8%E5%AE%9A/index.xml" rel="self" type="application/rss+xml" />
@@ -46,7 +46,7 @@
 &lt;li&gt;一貫したガバナンスの欠如&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;dbt-との親和性の低さ&#34;&gt;dbt との親和性の低さ&lt;/h3&gt;
-&lt;p&gt;前回作成した&lt;a href=&#34;https://soonraah.github.io/posts/ordinary-data-platform-migration-part-1/#ロードマップ作成&#34;&gt;ロードマップ&lt;/a&gt;において、dbt の導入が課題解決における重要なポイントになっています。&lt;br&gt;
+&lt;p&gt;前回作成した&lt;a href=&#34;https://soonraah.github.io/posts/ordinary-data-platform-migration-part-1/#%e3%83%ad%e3%83%bc%e3%83%89%e3%83%9e%e3%83%83%e3%83%97%e4%bd%9c%e6%88%90&#34;&gt;ロードマップ&lt;/a&gt;において、dbt の導入が課題解決における重要なポイントになっています。&lt;br&gt;
 dbt の周辺エコシステムがデータ基盤の課題の解決に大きく貢献すると考えています。&lt;/p&gt;
 &lt;p&gt;また、データパイプラインの開発・運用の負荷も dbt 導入で軽減できそうです。&lt;br&gt;
 旧データ基盤では Glue Job と Athena クエリを組み合わせた複雑なパイプラインになっており、table を1つ追加するだけでもいろいろなコードに手をいれる必要があります。&lt;br&gt;

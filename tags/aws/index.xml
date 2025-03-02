@@ -9,7 +9,7 @@
       <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
       <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- 0.138.0</generator>
+    <generator>Hugo -- 0.144.2</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 03 Dec 2023 22:00:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/tags/aws/index.xml" rel="self" type="application/rss+xml" />
@@ -75,8 +75,7 @@ Glue Schema Registry もだいたい同じで、ストリーム処理のため�
 &lt;li&gt;Only a subset of the attributes are examined, so only pre-determined questions can be answered.&lt;/li&gt;
 &lt;li&gt;The data is aggregated so visibility into the lowest levels is lost&lt;br&gt;
 &amp;ndash;&lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;https://jamesdixon.wordpress.com/2010/10/14/pentaho-hadoop-and-data-lakes/&#34;&gt;Pentaho, Hadoop, and Data Lakes - James Dixon’s Blog&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
 &lt;p&gt;というような問題意識からデータレイクというコンセプトを提案したようだ。&lt;/p&gt;
 &lt;p&gt;最近？のデータレイクについてはベンダー等の記事が参考になる。&lt;/p&gt;
 &lt;ul&gt;
@@ -84,7 +83,7 @@ Glue Schema Registry もだいたい同じで、ストリーム処理のため�
 &lt;li&gt;&lt;a href=&#34;https://www.talend.com/jp/resources/what-is-data-lake/&#34;&gt;データレイクとは？ - talend&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://blogs.informatica.com/jp/2019/09/30/data-lake/&#34;&gt;データレイクとは？データレイクの落とし穴と効果 - Informatica&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;書籍だと&lt;a href=&#34;https://www.amazon.co.jp/gp/product/491031301X/ref=as_li_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=491031301X&amp;linkCode=as2&amp;tag=froglog02-22&amp;linkId=4e6220e28ad8d55e37e1884c69938ab0&#34;&gt;『AWSではじめるデータレイク: クラウドによる統合型データリポジトリ構築入門』&lt;/a&gt;がいいだろうか。&lt;br&gt;
+&lt;p&gt;書籍だと&lt;a href=&#34;https://www.amazon.co.jp/gp/product/491031301X/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=491031301X&amp;amp;linkCode=as2&amp;amp;tag=froglog02-22&amp;amp;linkId=4e6220e28ad8d55e37e1884c69938ab0&#34;&gt;『AWSではじめるデータレイク: クラウドによる統合型データリポジトリ構築入門』&lt;/a&gt;がいいだろうか。&lt;br&gt;
 データレイクの概要と AWS が考えている構築・運用がざっとわかる。&lt;br&gt;
 Amazon で検索した限りだと現時点でタイトルに「データレイク」を含む和書はこれのみだった。&lt;/p&gt;</description>
     </item>

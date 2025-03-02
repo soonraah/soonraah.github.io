@@ -9,7 +9,7 @@
       <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
       <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- 0.138.0</generator>
+    <generator>Hugo -- 0.144.2</generator>
     <language>ja</language>
     <lastBuildDate>Sat, 09 Dec 2023 10:30:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/tags/metadata/index.xml" rel="self" type="application/rss+xml" />
@@ -28,8 +28,7 @@
 データに関するデータはすべてメタデータなので、メタデータはとても幅広い内容となっている。&lt;br&gt;
 DMBOK2 ではメタデータの説明として図書館の例を挙げている。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;そこには数十万の書籍と雑誌があるのに、図書目録がない。図書目録がなければ、読者は特定の本や特定のトピックの検索を開始する方法さえ分からないかもしれない。図書目録は、必要な情報 (図書館が所有する本と資料、保管場所) を提供するだけでなく、利用者が様々な着眼点 (対象分野、著者、タイトル) から資料を見つけることを可能にする。 &lt;em&gt;(中略)&lt;/em&gt; メタデータを持たない組織は、図書目録のない図書館のようなものである。&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;そこには数十万の書籍と雑誌があるのに、図書目録がない。図書目録がなければ、読者は特定の本や特定のトピックの検索を開始する方法さえ分からないかもしれない。図書目録は、必要な情報 (図書館が所有する本と資料、保管場所) を提供するだけでなく、利用者が様々な着眼点 (対象分野、著者、タイトル) から資料を見つけることを可能にする。 &lt;em&gt;(中略)&lt;/em&gt; メタデータを持たない組織は、図書目録のない図書館のようなものである。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;データという資産を管理するためにも、データを利用するためにも、リスクマネジメントのためにもメタデータは必要となる。&lt;/p&gt;
 &lt;h2 id=&#34;メタデータの種類&#34;&gt;メタデータの種類&lt;/h2&gt;
 &lt;p&gt;メタデータはビジネス、テクニカル、オペレーショナルの3つに分類することができる。&lt;/p&gt;

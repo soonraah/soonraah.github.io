@@ -9,7 +9,7 @@
       <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
       <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- 0.138.0</generator>
+    <generator>Hugo -- 0.144.2</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 21 Jan 2024 21:30:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/tags/data-modeling/index.xml" rel="self" type="application/rss+xml" />
@@ -25,8 +25,7 @@
 &lt;p&gt;以降、特に注釈のない引用は DMBOK2 第5章からの引用とする。&lt;/p&gt;
 &lt;h2 id=&#34;データモデリングとは&#34;&gt;データモデリングとは&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;データモデリングとは、データ要件を洗い出し、分析し、取扱スコープを決めるプロセスであり、データ要件を記述し伝えるために、明確に定義されたデータモデルと呼ばれる様式が用いられる。このプロセスは反復的であり、概念、論理、物理モデルが含まれる。&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;データモデリングとは、データ要件を洗い出し、分析し、取扱スコープを決めるプロセスであり、データ要件を記述し伝えるために、明確に定義されたデータモデルと呼ばれる様式が用いられる。このプロセスは反復的であり、概念、論理、物理モデルが含まれる。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;../dmbok-chapter-4/&#34;&gt;第4章 データアーキテクチャ&lt;/a&gt; ではエンタープライズ・データモデルという言葉が登場したが、この第5章ではそのデータモデルがより具体的に解説されている。&lt;br&gt;
 データモデルは効果的なデータマネジメントを行うにあたり必要なものとされている。&lt;br&gt;
 次のような意義がある。&lt;/p&gt;
@@ -36,8 +35,7 @@
 &lt;li&gt;組織のデータや情報システムに関しての明示的な知識を捉え文書化する&lt;/li&gt;
 &lt;li&gt;プロジェクトにおいて主なコミュニケーションツールとして使われる&lt;/li&gt;
 &lt;li&gt;アプリケーションをカスタマイズ、統合、リプレースする際の出発点となる&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
 &lt;p&gt;データモデルは組織が把握した現状、またはあるべき姿として組織のデータを記述する。&lt;br&gt;
 カテゴリー情報、リソース情報、業務イベント情報、詳細取引情報がその対象となる。&lt;/p&gt;
 &lt;h2 id=&#34;データモデルの構成要素&#34;&gt;データモデルの構成要素&lt;/h2&gt;

@@ -9,7 +9,7 @@
       <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
       <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- 0.138.0</generator>
+    <generator>Hugo -- 0.144.2</generator>
     <language>ja</language>
     <lastBuildDate>Thu, 04 Apr 2024 06:30:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/tags/data-integration/index.xml" rel="self" type="application/rss+xml" />
@@ -26,8 +26,7 @@
 &lt;h2 id=&#34;データストレージと相互運用性とは&#34;&gt;データストレージと相互運用性とは&lt;/h2&gt;
 &lt;p&gt;データ統合と相互運用性 (DII: Data Integration and Interoperability) は次のように定義されている。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;アプリケーションや組織内および相互間におけるデータの移動と統合を管理する&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;アプリケーションや組織内および相互間におけるデータの移動と統合を管理する&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;データの移動を効率的に管理することがそのビジネス上の意義となる。&lt;br&gt;
 ほとんどの組織には数多くのデータストアがあり、組織内・組織間でデータを移動させることは IT 組織の重要な任務となっている。&lt;br&gt;
 複雑さとそれに伴うコストを管理するために、全社的な視点からデータ統合を設計しなければならない。&lt;br&gt;
@@ -39,8 +38,7 @@
 &lt;li&gt;共有のモデルとインターフェースを開発することでソリューションを管理するコストと複雑さを軽減する。&lt;/li&gt;
 &lt;li&gt;重要なイベントを特定し、アラートとアクションを自動的に起動する。&lt;/li&gt;
 &lt;li&gt;ビジネスインテリジェンス、アナリティクス、マスターデータ管理、業務効率化の取り組みをサポートする。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
+&lt;/ol&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;概念用語など&#34;&gt;概念・用語など&lt;/h2&gt;
 &lt;h3 id=&#34;抽出変換取込&#34;&gt;抽出、変換、取込&lt;/h3&gt;
 &lt;p&gt;DII の中心にあるのが、抽出 (Extract)、変換 (Transform)、取込 (Load) のいわゆる ETL という基本プロセス。&lt;/p&gt;

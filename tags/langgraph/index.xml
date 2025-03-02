@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>LangGraph on Froglog</title>
+    <link>https://soonraah.github.io/tags/langgraph/</link>
+    <description>Recent content in LangGraph on Froglog</description>
+    <image>
+      <title>Froglog</title>
+      <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
+      <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
+    </image>
+    <generator>Hugo -- 0.144.2</generator>
+    <language>ja</language>
+    <lastBuildDate>Sun, 02 Mar 2025 23:45:00 +0900</lastBuildDate>
+    <atom:link href="https://soonraah.github.io/tags/langgraph/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>読書メモ: LangChainとLangGraphによるRAG・AIエージェント［実践］入門</title>
+      <link>https://soonraah.github.io/posts/reading-note-agent-book/</link>
+      <pubDate>Sun, 02 Mar 2025 23:45:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/posts/reading-note-agent-book/</guid>
+      <description>&lt;h2 id=&#34;書籍について&#34;&gt;書籍について&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://gihyo.jp/book/2024/978-4-297-14530-9&#34;&gt;西見 公宏; 吉田 真吾; 大嶋 勇樹. LangChainとLangGraphによるRAG・AIエージェント［実践］入門 エンジニア選書. 株式会社技術評論社.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;タイトルのとおりで RAG や AI エージェントについて書かれた本。&lt;br&gt;
+出版は2024年11月。&lt;br&gt;
+LangChain や LangGraph を使ったサンプルコードが豊富に載っている。&lt;br&gt;
+著者の方は3名ともジェネラティブエージェンツ社の方で、AI エージェントを扱う会社らしい。&lt;br&gt;
+前作として『&lt;a href=&#34;https://gihyo.jp/book/2023/978-4-297-13839-4&#34;&gt;ChatGPT/LangChainによるチャットシステム構築［実践］入門&lt;/a&gt;』という本もあり、本書の何章かは前作の内容を引き継いでアップデートしているとのこと。&lt;/p&gt;
+&lt;p&gt;個人的にはこれまで LLM や LangChain など追えていなかったので勉強になったし、自分でコードを写経して動かしてみるのがとても面白かった。&lt;br&gt;
+AI エージェントまわりの技術を実感したい人におすすめ。&lt;br&gt;
+ちなみにサンプルコードを動かすためには OpenAI をはじめとする様々なサービスに登録する必要があり、料金が発生するものも含まれている。&lt;/p&gt;
+&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;書籍「LangChainとLangGraphによるRAG・AIエージェント［実践］入門」を読んで、面白かったので内容をまとめる。&lt;br&gt;
+各章ごとに内容を挙げていってもいいのだが、ここではそうはせず、本書に登場する言葉や概念をまとめていくことにする。&lt;/p&gt;
+&lt;p&gt;ちなみにこの記事で紹介するプロンプト等は書籍そのままではなく、少し変更している。&lt;br&gt;
+実際のプロンプトを知りたい場合は書籍を読んでください。&lt;/p&gt;
+&lt;h2 id=&#34;プロンプトエンジニアリング&#34;&gt;プロンプトエンジニアリング&lt;/h2&gt;
+&lt;p&gt;これは知っている人も多いだろう。&lt;br&gt;
+プロンプトとは主に自然言語で記述される、LLM に与える命令のこと。&lt;br&gt;
+LLM をアプリケーションに組み込む場合はプロンプトはテンプレート化し、入力データをそれに差し込む形となる。&lt;/p&gt;
+&lt;p&gt;LLM は必ずしも人間の出す命令に対して望ましい回答を出力してくれるわけではない。&lt;br&gt;
+望ましい回答を出力してもらえるよう、プロンプトを工夫するテクニックがプロンプトエンジニアリングである。&lt;br&gt;
+本書ではプロンプトエンジニアリングの具体的な手法として次の3つが紹介されていた。&lt;/p&gt;
+&lt;p&gt;ちなみにここで例として示している出力は実際に OpenAI の LLM &lt;code&gt;gpt-4o-mini&lt;/code&gt; で出力したものである。&lt;/p&gt;
+&lt;h3 id=&#34;zero-shot-プロンプティング&#34;&gt;Zero-shot プロンプティング&lt;/h3&gt;
+&lt;p&gt;簡単なタスクであれば、特に追加の情報がなくとも (=Zero-shot) 望ましい回答を得ることができる。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;system: 次の日本酒のレビューをポジティブ・ネガティブ・中立のどれかに分類してください。
+user: ふくよかで芳醇な香り
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;出力&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ポジティブ
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;few-shot-プロンプティング&#34;&gt;Few-shot プロンプティング&lt;/h3&gt;
+&lt;p&gt;より複雑なタスクになった場合、デモンストレーションを与えることで回答の精度を高めることができる。&lt;br&gt;
+いくつかのデモンストレーションを示すため、Zero-shot ではなく Few-shot である。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -9,7 +9,7 @@
       <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
       <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- 0.138.0</generator>
+    <generator>Hugo -- 0.144.2</generator>
     <language>ja</language>
     <lastBuildDate>Tue, 13 Dec 2022 00:30:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/tags/stream-processing/index.xml" rel="self" type="application/rss+xml" />
@@ -136,8 +136,7 @@ out-of-order は処理の遅延や正しくない結果の原因となること�
 以下の引用が簡潔に示している。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;a type of data processing engine that is designed with infinite data sets in mind. Nothing more.&lt;!-- raw HTML omitted --&gt;&lt;br&gt;
-&amp;ndash; &lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;https://www.oreilly.com/radar/the-world-beyond-batch-streaming-101/&#34;&gt;Streaming 101: The world beyond batch&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&amp;ndash; &lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;https://www.oreilly.com/radar/the-world-beyond-batch-streaming-101/&#34;&gt;Streaming 101: The world beyond batch&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;こちらは &amp;ldquo;streaming system&amp;rdquo; について述べたものだが、つまり終わりのないデータを扱うのがストリーム処理ということである。&lt;/p&gt;
 &lt;p&gt;例えば web サービスから生まれ続けるユーザ行動ログを逐次的に処理するというのがストリーム処理。&lt;br&gt;
 web サービスが終了しないかぎりはユーザ行動ログの生成には終わりがない。&lt;/p&gt;

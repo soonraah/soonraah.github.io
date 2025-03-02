@@ -9,7 +9,7 @@
       <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
       <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- 0.138.0</generator>
+    <generator>Hugo -- 0.144.2</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 28 May 2023 09:00:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/tags/data-lake/index.xml" rel="self" type="application/rss+xml" />
@@ -102,13 +102,11 @@ Glue Schema Registry もだいたい同じで、ストリーム処理のため�
 &lt;blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;加工前データや非構造化データを含むあらゆるデータを保存&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;一元的なデータ管理&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
 &lt;p&gt;という部分だ。&lt;br&gt;
 あらゆるデータを一元的に管理するという思想であり、これができるアーキテクチャがデータレイクということだ。&lt;/p&gt;
 &lt;p&gt;例えば AWS や Azure のドキュメントを見るとデータレイクの中が zone に分けられており、生データを保持する raw zone や加工されたデータを置いておく curated zone などがある。&lt;br&gt;
@@ -127,7 +125,7 @@ Glue Schema Registry もだいたい同じで、ストリーム処理のため�
 &lt;p&gt;　本書におけるデータレイク（DataLake）層とは、元のデータをコピーして、1つのシステムに集約したものを指します。 データソース（＝水源）から流れてきたデータを蓄える場所なのでレイク（湖）と呼びます。&lt;br&gt;
 　ECサイトの注文履歴データを、分析用DBにコピーしている場合、それがデータレイクと言えます。データレイクのデータは、データソースと一対一の関係にあります。何も加工していない、ただのコピーだからです。&lt;br&gt;
 　&lt;strong&gt;何も加工していない、ただのコピーであることが重要です。仮にデータの中身に誤りがあったとしても、修正や加工をせず、そのまま集約しましょう。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&amp;ndash; &lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;https://soonraah.github.io/&#34;&gt;ゆずたそ,渡部 徹太郎,伊藤 徹郎. 実践的データ基盤への処方箋〜 ビジネス価値創出のためのデータ・システム・ヒトのノウハウ (Japanese Edition) (pp.57-58). Kindle 版.&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
+&lt;p&gt;&amp;ndash; &lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;&#34;&gt;ゆずたそ,渡部 徹太郎,伊藤 徹郎. 実践的データ基盤への処方箋〜 ビジネス価値創出のためのデータ・システム・ヒトのノウハウ (Japanese Edition) (pp.57-58). Kindle 版.&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>データレイク関連の OSS - Delta Lake, Apache Hudi, Apache Kudu</title>
@@ -155,8 +153,7 @@ Glue Schema Registry もだいたい同じで、ストリーム処理のため�
 &lt;h2 id=&#34;delta-lake&#34;&gt;Delta Lake&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://delta.io/&#34;&gt;https://delta.io/&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Delta Lake is an open-source storage layer that brings ACID transactions to Apache Spark™ and big data workloads.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;Delta Lake is an open-source storage layer that brings ACID transactions to Apache Spark™ and big data workloads.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;figure&gt;
     &lt;img loading=&#34;lazy&#34; src=&#34;https://soonraah.github.io/image/deltalake/Delta-Lake-marketecture-0423c.png&#34;/&gt; &lt;figcaption&gt;
             &lt;p&gt;
@@ -182,8 +179,7 @@ Databricks が作り、2019年4月に v0.1.0 がリリースされたのが最�
 &lt;li&gt;Only a subset of the attributes are examined, so only pre-determined questions can be answered.&lt;/li&gt;
 &lt;li&gt;The data is aggregated so visibility into the lowest levels is lost&lt;br&gt;
 &amp;ndash;&lt;!-- raw HTML omitted --&gt;&lt;a href=&#34;https://jamesdixon.wordpress.com/2010/10/14/pentaho-hadoop-and-data-lakes/&#34;&gt;Pentaho, Hadoop, and Data Lakes - James Dixon’s Blog&lt;/a&gt;&lt;!-- raw HTML omitted --&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
 &lt;p&gt;というような問題意識からデータレイクというコンセプトを提案したようだ。&lt;/p&gt;
 &lt;p&gt;最近？のデータレイクについてはベンダー等の記事が参考になる。&lt;/p&gt;
 &lt;ul&gt;
@@ -191,7 +187,7 @@ Databricks が作り、2019年4月に v0.1.0 がリリースされたのが最�
 &lt;li&gt;&lt;a href=&#34;https://www.talend.com/jp/resources/what-is-data-lake/&#34;&gt;データレイクとは？ - talend&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://blogs.informatica.com/jp/2019/09/30/data-lake/&#34;&gt;データレイクとは？データレイクの落とし穴と効果 - Informatica&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;書籍だと&lt;a href=&#34;https://www.amazon.co.jp/gp/product/491031301X/ref=as_li_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=491031301X&amp;linkCode=as2&amp;tag=froglog02-22&amp;linkId=4e6220e28ad8d55e37e1884c69938ab0&#34;&gt;『AWSではじめるデータレイク: クラウドによる統合型データリポジトリ構築入門』&lt;/a&gt;がいいだろうか。&lt;br&gt;
+&lt;p&gt;書籍だと&lt;a href=&#34;https://www.amazon.co.jp/gp/product/491031301X/ref=as_li_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=491031301X&amp;amp;linkCode=as2&amp;amp;tag=froglog02-22&amp;amp;linkId=4e6220e28ad8d55e37e1884c69938ab0&#34;&gt;『AWSではじめるデータレイク: クラウドによる統合型データリポジトリ構築入門』&lt;/a&gt;がいいだろうか。&lt;br&gt;
 データレイクの概要と AWS が考えている構築・運用がざっとわかる。&lt;br&gt;
 Amazon で検索した限りだと現時点でタイトルに「データレイク」を含む和書はこれのみだった。&lt;/p&gt;</description>
     </item>

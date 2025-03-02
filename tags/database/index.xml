@@ -9,7 +9,7 @@
       <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
       <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- 0.138.0</generator>
+    <generator>Hugo -- 0.144.2</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 17 Mar 2024 21:30:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/tags/database/index.xml" rel="self" type="application/rss+xml" />
@@ -26,8 +26,7 @@
 &lt;h2 id=&#34;データストレージとオペレーションとは&#34;&gt;データストレージとオペレーションとは&lt;/h2&gt;
 &lt;p&gt;以下のように定義されている。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;データの価値を最大化するために、永続化されるデータを設計し、実装し、サポートすること&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;データの価値を最大化するために、永続化されるデータを設計し、実装し、サポートすること&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;主にデータベース管理者 (DBA: Database Administrators) が行うことになる。&lt;br&gt;
 次の2つのアクティビティが含まれる。&lt;/p&gt;
 &lt;ul&gt;
@@ -41,8 +40,7 @@
 &lt;li&gt;データライフサイクル全体にわたるデータの可用性を管理する&lt;/li&gt;
 &lt;li&gt;データ資産の完全性を保証する&lt;/li&gt;
 &lt;li&gt;データ処理の性能を管理する&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;概念用語など&#34;&gt;概念・用語など&lt;/h2&gt;
 &lt;h3 id=&#34;データベースアーキテクチャの種類&#34;&gt;データベースアーキテクチャの種類&lt;/h3&gt;
 &lt;ul&gt;
