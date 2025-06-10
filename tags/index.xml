@@ -9,10 +9,38 @@
       <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
       <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
     </image>
-    <generator>Hugo -- 0.144.2</generator>
+    <generator>Hugo -- 0.147.3</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 02 Mar 2025 23:45:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 11 Jun 2025 08:30:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data Platform</title>
+      <link>https://soonraah.github.io/tags/data-platform/</link>
+      <pubDate>Wed, 11 Jun 2025 08:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/data-platform/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Databricks</title>
+      <link>https://soonraah.github.io/tags/databricks/</link>
+      <pubDate>Wed, 11 Jun 2025 08:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/databricks/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Dbt</title>
+      <link>https://soonraah.github.io/tags/dbt/</link>
+      <pubDate>Wed, 11 Jun 2025 08:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/dbt/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Medallion Architecture</title>
+      <link>https://soonraah.github.io/tags/medallion-architecture/</link>
+      <pubDate>Wed, 11 Jun 2025 08:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/medallion-architecture/</guid>
+      <description></description>
+    </item>
     <item>
       <title>AI Agent</title>
       <link>https://soonraah.github.io/tags/ai-agent/</link>
@@ -46,20 +74,6 @@
       <link>https://soonraah.github.io/tags/rag/</link>
       <pubDate>Sun, 02 Mar 2025 23:45:00 +0900</pubDate>
       <guid>https://soonraah.github.io/tags/rag/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Data Platform</title>
-      <link>https://soonraah.github.io/tags/data-platform/</link>
-      <pubDate>Mon, 16 Dec 2024 00:30:00 +0900</pubDate>
-      <guid>https://soonraah.github.io/tags/data-platform/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Databricks</title>
-      <link>https://soonraah.github.io/tags/databricks/</link>
-      <pubDate>Mon, 16 Dec 2024 00:30:00 +0900</pubDate>
-      <guid>https://soonraah.github.io/tags/databricks/</guid>
       <description></description>
     </item>
     <item>
