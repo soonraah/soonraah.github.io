@@ -11,8 +11,56 @@
     </image>
     <generator>Hugo -- 0.147.3</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 02 Mar 2025 23:45:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 18 Jun 2025 07:30:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/tags/langchain/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ふつうのデータ基盤移行 - Part 4. AI ワークフローで移行作業効率化編</title>
+      <link>https://soonraah.github.io/posts/ordinary-data-platform-migration-part-4/</link>
+      <pubDate>Wed, 18 Jun 2025 07:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/posts/ordinary-data-platform-migration-part-4/</guid>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;データ基盤移行について書いていくシリーズです。&lt;br&gt;
+シリーズ一覧は&lt;a href=&#34;https://soonraah.github.io/tags/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%9F%BA%E7%9B%A4%E7%A7%BB%E8%A1%8C/&#34;&gt;こちら&lt;/a&gt;から。&lt;/p&gt;
+&lt;p&gt;前回 &lt;a href=&#34;https://soonraah.github.io/posts/ordinary-data-platform-migration-part-3/&#34;&gt;Part 3. アーキテクチャ編&lt;/a&gt;ではどういったシステム構成にしたかを書きました。&lt;br&gt;
+今回はその技術スタックへと移行するための苦労と効率化について書きます。&lt;/p&gt;
+&lt;p&gt;(次は CI/CD の話をすると書きましたが…スマンありゃウソだった)&lt;/p&gt;
+&lt;h2 id=&#34;スコープ&#34;&gt;スコープ&lt;/h2&gt;
+&lt;p&gt;今回はやや小さいスコープの話です。&lt;br&gt;
+データ基盤における ETL (ELT) 処理の移行作業を対象としています。&lt;br&gt;
+移行作業における工数的な課題を AI ワークフローを作って効率化して軽減したという話になります。&lt;br&gt;
+ETL 以外の移行作業は今回はスコープ外となります。&lt;/p&gt;
+&lt;h2 id=&#34;課題&#34;&gt;課題&lt;/h2&gt;
+&lt;p&gt;旧データ基盤から新データ基盤へと table およびそれを更新するための処理を移行するにあたり工数面での課題が2つあります。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;技術スタックの移行&lt;/li&gt;
+&lt;li&gt;column 命名などの標準化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;これらについて述べます。&lt;/p&gt;
+&lt;h3 id=&#34;技術スタックの移行&#34;&gt;技術スタックの移行&lt;/h3&gt;
+&lt;p&gt;データ基盤の移行において、新旧の環境で技術スタックは次のようになっています。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;旧データ基盤
+&lt;ul&gt;
+&lt;li&gt;ETL: Glue Job&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;新データ基盤
+&lt;ul&gt;
+&lt;li&gt;ELT: dbt-databricks&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;つまり Glue Job の Python コードを dbt model、つまり SQL に翻訳する必要があり、それなりに手間がかかります。&lt;br&gt;
+さらにこの Python コードは次のような問題もあり、移行のハードルを上げます。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;UDF を実装して特殊な処理を行っているケースがある&lt;/li&gt;
+&lt;li&gt;Spark の API だけでなく Glue の API をふんだんに使っている (なるべく Spark に寄せればいいものを…)&lt;/li&gt;
+&lt;li&gt;(ここ数年の業務で見た中で一番というぐらいに) コード品質が低い&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;column-命名などの標準化&#34;&gt;column 命名などの標準化&lt;/h3&gt;
+&lt;p&gt;旧データ基盤は利用者への配慮があまりない状態で table の schema が作られており、利用者にとって使いにくいものとなっていました。&lt;br&gt;
+それを改善するため、新データ基盤では次のようなルールを導入しました。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>読書メモ: LangChainとLangGraphによるRAG・AIエージェント［実践］入門</title>
       <link>https://soonraah.github.io/posts/reading-note-agent-book/</link>

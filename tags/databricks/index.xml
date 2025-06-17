@@ -20,7 +20,8 @@
       <guid>https://soonraah.github.io/posts/ordinary-data-platform-migration-part-3/</guid>
       <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
 &lt;p&gt;データ基盤移行について書いていくシリーズです。&lt;br&gt;
-前回 &lt;a href=&#34;https://soonraah.github.io/posts/ordinary-data-platform-migration-part-2/&#34;&gt;Part 2. 技術選定編&lt;/a&gt;では技術選定について書きました。&lt;br&gt;
+シリーズ一覧は&lt;a href=&#34;https://soonraah.github.io/tags/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%9F%BA%E7%9B%A4%E7%A7%BB%E8%A1%8C/&#34;&gt;こちら&lt;/a&gt;から。&lt;/p&gt;
+&lt;p&gt;前回 &lt;a href=&#34;https://soonraah.github.io/posts/ordinary-data-platform-migration-part-2/&#34;&gt;Part 2. 技術選定編&lt;/a&gt;では技術選定について書きました。&lt;br&gt;
 今回はそれを踏まえた結果としてどのようなアーキテクチャになったかを書きます。&lt;/p&gt;
 &lt;h2 id=&#34;スコープ&#34;&gt;スコープ&lt;/h2&gt;
 &lt;p&gt;前回の記事ではプラットフォームとして Databricks を選定したことやその経緯について記載しました。&lt;br&gt;
@@ -56,7 +57,8 @@
       <guid>https://soonraah.github.io/posts/ordinary-data-platform-migration-part-2/</guid>
       <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
 &lt;p&gt;データ基盤移行について書いていくシリーズです。&lt;br&gt;
-前回は戦略策定 (実際は戦術) までのところを書きました。&lt;br&gt;
+シリーズ一覧は&lt;a href=&#34;https://soonraah.github.io/tags/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%9F%BA%E7%9B%A4%E7%A7%BB%E8%A1%8C/&#34;&gt;こちら&lt;/a&gt;から。&lt;/p&gt;
+&lt;p&gt;前回は戦略策定 (実際は戦術) までのところを書きました。&lt;br&gt;
 今回はそれを踏まえた技術選定、およびその後の予算獲得について書いていきます。&lt;/p&gt;
 &lt;p&gt;また、こちらは &lt;a href=&#34;https://qiita.com/advent-calendar/2024/databricks&#34;&gt;Databricks Advent Calendar 2024&lt;/a&gt; シリーズ 2 の16日目の記事にもなっています。&lt;br&gt;
 はいそうです、出落ちですが技術選定として Databricks を選ぶことになります。&lt;/p&gt;

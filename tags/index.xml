@@ -11,13 +11,41 @@
     </image>
     <generator>Hugo -- 0.147.3</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 11 Jun 2025 08:30:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 18 Jun 2025 07:30:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Data Platform</title>
       <link>https://soonraah.github.io/tags/data-platform/</link>
-      <pubDate>Wed, 11 Jun 2025 08:30:00 +0900</pubDate>
+      <pubDate>Wed, 18 Jun 2025 07:30:00 +0900</pubDate>
       <guid>https://soonraah.github.io/tags/data-platform/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>LangChain</title>
+      <link>https://soonraah.github.io/tags/langchain/</link>
+      <pubDate>Wed, 18 Jun 2025 07:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/langchain/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>LangGraph</title>
+      <link>https://soonraah.github.io/tags/langgraph/</link>
+      <pubDate>Wed, 18 Jun 2025 07:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/langgraph/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>LLM</title>
+      <link>https://soonraah.github.io/tags/llm/</link>
+      <pubDate>Wed, 18 Jun 2025 07:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/llm/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ふつうのデータ基盤移行</title>
+      <link>https://soonraah.github.io/tags/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%9F%BA%E7%9B%A4%E7%A7%BB%E8%A1%8C/</link>
+      <pubDate>Wed, 18 Jun 2025 07:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%9F%BA%E7%9B%A4%E7%A7%BB%E8%A1%8C/</guid>
       <description></description>
     </item>
     <item>
@@ -46,27 +74,6 @@
       <link>https://soonraah.github.io/tags/ai-agent/</link>
       <pubDate>Sun, 02 Mar 2025 23:45:00 +0900</pubDate>
       <guid>https://soonraah.github.io/tags/ai-agent/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>LangChain</title>
-      <link>https://soonraah.github.io/tags/langchain/</link>
-      <pubDate>Sun, 02 Mar 2025 23:45:00 +0900</pubDate>
-      <guid>https://soonraah.github.io/tags/langchain/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>LangGraph</title>
-      <link>https://soonraah.github.io/tags/langgraph/</link>
-      <pubDate>Sun, 02 Mar 2025 23:45:00 +0900</pubDate>
-      <guid>https://soonraah.github.io/tags/langgraph/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>LLM</title>
-      <link>https://soonraah.github.io/tags/llm/</link>
-      <pubDate>Sun, 02 Mar 2025 23:45:00 +0900</pubDate>
-      <guid>https://soonraah.github.io/tags/llm/</guid>
       <description></description>
     </item>
     <item>
