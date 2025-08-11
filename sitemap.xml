@@ -2,11 +2,29 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://soonraah.github.io/tags/aws/</loc>
+    <lastmod>2025-08-12T07:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/tags/data-management/</loc>
+    <lastmod>2025-08-12T07:00:00+09:00</lastmod>
+  </url><url>
     <loc>https://soonraah.github.io/tags/data-platform/</loc>
-    <lastmod>2025-06-18T07:30:00+09:00</lastmod>
+    <lastmod>2025-08-12T07:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/tags/finops/</loc>
+    <lastmod>2025-08-12T07:00:00+09:00</lastmod>
   </url><url>
     <loc>https://soonraah.github.io/</loc>
-    <lastmod>2025-06-18T07:30:00+09:00</lastmod>
+    <lastmod>2025-08-12T07:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/posts/</loc>
+    <lastmod>2025-08-12T07:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/tags/</loc>
+    <lastmod>2025-08-12T07:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://soonraah.github.io/posts/cloud-finops-for-data-engineer/</loc>
+    <lastmod>2025-08-12T07:00:00+09:00</lastmod>
   </url><url>
     <loc>https://soonraah.github.io/tags/langchain/</loc>
     <lastmod>2025-06-18T07:30:00+09:00</lastmod>
@@ -15,12 +33,6 @@
     <lastmod>2025-06-18T07:30:00+09:00</lastmod>
   </url><url>
     <loc>https://soonraah.github.io/tags/llm/</loc>
-    <lastmod>2025-06-18T07:30:00+09:00</lastmod>
-  </url><url>
-    <loc>https://soonraah.github.io/posts/</loc>
-    <lastmod>2025-06-18T07:30:00+09:00</lastmod>
-  </url><url>
-    <loc>https://soonraah.github.io/tags/</loc>
     <lastmod>2025-06-18T07:30:00+09:00</lastmod>
   </url><url>
     <loc>https://soonraah.github.io/tags/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%9F%BA%E7%9B%A4%E7%A7%BB%E8%A1%8C/</loc>
@@ -64,9 +76,6 @@
   </url><url>
     <loc>https://soonraah.github.io/posts/ordinary-data-platform-migration-part-1/</loc>
     <lastmod>2024-12-01T22:30:00+09:00</lastmod>
-  </url><url>
-    <loc>https://soonraah.github.io/tags/data-management/</loc>
-    <lastmod>2024-11-18T20:30:00+09:00</lastmod>
   </url><url>
     <loc>https://soonraah.github.io/tags/data-quality/</loc>
     <lastmod>2024-11-18T20:30:00+09:00</lastmod>
@@ -141,9 +150,6 @@
     <lastmod>2023-12-03T22:00:00+09:00</lastmod>
   </url><url>
     <loc>https://soonraah.github.io/tags/apache-iceberg/</loc>
-    <lastmod>2023-12-03T22:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://soonraah.github.io/tags/aws/</loc>
     <lastmod>2023-12-03T22:00:00+09:00</lastmod>
   </url><url>
     <loc>https://soonraah.github.io/tags/aws-dms/</loc>

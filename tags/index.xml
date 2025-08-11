@@ -11,13 +11,34 @@
     </image>
     <generator>Hugo -- 0.147.3</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 18 Jun 2025 07:30:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 12 Aug 2025 07:00:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS</title>
+      <link>https://soonraah.github.io/tags/aws/</link>
+      <pubDate>Tue, 12 Aug 2025 07:00:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/aws/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Data Management</title>
+      <link>https://soonraah.github.io/tags/data-management/</link>
+      <pubDate>Tue, 12 Aug 2025 07:00:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/data-management/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Data Platform</title>
       <link>https://soonraah.github.io/tags/data-platform/</link>
-      <pubDate>Wed, 18 Jun 2025 07:30:00 +0900</pubDate>
+      <pubDate>Tue, 12 Aug 2025 07:00:00 +0900</pubDate>
       <guid>https://soonraah.github.io/tags/data-platform/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>FinOps</title>
+      <link>https://soonraah.github.io/tags/finops/</link>
+      <pubDate>Tue, 12 Aug 2025 07:00:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/finops/</guid>
       <description></description>
     </item>
     <item>
@@ -102,13 +123,6 @@
       <link>https://soonraah.github.io/tags/strategy/</link>
       <pubDate>Sun, 01 Dec 2024 22:30:00 +0900</pubDate>
       <guid>https://soonraah.github.io/tags/strategy/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Data Management</title>
-      <link>https://soonraah.github.io/tags/data-management/</link>
-      <pubDate>Mon, 18 Nov 2024 20:30:00 +0900</pubDate>
-      <guid>https://soonraah.github.io/tags/data-management/</guid>
       <description></description>
     </item>
     <item>
@@ -214,13 +228,6 @@
       <link>https://soonraah.github.io/tags/apache-iceberg/</link>
       <pubDate>Sun, 03 Dec 2023 22:00:00 +0900</pubDate>
       <guid>https://soonraah.github.io/tags/apache-iceberg/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>AWS</title>
-      <link>https://soonraah.github.io/tags/aws/</link>
-      <pubDate>Sun, 03 Dec 2023 22:00:00 +0900</pubDate>
-      <guid>https://soonraah.github.io/tags/aws/</guid>
       <description></description>
     </item>
     <item>

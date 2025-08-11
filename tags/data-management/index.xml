@@ -11,8 +11,36 @@
     </image>
     <generator>Hugo -- 0.147.3</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 18 Nov 2024 20:30:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 12 Aug 2025 07:00:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/tags/data-management/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>データエンジニアから見るクラウド FinOps</title>
+      <link>https://soonraah.github.io/posts/cloud-finops-for-data-engineer/</link>
+      <pubDate>Tue, 12 Aug 2025 07:00:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/posts/cloud-finops-for-data-engineer/</guid>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;書籍『クラウドFinOps 第2版』を読んだところ、FinOps にデータマネジメントやデータエンジニアリングに深く関連する内容があるということがわかったのでまとめてみる。&lt;/p&gt;
+&lt;h2 id=&#34;書籍について&#34;&gt;書籍について&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.oreilly.co.jp/books/9784814401086/&#34;&gt;J.R. Storment; Mike Fulle. クラウドFinOps 第2版 協調的でリアルタイムなクラウド価値の意思決定 O&amp;rsquo;Reilly Japan.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;2025年3月に出版。&lt;br&gt;
+ちなみに原著の初版は2019年、第2版は2023年。&lt;/p&gt;
+&lt;p&gt;タイトルのとおり FinOps (後述) について書かれた書籍となっている。&lt;br&gt;
+著者は両名とも &lt;a href=&#34;https://www.finops.org/&#34;&gt;FinOps Foundation&lt;/a&gt; の関係者であり、本文中にも随所に FinOps Foundation についての記載が出てくる。&lt;/p&gt;
+&lt;p&gt;私はデータエンジニア、ソフトウェアエンジニアとして日々 AWS その他のクラウドサービスを利用している。&lt;br&gt;
+クラウドサービス上に例えばデータ基盤等を構築し、ビジネス上の価値を提供している。&lt;/p&gt;
+&lt;p&gt;その一方でクラウドを使うということは料金的な意味でのコストがかかるということでもある。&lt;br&gt;
+もちろん支払うコストは少ない方がいい。&lt;br&gt;
+それは分かるのだが、それ以上のクラウドコストについての体系的な考え方を持ち合わせていなかった。&lt;br&gt;
+毎日それなりの額を使ってるのにね。&lt;/p&gt;
+&lt;p&gt;というのが本書を読もうと思った理由だった。&lt;/p&gt;
+&lt;h2 id=&#34;finops-とは&#34;&gt;FinOps とは&lt;/h2&gt;
+&lt;h3 id=&#34;定義&#34;&gt;定義&lt;/h3&gt;
+&lt;p&gt;これを書いている2025年8月現在における &lt;a href=&#34;https://www.finops.org/introduction/what-is-finops/&#34;&gt;FinOps Foundation&lt;/a&gt; での定義は以下のようになっている。&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;FinOps is an operational framework and cultural practice which maximizes the business value of cloud and technology, enables timely data-driven decision making, and creates financial accountability through collaboration between engineering, finance, and business teams.&amp;rdquo;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>読書メモ: DMBOK2 第13章 データ品質</title>
       <link>https://soonraah.github.io/posts/dmbok-chapter-13/</link>
