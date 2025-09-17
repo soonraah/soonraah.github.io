@@ -11,8 +11,57 @@
     </image>
     <generator>Hugo -- 0.147.3</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 12 Aug 2025 07:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 18 Sep 2025 07:30:00 +0900</lastBuildDate>
     <atom:link href="https://soonraah.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CI/CD</title>
+      <link>https://soonraah.github.io/tags/ci/cd/</link>
+      <pubDate>Thu, 18 Sep 2025 07:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/ci/cd/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Data Platform</title>
+      <link>https://soonraah.github.io/tags/data-platform/</link>
+      <pubDate>Thu, 18 Sep 2025 07:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/data-platform/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Databricks</title>
+      <link>https://soonraah.github.io/tags/databricks/</link>
+      <pubDate>Thu, 18 Sep 2025 07:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/databricks/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>GitHub Actions</title>
+      <link>https://soonraah.github.io/tags/github-actions/</link>
+      <pubDate>Thu, 18 Sep 2025 07:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/github-actions/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>IaC</title>
+      <link>https://soonraah.github.io/tags/iac/</link>
+      <pubDate>Thu, 18 Sep 2025 07:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/iac/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Terraform</title>
+      <link>https://soonraah.github.io/tags/terraform/</link>
+      <pubDate>Thu, 18 Sep 2025 07:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/terraform/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ふつうのデータ基盤移行</title>
+      <link>https://soonraah.github.io/tags/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%9F%BA%E7%9B%A4%E7%A7%BB%E8%A1%8C/</link>
+      <pubDate>Thu, 18 Sep 2025 07:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/tags/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%9F%BA%E7%9B%A4%E7%A7%BB%E8%A1%8C/</guid>
+      <description></description>
+    </item>
     <item>
       <title>AWS</title>
       <link>https://soonraah.github.io/tags/aws/</link>
@@ -25,13 +74,6 @@
       <link>https://soonraah.github.io/tags/data-management/</link>
       <pubDate>Tue, 12 Aug 2025 07:00:00 +0900</pubDate>
       <guid>https://soonraah.github.io/tags/data-management/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Data Platform</title>
-      <link>https://soonraah.github.io/tags/data-platform/</link>
-      <pubDate>Tue, 12 Aug 2025 07:00:00 +0900</pubDate>
-      <guid>https://soonraah.github.io/tags/data-platform/</guid>
       <description></description>
     </item>
     <item>
@@ -60,20 +102,6 @@
       <link>https://soonraah.github.io/tags/llm/</link>
       <pubDate>Wed, 18 Jun 2025 07:30:00 +0900</pubDate>
       <guid>https://soonraah.github.io/tags/llm/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>ふつうのデータ基盤移行</title>
-      <link>https://soonraah.github.io/tags/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%9F%BA%E7%9B%A4%E7%A7%BB%E8%A1%8C/</link>
-      <pubDate>Wed, 18 Jun 2025 07:30:00 +0900</pubDate>
-      <guid>https://soonraah.github.io/tags/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%9F%BA%E7%9B%A4%E7%A7%BB%E8%A1%8C/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Databricks</title>
-      <link>https://soonraah.github.io/tags/databricks/</link>
-      <pubDate>Wed, 11 Jun 2025 08:30:00 +0900</pubDate>
-      <guid>https://soonraah.github.io/tags/databricks/</guid>
       <description></description>
     </item>
     <item>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>IaC on Froglog</title>
+    <link>https://soonraah.github.io/tags/iac/</link>
+    <description>Recent content in IaC on Froglog</description>
+    <image>
+      <title>Froglog</title>
+      <url>https://soonraah.github.io/image/brand/soonraah_full.png</url>
+      <link>https://soonraah.github.io/image/brand/soonraah_full.png</link>
+    </image>
+    <generator>Hugo -- 0.147.3</generator>
+    <language>ja</language>
+    <lastBuildDate>Thu, 18 Sep 2025 07:30:00 +0900</lastBuildDate>
+    <atom:link href="https://soonraah.github.io/tags/iac/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ふつうのデータ基盤移行 - Part 5. IaC と CI/CD 編</title>
+      <link>https://soonraah.github.io/posts/ordinary-data-platform-migration-part-5/</link>
+      <pubDate>Thu, 18 Sep 2025 07:30:00 +0900</pubDate>
+      <guid>https://soonraah.github.io/posts/ordinary-data-platform-migration-part-5/</guid>
+      <description>&lt;h2 id=&#34;このポストについて&#34;&gt;このポストについて&lt;/h2&gt;
+&lt;p&gt;データ基盤移行について書いていくシリーズです。&lt;br&gt;
+シリーズ一覧は&lt;a href=&#34;https://soonraah.github.io/tags/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%9F%BA%E7%9B%A4%E7%A7%BB%E8%A1%8C/&#34;&gt;こちら&lt;/a&gt;から。&lt;/p&gt;
+&lt;p&gt;前回 &lt;a href=&#34;https://soonraah.github.io/posts/ordinary-data-platform-migration-part-4/&#34;&gt;Part 4. AI ワークフローで移行作業効率化編&lt;/a&gt;では移行するための苦労と効率化について書きました。&lt;br&gt;
+今回はがらっと変わって IaC と CI/CD について書きます。&lt;/p&gt;
+&lt;h2 id=&#34;スコープ&#34;&gt;スコープ&lt;/h2&gt;
+&lt;p&gt;今回は開発寄りの話です。&lt;br&gt;
+データ基盤の構築にあたり Terraform を使って IaC (Infrastructure as Code) を実現し、さらにそれに基づいて GitHub Actions による CI/CD (Continuous Integration &amp;amp; Continuous Derivery) 環境を作ったという話をしていきます。&lt;/p&gt;
+&lt;p&gt;IaC で作りたいアーキテクチャは AWS 上の Databricks 環境とその周辺です。&lt;br&gt;
+アーキテクチャについて詳しくは &lt;a href=&#34;https://soonraah.github.io/posts/ordinary-data-platform-migration-part-3/&#34;&gt;Part 3. アーキテクチャ編&lt;/a&gt;などをご参照ください。&lt;/p&gt;
+&lt;p&gt;だいたい以下の図のような話です。&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;CI/CD&#34; loading=&#34;lazy&#34; src=&#34;https://soonraah.github.io/image/ordinary-data-plagform-migration/ci_cd.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;お気持ち表明&#34;&gt;お気持ち表明&lt;/h2&gt;
+&lt;p&gt;こんにちは、初手で絶対に CI/CD 環境を構築するマンです。&lt;br&gt;
+初手で絶対に CI/CD 環境を構築するマンは、初手で絶対に CI/CD 環境を構築するぞ！という強い気持ちを持っています。&lt;/p&gt;
+&lt;p&gt;Databricks 上にデータ基盤を構築するにあたり、他社事例でインフラ構築を自動化していないケースを見たこともあります。&lt;br&gt;
+しかし我々のチームでは PoC 終了後の構築最初期から IaC としてインフラをコード化し、それを CI/CD の仕組みで自動でデプロイすることを決めていました。&lt;br&gt;
+次のような理由からです。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;リリースの数だけ自動化のリターンがあるので、最初から自動化しておくのが最もリターンが大きい&lt;/li&gt;
+&lt;li&gt;チームにはジュニアなメンバーもおり、手動の運用はオペミスや production, staging などの環境差発生のリスクが大きい&lt;/li&gt;
+&lt;li&gt;社内で Terraform や GitHub Actions などがよく使われており、導入できる下地があった&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;まだ Databricks にそこまで慣れていない導入初期にこれらの仕組みを入れるのはそれなりにたいへんです。&lt;br&gt;
+しかしそのたいへんさ以上のメリットがあると判断しました。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
